@@ -73,7 +73,7 @@ $(function(){
     	 node.borderWidth = 2; // 边框的宽度
     	 node.borderColor = '255,255,255'; //边框颜色            
     	 node.alpha = 0.7; //透明度
-         scene.add(node);
+     scene.add(node);
          obj.node = node;
          for(var i =0; i<n;i++){
         	 var textName = "textNode"+i;
@@ -89,18 +89,18 @@ $(function(){
     }   
    
     var nodeB1 = nodeBlock(40,10,3);
-    nodeB1.textNode0.text = '电流：'+ data_json["newesControlData"]["current"];
-    nodeB1.textNode1.text = '电压：'+ data_json["newesControlData"]["voltage"];
-    nodeB1.textNode2.text = '功率：'+ data_json["newesControlData"]["power"];
+    nodeB1.textNode0.text = '电流：'+ data_json["newes"]["x_Coutpout_Voltage"]+" V";
+    nodeB1.textNode1.text = '电压：'+ data_json["newes"]["x_Coutpout_Current"]+" A";
+    nodeB1.textNode2.text = '功率：'+ data_json["newes"]["x_Coutpout_Power"]+" KW";
     
     var nodeB2 = nodeBlock(330,10,2);
-    nodeB2.textNode0.text = '内部温度：'+ data_json["ControlStatus"]["mpptTemp"];
-    nodeB2.textNode1.text = data_json["ControlStatus"]["chargeDischarge "]?"放电":"充电";
+    nodeB2.textNode0.text = '内部温度：'+ data_json["newes"]["x_Inerin_tem"]+" °C";
+    nodeB2.textNode1.text = data_json["newes"]["machineState "]?"放电":"充电";
     
     var nodeB3 = nodeBlock(620,10,3);
-    nodeB3.textNode0.text = '电流：'+ data_json["newesInverterData"]["current"];
-    nodeB3.textNode1.text = '电压：'+ data_json["newesInverterData"]["voltage"];
-    nodeB3.textNode2.text = '功率：'+ data_json["newesInverterData"]["power"];
+    nodeB3.textNode0.text = '电流：'+ data_json["newes"]["outputVoltage"]+" V";
+    nodeB3.textNode1.text = '电压：'+ data_json["newes"]["outputCurrent"]+" A";
+    nodeB3.textNode2.text = '功率：'+ data_json["newes"]["exchangeOutPower"]+" KW";
     nodeB3.node.setSize(150,80);
     
     

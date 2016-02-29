@@ -56,7 +56,7 @@
         <div class="container">
           <div class="crumbs">
             <div class="current-time" style="    padding: 10px 15px;font-size: 14px;font-weight: bold;
-    float: left;">采集时刻：
+    float: left;">系统时间：
             </div>
           </div>
           <div class="page-header">

@@ -205,7 +205,7 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 		StringBuffer buffer=new StringBuffer();
 		buffer.append(" select ");
 		buffer.append(" top 1 tod.OutputVoltage voltage,tod.OutputCurrent curr, ");
-		buffer.append(" tod.OutputVoltage* tod.OutputCurrent as power ");
+		buffer.append(" (tod.OutputVoltage* tod.OutputCurrent)/1000 as power ");
 		buffer.append(" from bd_to_data tod   ");
 		buffer.append(" inner join Inverter_parameter inp  on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");

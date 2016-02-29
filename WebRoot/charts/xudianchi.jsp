@@ -184,11 +184,11 @@
                             <div class="bar-face face-position front percentage volume-lights shine">
                               <div class="tooltip heat-gradient-tooltip" style="display:none"></div>
                               <div style="line-height: 1em;
-    font-size: 32px;
+    font-size: 28px;
     position: absolute;
     height: 1em;
-    width: 2em;
-    margin: .4em .4em .4em .8em;"><%=newes.getX_Battery_Capacity() %></div>
+    width: 4em;
+    margin: .4em .4em .4em .8em;"><%=newes.getX_Battery_Capacity() %> %</div>
                             </div>
                           </div>
                         </div>
@@ -202,6 +202,9 @@
                 </div>
                 <div class="widget-content">
                   <ul class="stats" style="text-align: center;">
+                  <li><strong>
+                      剩余容量：</strong> <span class="label label-info"><%=newes.getX_Battery_Capacity() %> %</span>
+                    </li>
                     <li><strong>
                       状态：</strong> <span class="label label-info"><%=fail %></span>
                     </li>
