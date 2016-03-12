@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!--巡检管理 -->
+	<class name="com.PSMS.pojo.InspectionManager" table="bd_inspection_manager">
+		<id name="id" type="java.lang.String">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="areaId" type="java.lang.String">
+			<column name="area_id" />
+		</property>
+
+		<property name="psId" type="java.lang.Integer">
+			<column name="ps_id" />
+		</property>
+
+		<property name="equipmentId" type="java.lang.Integer">
+			<column name="equipment_id" />
+		</property>
+
+		<property name="userId" type="java.lang.Integer">
+			<column name="user_id" />
+		</property>
+		
+		<property name="currDate" type="java.lang.String">
+			<column name="curr_date"></column>
+		</property>
+		
+		<property name="inspectionPeriod" type="java.lang.Integer">
+			<column name="inspection_period" />
+		</property>
+		
+		<property name="nextDate" type="java.lang.String">
+			<column name="next_date"></column>
+		</property>
+	</class>
+
+
+	<!-- 巡检 记录-->
+	<class name="com.PSMS.pojo.Inspection" table="bd_inspection"
+		dynamic-update="true">
+		<id name="id" type="java.lang.String">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+
+		<property name="managerId" type="java.lang.String">
+			<column name="manager_id" />
+		</property>
+
+		<property name="inspectionReport" type="java.lang.String">
+			<column name="inspection_report"></column>
+		</property>
+
+		<property name="inspectionStatus" type="java.lang.Integer">
+			<column name="inspection_status"></column>
+		</property>
+		
+		<property name="shouldDate" type="java.lang.String">
+			<column name="should_date"></column>
+		</property>
+		
+		<property name="actualDate" type="java.lang.String">
+			<column name="actual_date"></column>
+		</property>
+	</class>
+</hibernate-mapping>

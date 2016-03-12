@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.PSMS.Hibernate.PS_information">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="name"></property>
+		<property name="capacity"></property>
+		<property name="area"></property>
+		<property name="Part_num"></property>
+		<property name="owner"></property>
+		<property name="investor"></property>
+		<property name="province"></property>
+		<property name="longitude"></property>
+		<property name="latitude"></property>
+		<property name="Build_time"></property>
+		<property name="Station_manage"></property>
+		<property name="User_manage"></property>
+		<property name="Device_manage"></property>
+		<property name="Station_num"></property>
+		<property name="User_num"></property>
+		<property name="Delete_flag"></property>
+	</class>
+	
+	<class name="com.PSMS.Hibernate.M_user">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="User_name"></property>
+		<property name="password"></property>
+		<property name="name"></property>
+		<property name="telephone"></property>
+		<property name="email"></property>
+		<property name="Role_id"></property>
+		<property name="PS_id"></property>
+	</class>
+	<class name="com.PSMS.Hibernate.Role">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="Role_name"></property>
+		<property name="Role_type"></property>
+	</class>
+	<class name="com.PSMS.Hibernate.Count_user">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="PS_id"></property>
+		<property name="usercount"></property>
+	</class>
+	
+	<class name="com.PSMS.Hibernate.Inverter_parameter">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="PS_id"></property>
+		<property name="name"></property>
+		<property name="type"></property>
+		<property name="brand"></property>
+		<property name="model"></property>
+		<property name="Purchase_time"></property>
+		<property name="Rate_power"></property>
+		<property name="Rated_voltage"></property>
+		<property name="Max_power"></property>
+		<property name="Power_factor"></property>
+		<property name="Period_num"></property>
+	</class>
+	
+	<class name="com.PSMS.Hibernate.WS_parameter">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="PS_id"></property>
+		<property name="name"></property>
+		<property name="type"></property>
+		<property name="brand"></property>
+		<property name="model"></property>
+		<property name="Purchase_time"></property>
+		<property name="Max_temperature"></property>
+		<property name="Period_num"></property>
+	</class>
+	
+	<class name="com.PSMS.Hibernate.Connection_book">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="Company_name"></property>
+		<property name="telephone"></property>
+		<property name="email"></property>
+		<property name="fax"></property>
+		<property name="QQ"></property>
+		<property name="Home_page"></property>
+		<property name="addr"></property>
+		<property name="more"></property>
+	</class>
+	<class name="com.PSMS.Hibernate.PM_parameter">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="PS_id"></property>
+		<property name="name"></property>
+		<property name="type"></property>
+		<property name="brand"></property>
+		<property name="model"></property>
+		<property name="Purchase_time"></property>
+		<property name="Max_current"></property>
+		<property name="Period_num"></property>
+	</class>
+	
+	<class name="com.PSMS.Hibernate.Equipment">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="brand"></property>
+		<property name="model"></property>
+		<property name="type"></property>
+	</class>
+	
+	<class name="com.PSMS.Hibernate.HistoryOfYear">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="PS_id"></property>
+		<property name="total_power"></property>
+		<property name="total_hour"></property>
+		<property name="year"></property>
+	</class>
+	<class name="com.PSMS.Hibernate.HistoryOfDay">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="PS_id"></property>
+		<property name="total_power"></property>
+		<property name="grid_connection_power"></property>
+		<property name="power_consumption"></property>
+		<property name="total_irradiation"></property>
+		<property name="direct_radiation"></property>
+		<property name="diffuse_radiation"></property>
+		<property name="max_irradiation"></property>
+		<property name="year"></property>
+		<property name="month"></property>
+		<property name="day"></property>
+	</class>
+		<class name="com.PSMS.Hibernate.Failure_alarm">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="type"></property>
+		<property name="brand"></property>
+		<property name="model"></property>
+		<property name="Failure_code"></property>
+		<property name="Failure_meaning"></property>
+		<property name="Failure_type"></property>
+	</class>
+	<class name="com.PSMS.Hibernate.HistoryOfMonth">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="PS_id"></property>
+		<property name="total_power"></property>
+		<property name="total_hour"></property>
+		<property name="year"></property>
+		<property name="month"></property>
+	</class>
+	<class name="com.PSMS.Hibernate.HistoryOfFailure">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="Ps_name"></property>
+		<property name="Device_type"></property>
+		<property name="Device_name"></property>
+		<property name="state"></property>
+		<property name="Failure_meaning"></property>
+		<property name="time"></property>
+	</class>
+	
+	<class name="com.PSMS.Hibernate.JB_parameter">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="PS_id" />
+		<property name="name" />
+		<property name="type" />
+		<property name="brand" />
+		<property name="model" />
+		<property name="Purchase_time" />
+		<property name="Max_dc_voltage" />
+		<property name="Road_num" />
+		<property name="Period_num"></property>
+	</class>
+	<class name="com.PSMS.Hibernate.PS_picture">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="PS_id" />
+		<property name="name" />
+		<property name="Picture_url" />
+	</class>
+	
+	<class name="com.PSMS.Hibernate.Device_period">
+		<id name="id">
+			<generator class="native" />
+		</id>
+		<property name="PS_id" />
+		<property name="Period_num" />
+		<property name="Device_type" />
+		<property name="Parameter_id" />
+		<property name="name" />
+		<property name="Unit_num" />
+	</class>	
+	<class name="com.PSMS.Hibernate.PS_period">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="PS_id"></property>
+		<property name="Period_num"></property>
+		<property name="Period_capacity"></property>
+		<property name="Period_unit_num"></property>
+		<property name="Period_time"></property>
+	</class>
+	
+</hibernate-mapping>
+
+
+

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.PSMS.pojo.Area" table="bd_area">
+		<id name="areaId" type="java.lang.String">
+			<column name="area_id" />
+			<generator class="assigned"/>
+		</id>
+		
+		<property name="areaCode" type="java.lang.String">
+			<column name="area_code" />
+		</property>
+		
+		<property name="areaName" type="java.lang.String">
+			<column name="area_name" />	
+		</property>
+		
+		<property name="areaLevel" type="java.lang.Integer">
+			<column name="area_level" />	
+		</property>
+		
+		<property name="parentId" type="java.lang.Integer">
+			<column name="parent_id"/>
+		</property>
+		
+		<property name="areaFlag" type="java.lang.Integer">
+			<column name="area_flag"/>
+		</property>
+	</class>
+</hibernate-mapping>

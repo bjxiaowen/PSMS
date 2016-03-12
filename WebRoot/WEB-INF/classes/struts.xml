@@ -1,0 +1,724 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+	 "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.multipart.maxSize" value="10485760" />
+	<package name="main" extends="struts-default">
+		<global-results><!-- 全局result -->
+			<result name=""></result>
+		</global-results>
+
+		<action name="toGuestPageAction" method="toGuestPage"
+			class="com.PSMS.Action.toGuestPageAction">
+			<result name="success">guest.jsp</result>
+		</action>
+		<action name="getStationPosition" method="getStationPosition"
+			class="com.PSMS.Action.toGuestPageAction">
+		</action>
+
+
+		<action name="toUserManage" method="toUserManage"
+			class="com.PSMS.Action.toUserManageAction">
+			<result name="success">user.jsp</result>
+		</action>
+		<action name="getUserInformation" method="getUserInformation"
+			class="com.PSMS.Action.toUserManageAction">
+		</action>
+		<action name="getUserPartInformation" method="getUserPartInformation"
+			class="com.PSMS.Action.toUserManageAction">
+		</action>
+
+		<action name="addUser" method="addUser"
+			class="com.PSMS.Action.toUserManageAction">
+		</action>
+		<action name="checkUserNameIsLegal" method="checkUserNameIsLegal"
+			class="com.PSMS.Action.toUserManageAction">
+		</action>
+		<action name="deleteUser" method="deleteUser"
+			class="com.PSMS.Action.toUserManageAction">
+		</action>
+		<action name="updateUser" method="updateUser"
+			class="com.PSMS.Action.toUserManageAction">
+		</action>
+		<action name="queryUserByName" method="queryUserByName"
+			class="com.PSMS.Action.toUserManageAction">
+		</action>
+		<action name="setPSbyrole" class="com.PSMS.Action.toUserManageAction"
+			method="setPSbyrole">
+		</action>
+
+		<action name="queryUserByPs_name" method="queryUserByPs_name"
+			class="com.PSMS.Action.toUserManageAction">
+		</action>
+		<action name="checkUsernameAndPassword" method="checkUsernameAndPassword"
+			class="com.PSMS.Action.userLoginAction">
+		</action>
+
+		<action name="getUserName" method="getUserName"
+			class="com.PSMS.Action.userLoginAction">
+		</action>
+
+		<action name="userLogin" method="userLogin"
+			class="com.PSMS.Action.userLoginAction">
+			<result name="Role1" type="redirectAction">
+				<param name="actionName">toSuperManageUser</param>
+				<param name="User_name">${User_name}</param>
+			</result>
+			<result name="Role2" type="redirectAction">
+				<param name="actionName">toSuperUser</param>
+				<param name="User_name">${User_name}</param>
+			</result>
+			<result name="Role3" type="redirectAction">
+				<param name="actionName">toCommonManageUser</param>
+				<param name="User_name">${User_name}</param>
+			</result>
+			<result name="Role4" type="redirectAction">
+				<param name="actionName">toCommonUser</param>
+				<param name="User_name">${User_name}</param>
+			</result>
+			<result name="fail">fail.jsp</result>
+		</action>
+
+		<action name="toSuperManageUser" method="toSuperManageUser"
+			class="com.PSMS.Action.userLoginAction">
+			<result name="success">desktop1.jsp</result>
+		</action>
+		<action name="toSuperUser" method="toSuperUser"
+			class="com.PSMS.Action.userLoginAction">
+			<result name="success">desktop2.jsp</result>
+		</action>
+		<action name="toCommonManageUser" method="toCommonManageUser"
+			class="com.PSMS.Action.userLoginAction">
+			<result name="success">desktop3.jsp</result>
+		</action>
+		<action name="toCommonUser" method="toCommonUser"
+			class="com.PSMS.Action.userLoginAction">
+			<result name="success">desktop4.jsp</result>
+		</action>
+
+		<action name="toAccountSetting" method="toAccountSetting"
+			class="com.PSMS.Action.toUserManageAction">
+			<result name="success">accountSetting.jsp</result>
+		</action>
+
+		<action name="toPsSearch" method="toPsSearch"
+			class="com.PSMS.Action.toPsManageAction">
+			<result name="success">psSearch.jsp</result>
+		</action>
+		<action name="getPsInformation" method="getPsInformation"
+			class="com.PSMS.Action.toPsManageAction">
+		</action>
+		<action name="addPs" method="addPs" class="com.PSMS.Action.toPsManageAction">
+		</action>
+		<action name="deletePs" method="deletePs"
+			class="com.PSMS.Action.toPsManageAction">
+		</action>
+		<action name="updatePs" method="updatePs"
+			class="com.PSMS.Action.toPsManageAction">
+		</action>
+		<action name="searchPsByName" method="searchPsByName"
+			class="com.PSMS.Action.toPsManageAction">
+		</action>
+		<action name="searchPsByProvince" method="searchPsByProvince"
+			class="com.PSMS.Action.toPsManageAction">
+		</action>
+		<action name="searchPsByTime" method="searchPsByTime"
+			class="com.PSMS.Action.toPsManageAction">
+		</action>
+		<action name="checkPsNameIsLegal" method="checkPsNameIsLegal"
+			class="com.PSMS.Action.toPsManageAction">
+		</action>
+		<action name="checkCapacity" method="checkCapacity"
+			class="com.PSMS.Action.toPsManageAction">
+		</action>
+		
+		<action name="CanDelete" method="checkPsCanDelete"
+			class="com.PSMS.Action.toPsManageAction">
+		</action>
+
+		<!-- 20141202YL -->
+		<action name="toInverterManage" method="toInverterManage"
+			class="com.PSMS.Action.toInverterManageAction">
+			<result name="success">Inverter_parameter.jsp</result>
+		</action>
+		<action name="getInverterInformation" method="getInverterInformation"
+			class="com.PSMS.Action.toInverterManageAction">
+		</action>
+		<action name="checkInverterNameIsLegal" method="checkInverterNameIsLegal"
+			class="com.PSMS.Action.toInverterManageAction">
+		</action>
+		<action name="addInverter" method="addInverter"
+			class="com.PSMS.Action.toInverterManageAction">
+		</action>
+		<!-- <action name="updateInverter" method="updateInverter" class="com.PSMS.Action.toInverterManageAction"> 
+			</action> -->
+		<action name="deleteInverter" method="deleteInverter"
+			class="com.PSMS.Action.toInverterManageAction">
+		</action>
+		<action name="queryInverterByName" method="queryInverterByName"
+			class="com.PSMS.Action.toInverterManageAction">
+		</action>
+		<action name="queryInverterByPS_name" method="queryInverterByPS_name"
+			class="com.PSMS.Action.toInverterManageAction">
+		</action>
+		<action name="setModelByTypeAndBrandI" method="setModelByTypeAndBrandI"
+			class="com.PSMS.Action.toInverterManageAction">
+		</action>
+
+
+
+
+		<action name="toJunctionManage" class="com.PSMS.Action.toJunctionManageAction"
+			method="toJunctionManage">
+			<result name="success">JB_parameter.jsp</result>
+		</action>
+		<action name="getJunctionInformation" method="getJunctionInformation"
+			class="com.PSMS.Action.toJunctionManageAction">
+		</action>
+		<action name="deleteJunction" method="deleteJunction"
+			class="com.PSMS.Action.toJunctionManageAction">
+		</action>
+		<action name="checkJunctionNameIsLegal" method="checkJunctionNameIsLegal"
+			class="com.PSMS.Action.toJunctionManageAction">
+		</action>
+		<action name="addJunction" method="addJunction"
+			class="com.PSMS.Action.toJunctionManageAction">
+		</action>
+		<action name="queryJunctionByName" method="queryJunctionByName"
+			class="com.PSMS.Action.toJunctionManageAction">
+		</action>
+		<action name="queryJunctionByPS_name" method="queryJunctionByPS_name"
+			class="com.PSMS.Action.toJunctionManageAction">
+		</action>
+		<action name="setModelByTypeAndBrandJ" method="setModelByTypeAndBrandJ"
+			class="com.PSMS.Action.toJunctionManageAction">
+		</action>
+
+
+
+		<action name="toWSManage" class="com.PSMS.Action.toWSManageAction"
+			method="toWSManage">
+			<result name="success">WS_parameter.jsp</result>
+		</action>
+		<action name="getWSInformation" class="com.PSMS.Action.toWSManageAction"
+			method="getWSInformation">
+		</action>
+		<action name="checkWSNameIsLegal" class="com.PSMS.Action.toWSManageAction"
+			method="checkWSNameIsLegal">
+		</action>
+		<action name="addWS" class="com.PSMS.Action.toWSManageAction"
+			method="addWS">
+		</action>
+		<action name="deleteWS" class="com.PSMS.Action.toWSManageAction"
+			method="deleteWS">
+		</action>
+		<action name="queryWSByName" class="com.PSMS.Action.toWSManageAction"
+			method="queryWSByName">
+		</action>
+		<action name="queryWSByPS_name" class="com.PSMS.Action.toWSManageAction"
+			method="queryWSByPS_name">
+		</action>
+		<action name="setModelByTypeAndBrandW" method="setModelByTypeAndBrandW"
+			class="com.PSMS.Action.toWSManageAction">
+		</action>
+
+
+
+		<action name="toPMManage" class="com.PSMS.Action.toPMManageAction"
+			method="toPMManage">
+			<result name="success">PM_parameter.jsp</result>
+		</action>
+		<action name="getPMInformation" class="com.PSMS.Action.toPMManageAction"
+			method="getPMInformation">
+		</action>
+		<action name="checkPMNameIsLegal" class="com.PSMS.Action.toPMManageAction"
+			method="checkPMNameIsLegal">
+		</action>
+		<action name="addPM" class="com.PSMS.Action.toPMManageAction"
+			method="addPM">
+		</action>
+		<action name="deletePM" class="com.PSMS.Action.toPMManageAction"
+			method="deletePM">
+		</action>
+		<action name="queryPMByName" class="com.PSMS.Action.toPMManageAction"
+			method="queryPMByName">
+		</action>
+		<action name="queryPMByPS_name" class="com.PSMS.Action.toPMManageAction"
+			method="queryPMByPS_name">
+		</action>
+		<action name="setModelByTypeAndBrandP" method="setModelByTypeAndBrandP"
+			class="com.PSMS.Action.toPMManageAction">
+		</action>
+
+
+		<action name="toConnectionBookManage" method="toConnectionBookManage"
+			class="com.PSMS.Action.toConnectionBookManageAction">
+			<result name="success">connectionBook.jsp</result>
+		</action>
+
+		<action name="getConnectionBookInformation" method="getConnectionBookInformation"
+			class="com.PSMS.Action.toConnectionBookManageAction">
+		</action>
+		<action name="addConnectionBook" method="addConnectionBook"
+			class="com.PSMS.Action.toConnectionBookManageAction">
+		</action>
+		<action name="editConnectionBook" method="editConnectionBook"
+			class="com.PSMS.Action.toConnectionBookManageAction">
+		</action>
+		<action name="checkConnectionBookNameIsLegal" method="checkConnectionBookNameIsLegal"
+			class="com.PSMS.Action.toConnectionBookManageAction">
+		</action>
+		<action name="deleteConnectionBook" method="deleteConnectionBook"
+			class="com.PSMS.Action.toConnectionBookManageAction">
+		</action>
+		<action name="getConnectionBookByCompany_name" class="com.PSMS.Action.toConnectionBookManageAction"
+			method="getConnectionBookByCompany_name">
+		</action>
+		<action name="queryConnectionBookByName" class="com.PSMS.Action.toConnectionBookManageAction"
+			method="queryConnectionBookByName">
+		</action>
+		<action name="updateConnectionBook" method="updateConnectionBook"
+			class="com.PSMS.Action.toConnectionBookManageAction">
+		</action>
+
+
+
+
+
+		<!-- YL 2014-11-15 -->
+		<action name="toEquipmentManage" class="com.PSMS.Action.toEquipmentManageAction"
+			method="toEquipmentManage">
+			<result name="success">Equipment.jsp</result>
+		</action>
+		<action name="getEquipmentInformation" class="com.PSMS.Action.toEquipmentManageAction"
+			method="getEquipmentInformation">
+		</action>
+		<action name="deleteEquipment" class="com.PSMS.Action.toEquipmentManageAction"
+			method="deleteEquipment">
+		</action>
+		<action name="addEquipment" class="com.PSMS.Action.toEquipmentManageAction"
+			method="addEquipment">
+		</action>
+		<action name="queryEquipmentByName" method="queryEquipmentByName"
+			class="com.PSMS.Action.toEquipmentManageAction">
+		</action>
+		<action name="queryEquipmentByMName" method="queryEquipmentByMName"
+			class="com.PSMS.Action.toEquipmentManageAction">
+		</action>
+		<action name="queryEquipmentByType" method="queryEquipmentByType"
+			class="com.PSMS.Action.toEquipmentManageAction">
+		</action>
+		<action name="checkEquipmentIsLegal" method="checkEquipmentIsLegal"
+			class="com.PSMS.Action.toEquipmentManageAction">
+		</action>
+		<action name="toFailureAlarmManage" method="toFailureAlarmManage"
+			class="com.PSMS.Action.toFailureAlarmManageAction">
+			<result name="success">Failure_alarm.jsp</result>
+		</action>
+		<action name="getFailureAlarmInformation" method="getFailureAlarmInformation"
+			class="com.PSMS.Action.toFailureAlarmManageAction">
+		</action>
+		<action name="addOrUpdateFA" method="addOrUpdateFA"
+			class="com.PSMS.Action.toFailureAlarmManageAction">
+		</action>
+		<action name="deleteFA" method="deleteFA"
+			class="com.PSMS.Action.toFailureAlarmManageAction">
+		</action>
+		<action name="checkFAInformation" method="checkFAInformation"
+			class="com.PSMS.Action.toFailureAlarmManageAction">
+		</action>
+		<action name="setBrandByType" method="setBrandByType"
+			class="com.PSMS.Action.toFailureAlarmManageAction">
+		</action>
+		<action name="setModelByTypeAndBrand0" method="setModelByTypeAndBrand"
+			class="com.PSMS.Action.toFailureAlarmManageAction">
+		</action>
+		<action name="setType" method="setType"
+			class="com.PSMS.Action.toFailureAlarmManageAction">
+		</action>
+		<action name="queryEquipmentByType11" class="com.PSMS.Action.toFailureAlarmManageAction"
+			method="queryEquipmentByType11">
+		</action>
+		<!-- LM 2014-11-11 -->
+		<action name="toAllStationHistoryData" method="toAllStationHistoryData"
+			class="com.PSMS.Action.toAllStationHistoryDataAction">
+		</action>
+		<action name="getInverterHistoryData" method="getInverterHistoryData"
+			class="com.PSMS.Action.toAllStationHistoryDataAction">
+		</action>
+		<action name="toHistoryOfYear" method="toHistoryOfYear"
+			class="com.PSMS.Action.toPowerHistoryDataAction">
+		</action>
+		<!-- LM 2014-11-17 -->
+		<action name="getAllHistoryYear" method="getAllHistoryYear"
+			class="com.PSMS.Action.toPowerHistoryDataAction">
+		</action>
+		<!-- LM 2014-11-20 -->
+		<action name="getAllStationMonitor" method="getAllStationMonitor"
+			class="com.PSMS.Action.toAllStationMonitorAction">
+		</action>
+		<action name="getWholeData" method="getWholeData"
+			class="com.PSMS.Action.toAllStationMonitorAction">
+		</action>
+		<!-- LM 2014-11-27 -->
+		<action name="getPsNames" method="getPsNames"
+			class="com.PSMS.Action.toPsManageAction">
+		</action>
+		<action name="toCompOfPowerAndIrradByYear" method="toCompOfPowerAndIrradByYear"
+			class="com.PSMS.Action.toCompOfPowerAndIrrad">
+		</action>
+		<action name="toCompOfPowerAndIrradByMonth" method="toCompOfPowerAndIrradByMonth"
+			class="com.PSMS.Action.toCompOfPowerAndIrrad">
+		</action>
+
+		<action name="toHistoryOfYear_Chart" method="toHistoryOfYear_Chart"
+			class="com.PSMS.Action.toPowerHistoryDataAction">
+		</action>
+		<action name="toHistoryOfMonth_Chart" method="toHistoryOfMonth_Chart"
+			class="com.PSMS.Action.toPowerHistoryDataAction">
+		</action>
+		<action name="toHistoryOfDay_Chart" method="toHistoryOfDay_Chart"
+			class="com.PSMS.Action.toPowerHistoryDataAction">
+		</action>
+		<!-- WJJ 2014-11-27 -->
+		<action name="toHistoryOfMonth" method="toHistoryOfMonth"
+			class="com.PSMS.Action.toPowerHistoryDataAction">
+		</action>
+		<action name="getAllHistoryMonth" method="getAllHistoryMonth"
+			class="com.PSMS.Action.toPowerHistoryDataAction">
+		</action>
+		<action name="toHistoryOfDay" method="toHistoryOfDay"
+			class="com.PSMS.Action.toPowerHistoryDataAction">
+		</action>
+		<action name="getAllHistoryDay" method="getAllHistoryDay"
+			class="com.PSMS.Action.toPowerHistoryDataAction">
+		</action>
+		<action name="getFailureHistory" method="getFailureHistory"
+			class="com.PSMS.Action.toAllFailureHistoryAction">
+		</action>
+		<action name="getPowerMeterHistoryData" method="getPowerMeterHistoryData"
+			class="com.PSMS.Action.toAllStationHistoryDataAction">
+		</action>
+		<action name="getWeatherStationHistoryData" method="getWeatherStationHistoryData"
+			class="com.PSMS.Action.toAllStationHistoryDataAction">
+		</action>
+		<action name="getJunctionBoxHistoryData" method="getJunctionBoxHistoryData"
+			class="com.PSMS.Action.toAllStationHistoryDataAction">
+		</action>
+		<!-- YJ 2014-12-02 -->
+		<action name="toComparisonOfPower" method="toComparisonOfPower"
+			class="com.PSMS.Action.toComparisonOfPower">
+		</action>
+		<action name="toComparisonOfPower2" method="toComparisonOfPower2"
+			class="com.PSMS.Action.toComparisonOfPower">
+		</action>
+		<action name="getAllStationName" method="getPsNames"
+			class="com.PSMS.Action.toPsManageAction">
+		</action>
+		<action name="toComparisonOfPower3" method="toComparisonOfPower3"
+			class="com.PSMS.Action.toComparisonOfPower">
+		</action>
+		<action name="toComparisonOfPower4" method="toComparisonOfPower4"
+			class="com.PSMS.Action.toComparisonOfPower">
+		</action>
+		<!-- YJ 2014-12-08 -->
+		<action name="getGuestPageData" method="getGuestPageData"
+			class="com.PSMS.Action.toGuestPageAction">
+		</action>
+		<!-- LM 2014-12-18 -->
+		<action name="getPSNameByUsername" method="getPSNameByUsername"
+			class="com.PSMS.Action.toUserManageAction">
+		</action>
+
+		<!-- WJJ 2014-12-19 -->
+		<action name="toHistoryOfYearPart" method="toHistoryOfYearPart"
+			class="com.PSMS.Action.toPowerHistoryDataAction">
+		</action>
+		<!-- WJJ2014/12/22 -->
+		<action name="getAuthority" method="getAuthority"
+			class="com.PSMS.Action.toPsManageAction">
+		</action>
+		<!-- YJ 2014-12-26 -->
+		<action name="uploadFile" method="uploadFile"
+			class="com.PSMS.Action.PSPictureAction" />
+		<action name="getPSName" method="getPSName"
+			class="com.PSMS.Action.PSPictureAction" />
+		<action name="getPSPName" method="getPSPName" class="com.PSMS.Action.upLoadPic" />
+		<action name="upLoadPicture" method="importData" class="com.PSMS.Action.upLoadPic">
+			<interceptor-ref name="fileUpload">
+				<param name="allowedTypes">image/bmp,image/png,image/jpeg,image/jpg</param>
+				<param name="maximumSize">10485760</param>
+			</interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="success">psSearch.jsp</result>
+		</action>
+		<action name="deletePic" method="deletePic"
+			class="com.PSMS.Action.PSPictureAction" />
+
+		<!-- 20150114 YJ -->
+		<action name="toDesktop" method="toDesktop"
+			class="com.PSMS.Action.userLoginAction">
+			<result name="Role1" type="redirectAction">
+				<param name="actionName">toSuperManageUser</param>
+				<param name="User_name">${uName}</param>
+			</result>
+			<result name="Role2" type="redirectAction">
+				<param name="actionName">toSuperUser</param>
+				<param name="User_name">${uName}</param>
+			</result>
+			<result name="Role3" type="redirectAction">
+				<param name="actionName">toCommonManageUser</param>
+				<param name="User_name">${uName}</param>
+			</result>
+			<result name="Role4" type="redirectAction">
+				<param name="actionName">toCommonUser</param>
+				<param name="User_name">${uName}</param>
+			</result>
+			<result name="fail">fail.jsp</result>
+		</action>
+
+		<action name="getPSIDByUserName" method="getPSIDByUserName"
+			class="com.PSMS.Action.toUserManageAction" />
+
+		<!-- HHR 2015-01-16 -->
+		<action name="getWeatherStationSummary" method="getWeatherStationSummary"
+			class="MonitoringAction" />
+		<action name="getSummaryChart" method="getSummaryChart" class="MonitoringAction" />
+
+		<action name="getMonitorGrid" method="getMonitorGrid" class="MonitoringAction" />
+		<action name="setBatchDelete" method="setBatchDelete" class="MonitoringAction" />
+		<action name="setAllDeleteOrRecover" method="setAllDeleteOrRecover"
+			class="MonitoringAction" />
+
+		<action name="getMonitorChart" method="getMonitorChart" class="MonitoringAction" />
+		<action name="getMonitorParameterIds" method="getMonitorParameterIds"
+			class="MonitoringAction" />
+		<action name="getMonitorNames" method="getMonitorNames" class="MonitoringAction" />
+
+		<action name="getDeviceList" method="getDeviceList" class="MonitoringAction" />
+
+		<action name="test" method="test" class="MonitoringAction" />
+		<action name="getFailureMeaning" method="getFailureMeaning"
+			class="MonitoringAction" />
+		<action name="getAccPowerSummary" method="getAccPowerSummary"
+			class="MonitoringAction" />
+		<action name="getTotalSalary" method="getTotalSalary" class="MonitoringAction" />
+		<!-- YJ 2015-01-28 -->
+		<action name="recoverPS" method="recoverPS"
+			class="com.PSMS.Action.toPsManageAction" />
+		<!-- YJ 2015-03 -->
+
+
+		<action name="getPsPeriodInformation" method="getPsPeriodInformation"
+			class="com.PSMS.Action.toPSPeriodMamageAction" />
+
+		<action name="toPsPeriod" method="toPsPeriod"
+			class="com.PSMS.Action.toPSPeriodMamageAction">
+			<result name="success">PS_period.jsp </result>
+		</action>
+
+		<action name="addPeriod" method="addPeriod"
+			class="com.PSMS.Action.toPSPeriodMamageAction">
+		</action>
+		<action name="editPeriod" method="editPeriod"
+			class="com.PSMS.Action.toPSPeriodMamageAction">
+		</action>
+		<action name="deletePeriod" method="deletePeriod"
+			class="com.PSMS.Action.toPSPeriodMamageAction">
+		</action>
+		<action name="getPeriodNumByPsName" method="getPeriodNumByPsName"
+			class="com.PSMS.Action.toPSPeriodMamageAction">
+		</action>
+		<action name="checkAddPeriodCapacityIsLegal" method="checkAddPeriodCapacityIsLegal"
+			class="com.PSMS.Action.toPSPeriodMamageAction">
+		</action>
+
+		<!-- 2015-04-lm -->
+		<action name="toPsHistoryData" method="toPsHistoryData"
+			class="com.PSMS.Action.toAllStationHistoryDataAction">
+			<result name="success">pshistorydata.jsp</result>
+		</action>
+		<action name="toYearPowerHistory" method="toYearPowerHistory"
+			class="com.PSMS.Action.toPowerHistoryDataAction">
+			<result name="success">YearPowerHistory.jsp</result>
+		</action>
+		<action name="toMonthPowerHistory" method="toMonthPowerHistory"
+			class="com.PSMS.Action.toPowerHistoryDataAction">
+			<result name="success">MonthPowerHistory.jsp</result>
+		</action>
+		<action name="toDayPowerHistory" method="toDayPowerHistory"
+			class="com.PSMS.Action.toPowerHistoryDataAction">
+			<result name="success">DayPowerHistory.jsp</result>
+		</action>
+		<action name="toCompPowerAndIrradPage" method="toCompPowerAndIrradPage"
+			class="com.PSMS.Action.toCompOfPowerAndIrrad">
+			<result name="success">compPowerAndIrrad.jsp</result>
+		</action>
+		<action name="toCompHistoryDayPage" method="toCompHistoryDayPage"
+			class="com.PSMS.Action.toComparisonOfPower">
+			<result name="success">compHistoryDay.jsp</result>
+		</action>
+		<action name="toCompTheoreticalAndActualPage" method="toCompTheoreticalAndActualPage"
+			class="com.PSMS.Action.toComparisonOfPower">
+			<result name="success">compTheoreticalAndActual.jsp</result>
+		</action>
+		<action name="toFailureHistoryPage" method="toFailureHistoryPage"
+			class="com.PSMS.Action.toFailureAlarmManageAction">
+			<result name="success">failureHistory.jsp</result>
+		</action>
+		<action name="toComOfInverter" method="toComOfInverter"
+			class="com.PSMS.Action.toComOfInverterAction">
+			<result name="success">compInverter1.jsp</result>
+		</action>
+		
+		<action name="toCompOfWeatherStaion" method="toCompOfWeatherStaion"
+			class="com.PSMS.Action.toCompOfWeatherStaionAction">
+			<result name="success">compWS1.jsp</result>
+		</action>
+		
+		<action name="getInverterCompData" method="getInverterCompData"
+			class="com.PSMS.Action.toComOfInverterAction">
+			
+		</action>
+		
+		<action name="getInverterCompData1" method="getInverterCompData1"
+			class="com.PSMS.Action.toComOfInverterAction">
+			
+		</action>
+		
+		<action name="getWSCompData" method="getWSCompData"
+			class="com.PSMS.Action.toCompOfWeatherStaionAction">
+		</action>
+		<action name="getWSCompData1" method="getWSCompData1"
+			class="com.PSMS.Action.toCompOfWeatherStaionAction">
+		</action>
+		<!--  LM-20150422  -->
+		<action name="getStationDeviceList" method="getStationDeviceList"
+			class="com.PSMS.Action.toDeviceListAction">	
+		</action>
+		<action name="getPeriodIndexByPsId" method="getPeriodIndexByPsId"
+			class="com.PSMS.Action.toDeviceListAction">	
+		</action>
+		
+		<action name="getPSNameByPSId" method="getPSNameByPSId"
+			class="com.PSMS.Action.toPsManageAction">	
+		</action>
+		
+		<action name="getWSRealTimeData" method="getWSRealTimeData"
+			class="com.PSMS.Action.toWSManageAction">	
+		</action>
+		
+		<action name="getPMRealTimeDataByPSId" method="getPMRealTimeDataByPSId"
+			class="com.PSMS.Action.toRealTimeDataAction">	
+		</action>
+		
+		<action name="getInverterNamesByPSId" method="getInverterNamesByPSId"
+			class="com.PSMS.Action.toRealTimeDataAction">	
+		</action>
+		
+		<action name="getInverterRealTimeDataByPSId" method="getInverterRealTimeDataByPSId"
+			class="com.PSMS.Action.toRealTimeDataAction">	
+		</action>
+		
+		<action name="createHistoryData" method="creatHistory"
+			class="com.PSMS.Action.createHistoryData">
+				
+		</action>
+		
+		<action name="getAllMonth" method="getAllMonth"
+			class="com.PSMS.Action.toPowerHistoryDataAction">
+				
+		</action>
+		<action name="exportInverterHistoryData" method="exportInverterHistoryData"
+			class="com.PSMS.Action.toAllStationHistoryDataAction">
+		</action>
+		<action name="exportPowerMeterHistoryData" method="exportPowerMeterHistoryData"
+			class="com.PSMS.Action.toAllStationHistoryDataAction">
+		</action>
+		<action name="exportWSHistoryData" method="exportWSHistoryData"
+			class="com.PSMS.Action.toAllStationHistoryDataAction">
+		</action>
+		<action name="exportJBHistoryData" method="exportJBHistoryData"
+			class="com.PSMS.Action.toAllStationHistoryDataAction">
+		</action>
+		
+		<!-- 人员分配 -->
+		<action name="toAssignment" method="toAssignment" class="com.PSMS.Action.ReAreaPowerStationAction">
+			<result name="success">assignment.jsp</result>
+		</action>
+		
+		<!-- 区域  -->
+		<action name="toRegionList" method="toRegionList" class="com.PSMS.Action.AreaAction">
+			<result name="success">regionList.jsp</result>
+		</action>
+		<action name="addRegion" method="addRegion" class="com.PSMS.Action.AreaAction"/>
+		<action name="updateRegion" method="updateRegion" class="com.PSMS.Action.AreaAction"/>
+		<action name="getRegionList" method="getRegionList" class="com.PSMS.Action.AreaAction"/>
+		<action name="queryByCode" method="queryByCode" class="com.PSMS.Action.AreaAction"/>
+		<action name="deleteRegion" method="deleteRegion" class="com.PSMS.Action.AreaAction"/>
+		<action name="queryByCodeAndName" method="queryByCodeAndName" class="com.PSMS.Action.AreaAction"/>
+		
+		<!-- 工程师与区域关系 -->
+		<action name="toEngineerArea" method="toEngineerArea" class="com.PSMS.Action.ReEngineerAreaAction">
+			<result name="success">engineerArea.jsp</result>
+		</action>
+		<action name="addReEngineerArea" method="addReEngineerArea" class="com.PSMS.Action.ReEngineerAreaAction"/>
+		<action name="updateReEngineerArea" method="updateReEngineerArea" class="com.PSMS.Action.ReEngineerAreaAction"/>
+		<action name="getById" method="getById" class="com.PSMS.Action.ReEngineerAreaAction"/>
+		<action name="getAll" method="getAll" class="com.PSMS.Action.ReEngineerAreaAction"/>
+		<action name="searchByUserName" method="searchByUserName" class="com.PSMS.Action.ReEngineerAreaAction"/>
+		<action name="searchByAreaName" method="searchByAreaName" class="com.PSMS.Action.ReEngineerAreaAction"/>
+		<action name="checkByAreaIdAndUserId" method="checkByAreaIdAndUserId" class="com.PSMS.Action.ReEngineerAreaAction"/>
+		<action name="deleteReEngineerArea" method="deleteReEngineerArea" class="com.PSMS.Action.ReEngineerAreaAction"/>
+		<!-- 通过角色查询用户信息 -->
+		<action name="getUserByRoleId" method="getUserByRoleId" class="com.PSMS.Action.toUserManageAction"/>
+		
+		<!-- 电站工程师区域关系 -->
+		<action name="toReEngAreaPS" method="toReEngAreaPS" class="com.PSMS.Action.ReEngAreaPSAction">
+			<result name="success">reEngAreaPS.jsp</result>
+		</action>
+		<action name="addReEngAreaPS" method="addReEngAreaPS" class="com.PSMS.Action.ReEngAreaPSAction"/>
+		<action name="UpdateReEngAreaPS" method="UpdateReEngAreaPS" class="com.PSMS.Action.ReEngAreaPSAction"/>
+		<action name="deleteReEngAreaPS" method="deleteReEngAreaPS" class="com.PSMS.Action.ReEngAreaPSAction"/>
+		<action name="getReEngAreaPSById" method="getReEngAreaPSById" class="com.PSMS.Action.ReEngAreaPSAction"/>
+		<action name="getAllReEngAreaPS" method="getAllReEngAreaPS" class="com.PSMS.Action.ReEngAreaPSAction"/>
+		<action name="searchByAreaNamePS" method="searchByAreaName" class="com.PSMS.Action.ReEngAreaPSAction"/>
+		<action name="searchByUserNamePS" method="searchByUserName" class="com.PSMS.Action.ReEngAreaPSAction"/>
+		<action name="searchByPSNamePS" method="searchByPSName" class="com.PSMS.Action.ReEngAreaPSAction"/>
+		<action name="checkReEngAreaPSById" method="checkReEngAreaPSById" class="com.PSMS.Action.ReEngAreaPSAction"/>
+	
+	
+		<!-- 巡检管理-->
+		<action name="toInspectionManager" 		method="toInspectionManager" class="com.PSMS.Action.InspectionManagerAction">
+			<result name="success">inspectionManager.jsp</result>
+		</action>
+		<action name="addInspectionManager" 	method="addInspectionManager" class="com.PSMS.Action.InspectionManagerAction"/>
+		<action name="updateInspectionManager" 	method="updateInspectionManager" class="com.PSMS.Action.InspectionManagerAction"/>
+		<action name="deleteInspectionManager" 	method="deleteInspectionManager" class="com.PSMS.Action.InspectionManagerAction"/>
+		<action name="getInspectionManagerById" method="getInspectionManagerById" class="com.PSMS.Action.InspectionManagerAction"/>
+		<action name="getAllInspectionManager" 	method="getAllInspectionManager" class="com.PSMS.Action.InspectionManagerAction"/>
+	
+		<!-- 巡检记录 -->
+		<action name="toInspection" method="toInspection" class="com.PSMS.Action.InspectionAction">
+			<result name="success">inspection.jsp</result>
+		</action>
+		<action name="addInspection" method="addInspection" class="com.PSMS.Action.InspectionAction"/>
+		<action name="updateInspection" method="updateInspection" class="com.PSMS.Action.InspectionAction"/>
+		<action name="deleteInspection" method="deleteInspection" class="com.PSMS.Action.InspectionAction"/>
+		<action name="getInspectionById" method="getInspectionById" class="com.PSMS.Action.InspectionAction"/>
+		<action name="getInspectionAll" method="getInspectionAll" class="com.PSMS.Action.InspectionAction"/>
+		
+		<!-- 异常信息处理 -->
+		<action name="toFaultMessage" method="toFaultMessage" class="com.PSMS.Action.FaultMessageAction">
+			<result name="success">faultMessage.jsp</result>
+		</action>
+		<action name="addFaultMessage" method="addFaultMessage" class="com.PSMS.Action.FaultMessageAction"></action>
+		<action name="updateFaultMessage" method="updateFaultMessage" class="com.PSMS.Action.FaultMessageAction"></action>
+		<action name="deleteFaultMessage" method="deleteFaultMessage" class="com.PSMS.Action.FaultMessageAction"></action>
+		<action name="getFaultMessageById" method="getFaultMessageById" class="com.PSMS.Action.FaultMessageAction"></action>
+		<action name="getAllFaultMessage" method="getAllFaultMessage" class="com.PSMS.Action.FaultMessageAction"></action>
+	</package>
+</struts>

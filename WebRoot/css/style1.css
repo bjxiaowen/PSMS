@@ -1,0 +1,33 @@
+/*
+	 CSS-Tricks Example
+	 by Chris Coyier
+	 http://css-tricks.com
+*/
+
+* { margin: 0; padding: 0; }
+body { font: 12px Georgia, serif; }
+html { overflow-y: scroll; }
+a { text-decoration: none; }
+p { font-size: 15px; margin: 0 0 15px 0; }
+#page-wrap { width: 440px; margin: 20px auto; }
+
+ul { list-style: none; }
+ul li a { display: block; border-bottom: 1px solid #666; padding: 4px; color: #666; }
+ul li a:hover { background: #fe4902; color: white; }
+ul li:last-child a { border: none; }
+
+#organic-tabs { background: #eee; padding: 10px; margin: 0 0 15px 0; -moz-box-shadow: 0 0 5px #666; -webkit-box-shadow: 0 0 5px #666; }
+
+#explore-nav { overflow: hidden; margin: 0 0 10px 0; }
+#explore-nav li { width: 97px; float: left; margin: 0 10px 0 0; }
+#explore-nav li.last { margin-right: 0; }
+#explore-nav li a { display: block; padding: 5px; background: #959290; color: white; font-size: 10px; text-align: center; border: 0; }
+#explore-nav li a:hover { background-color: #111; }
+
+#jquerytuts, #core, #classics { display: none; }
+
+#explore-nav li#ex-featured a.current, ul#featured li a:hover { background-color: #23d12f; color: white; }
+#explore-nav li#ex-core a.current, ul#core li a:hover { background-color: #d30000; color: white; }
+#explore-nav li#ex-jquery a.current, ul#jquerytuts li a:hover { background-color: #8d01b0; color: white; }
+#explore-nav li#ex-classics a.current, ul#classics li a:hover { background-color: #FE4902; color: white; }
+

@@ -1,0 +1,62 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+
+.social-links {
+	clear: both;
+	overflow: hidden;
+	margin-bottom: 30px;
+	width:100%;
+	
+	
+}
+
+.social-links .span9 {
+	padding-left: 10px;
+}
+
+.social-links ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.social-links ul li {
+	
+	padding: 30px 18px 10px 0;
+}
+
+.social-links ul li a{
+	display:block;	
+	width: 80px;
+	height: 80px;
+	cursor: pointer;
+}
+
+.social-links ul li.facebook a {
+	background: url(../images/icon-mana.png) no-repeat 0 0;
+}
+
+.social-links ul li.twitter a {
+	background: url(../images/icon-mon.png) no-repeat 0 0;
+}
+
+.social-links ul li.flickr a {
+	background: url(../images/icon-sds.png) no-repeat 0 0;
+}
+
+.social-links ul li.pinterest a {
+	background: url(../images/icon-work.png) no-repeat 0 0;
+}
+
+.social-links ul li.dribble a {
+	background: url(../images/icon-setting.png) no-repeat 0 0;
+}
+
+.social-links ul li.gplus a {
+	background: url(../images/icon-log.png) no-repeat 0 0;
+}
+
+
+

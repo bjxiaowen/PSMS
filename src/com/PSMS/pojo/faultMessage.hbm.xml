@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.PSMS.pojo.FaultMessage" table="bd_fault_message">
+		<id name="faultMessageId" type="java.lang.String">
+			<column name="fault_message_id"/>
+			<generator class="assigned"/>
+		</id>
+		
+		<property name="areaId" type="java.lang.String">
+			<column name="area_id"></column>
+		</property>
+		
+		<property name="psId" type="java.lang.Integer">
+			<column name="ps_id"></column>
+		</property>
+		
+		<property name="equipmentId" type="java.lang.Integer">
+			<column name="equipment_id"></column>
+		</property>
+		
+		<property name="equipmentStatus" type="java.lang.Integer">
+			<column name="equipment_status"></column>
+		</property>
+		
+		<property name="userId" type="java.lang.Integer">
+			<column name="user_id"></column>
+		</property>
+		
+		<property name="alertTime" type="java.lang.String">
+			<column name="alert_time"></column>
+		</property>
+		
+		<property name="status" type="java.lang.Integer">
+			<column name="status"></column>
+		</property>
+		
+		<property name="initialDiagnose" type="java.lang.String">
+			<column name="initial_diagnose"></column>
+		</property>
+		
+		<property name="predictTime" type="java.lang.String">
+			<column name="predict_time"></column>
+		</property>
+		
+		<property name="alertCause" type="java.lang.String">
+			<column name="alert_cause"></column>
+		</property>
+		
+		<property name="handleCondition" type="java.lang.String">
+			<column name="handle_condition"></column>
+		</property>
+		
+		<property name="maintainDate" type="java.lang.String">
+			<column name="maintain_date"></column>
+		</property>
+		
+		<property name="checkPerson" type="java.lang.String">
+			<column name="check_person"></column>
+		</property>
+		
+		<property name="checkDate" type="java.lang.String">
+			<column name="check_date"></column>
+		</property>
+		<property name="checkText" type="java.lang.String">
+			<column name="check_text"></column>
+		</property>
+		<property name="checkStatus" type="java.lang.Integer">
+			<column name="check_status"></column>
+		</property>
+		
+	</class>
+</hibernate-mapping>

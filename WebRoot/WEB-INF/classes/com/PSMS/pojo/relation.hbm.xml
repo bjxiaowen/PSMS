@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 工程师区域关系 -->
+	<class name="com.PSMS.pojo.ReEngineerArea" table="re_engineer_area">
+		<id name="id" type="java.lang.String">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="areaId" type="java.lang.String">
+			<column name="area_id" />
+		</property>
+		<property name="userId" type="java.lang.Integer">
+			<column name="user_id" />
+		</property>
+	</class>
+	<!-- 区域电站关系 -->
+	<class name="com.PSMS.pojo.ReAreaPowerStation" table="re_area_power_station">
+		<id name="id" type="java.lang.String">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="psId" type="java.lang.Integer">
+			<column name="ps_id" />
+		</property>
+		<property name="areaId" type="java.lang.String">
+			<column name="area_id" />
+		</property>
+	</class>
+	
+	<!-- 电站工程师关系 -->
+	<class name="com.PSMS.pojo.ReEngineerPowerStation" table="re_area_power_station">
+		<id name="id" type="java.lang.String">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="psId" type="java.lang.Integer">
+			<column name="ps_id" />
+		</property>
+		<property name="userId" type="java.lang.Integer">
+			<column name="user_id" />
+		</property>
+	</class>
+	
+	<class name="com.PSMS.pojo.ReEngAreaPowerStation" table="re_engineer_area_powerstation">
+		<id name="id" type="java.lang.String">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="areaId" type="java.lang.String">
+			<column name="area_id"></column>
+		</property>
+		<property name="userId" type="java.lang.Integer">
+			<column name="user_id"></column>
+		</property>
+		<property name="psId" type="java.lang.Integer">
+			<column name="ps_id"></column>
+		</property>
+	</class>
+</hibernate-mapping>

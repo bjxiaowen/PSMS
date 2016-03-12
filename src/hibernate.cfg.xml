@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+
+   
+<hibernate-configuration>
+	<session-factory>
+		<property name="dialect">
+			org.hibernate.dialect.SQLServerDialect
+		</property>
+		 <property name="connection.url">
+			jdbc:sqlserver://localhost:1433;instanceName=StandardSERVER;DatabaseName=PSMS
+		</property>
+		 <property name="connection.username">sa</property>
+		<property name="connection.password">Andy</property>
+		<property name="connection.driver_class">
+			com.microsoft.sqlserver.jdbc.SQLServerDriver
+		</property>
+		 <property name="show_sql">true</property>
+		<mapping resource="com/PSMS/Hibernate/PSMS.hbm.xml" />
+		<mapping resource="com/PSMS/Hibernate/Inverter.hbm.xml" />
+		<mapping resource="com/PSMS/Hibernate/JunctionBox.hbm.xml" />
+		<mapping resource="com/PSMS/Hibernate/PowerMeter.hbm.xml" />
+		<mapping resource="com/PSMS/Hibernate/WeatherStation.hbm.xml" />
+		<mapping resource="com/PSMS/pojo/area.hbm.xml" />
+		<mapping resource="com/PSMS/pojo/inspection.hbm.xml" />
+		<mapping resource="com/PSMS/pojo/relation.hbm.xml" />
+		<mapping resource="com/PSMS/pojo/faultMessage.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>

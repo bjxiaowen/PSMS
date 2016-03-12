@@ -1,0 +1,209 @@
+@CHARSET "UTF-8";
+#fullbg { 
+background-color:gray; 
+left:0; 
+opacity:0.5; 
+position:absolute; 
+top:0; 
+z-index:3; 
+filter:alpha(opacity=50); 
+-moz-opacity:0.5; 
+-khtml-opacity:0.5; 
+} 
+#dialog1 { 
+background-color:#fff; 
+border:5px solid rgba(0,0,0, 0.4); 
+height:400px; 
+left:50%; 
+margin:-200px 0 0 -200px; 
+padding:1px; 
+position:fixed !important; /* 浮动对话框 */ 
+position:absolute; 
+top:50%; 
+width:400px; 
+z-index:5; 
+border-radius:5px; 
+display:none; 
+} 
+#dialog1 p { 
+margin:0 0 1px; 
+height:24px; 
+line-height:24px; 
+background:#35abd9; 
+} 
+#dialog1 p.close { 
+text-align:right; 
+padding-right:10px; 
+} 
+#dialog1 p.close a { 
+color:#fff; 
+text-decoration:none; 
+} 
+
+#dialog2 { 
+background-color:#fff; 
+border:5px solid rgba(0,0,0, 0.4); 
+height:400px; 
+left:50%; 
+margin:-200px 0 0 -200px; 
+padding:1px; 
+position:fixed !important; /* 浮动对话框 */ 
+position:absolute; 
+top:50%; 
+width:400px; 
+z-index:5; 
+border-radius:5px; 
+display:none; 
+} 
+#dialog2 p { 
+margin:0 0 1px; 
+height:24px; 
+line-height:24px; 
+background:#35abd9; 
+} 
+#dialog2 p.close { 
+text-align:right; 
+padding-right:10px; 
+} 
+#dialog2 p.close a { 
+color:#fff; 
+text-decoration:none; 
+} 
+
+#dialog3 { 
+background-color:#fff; 
+border:5px solid rgba(0,0,0, 0.4); 
+height:400px; 
+left:50%; 
+margin:-200px 0 0 -200px; 
+padding:1px; 
+position:fixed !important; /* 浮动对话框 */ 
+position:absolute; 
+top:50%; 
+width:400px; 
+z-index:5; 
+border-radius:5px; 
+display:none; 
+} 
+#dialog3 p { 
+margin:0 0 1px; 
+height:24px; 
+line-height:24px; 
+background:#35abd9; 
+} 
+#dialog3 p.close { 
+text-align:right; 
+padding-right:10px; 
+} 
+#dialog3 p.close a { 
+color:#fff; 
+text-decoration:none; 
+}
+
+#dialog4 { 
+background-color:#fff; 
+border:5px solid rgba(0,0,0, 0.4); 
+height:400px; 
+left:50%; 
+margin:-200px 0 0 -200px; 
+padding:1px; 
+position:fixed !important; /* 浮动对话框 */ 
+position:absolute; 
+top:50%; 
+width:400px; 
+z-index:5; 
+border-radius:5px; 
+display:none; 
+} 
+#dialog4 p { 
+margin:0 0 1px; 
+height:24px; 
+line-height:24px; 
+background:#35abd9; 
+} 
+#dialog4 p.close { 
+text-align:right; 
+padding-right:10px; 
+} 
+#dialog4 p.close a { 
+color:#fff; 
+text-decoration:none; 
+}
+
+#dialogMap_disp_data{ 
+background-color:#fff; 
+border:5px solid rgba(0,0,0, 0.4); 
+height:400px; 
+left:50%; 
+margin:-200px 0 0 -200px; 
+padding:1px; 
+position:fixed !important; /* 浮动对话框 */ 
+position:absolute; 
+top:50%; 
+width:400px; 
+z-index:5; 
+border-radius:5px; 
+display:none; 
+} 
+#dialogMap_disp_data p { 
+margin:0 0 1px; 
+height:24px; 
+line-height:24px; 
+background:#35abd9; 
+} 
+#dialogMap_disp_data p.close { 
+text-align:right; 
+padding-right:10px; 
+} 
+#dialogMap_disp_data p.close a { 
+color:#fff; 
+text-decoration:none; 
+}
+
+
+#dialog1 table{ 
+	border-collapse:collapse;
+	text-align:center; 
+	color:#5C6B87;
+	letter-spacing:1px;
+	width:100%;
+ 	}
+
+#dialog1 th,#dialog1 td{
+	border:1px solid #B6D5F3;
+	line-height:35px;
+	}
+
+#dialog1 thead th{
+	background:#F3F8FC;  
+	color:#2E7DBE;
+	}
+	
+#dialog1 tbody th{
+	background:#F3F8FC;
+	font-weight:normal;
+	}
+	
+	
+#dialog2 table{ 
+	border-collapse:collapse;
+	text-align:center; 
+	color:#5C6B87;
+	letter-spacing:1px;
+	width:100%;
+ 	}
+
+#dialog2 th,#dialog2 td{
+	border:1px solid #B6D5F3;
+	line-height:35px;
+	}
+
+#dialog2 thead th{
+	background:#F3F8FC;  
+	color:#2E7DBE;
+	}
+	
+#dialog2 tbody th{
+	background:#F3F8FC;
+	font-weight:normal;
+	}

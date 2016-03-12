@@ -1,0 +1,599 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>    <html class="lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>    <html class="lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html>
+<!--<![endif]-->
+<head>
+<title>AIR - Premium Bootstrap Admin Template</title>
+
+<!-- Meta -->
+<meta charset="UTF-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+ <script src="theme/scripts/jquery-1.11.1-min.js"></script>
+    <script src="theme/scripts/jquery.dataTables.min.js"></script>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/font-awesome.css">
+    <link rel="stylesheet" href="../css/font-awesome-ie7.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+   	<link rel="stylesheet" href="../css/font-awesome-ie7.min.css">  
+
+<!-- Bootstrap Extended -->
+<link
+	href="bootstrap/extend/jasny-bootstrap/css/jasny-bootstrap.min.css"
+	rel="stylesheet" />
+<link
+	href="bootstrap/extend/jasny-bootstrap/css/jasny-bootstrap-responsive.min.css"
+	rel="stylesheet" />
+<link
+	href="bootstrap/extend/bootstrap-wysihtml5/css/bootstrap-wysihtml5-0.0.2.css"
+	rel="stylesheet" />
+
+<!-- JQueryUI v1.9.2 -->
+<link rel="stylesheet"
+	href="theme/scripts/jquery-ui-1.9.2.custom/css/smoothness/jquery-ui-1.9.2.custom.min.css" />
+
+<!-- Glyphicons -->
+<link rel="stylesheet" href="theme/css/glyphicons.css" />
+
+<!-- Bootstrap Extended -->
+<link rel="stylesheet"
+	href="bootstrap/extend/bootstrap-select/bootstrap-select.css" />
+<link rel="stylesheet"
+	href="bootstrap/extend/bootstrap-toggle-buttons/static/stylesheets/bootstrap-toggle-buttons.css" />
+
+<!-- Uniform -->
+<link rel="stylesheet" media="screen"
+	href="theme/scripts/pixelmatrix-uniform/css/uniform.default.css" />
+
+
+<!-- Modernizr -->
+<script src="theme/scripts/modernizr.custom.76094.js"></script>
+
+<!-- MiniColors -->
+<link rel="stylesheet" media="screen"
+	href="theme/scripts/jquery-miniColors/jquery.miniColors.css" />
+
+<!-- Theme -->
+<link rel="stylesheet" href="theme/css/style.min.css?1361377786" />
+
+
+
+<!-- LESS 2 CSS -->
+<script src="theme/scripts/less-1.3.3.min.js"></script>
+
+
+<!--[if IE]><script type="text/javascript" src="theme/scripts/excanvas/excanvas.js"></script><![endif]-->
+<!--[if lt IE 8]><script type="text/javascript" src="theme/scripts/json2.js"></script><![endif]-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+<script>
+	var flag = 0;
+	$(document).ready(
+			function() {
+				$.ajax({
+					url : 'getUserName.action',
+					type : 'GET',
+					dataType : 'json',
+					async : false,
+					success : function(obj) {
+						$("#username").html(obj.toString());//填充内容
+					}
+
+				});
+
+				$.ajax({//将电站加入下拉菜单
+					url : 'getPsNames.action',
+					type : 'GET',
+					dataType : 'json',
+					async : false,
+					success : function(obj) {
+						for ( var i = 0; i < obj[0].length; i++) {
+							$("#ps_name").append(
+									"<option value='"+obj[0][i]+"'>"
+											+ obj[0][i] + "</option>"); //添加一项option
+						}
+					}
+				});
+				$.ajax({//将年份加入下拉菜单
+					url : 'getAllHistoryYear.action',
+					type : 'GET',
+					dataType : 'json',
+					async : false,
+					success : function(obj) {
+						for ( var i = 0; i < obj[0].length; i++) {
+							$("#statistic_year").append(
+									"<option value='"+obj[0][i]+"'>"
+											+ obj[0][i] + "</option>"); //添加一项option
+						}
+					}
+				});
+				$("#statistic_type").change(
+						function() {
+
+							var type = $("#statistic_type").find(
+									"option:selected").text();
+							if (type == "按年统计") {
+								$("#statistic_month").attr("disabled", true);
+							} else
+								$("#statistic_month").attr("disabled", false);
+
+						});
+				initChart();
+			});
+	function showTableData() {
+		if (flag == 0) {
+			var type = $("#statistic_type").find("option:selected").text();
+			if (type == "按年统计") {
+				showTableYear();
+				flag = 1;
+			} else {
+				showTableMonth();
+				flag = 1;
+			}
+		} else {
+			$("#comp_head").html("");
+			$("#comp_body").html("");
+			flag = 0;
+		}
+
+	}
+	function showTableYear() {//显示按年统计的发电量-辐射量表格数据
+		var year = $("#statistic_year").find("option:selected").text();
+		var ps_name = $("#ps_name").find("option:selected").text();
+		var str = "<tr>" +
+
+		"<th class='center'>序号</th>" + "<th class='center'>电站名称</th>"
+				+ "<th class='center'>年份</th>" + "<th class='center'>月份</th>"
+				+ "<th class='center'>发电小时数</th>"
+				+ "<th class='center'>发电量</th>" + "<th class='center'>辐射量</th>"
+				+ "</tr>";
+		$("#comp_head").html("");
+		$("#comp_head").append(str);
+		$.ajax({
+			url : 'toCompOfPowerAndIrradByYear.action?year=' + year
+					+ '&ps_name=' + encodeURI(encodeURI(ps_name)),
+			type : 'GET',
+			dataType : 'json',
+			async : false,
+			success : function(obj) {
+				var strtable = "";
+				for ( var i = 0; i < obj[0].length; i++) {
+					var sum = i + 1;
+					strtable = strtable + "<tr>" +
+
+					"<td class='center'>" + sum + "</td>"
+							+ "<td class='center'>" + ps_name + "</td>"
+							+ "<td class='center'>" + year + "</strong></td>"
+							+ "<td class='center'>" + obj[0][i].month + "</td>"
+							+ "<td class='center'>" + obj[0][i].total_hour
+							+ "</td>" + "<td class='center'><strong>"
+							+ obj[0][i].total_power + "</strong></td>"
+							+ "<td class='center'><strong>" + obj[1][i]
+							+ "</strong></td>" + "</tr>";
+				}
+				$("#comp_body").html("");
+				$("#comp_body").append(strtable);
+
+			}
+		});
+	}
+	function showTableMonth() {//显示按月统计的发电量-辐射量表格数据
+		var year = $("#statistic_year").find("option:selected").text();
+		var ps_name = $("#ps_name").find("option:selected").text();
+		var month = $("#statistic_month").find("option:selected").text();
+
+		var str = "<tr>" +
+
+		"<th class='center'>序号</th>" + "<th class='center'>电站名称</th>"
+				+ "<th class='center'>年份</th>" + "<th class='center'>月份</th>"
+				+ "<th class='center'>日期</th>" + "<th class='center'>发电量</th>"
+				+ "<th class='center'>辐射量</th>" + "</tr>";
+		$("#comp_head").html("");
+		$("#comp_head").append(str);
+		$.ajax({
+			url : 'toCompOfPowerAndIrradByMonth.action?year=' + year
+					+ '&ps_name=' + encodeURI(encodeURI(ps_name)) + '&month='
+					+ month,
+			type : 'GET',
+			dataType : 'json',
+			async : false,
+			success : function(obj) {
+				var strtable = "";
+				for ( var i = 0; i < obj[0].length; i++) {
+					var sum = i + 1;
+					strtable = strtable + "<tr>" +
+
+					"<td class='center'>" + sum + "</td>"
+							+ "<td class='center'>" + ps_name + "</td>"
+							+ "<td class='center'>" + year + "</strong></td>"
+							+ "<td class='center'>" + month + "</td>"
+							+ "<td class='center'>" + obj[0][i].day + "</td>"
+							+ "<td class='center'><strong>"
+							+ obj[0][i].total_power + "</strong></td>"
+							+ "<td class='center'><strong>"
+							+ obj[0][i].total_irradiation + "</strong></td>"
+							+ "</tr>";
+				}
+				$("#comp_body").html("");
+				$("#comp_body").append(strtable);
+
+			}
+		});
+	}
+
+	function searchData() {
+		initChart();
+	}
+	
+	function initChart() {
+		
+		var d1 = [];
+		var d2 = [];
+		var d3 = [];
+
+		var year = $("#statistic_year").find("option:selected").text();
+		var ps_name = $("#ps_name").find("option:selected").text();
+		var type = $("#statistic_type").find("option:selected").text();
+		var month = $("#statistic_month").find("option:selected").text();
+				
+		 if (type == "按年统计") {
+			$.ajax({
+				url : 'toCompOfPowerAndIrradByYear.action?year='
+						+ year + '&ps_name='
+						+ encodeURI(encodeURI(ps_name)),
+				type : 'GET',
+				dataType : 'json',
+				async : false,
+				success : function(obj) {
+					for ( var i = 0; i < obj[0].length; i++) {
+						d1.push([ obj[0][i].month]);
+						d2.push([ obj[0][i].total_power ]);
+						d3.push([ obj[1][i] ]);
+					}
+				}
+
+			});
+		} else if (type == "按月统计") {
+			$.ajax({
+				url : 'toCompOfPowerAndIrradByMonth.action?year='
+						+ year + '&ps_name='
+						+ encodeURI(encodeURI(ps_name)) + '&month='
+						+ month,
+				type : 'GET',
+				dataType : 'json',
+				async : false,
+				success : function(obj) {
+					for ( var i = 0; i < obj[0].length; i++) {
+						d1.push([ obj[0][i].day ]);
+						d2.push([ obj[0][i].total_power ]);
+						d3.push([ obj[0][i].total_irradiation ]);		
+					}
+				}
+
+			});
+		}
+			$("#container_line").highcharts({
+			 chart: {
+		                type: 'line',
+		                backgroundColor: 'rgba(68, 170, 213, 0.1)'
+		            },
+			 title: {
+			    text: year + '年' + ps_name + '发电量-辐射量对比',
+			    style: {
+			    	font: '16px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+			    	}
+			},
+			lang: {
+            contextButtonTitle: '图表导出菜单',
+            decimalPoint: '.',
+            downloadJPEG: "下载JPEG图片",
+            downloadPDF: "下载PDF文件",
+            downloadPNG: "下载PNG文件",
+            downloadSVG: "下载SVG文件",
+            drillUpText: "返回 {series.name}",
+            loading: '加载中...',
+            months: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            noData: "没有数据",
+            numericSymbols: ['k', 'M', 'G', 'T', 'P', 'E'],
+            printChart: "打印图表",
+            resetZoom: '重置缩放比例',
+            resetZoomTitle: '重置为原始大小',
+            shortMonths: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            thousandsSep: ',',
+            weekdays: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期天'],
+        },
+            
+			xAxis: {
+			    categories: d1,
+			    type: 'category',
+			    gridLineWidth: 0,
+			    lineColor: '#999',
+			    tickColor: '#999',
+			    labels: {
+			    	style: {
+			    		color: '#999',
+			    		fontWeight: 'bold',
+			    		fontSize: '13px',
+	                    fontFamily: 'Verdana, sans-serif'
+			    	}
+			    },
+			    title: {
+			        text: '日期',
+			        //align: 'right'
+			    },
+               
+			},
+			
+			 yAxis: {
+				 alternateGridColor: null,
+				 minorTickInterval: null,
+				 gridLineColor: '#999',
+				 minorGridLineColor: 'rgba(25,255,255,0.07)',
+				 lineWidth: 0,
+				 tickWidth: 0,
+				 labels: {
+				 	style: {
+				 		color: '#999',
+				 	}
+				 },
+			    title: {
+			        text: '发电量 （KWh)',
+			        style: {
+			        	color: '#333',
+			        	font: '12px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
+			        	}
+			    },
+			    plotLines: [{
+			        value: 0,
+			        width: 1,
+			        color: '#808080'
+			    }]
+			},
+			
+			tooltip: {
+			    valueSuffix: 'KWh',
+			},
+			legend: {
+			    borderWidth: 0,
+			    itemStyle: {
+			    	color: '#CCC'
+			    	},
+			    	itemHoverStyle: {
+			    	color: '#606060'
+			    	},
+			    	itemHiddenStyle: {
+			    	color: '#333'
+			    	}
+			},
+			series: [{
+			    name: '发电量',
+			    data: d2
+			}, {
+			    name: '辐射量',
+			    data: d3
+			}]
+		}); 
+	}
+</script>
+<body>
+
+	<div class="navbar main">
+
+		<div class="container">
+			<div class="row">
+				<div class="span12 relativeWrap">
+					<button type="button" class="btn btn-navbar visible-phone">
+						<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+							class="icon-bar"></span>
+					</button>
+					<ul id="menu" class="hidden-phone">
+						<li><a href="pshistorydata.html" class="menuToggle"
+							style="color:#000000;">历史数据</a>
+							<ul class="menu hide">
+								<li class=""><a href="pshistorydata.html"><span>电站数据</span></a></li>
+								<li class=""><a href="powerhistory.html"><span>发电量数据</span></a></li>
+								<li class=""><a href="failurehistory.html"><span>设备故障数据</span></a></li>
+							</ul></li>
+						<li><a href="compPowerAndIrrad.html" class="menuToggle">数据对比</a>
+							<ul class="menu hide">
+								<li class=""><a href="compPowerAndIrrad.html"><span>发电量-辐射量对比</span></a></li>
+								<li class=""><a href="compHistoryDay.html"><span>辐射量、发电量天数统计对比</span></a></li>
+								<li class=""><a href="compTheoreticalAndActual.html"><span>理论电量-实际发电量对比</span></a></li>
+							</ul></li>
+					</ul>
+					<span class="profile">
+						<span>
+							<strong id="username"></strong>						
+							<a href="javascript:void(0)" onclick="toDesktop()" class="icon-desktop" style="color:#fff"></a>
+						</span>
+						
+					</span>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 以上是导航条 -->
+
+	<!-- Start Content -->
+	<div class="container-fluid fixed">
+
+
+		<div id="content">
+			<ul class="breadcrumb">
+				<li><a href="compPowerAndIrrad.html" class="glyphicons home"><i></i>
+						数据对比</a></li>
+				<li class="divider"></li>
+				<li>发电量-辐射量对比</li>
+			</ul>
+			<div class="separator"></div>
+
+
+			<div class="filter-bar">
+				<form />
+				<div class="lbl glyphicons cogwheel">
+					<i></i>设置
+				</div>
+				<div>
+					<label>统计方式:</label> <select id="statistic_type"
+						style="width: 80px;" onSelect="chooseType()">
+						<option value="按年统计" selected>按年统计</option>
+						<option value="按月统计">按月统计</option>
+					</select>
+				</div>
+				<div>
+					<label>选择电站:</label> <select id="ps_name" style="width: 200px;">
+					</select>
+				</div>
+				<div>
+					<label>选择年份:</label> <select id="statistic_year"
+						style="width: 80px;" onSelect="chooseYear()">
+					</select>
+				</div>
+				<div>
+					<label>选择月份:</label> <select id="statistic_month" disabled="true"
+						style="width: 80px;">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+					</select>
+				</div>
+
+				<div class="buttons pull-right">
+					<a href="javascript:void(0)" onclick="searchData()"
+						class="btn btn-default btn-icon glyphicons search"><i></i> 查询</a>
+					<!--<a href="javascript:void(0)" onclick="showTableData()"
+						class="btn-action border-only circle glyphicons table btn-primary"><i></i></a>-->
+				</div>
+
+				<div class="clearfix"></div>
+				</form>
+			</div>
+			<div class="widget widget-4 widget-body-white">
+				<div class="widget-head">
+					<h4 class="heading" id="chart_title"></h4>
+				</div>
+				<div class="widget-body">
+					<div id="container_line" style=" height: 400px; "></div>
+				</div>
+			</div>
+			<div class="widget widget-4" style="margin-top: -1px;">
+				<div class="widget-body" style="padding: 10px 0;">
+					<table
+						class="dynamicTable table table-striped table-bordered table-primary table-condensed">
+						<thead id="comp_head">
+						</thead>
+						
+					</table>
+				</div>
+			</div>
+			
+			<br /> 
+		<div style="text-align:center;padding:3px;font-size:12px;color:#999999;">Copyright© 中兴能源有限公司</div>
+	
+		</div>
+
+	</div>
+	<script type=text/javascript>
+	function toDesktop(){
+ 		var u = document.getElementsByName("username");
+       	window.open('toDesktop.action?uName='+encodeURI(encodeURI(u)), "_self");
+	} 
+	</script>
+	<!-- JQueryUI v1.9.2 -->
+	<script
+		src="theme/scripts/jquery-ui-1.9.2.custom/js/jquery-ui-1.9.2.custom.min.js"></script>
+
+	<!-- JQueryUI Touch Punch -->
+	<!-- small hack that enables the use of touch events on sites using the jQuery UI user interface library -->
+	<script
+		src="theme/scripts/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js"></script>
+
+	<!-- MiniColors -->
+	<script src="theme/scripts/jquery-miniColors/jquery.miniColors.js"></script>
+
+	<!-- Themer -->
+	<script>
+		var themerPrimaryColor = '#3366cc';
+	</script>
+	<script src="theme/scripts/jquery.cookie.js"></script>
+	<script src="theme/scripts/themer.js"></script>
+
+
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+
+	<!--  Flot (Charts) JS -->
+	<script src="theme/scripts/flot/jquery.flot.js" type="text/javascript"></script>
+	<script src="theme/scripts/flot/jquery.flot.pie.js"
+		type="text/javascript"></script>
+	<script src="theme/scripts/flot/jquery.flot.tooltip.js"
+		type="text/javascript"></script>
+	<script src="theme/scripts/flot/jquery.flot.selection.js"></script>
+	<script src="theme/scripts/flot/jquery.flot.resize.js"
+		type="text/javascript"></script>
+	<script src="theme/scripts/flot/jquery.flot.orderBars.js"
+		type="text/javascript"></script>
+
+
+	<script type=text/javascript>
+	function toDesktop(){
+ 		var u = document.getElementById('username').innerText;
+       	window.open('toDesktop.action?uName='+encodeURI(encodeURI(u)), "_self");
+	} 
+	</script>
+
+	<script src="../HighCharts/highcharts.js"></script>
+	<script src="../HighCharts/modules/exporting.js"></script>
+	<!-- Resize Script -->
+	<script src="theme/scripts/jquery.ba-resize.js"></script>
+
+	<!-- Uniform -->
+	<script src="theme/scripts/pixelmatrix-uniform/jquery.uniform.min.js"></script>
+
+	<!-- Bootstrap Script -->
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+
+	<!-- Bootstrap Extended -->
+	<script src="bootstrap/extend/bootstrap-select/bootstrap-select.js"></script>
+	<script
+		src="bootstrap/extend/bootstrap-toggle-buttons/static/js/jquery.toggle.buttons.js"></script>
+	<script
+		src="bootstrap/extend/bootstrap-hover-dropdown/twitter-bootstrap-hover-dropdown.min.js"></script>
+	<script
+		src="bootstrap/extend/jasny-bootstrap/js/jasny-bootstrap.min.js"
+		type="text/javascript"></script>
+	<script
+		src="bootstrap/extend/jasny-bootstrap/js/bootstrap-fileupload.js"
+		type="text/javascript"></script>
+	<script src="bootstrap/extend/bootbox.js" type="text/javascript"></script>
+	<script
+		src="bootstrap/extend/bootstrap-wysihtml5/js/wysihtml5-0.3.0_rc2.min.js"
+		type="text/javascript"></script>
+	<script
+		src="bootstrap/extend/bootstrap-wysihtml5/js/bootstrap-wysihtml5-0.0.2.js"
+		type="text/javascript"></script>
+
+	<!-- Custom Onload Script -->
+	<script src="theme/scripts/load.js"></script>
+
+	<!-- jQuery Knob -->
+	<script src="theme/scripts/jquery-knob/js/jquery.knob.js"></script>
+
+</body>
+</html>
