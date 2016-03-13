@@ -700,6 +700,7 @@
 		<action name="deleteInspectionManager" 	method="deleteInspectionManager" class="com.PSMS.Action.InspectionManagerAction"/>
 		<action name="getInspectionManagerById" method="getInspectionManagerById" class="com.PSMS.Action.InspectionManagerAction"/>
 		<action name="getAllInspectionManager" 	method="getAllInspectionManager" class="com.PSMS.Action.InspectionManagerAction"/>
+		<action name="getManagergetCheckById" 	method="getCheckById" class="com.PSMS.Action.InspectionManagerAction"/>
 	
 		<!-- 巡检记录 -->
 		<action name="toInspection" method="toInspection" class="com.PSMS.Action.InspectionAction">
