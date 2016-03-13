@@ -39,4 +39,9 @@ public class InspectionManagerServiceImpl implements IInspectionManagerService {
 		return dao.getAll();
 	}
 
+	@Override
+	public JointInspection checkById(String areaId, int psId, int userId, int equipmentId) throws Exception {
+		return dao.checkById(areaId, psId, userId, equipmentId);
+	}
+
 }

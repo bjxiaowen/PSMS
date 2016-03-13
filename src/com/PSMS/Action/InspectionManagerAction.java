@@ -21,8 +21,10 @@ import com.PSMS.Service.PS_informationService;
 import com.PSMS.Service.PS_informationServiceImpl;
 import com.PSMS.Service.impl.AreaServiceImpl;
 import com.PSMS.Service.impl.InspectionManagerServiceImpl;
+import com.PSMS.Service.impl.ReEngAreaPSServiceImpl;
 import com.PSMS.pojo.Area;
 import com.PSMS.pojo.InspectionManager;
+import com.PSMS.pojo.JointEngAreaPS;
 import com.PSMS.pojo.JointInspection;
 
 import net.sf.json.JSONArray;
@@ -155,6 +157,40 @@ public class InspectionManagerAction {
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			ServletActionContext.getResponse().getWriter().write(object.toString());
 		} catch (Exception e) {
+		}
+		return null;
+	}
+	
+	public String getCheckById(){
+		try {
+
+			String result =null;
+			HttpServletRequest request = ServletActionContext.getRequest();
+			request.setCharacterEncoding("utf-8");
+			String areaId = request.getParameter("areaId");
+			String userId = request.getParameter("userId");
+			String psId = request.getParameter("psId");
+			String equipmentId= request.getParameter("equipmentId");
+			areaId = java.net.URLDecoder.decode(areaId, "UTF-8");
+			userId = java.net.URLDecoder.decode(userId, "UTF-8");
+			psId = java.net.URLDecoder.decode(psId, "UTF-8");
+			equipmentId = java.net.URLDecoder.decode(equipmentId, "UTF-8");
+			inspectionManagerService = new InspectionManagerServiceImpl();
+			JointInspection lists = inspectionManagerService.checkById(areaId,Integer.valueOf(psId) ,Integer.parseInt(userId) ,Integer.parseInt(equipmentId) );
+			if(lists!=null&&lists.getManageId()==null){
+				result="wrong";
+			}else{
+				result="correct";
+			}
+			List<String> list=new ArrayList<String>();
+			list.add(result);
+			JSONArray object = JSONArray.fromObject(list);
+			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
+			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
+			ServletActionContext.getResponse().getWriter().write(object.toString());
+		
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return null;
 	}
