@@ -166,33 +166,33 @@ public class InspectionAction {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setCharacterEncoding("utf-8");
 		String inspectionId = request.getParameter("inspectionId");
-		inspectionId = java.net.URLDecoder.decode(inspectionId, "UTF-8");
 		if (null != inspectionId && !inspectionId.equals("")) {
+			inspectionId = java.net.URLDecoder.decode(inspectionId, "UTF-8");
 			ins.setId(inspectionId);
 		}
 
 	
 		String inspectionReport = request.getParameter("inspectionReport");
-		inspectionReport = java.net.URLDecoder.decode(inspectionReport, "UTF-8");
 		if (null != inspectionReport && !inspectionReport.equals("")) {
+			inspectionReport = java.net.URLDecoder.decode(inspectionReport, "UTF-8");
 			ins.setInspectionReport(inspectionReport);
 		}
 		//shouldDate
 		String shouldDate = request.getParameter("shouldDate");
-		shouldDate = java.net.URLDecoder.decode(shouldDate, "UTF-8");
 		if (null != shouldDate && !shouldDate.equals("")) {
+			shouldDate = java.net.URLDecoder.decode(shouldDate, "UTF-8");
 			ins.setShouldDate(shouldDate);
 		}
 		//actualDate
 		String actualDate = request.getParameter("actualDate");
-		actualDate = java.net.URLDecoder.decode(actualDate, "UTF-8");
 		if (null != actualDate && !actualDate.equals("")) {
+			actualDate = java.net.URLDecoder.decode(actualDate, "UTF-8");
 			ins.setActualDate(actualDate);
 		}
 		
 		String inspectionStatus = request.getParameter("inspectionStatus");
-		inspectionStatus = java.net.URLDecoder.decode(inspectionStatus, "UTF-8");
 		if (null != inspectionStatus && !inspectionStatus.equals("")) {
+			inspectionStatus = java.net.URLDecoder.decode(inspectionStatus, "UTF-8");
 			ins.setInspectionStatus(Integer.parseInt(inspectionStatus));
 		}
 		return ins;

@@ -240,50 +240,50 @@ public class InspectionManagerAction {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setCharacterEncoding("utf-8");
 		String id = request.getParameter("id");
-		id = java.net.URLDecoder.decode(id, "UTF-8");
 		if (null != id && !id.equals("")) {
+			id = java.net.URLDecoder.decode(id, "UTF-8");
 			ins.setId(id);
 		}
 	
 		String psId = request.getParameter("psId");
-		psId = java.net.URLDecoder.decode(psId, "UTF-8");
 		if (null != psId && !psId.equals("")) {
+			psId = java.net.URLDecoder.decode(psId, "UTF-8");
 			ins.setPsId(Integer.parseInt(psId));
 		}
 		
 		String areaId = request.getParameter("areaId");
-		areaId = java.net.URLDecoder.decode(areaId, "UTF-8");
 		if (null != areaId && !areaId.equals("")) {
+			areaId = java.net.URLDecoder.decode(areaId, "UTF-8");
 			ins.setAreaId(areaId);
 		}
 		
 		String equipmentId = request.getParameter("equipmentId");
-		equipmentId = java.net.URLDecoder.decode(equipmentId, "UTF-8");
 		if (null != equipmentId && !equipmentId.equals("")) {
+			equipmentId = java.net.URLDecoder.decode(equipmentId, "UTF-8");
 			ins.setEquipmentId(Integer.parseInt(equipmentId));
 		}
 		
 		String userId = request.getParameter("userId");
-		userId = java.net.URLDecoder.decode(userId, "UTF-8");
 		if (null != userId && !userId.equals("")) {
+			userId = java.net.URLDecoder.decode(userId, "UTF-8");
 			ins.setUserId(Integer.parseInt(userId));
 		}
 		
 		String currDate = request.getParameter("currDate");
-		currDate = java.net.URLDecoder.decode(currDate, "UTF-8");
 		if (null != currDate && !currDate.equals("")) {
+			currDate = java.net.URLDecoder.decode(currDate, "UTF-8");
 			ins.setCurrDate(currDate);
 		}
 		
 		String inspectionPeriod = request.getParameter("inspectionPeriod");
-		inspectionPeriod = java.net.URLDecoder.decode(inspectionPeriod, "UTF-8");
 		if (null != inspectionPeriod && !inspectionPeriod.equals("")) {
+			inspectionPeriod = java.net.URLDecoder.decode(inspectionPeriod, "UTF-8");
 			ins.setInspectionPeriod(Integer.parseInt(inspectionPeriod));
 		}
 		
 		String nextDate = request.getParameter("nextDate");
-		nextDate = java.net.URLDecoder.decode(nextDate, "UTF-8");
 		if (null != nextDate && !nextDate.equals("")) {
+			nextDate = java.net.URLDecoder.decode(nextDate, "UTF-8");
 			ins.setNextDate(nextDate);
 		}
 		return ins;
