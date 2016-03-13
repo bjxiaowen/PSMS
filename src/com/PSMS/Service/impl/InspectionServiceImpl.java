@@ -45,4 +45,10 @@ public class InspectionServiceImpl implements IInspectionService {
 		return dao.getPsId(psId);
 	}
 
+	@Override
+	public List<JointInspection> getOverdue() throws Exception {
+		return dao.getOverdue();
+	}
+	
+	
 }

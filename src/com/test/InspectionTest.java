@@ -21,7 +21,8 @@ public class InspectionTest {
 //			UpdateInspection(dao);
 //			deleteInspection(dao);
 			//getById(dao);
-			getAll(dao);
+		//	getAll(dao);
+			getOverdue(dao);//逾期查询
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -51,12 +52,12 @@ public class InspectionTest {
 	
 	public static void UpdateInspection(IInspectionDao dao) throws Exception{
 		Inspection ins=new Inspection();
-		ins.setId("In14577650698160000");
+		ins.setId("In14577652263700000");
 		ins.setManagerId("IM14577629363890000");
-		ins.setShouldDate(formatter.format(new Date()));
-		ins.setActualDate(formatter.format(new Date()));
+		ins.setShouldDate("2016-02-12");//formatter.format(new Date())
+		ins.setActualDate("2016-02-12");
 		ins.setInspectionReport("我们正在努力处理中！！！！我们已经处理完了！！");
-		ins.setInspectionStatus(2);
+		ins.setInspectionStatus(0);
 		System.out.println(dao.UpdateInspection(ins));
 	}
 	
@@ -66,5 +67,12 @@ public class InspectionTest {
 		Inspection ins=new Inspection();
 		ins.setId("In14577651618860000");
 		System.out.println(dao.deleteInspection(ins));
+	}
+	
+	public static void getOverdue(IInspectionDao dao)throws Exception{//逾期查询
+		List<JointInspection> list=dao.getOverdue();
+		for(JointInspection joint:list){
+			System.out.println(joint);
+		}
 	}
 }

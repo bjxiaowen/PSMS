@@ -1,8 +1,5 @@
 package com.PSMS.pojo;
-
 import java.io.Serializable;
-import java.util.Date;
-
 public class JointInspection implements Serializable {
 
 	/**
@@ -34,23 +31,21 @@ public class JointInspection implements Serializable {
 
 	private String email;// 邮箱
 
-	private String inspectionDate;// 巡检日期
-
 	private int inspectionPeriod;// 巡检周期
 
 	private String inspectionReport;// 巡检报告
-
-	private String reportDate;// 巡检日期
 
 	private String currDate;// 当前巡检日期
 
 	private String nextDate;// 下次巡检日期
 
-	private String shouldDate;
+	private String shouldDate;//应检日期
 
-	private String actualDate;
+	private String actualDate;//实检日期
 
-	private int inspectionStatus;
+	private int inspectionStatus;//巡检状态,0:未完成，1：已完成
+	
+	private int overdueDays;//逾期天数
 
 	public String getShouldDate() {
 		return shouldDate;
@@ -156,14 +151,6 @@ public class JointInspection implements Serializable {
 		this.email = email;
 	}
 
-	public String getInspectionDate() {
-		return inspectionDate;
-	}
-
-	public void setInspectionDate(String inspectionDate) {
-		this.inspectionDate = inspectionDate;
-	}
-
 	public int getInspectionPeriod() {
 		return inspectionPeriod;
 	}
@@ -178,14 +165,6 @@ public class JointInspection implements Serializable {
 
 	public void setInspectionReport(String inspectionReport) {
 		this.inspectionReport = inspectionReport;
-	}
-
-	public String getReportDate() {
-		return reportDate;
-	}
-
-	public void setReportDate(String reportDate) {
-		this.reportDate = reportDate;
 	}
 
 	public int getInspectionStatus() {
@@ -220,14 +199,23 @@ public class JointInspection implements Serializable {
 		this.nextDate = nextDate;
 	}
 
+	public int getOverdueDays() {
+		return overdueDays;
+	}
+
+	public void setOverdueDays(int overdueDays) {
+		this.overdueDays = overdueDays;
+	}
+
 	@Override
 	public String toString() {
 		return "JointInspection [manageId=" + manageId + ", inspectionId=" + inspectionId + ", psId=" + psId
 				+ ", psName=" + psName + ", areaId=" + areaId + ", areaName=" + areaName + ", equipmentId="
 				+ equipmentId + ", equipmentName=" + equipmentName + ", userId=" + userId + ", userName=" + userName
-				+ ", tel=" + tel + ", email=" + email + ", inspectionDate=" + inspectionDate + ", inspectionPeriod="
-				+ inspectionPeriod + ", inspectionReport=" + inspectionReport + ", reportDate=" + reportDate
-				+ ", currDate=" + currDate + ", nextDate=" + nextDate + ", shouldDate=" + shouldDate + ", actualDate="
-				+ actualDate + ", inspectionStatus=" + inspectionStatus + "]";
+				+ ", tel=" + tel + ", email=" + email + ", inspectionPeriod=" + inspectionPeriod + ", inspectionReport="
+				+ inspectionReport + ", currDate=" + currDate + ", nextDate=" + nextDate + ", shouldDate=" + shouldDate
+				+ ", actualDate=" + actualDate + ", inspectionStatus=" + inspectionStatus + ", overdueDays="
+				+ overdueDays + "]";
 	}
+
 }

@@ -714,6 +714,9 @@
 		<action name="getInspectionAll" method="getInspectionAll" class="com.PSMS.Action.InspectionAction"/>
 		<action name="getInspectionByPsId" method="getInspectionByPsId" class="com.PSMS.Action.InspectionAction"/>
 		
+		<!-- 逾期查询  -->
+		<action name="getInspectionOverdue" method="getInspectionOverdue" class="com.PSMS.Action.InspectionAction"/>
+		
 		<!-- 异常信息处理 -->
 		<action name="toFaultMessage" method="toFaultMessage" class="com.PSMS.Action.FaultMessageAction">
 			<result name="success">faultMessage.jsp</result>

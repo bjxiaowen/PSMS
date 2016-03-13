@@ -161,6 +161,23 @@ public class InspectionAction {
 		return null;
 	}
 	
+	public String getInspectionOverdue() {//逾期查询
+		try {
+			HttpServletRequest request = ServletActionContext.getRequest();
+			request.setCharacterEncoding("utf-8");
+			inspectionService = new InspectionServiceImpl();
+			List<JointInspection> list = inspectionService.getOverdue();
+			JSONObject object = JSONObject.fromObject("{}");
+			object.put("total", list.size());
+			object.put("rows", list);
+			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
+			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
+			ServletActionContext.getResponse().getWriter().write(object.toString());
+		} catch (Exception e) {
+		}
+		return null;
+	}
+	
 	public String getInspectionByPsId() {
 		try {
 			HttpServletRequest request = ServletActionContext.getRequest();

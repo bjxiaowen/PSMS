@@ -49,4 +49,11 @@ public interface IInspectionService {
 	 * 通过电站id查询
 	 */
 	public List<JointInspection> getPsId(int psId) throws Exception; 
+	
+	/**
+	 * 逾期查询
+	 * @return
+	 * @throws Exception
+	 */
+	public List<JointInspection> getOverdue()throws Exception;
 }
