@@ -21,6 +21,7 @@ public class InspectionServiceImpl implements IInspectionService {
 
 	@Override
 	public boolean UpdateInspection(Inspection inspection) throws Exception {
+		inspection.setInspectionStatus(1);
 		return dao.UpdateInspection(inspection);
 	}
 
@@ -37,6 +38,11 @@ public class InspectionServiceImpl implements IInspectionService {
 	@Override
 	public List<JointInspection> getInspectionAll() throws Exception {
 		return dao.getAll();
+	}
+
+	@Override
+	public List<JointInspection> getPsId(int psId) throws Exception {
+		return dao.getPsId(psId);
 	}
 
 }

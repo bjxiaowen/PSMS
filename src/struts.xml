@@ -701,7 +701,8 @@
 		<action name="getInspectionManagerById" method="getInspectionManagerById" class="com.PSMS.Action.InspectionManagerAction"/>
 		<action name="getAllInspectionManager" 	method="getAllInspectionManager" class="com.PSMS.Action.InspectionManagerAction"/>
 		<action name="getManagergetCheckById" 	method="getCheckById" class="com.PSMS.Action.InspectionManagerAction"/>
-	
+		<action name="getManagerPsId" 	method="getPsId" class="com.PSMS.Action.InspectionManagerAction"/>
+		
 		<!-- 巡检记录 -->
 		<action name="toInspection" method="toInspection" class="com.PSMS.Action.InspectionAction">
 			<result name="success">inspection.jsp</result>
@@ -711,6 +712,7 @@
 		<action name="deleteInspection" method="deleteInspection" class="com.PSMS.Action.InspectionAction"/>
 		<action name="getInspectionById" method="getInspectionById" class="com.PSMS.Action.InspectionAction"/>
 		<action name="getInspectionAll" method="getInspectionAll" class="com.PSMS.Action.InspectionAction"/>
+		<action name="getInspectionByPsId" method="getInspectionByPsId" class="com.PSMS.Action.InspectionAction"/>
 		
 		<!-- 异常信息处理 -->
 		<action name="toFaultMessage" method="toFaultMessage" class="com.PSMS.Action.FaultMessageAction">

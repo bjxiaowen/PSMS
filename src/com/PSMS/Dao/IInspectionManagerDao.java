@@ -56,5 +56,14 @@ public interface IInspectionManagerDao {
 	 * @throws Exception
 	 */
 	public JointInspection checkById(String areaId,int psId,int userId,int equipmentId)throws Exception;
+	
+	
+	/**
+	 * 通过电站id查询
+	 * @param psId 电站id
+	 * @return
+	 * @throws Exception
+	 */
+	public List<JointInspection> getPsId(int psId)throws Exception;
 
 }

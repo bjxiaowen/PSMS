@@ -157,6 +157,27 @@ public class InspectionManagerAction {
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			ServletActionContext.getResponse().getWriter().write(object.toString());
 		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public String getPsId(){
+		try {
+			HttpServletRequest request = ServletActionContext.getRequest();
+			request.setCharacterEncoding("utf-8");
+			String psId = request.getParameter("psId");
+			psId = java.net.URLDecoder.decode(psId, "UTF-8");
+			inspectionManagerService = new InspectionManagerServiceImpl();
+			List<JointInspection> list = inspectionManagerService.getPsId(Integer.parseInt(psId));
+			JSONObject object = JSONObject.fromObject("{}");
+			object.put("total", list.size());
+			object.put("rows", list);
+			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
+			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
+			ServletActionContext.getResponse().getWriter().write(object.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return null;
 	}

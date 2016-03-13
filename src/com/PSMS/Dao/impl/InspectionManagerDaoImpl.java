@@ -165,4 +165,44 @@ public class InspectionManagerDaoImpl implements IInspectionManagerDao {
 		return inspection;
 	}
 
+	@Override
+	public List<JointInspection> getPsId(int psId) throws Exception {
+		Session session = HibernateSessionFactory.getHibernateSession();
+		StringBuffer buff=new StringBuffer(" select ");
+		buff.append("inm.id,inm.psId,ps.name,inm.areaId,ar.areaName,inm.equipmentId,equ.type,");
+		buff.append("inm.userId,mu.User_name,inm.currDate,inm.inspectionPeriod,mu.telephone,mu.email,inm.nextDate ");
+		buff.append(" from InspectionManager as inm, Area as ar,M_user as mu,PS_information as ps,Equipment equ ");
+		buff.append(" where inm.areaId=ar.areaId and inm.userId=mu.id and inm.psId=ps.id and inm.equipmentId=equ.id  ");
+		buff.append(" and ps.id=? ");
+		Query query = session.createQuery(buff.toString());
+		query.setInteger(0, psId);
+		List list = query.list();
+		List<JointInspection> reList = new ArrayList<JointInspection>();
+		for (int i = 0; i < list.size(); i++) {
+			JointInspection inspection = new JointInspection();
+			Object[] obj = (Object[]) list.get(i);
+			inspection.setManageId((String) obj[0]);
+			inspection.setPsId(Integer.parseInt(obj[1] + ""));
+			inspection.setPsName("" + obj[2]);
+			inspection.setAreaId("" + obj[3]);
+			inspection.setAreaName("" + obj[4]);
+			inspection.setEquipmentId(Integer.parseInt(obj[5] + ""));
+			inspection.setEquipmentName("" + obj[6]);
+			inspection.setUserId(Integer.parseInt(obj[7] + ""));
+			inspection.setUserName("" + obj[8]);
+			if (obj[9] != null) {
+				inspection.setCurrDate("" + obj[9]);
+			}
+			inspection.setInspectionPeriod(Integer.parseInt(obj[10] + ""));
+			inspection.setTel(obj[11]+"");
+			inspection.setEmail(obj[12]+"");
+			if (obj[13] != null) {
+				inspection.setNextDate("" + obj[13]);
+			}
+			reList.add(inspection);
+		}
+		HibernateSessionFactory.closeHibernateSession();
+		return reList;
+	}
+
 }

@@ -44,4 +44,9 @@ public class InspectionManagerServiceImpl implements IInspectionManagerService {
 		return dao.checkById(areaId, psId, userId, equipmentId);
 	}
 
+	@Override
+	public List<JointInspection> getPsId(int psId) throws Exception {
+		return dao.getPsId(psId);
+	}
+
 }

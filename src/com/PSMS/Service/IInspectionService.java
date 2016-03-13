@@ -44,4 +44,9 @@ public interface IInspectionService {
 	 * @throws Exception
 	 */
 	public List<JointInspection> getInspectionAll() throws Exception;
+	
+	/**
+	 * 通过电站id查询
+	 */
+	public List<JointInspection> getPsId(int psId) throws Exception; 
 }
