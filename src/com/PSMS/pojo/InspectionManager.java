@@ -28,8 +28,6 @@ public class InspectionManager implements Serializable{
 	
 	private String nextDate;//下次巡检日期
 
-	
-
 	public int getPsId() {
 		return psId;
 	}

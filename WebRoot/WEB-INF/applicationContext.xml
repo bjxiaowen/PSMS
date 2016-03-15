@@ -31,22 +31,22 @@
 	<bean id="MonitoringServiceImpl" class="com.PSMS.Service.MonitoringServiceImpl">
 	</bean>
 
-	<bean id="myJob" class="com.PSMS.quartz.MyQuartzJob"></bean>
-	<bean id="jobtask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	<bean id="everyDayJob" class="com.PSMS.quartz.EveryDayJob"></bean>
+	<bean id="everyDayTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject">
-			<ref bean="myJob" />
+			<ref bean="everyDayJob" />
 		</property>
 		<property name="targetMethod">
 			<value>work</value>
 		</property>
 	</bean>
 
-	<bean id="doTime" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	<bean id="everyDayTime" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail">
-			<ref bean="jobtask"/>
+			<ref bean="everyDayTask"/>
 		</property>
 		<property name="cronExpression">
-			<value>0 0/1 * * * ?</value>
+			<value>0 0 23 * * ?</value>
 		</property>
 	</bean>
 	

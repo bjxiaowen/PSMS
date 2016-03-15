@@ -20,8 +20,8 @@ public class FaultMessageTest {
 			//addFaultMessage(dao);
 			//updateFaultMessage(dao);
 			//deleteFaultMessage(dao);
-			getFaultMessageById(dao);
-			//getAllJointFaultMessage(dao);
+			//getFaultMessageById(dao);
+			getAllJointFaultMessage(dao);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

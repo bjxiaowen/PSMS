@@ -27,6 +27,8 @@ create table bd_area
    constraint PK_BD_AREA primary key  (area_id)
 );
 
+select * from bd_fault_message;
+
 /*故障信息表*/
 create table bd_fault_message 
 (

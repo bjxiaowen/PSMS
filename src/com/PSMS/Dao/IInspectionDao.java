@@ -57,4 +57,12 @@ public interface IInspectionDao {
 	 * @throws Exception
 	 */
 	public List<JointInspection> getOverdue()throws Exception;
+	
+	
+	/**
+	 * 查询没有巡检的数据
+	 * @return
+	 * @throws Exception
+	 */
+	public List<JointInspection> getNoInspection()throws Exception;
 }
