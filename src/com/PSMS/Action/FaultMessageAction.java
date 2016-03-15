@@ -161,11 +161,11 @@ public class FaultMessageAction {
 		HttpServletRequest request =ServletActionContext.getRequest();
 		request.setCharacterEncoding("utf-8");
 		String faultMessageId = request.getParameter("faultMessageId");
-		faultMessageId = java.net.URLDecoder.decode(faultMessageId, "UTF-8");
 		/**
 		 * 主键
 		 */
 		if(null!=faultMessageId&&!faultMessageId.equals("")){
+			faultMessageId = java.net.URLDecoder.decode(faultMessageId, "UTF-8");
 			fau.setFaultMessageId(faultMessageId);
 		}
 
@@ -173,16 +173,16 @@ public class FaultMessageAction {
 		 * 区域id
 		 */
 		String areaId = request.getParameter("areaId");
-		areaId = java.net.URLDecoder.decode(areaId, "UTF-8");
 		if(null!=areaId&&!areaId.equals("")){
+			areaId = java.net.URLDecoder.decode(areaId, "UTF-8");
 			fau.setAreaId(areaId);
 		}
 		/**
 		 * 电站id
 		 */
 		String psId = request.getParameter("psId");
-		psId = java.net.URLDecoder.decode(psId, "UTF-8");
 		if(null!=psId&&!psId.equals("")){
+			psId = java.net.URLDecoder.decode(psId, "UTF-8");
 			fau.setPsId(Integer.parseInt(psId));
 		}
 
@@ -190,16 +190,16 @@ public class FaultMessageAction {
 		 * 设备id
 		 */
 		String equipmentId = request.getParameter("equipmentId");
-		equipmentId = java.net.URLDecoder.decode(equipmentId, "UTF-8");
 		if(null!=equipmentId&&!equipmentId.equals("")){
+			equipmentId = java.net.URLDecoder.decode(equipmentId, "UTF-8");
 			fau.setEquipmentId(Integer.parseInt(equipmentId));
 		}
 		/**
 		 * 设备状态
 		 */
 		String equipmentStatus = request.getParameter("equipmentStatus");
-		equipmentStatus = java.net.URLDecoder.decode(equipmentStatus, "UTF-8");
 		if(null!=equipmentStatus&&!equipmentStatus.equals("")){
+			equipmentStatus = java.net.URLDecoder.decode(equipmentStatus, "UTF-8");
 			fau.setEquipmentStatus(Integer.parseInt(equipmentStatus));
 		}
 
@@ -207,8 +207,8 @@ public class FaultMessageAction {
 		 * 工程师id
 		 */
 		String userId = request.getParameter("userId");
-		userId = java.net.URLDecoder.decode(userId, "UTF-8");
 		if(null!=userId&&!userId.equals("")){
+			userId = java.net.URLDecoder.decode(userId, "UTF-8");
 			fau.setUserId(Integer.parseInt(userId));
 		}
 
@@ -216,8 +216,8 @@ public class FaultMessageAction {
 		 * 报警时间
 		 */
 		String alertTime = request.getParameter("alertTime");
-		alertTime = java.net.URLDecoder.decode(alertTime, "UTF-8");
 		if(null!=userId&&!userId.equals("")){
+			alertTime = java.net.URLDecoder.decode(alertTime, "UTF-8");
 			fau.setAlertTime(alertTime);
 		}
 
@@ -225,8 +225,8 @@ public class FaultMessageAction {
 		 * 处理状态
 		 */
 		String status = request.getParameter("status");
-		status = java.net.URLDecoder.decode(status, "UTF-8");
 		if(null!=status&&!status.equals("")){
+			status = java.net.URLDecoder.decode(status, "UTF-8");
 			fau.setStatus(Integer.parseInt(status));
 		}
 
@@ -234,8 +234,8 @@ public class FaultMessageAction {
 		 * 初步诊断
 		 */
 		String initialDiagnose = request.getParameter("initialDiagnose");
-		initialDiagnose = java.net.URLDecoder.decode(initialDiagnose, "UTF-8");
 		if(null!=initialDiagnose&&!initialDiagnose.equals("")){
+			initialDiagnose = java.net.URLDecoder.decode(initialDiagnose, "UTF-8");
 			fau.setInitialDiagnose(initialDiagnose);
 		}
 
@@ -243,8 +243,8 @@ public class FaultMessageAction {
 		 * 预计完成日期
 		 */
 		String predictTime = request.getParameter("predictTime");
-		predictTime = java.net.URLDecoder.decode(predictTime, "UTF-8");
 		if(null!=predictTime&&!predictTime.equals("")){
+			predictTime = java.net.URLDecoder.decode(predictTime, "UTF-8");
 			fau.setPredictTime(predictTime);
 		}
 
@@ -252,8 +252,8 @@ public class FaultMessageAction {
 		 * 故障原因
 		 */
 		String alertCause = request.getParameter("alertCause");
-		alertCause = java.net.URLDecoder.decode(alertCause, "UTF-8");
 		if(null!=alertCause&&!alertCause.equals("")){
+			alertCause = java.net.URLDecoder.decode(alertCause, "UTF-8");
 			fau.setAlertCause(alertCause);
 		}
 		
@@ -261,8 +261,8 @@ public class FaultMessageAction {
 		 * 处理状况
 		 */
 		String handleCondition = request.getParameter("handleCondition");
-		handleCondition = java.net.URLDecoder.decode(handleCondition, "UTF-8");
 		if(null!=handleCondition&&!handleCondition.equals("")){
+			handleCondition = java.net.URLDecoder.decode(handleCondition, "UTF-8");
 			fau.setHandleCondition(handleCondition);
 		}
 
@@ -270,8 +270,8 @@ public class FaultMessageAction {
 		 * 维护日期
 		 */
 		String maintainDate = request.getParameter("maintainDate");
-		maintainDate = java.net.URLDecoder.decode(maintainDate, "UTF-8");
 		if(null!=maintainDate&&!maintainDate.equals("")){
+			maintainDate = java.net.URLDecoder.decode(maintainDate, "UTF-8");
 			fau.setMaintainDate(maintainDate);
 		}
 
@@ -279,28 +279,28 @@ public class FaultMessageAction {
 		 * 检验人
 		 */
 		String checkPerson = request.getParameter("checkPerson");
-		checkPerson = java.net.URLDecoder.decode(checkPerson, "UTF-8");
 		if(null!=checkPerson&&!checkPerson.equals("")){
+			checkPerson = java.net.URLDecoder.decode(checkPerson, "UTF-8");
 			fau.setCheckPerson(checkPerson);
 		}
 		/**
 		 * 检验日期
 		 */
 		String checkDate = request.getParameter("checkDate");
-		checkDate = java.net.URLDecoder.decode(checkDate, "UTF-8");
 		if(null!=checkDate&&!checkDate.equals("")){
+			checkDate = java.net.URLDecoder.decode(checkDate, "UTF-8");
 			fau.setCheckDate(checkDate);
 		}
 		
 		String checkText = request.getParameter("checkText");
-		checkText = java.net.URLDecoder.decode(checkText, "UTF-8");
 		if(null!=checkText&&!checkText.equals("")){
+			checkText = java.net.URLDecoder.decode(checkText, "UTF-8");
 			fau.setCheckText(checkText);;
 		}
 		
 		String checkStatus = request.getParameter("checkStatus");
-		checkStatus = java.net.URLDecoder.decode(checkStatus, "UTF-8");
 		if(null!=checkStatus&&!checkStatus.equals("")){
+			checkStatus = java.net.URLDecoder.decode(checkStatus, "UTF-8");
 			fau.setCheckStatus(Integer.parseInt(checkStatus));
 		}
 		return fau;

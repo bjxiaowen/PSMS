@@ -69,6 +69,11 @@
 		<property name="checkStatus" type="java.lang.Integer">
 			<column name="check_status"></column>
 		</property>
-		
+		<property name="flagSend" type="java.lang.String">
+			<column name="flag_send"></column>
+		</property>
+		<property name="sendDate" type="java.lang.String">
+			<column name="send_date"></column>
+		</property>
 	</class>
 </hibernate-mapping>

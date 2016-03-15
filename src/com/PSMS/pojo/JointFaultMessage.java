@@ -113,6 +113,10 @@ public class JointFaultMessage implements Serializable {
 
 	private String email;// 邮箱
 	
+	private String flagSend;//是否发过邮件或者短信
+	
+	private String sendDate;//发送时间
+	
 	
 
 	public String getFaultMessageId() {
@@ -298,6 +302,24 @@ public class JointFaultMessage implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
+	
+
+	public String getFlagSend() {
+		return flagSend;
+	}
+
+	public void setFlagSend(String flagSend) {
+		this.flagSend = flagSend;
+	}
+
+	public String getSendDate() {
+		return sendDate;
+	}
+
+	public void setSendDate(String sendDate) {
+		this.sendDate = sendDate;
+	}
 
 	@Override
 	public String toString() {
@@ -308,7 +330,7 @@ public class JointFaultMessage implements Serializable {
 				+ ", predictTime=" + predictTime + ", alertCause=" + alertCause + ", handleCondition=" + handleCondition
 				+ ", maintainDate=" + maintainDate + ", checkPerson=" + checkPerson + ", checkDate=" + checkDate
 				+ ", checkText=" + checkText + ", checkStatus=" + checkStatus + ", tel=" + tel + ", email=" + email
-				+ "]";
+				+ ", flagSend=" + flagSend + ", sendDate=" + sendDate + "]";
 	}
 
 }

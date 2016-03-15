@@ -88,11 +88,33 @@ public class FaultMessage implements Serializable {
 	/**
 	 * 检验日期
 	 */
-	private String checkDate;
+	private String checkDate;//检查时间
 	
 	private String checkText;//检查批语
 	
 	private int checkStatus;//检查状态
+	
+	private String flagSend;//是否发过邮件或者短信
+	
+	private String sendDate;//发送时间
+	
+	public String getFlagSend() {
+		return flagSend;
+	}
+
+	public void setFlagSend(String flagSend) {
+		this.flagSend = flagSend;
+	}
+
+	public String getSendDate() {
+		return sendDate;
+	}
+
+	public void setSendDate(String sendDate) {
+		this.sendDate = sendDate;
+	}
+
+	
 	
 
 	public String getFaultMessageId() {
@@ -240,6 +262,9 @@ public class FaultMessage implements Serializable {
 				+ ", alertTime=" + alertTime + ", status=" + status + ", initialDiagnose=" + initialDiagnose
 				+ ", predictTime=" + predictTime + ", alertCause=" + alertCause + ", handleCondition=" + handleCondition
 				+ ", maintainDate=" + maintainDate + ", checkPerson=" + checkPerson + ", checkDate=" + checkDate
-				+ ", checkText=" + checkText + ", checkStatus=" + checkStatus + "]";
+				+ ", checkText=" + checkText + ", checkStatus=" + checkStatus + ", flagSend=" + flagSend + ", sendDate="
+				+ sendDate + "]";
 	}
+
+	
 }
