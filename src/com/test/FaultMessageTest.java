@@ -21,9 +21,9 @@ public class FaultMessageTest {
 			//addFaultMessage(dao);
 			//updateFaultMessage(dao);
 			//deleteFaultMessage(dao);
-			//getFaultMessageById(dao);
-			//getAllJointFaultMessage(dao);
-			getNeedSendMailFaultMessage(dao);
+			getFaultMessageById(dao);
+			getAllJointFaultMessage(dao);
+			//getNeedSendMailFaultMessage(dao);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
