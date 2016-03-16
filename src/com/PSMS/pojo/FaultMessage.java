@@ -1,14 +1,15 @@
 package com.PSMS.pojo;
 
 import java.io.Serializable;
+
 /**
  * 错误信息
+ * 
  * @author Andy
  * @date 2016-03-08
  *
  */
 public class FaultMessage implements Serializable {
-
 
 	/**
 	 * 
@@ -88,16 +89,20 @@ public class FaultMessage implements Serializable {
 	/**
 	 * 检验日期
 	 */
-	private String checkDate;//检查时间
-	
-	private String checkText;//检查批语
-	
-	private int checkStatus;//检查状态
-	
-	private String flagSend;//是否发过邮件或者短信
-	
-	private String sendDate;//发送时间
-	
+	private String checkDate;// 检查时间
+
+	private String checkText;// 检查批语
+
+	private int checkStatus;// 检查状态
+
+	private String flagSend;// 是否发过邮件或者短信
+
+	private String sendDate;// 发送时间
+
+	private String failureMeaning;// 错误信息
+
+	private String failureType;// 错误类型
+
 	public String getFlagSend() {
 		return flagSend;
 	}
@@ -113,9 +118,6 @@ public class FaultMessage implements Serializable {
 	public void setSendDate(String sendDate) {
 		this.sendDate = sendDate;
 	}
-
-	
-	
 
 	public String getFaultMessageId() {
 		return faultMessageId;
@@ -189,8 +191,6 @@ public class FaultMessage implements Serializable {
 		this.initialDiagnose = initialDiagnose;
 	}
 
-	
-
 	public String getPredictTime() {
 		return predictTime;
 	}
@@ -255,6 +255,24 @@ public class FaultMessage implements Serializable {
 		this.checkStatus = checkStatus;
 	}
 
+	
+	
+	public String getFailureMeaning() {
+		return failureMeaning;
+	}
+
+	public void setFailureMeaning(String failureMeaning) {
+		this.failureMeaning = failureMeaning;
+	}
+
+	public String getFailureType() {
+		return failureType;
+	}
+
+	public void setFailureType(String failureType) {
+		this.failureType = failureType;
+	}
+
 	@Override
 	public String toString() {
 		return "FaultMessage [faultMessageId=" + faultMessageId + ", areaId=" + areaId + ", psId=" + psId
@@ -263,8 +281,7 @@ public class FaultMessage implements Serializable {
 				+ ", predictTime=" + predictTime + ", alertCause=" + alertCause + ", handleCondition=" + handleCondition
 				+ ", maintainDate=" + maintainDate + ", checkPerson=" + checkPerson + ", checkDate=" + checkDate
 				+ ", checkText=" + checkText + ", checkStatus=" + checkStatus + ", flagSend=" + flagSend + ", sendDate="
-				+ sendDate + "]";
+				+ sendDate + ", failureMeaning=" + failureMeaning + ", failureType=" + failureType + "]";
 	}
 
-	
 }

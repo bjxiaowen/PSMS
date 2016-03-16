@@ -44,5 +44,21 @@ public interface IFaultMessageDao {
 	 * @throws Exception
 	 */
 	public List<JointFaultMessage> getAllJointFaultMessage() throws Exception;
-
+	
+	
+	/**
+	 * 获取需要发短信或邮件的信息
+	 * @return
+	 * @throws Exception
+	 */
+	public List<JointFaultMessage> getNeedSendMailFaultMessage() throws Exception;
+	
+	/**
+	 * 发送邮件成功后更新数据发送状态
+	 * @param flagSend
+	 * @param sendDate
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean updateById(String flagSend,String sendDate,String id)throws Exception;
 }

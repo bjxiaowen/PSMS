@@ -32,7 +32,8 @@
 	</bean>
 
 	<bean id="everyDayJob" class="com.PSMS.quartz.EveryDayJob"></bean>
-	<bean id="everyDayTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	<bean id="everyDayTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject">
 			<ref bean="everyDayJob" />
 		</property>
@@ -43,17 +44,37 @@
 
 	<bean id="everyDayTime" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail">
-			<ref bean="everyDayTask"/>
+			<ref bean="everyDayTask" />
 		</property>
 		<property name="cronExpression">
 			<value>0 0 23 * * ?</value>
 		</property>
 	</bean>
-	
-	<bean id="startQuertz" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+
+	<bean id="everyHourJob" class="com.PSMS.quartz.EveryHourJob"></bean>
+	<bean id="everyHourTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<ref bean="everyHourJob" />
+		</property>
+		<property name="targetMethod">
+			<value>send</value>
+		</property>
+	</bean>
+
+	<bean id="everyHourTime" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="everyDayTask" />
+		</property>
+		<property name="cronExpression">
+			<value>0 0 0/1 * * ?</value>
+		</property>
+	</bean>
+	<bean id="startQuertz" lazy-init="false" autowire="no"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
-				<ref bean="doTime"/>
+				<ref bean="everyDayTime" />
+				<ref bean="everyHourTime" />
 			</list>
 		</property>
 	</bean>

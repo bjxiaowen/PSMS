@@ -75,5 +75,13 @@
 		<property name="sendDate" type="java.lang.String">
 			<column name="send_date"></column>
 		</property>
+		
+		<property name="failureMeaning" type="java.lang.String">
+			<column name="failure_meaning"></column>
+		</property>
+		
+		<property name="failureType" type="java.lang.String">
+			<column name="failure_type"></column>
+		</property>
 	</class>
 </hibernate-mapping>

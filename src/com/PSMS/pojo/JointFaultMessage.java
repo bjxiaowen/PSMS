@@ -117,6 +117,10 @@ public class JointFaultMessage implements Serializable {
 	
 	private String sendDate;//发送时间
 	
+	private String failureMeaning;//错误信息
+	
+	private String failureType;//错误类型
+	
 	
 
 	public String getFaultMessageId() {
@@ -321,6 +325,22 @@ public class JointFaultMessage implements Serializable {
 		this.sendDate = sendDate;
 	}
 
+	public String getFailureMeaning() {
+		return failureMeaning;
+	}
+
+	public void setFailureMeaning(String failureMeaning) {
+		this.failureMeaning = failureMeaning;
+	}
+
+	public String getFailureType() {
+		return failureType;
+	}
+
+	public void setFailureType(String failureType) {
+		this.failureType = failureType;
+	}
+
 	@Override
 	public String toString() {
 		return "JointFaultMessage [faultMessageId=" + faultMessageId + ", areaId=" + areaId + ", areaName=" + areaName
@@ -330,7 +350,7 @@ public class JointFaultMessage implements Serializable {
 				+ ", predictTime=" + predictTime + ", alertCause=" + alertCause + ", handleCondition=" + handleCondition
 				+ ", maintainDate=" + maintainDate + ", checkPerson=" + checkPerson + ", checkDate=" + checkDate
 				+ ", checkText=" + checkText + ", checkStatus=" + checkStatus + ", tel=" + tel + ", email=" + email
-				+ ", flagSend=" + flagSend + ", sendDate=" + sendDate + "]";
+				+ ", flagSend=" + flagSend + ", sendDate=" + sendDate + ", failureMeaning=" + failureMeaning
+				+ ", failureType=" + failureType + "]";
 	}
-
 }
