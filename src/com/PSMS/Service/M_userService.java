@@ -63,5 +63,8 @@ public interface M_userService {
 	boolean deleteUserByPSId(int id);//根据电站id删除该电站所有用户信息
 	
 	List<M_user> getUserByRoleId(int roleId);//通过角色查询用户
+	
+	
+	M_user getUserByUserName(String User_name);//通过用户名查询
 
 }

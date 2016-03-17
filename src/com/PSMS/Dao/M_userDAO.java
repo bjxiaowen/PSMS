@@ -64,4 +64,6 @@ public interface M_userDAO {
 	
 	List<M_user> getUserByRoleId(int roleId);//通过角色查询用户
 	
+	M_user getUserByUserName(String User_name);//通过用户名查询
+	
 }

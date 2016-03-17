@@ -397,6 +397,19 @@ public class M_userDAOImpl implements M_userDAO {
 		HibernateSessionFactory.commitHibernateTransaction();
 		HibernateSessionFactory.closeHibernateSession();
 		return p;
+	}
+
+	@Override
+	public M_user getUserByUserName(String userName) {
+		Session session = HibernateSessionFactory.getHibernateSession();
+		HibernateSessionFactory.begainHibernateTransaction();
+		String hql=" from M_user where User_name =? ";
+		Query query=session.createQuery(hql);
+	query.setString (0, userName);
+		M_user p=(M_user) query.uniqueResult();
+		HibernateSessionFactory.commitHibernateTransaction();
+		HibernateSessionFactory.closeHibernateSession();
+		return p;
 	}	
 
 }

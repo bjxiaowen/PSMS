@@ -174,14 +174,17 @@ public class userLoginAction {
 		String s1="fail";//区分登陆的不同角色
 			if(m_userService.checkUserIsExist(user_name,password))
 			{
-					Integer Role_id = m_userService.getRoleIdByName(user_name);//根据用户名获取该用户角色id
+				M_user user=m_userService.getUserByUserName(user_name);
+					Integer Role_id =user.getRole_id(); //m_userService.getUserByUserName(user_name);//根据用户名获取该用户角色id
 					switch (Role_id){//根据用户角色跳转不同用户界面
 						case 1 : s1="Role1"; break; 
 						case 2 : s1="Role2"; break;
 						case 3 : s1="Role3"; break; 
 						case 4 : s1="Role4"; break;
+						case 5 : s1="Role5"; break;
 					}
-			}									
+					session.setAttribute("user", user);
+			}	
 			session.setAttribute("User_name", user_name);//将用户名保存在session中传给前台使用
 			int id = m_userService.getPsIdByUsername(user_name);//根据用户名获取该用户所属电站id
 			session.setAttribute("id", id);//将电站id保存在session中传给前台使用

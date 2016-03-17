@@ -263,4 +263,9 @@ public class M_userServiceImpl implements M_userService {
 		return dao.getUserByRoleId(roleId);
 	}
 
+	@Override
+	public M_user getUserByUserName(String User_name) {
+		return dao.getUserByUserName(User_name);
+	}
+
 }
