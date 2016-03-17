@@ -63,7 +63,7 @@
 
 	<bean id="everyHourTime" class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail">
-			<ref bean="everyDayTask" />
+			<ref bean="everyHourTask" />
 		</property>
 		<property name="cronExpression">
 			<value>0 0 0/1 * * ?</value>

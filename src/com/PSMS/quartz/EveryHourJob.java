@@ -13,8 +13,10 @@ public class EveryHourJob {
 
 	public void send() {
 		try {
+			System.out.println("###################################每小时执行的定时任务开始！###############################################");
 			IFaultMessageDao dao=DAOFactory.getFaultMessageInstance();
 			getNeedSendMailFaultMessage(dao);
+			System.out.println("###################################每小时执行的定时任务结束！################################################");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -24,6 +26,7 @@ public class EveryHourJob {
 		List<JointFaultMessage> list=dao.getNeedSendMailFaultMessage();
 		SimpleDateFormat format =new  SimpleDateFormat("yyyy-MM-dd");
 		MailUtils sendmail = new MailUtils();
+		if(null==list||list.size()==0)return ;
 		for(JointFaultMessage message:list){
 			String mial=message.getEmail();
 			if(mial!=null&&!mial.equals("")){
