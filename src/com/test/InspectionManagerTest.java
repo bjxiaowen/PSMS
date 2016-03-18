@@ -121,6 +121,7 @@ public class InspectionManagerTest {
 			Date currIn=GetTime.addDate(new Date(),1);//当前日期+1=应该巡检的日期就发邮件或者短信
 			String tomorrow=format.format(currIn);
 			String shouldDate=inspect.getShouldDate();
+			System.out.println(inspect.toString());
 			if(tomorrow.equals(shouldDate)){
 				System.out.println(inspect.getEmail());
 				System.out.println(inspect.getTel());

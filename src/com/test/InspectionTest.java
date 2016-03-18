@@ -21,7 +21,7 @@ public class InspectionTest {
 //			UpdateInspection(dao);
 //			deleteInspection(dao);
 			//getById(dao);
-		//	getAll(dao);
+			//getAll(dao);
 			getOverdue(dao);//逾期查询
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -36,7 +36,7 @@ public class InspectionTest {
 	}
 	
 	public static void getById(IInspectionDao dao) throws Exception{
-		System.out.println(dao.getById("In14577652263700000").toString());
+		System.out.println(dao.getById("In14579653603910000").toString());
 	}
 
 	public static void addInspection(IInspectionDao dao) throws Exception{

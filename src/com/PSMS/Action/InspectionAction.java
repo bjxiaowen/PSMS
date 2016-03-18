@@ -67,6 +67,32 @@ public class InspectionAction {
 		}
 		return "success";
 	}
+	
+	public String toInspectionOverdue(){
+		try {
+			HttpServletRequest request = ServletActionContext.getRequest();
+			request.setCharacterEncoding("utf-8");
+			ps_informationService = new PS_informationServiceImpl();
+			equipmentService = new EquipmentServiceImpl();
+			areaService = new AreaServiceImpl();
+			userService = new M_userServiceImpl();
+			List<PS_information> list_ps = ps_informationService.getAllStation();
+			request.setAttribute("list_ps", list_ps);// 查询电站列表
+			List<Equipment> list_Equipment = equipmentService.getAllEquipment();
+			request.setAttribute("list_Equipment", list_Equipment);// 查询设备列表
+			List<Area> list_area = areaService.getAll();
+			request.setAttribute("list_area", list_area);// 查询区域列表
+			List<M_user> list_engineer = userService.getUserByRoleId(4);
+			request.setAttribute("list_engineer", list_engineer);// 查询工程师列表
+			List<M_user> list_check = userService.getUserByRoleId(5);
+			request.setAttribute("list_check", list_check);// 查询检查人员列表
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "success";
+	}
 
 	public String addInspection() {
 		try {
