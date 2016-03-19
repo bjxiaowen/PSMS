@@ -18,15 +18,15 @@ public class Inspection implements Serializable {
 
 	private String id;
 	
-	private String managerId;
+	private String managerId;//巡检id
 	
-	private String shouldDate;
+	private String shouldDate;//应该巡检的日期
 	
-	private String actualDate;
+	private String actualDate;//实际巡检的日期
 	
-	private String inspectionReport;
+	private String inspectionReport;//逾期天数
 	
-	private int inspectionStatus;
+	private int inspectionStatus;//状态
 	
 
 	public String getId() {
