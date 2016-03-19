@@ -38,4 +38,9 @@ public class FaultMessageServiceImpl implements IFaultMessageService {
 		return dao.getAllJointFaultMessage();
 	}
 
+	@Override
+	public List<JointFaultMessage> getFaultMessageByPsId(String psId) throws Exception {
+		return  dao.getFaultMessageByPsId(psId);
+	}
+
 }

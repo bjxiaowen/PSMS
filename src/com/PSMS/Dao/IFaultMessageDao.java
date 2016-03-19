@@ -61,4 +61,13 @@ public interface IFaultMessageDao {
 	 * @throws Exception
 	 */
 	public boolean updateById(String flagSend,String sendDate,String id)throws Exception;
+	
+	/**
+	 * 
+	 * @param psId 电站id
+	 * @return
+	 * @throws Exception
+	 */
+	public List<JointFaultMessage> getFaultMessageByPsId(String psId) throws Exception;
+
 }

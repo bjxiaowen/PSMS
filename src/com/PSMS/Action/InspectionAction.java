@@ -227,12 +227,18 @@ public class InspectionAction {
 		Inspection ins = new Inspection();
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setCharacterEncoding("utf-8");
+		
 		String inspectionId = request.getParameter("inspectionId");
 		if (null != inspectionId && !inspectionId.equals("")) {
 			inspectionId = java.net.URLDecoder.decode(inspectionId, "UTF-8");
 			ins.setId(inspectionId);
 		}
-
+		
+		String managerId = request.getParameter("managerId");
+		if (null != managerId && !managerId.equals("")) {
+			managerId = java.net.URLDecoder.decode(managerId, "UTF-8");
+			ins.setManagerId(managerId);
+		}
 	
 		String inspectionReport = request.getParameter("inspectionReport");
 		if (null != inspectionReport && !inspectionReport.equals("")) {

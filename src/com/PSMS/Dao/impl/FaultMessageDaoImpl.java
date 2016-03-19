@@ -424,4 +424,100 @@ public class FaultMessageDaoImpl implements IFaultMessageDao {
 		HibernateSessionFactory.closeHibernateSession();
 		return true;
 	}
+
+	@Override
+	public List<JointFaultMessage> getFaultMessageByPsId(String psId) throws Exception {
+
+		Session session = HibernateSessionFactory.getHibernateSession();
+		StringBuffer sql=new StringBuffer();
+		sql.append("select fau.faultMessageId,fau.psId,ps.name,fau.areaId,ar.areaName,");
+		sql.append(" fau.userId,mu.User_name,fau.alertTime ,fau.initialDiagnose,fau.predictTime,fau.alertCause,fau.handleCondition, ");
+		sql.append(" fau.maintainDate,fau.checkPerson,fau.checkDate,fau.status,fau.flagSend,fau.sendDate, ");
+		sql.append(" fau.failureMeaning,fau.failureType,mu.email,mu.telephone,fau.checkText ");
+		sql.append(" from FaultMessage as fau, Area as ar,M_user as mu,PS_information as ps ");
+		sql.append(" where fau.areaId=ar.areaId and fau.userId=mu.id and fau.psId=ps.id and ");
+		sql.append(" fau.psId=? ");
+		Query query = session.createQuery(sql.toString());
+		query.setString(0, psId);
+		List list=query.list();
+		List<JointFaultMessage> reList=new ArrayList<JointFaultMessage>();
+		if(list==null||list.size()==0){
+			return reList;
+		}
+		for(int i=0;i<list.size();i++){
+			JointFaultMessage faultMessage=new JointFaultMessage();
+			Object[] obj=(Object[]) list.get(i);
+			//fau.faultMessageId,fau.psId,ps.name,fau.areaId,ar.areaName,
+			faultMessage.setFaultMessageId(""+obj[0]);
+			if(obj[1]!=null&&!obj[1].equals("0")){
+				faultMessage.setPsId(Integer.parseInt(obj[1]+""));
+			}
+			faultMessage.setPsName(""+obj[2]);
+			faultMessage.setAreaId(""+obj[3]);
+			faultMessage.setAreaName(""+obj[4]);
+			//fau.userId,mu.User_name,
+			if(obj[5]!=null&&!obj[5].equals("0")){
+				faultMessage.setUserId(Integer.parseInt(""+obj[5]));
+			}
+			faultMessage.setUserName(""+obj[6]);
+			
+			//fau.alertTime ,fau.initialDiagnose,fau.predictTime,fau.alertCause,fau.handleCondition,
+			if(obj[7]!=null){
+				faultMessage.setAlertTime(obj[7]+"");
+			}
+			faultMessage.setInitialDiagnose(""+obj[8]);
+			
+			if(obj[9]!=null){
+				faultMessage.setPredictTime(obj[9]+"");
+			}
+			faultMessage.setAlertCause(obj[10]+"");
+			faultMessage.setHandleCondition(obj[11]+"");
+			
+			//fau.maintainDate,fau.checkPerson,fau.checkDate,fau.status,fau.flagSend,fau.sendDate, 
+			if(obj[12]!=null){
+				faultMessage.setMaintainDate(obj[12]+"");
+			}
+			faultMessage.setCheckPerson(obj[13]+"");
+			
+			if(obj[14]!=null){
+				faultMessage.setCheckDate(obj[14]+"");
+			}
+			
+			if(obj[15]!=null&&!obj[15].equals("0")){
+				faultMessage.setStatus(Integer.parseInt(""+obj[15]));
+			}
+			
+			if(obj[16]!=null){
+				faultMessage.setFlagSend(""+obj[16]);
+			}
+			
+			
+			if(obj[17]!=null){
+				faultMessage.setSendDate(""+obj[17]);
+			}
+			//fau.failureMeaning,fau.failureType,mu.email,mu.telephone,fau.checkText
+			if(obj[18]!=null){
+				faultMessage.setFailureMeaning(obj[18]+"");
+			}
+			
+			if(obj[19]!=null){
+				faultMessage.setFailureType(obj[19]+"");
+			}
+			
+			if(obj[20]!=null){
+				faultMessage.setEmail(obj[20]+"");
+			}
+			if(obj[21]!=null){
+				faultMessage.setTel(obj[21]+"");
+			}
+			
+			if(obj[22]!=null){
+				faultMessage.setCheckText(obj[22]+"");
+			}
+			
+			reList.add(faultMessage);
+		}
+		return reList;
+	
+	}
 }

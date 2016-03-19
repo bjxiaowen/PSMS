@@ -729,5 +729,7 @@
 		<action name="deleteFaultMessage" method="deleteFaultMessage" class="com.PSMS.Action.FaultMessageAction"></action>
 		<action name="getFaultMessageById" method="getFaultMessageById" class="com.PSMS.Action.FaultMessageAction"></action>
 		<action name="getAllFaultMessage" method="getAllFaultMessage" class="com.PSMS.Action.FaultMessageAction"></action>
+		<action name="getFaultMessageByPsId" method="getFaultMessageByPsId" class="com.PSMS.Action.FaultMessageAction"></action>
+		
 	</package>
 </struts>

@@ -139,6 +139,25 @@ public class FaultMessageAction {
 		return null;
 	}
 	
+	public String getFaultMessageByPsId(){
+		try {
+			HttpServletRequest request = ServletActionContext.getRequest();
+			request.setCharacterEncoding("utf-8");
+			String psId = request.getParameter("psId");
+			psId = java.net.URLDecoder.decode(psId, "UTF-8");
+			faultMessageService=new FaultMessageServiceImpl();
+			List<JointFaultMessage> list = faultMessageService.getFaultMessageByPsId(psId);
+			JSONObject object = JSONObject.fromObject("{}");
+			object.put("total", list.size());
+			object.put("rows", list);
+			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
+			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
+			ServletActionContext.getResponse().getWriter().write(object.toString());
+		} catch (Exception e) {
+		}
+		return null;
+	}
+	
 	public String getAllFaultMessage(){
 		try {
 			HttpServletRequest request = ServletActionContext.getRequest();
