@@ -38,19 +38,18 @@ public class ReEngAreaPSServiceImpl implements IReEngAreaPSService {
 		return dao.getAll();
 	}
 
-	@Override
-	public List<JointEngAreaPS> searchByAreaName(String areaName) throws Exception {
-		return dao.searchByAreaName(areaName);
+	public List<JointEngAreaPS> searchByAreaId(String areaId) throws Exception {
+		return dao.searchByAreaId(areaId);
 	}
 
 	@Override
-	public List<JointEngAreaPS> searchByUserName(String UserName) throws Exception {
-		return dao.searchByUserName(UserName);
+	public List<JointEngAreaPS> searchByUserId(int userId) throws Exception {
+		return dao.searchByUserId(userId);
 	}
 
 	@Override
-	public List<JointEngAreaPS> searchByPSName(String psName) throws Exception {
-		return dao.searchByPSName(psName);
+	public List<JointEngAreaPS> searchByPSId(int psId) throws Exception {
+		return dao.searchByPSId(psId);
 	}
 
 	@Override

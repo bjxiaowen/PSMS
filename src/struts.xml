@@ -685,9 +685,9 @@
 		<action name="deleteReEngAreaPS" method="deleteReEngAreaPS" class="com.PSMS.Action.ReEngAreaPSAction"/>
 		<action name="getReEngAreaPSById" method="getReEngAreaPSById" class="com.PSMS.Action.ReEngAreaPSAction"/>
 		<action name="getAllReEngAreaPS" method="getAllReEngAreaPS" class="com.PSMS.Action.ReEngAreaPSAction"/>
-		<action name="searchByAreaNamePS" method="searchByAreaName" class="com.PSMS.Action.ReEngAreaPSAction"/>
-		<action name="searchByUserNamePS" method="searchByUserName" class="com.PSMS.Action.ReEngAreaPSAction"/>
-		<action name="searchByPSNamePS" method="searchByPSName" class="com.PSMS.Action.ReEngAreaPSAction"/>
+		<action name="searchByAreaId" method="searchByAreaId" class="com.PSMS.Action.ReEngAreaPSAction"/>
+		<action name="searchByUserId" method="searchByUserId" class="com.PSMS.Action.ReEngAreaPSAction"/>
+		<action name="searchByPSId" method="searchByPSId" class="com.PSMS.Action.ReEngAreaPSAction"/>
 		<action name="checkReEngAreaPSById" method="checkReEngAreaPSById" class="com.PSMS.Action.ReEngAreaPSAction"/>
 	
 	

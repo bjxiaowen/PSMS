@@ -105,11 +105,12 @@ public class ReEngAreaPSImpl implements IReEngAreaPS {
 	}
 
 	@Override
-	public List<JointEngAreaPS> searchByAreaName(String areaName) throws Exception {
+	public List<JointEngAreaPS> searchByAreaId(String areaId) throws Exception {
 
 		Session session = HibernateSessionFactory.getHibernateSession();
-		String hql = "select reg.id,ar.areaId,ps.id,mu.id ,mu.User_name,ar.areaName,ps.name from ReEngAreaPowerStation as reg, Area as ar,M_user as mu,PS_information as ps where reg.areaId=ar.areaId and mu.id=reg.userId and reg.psId=ps.id and ar.areaName like '%"+areaName+"%'";
+		String hql = "select reg.id,ar.areaId,ps.id,mu.id ,mu.User_name,ar.areaName,ps.name from ReEngAreaPowerStation as reg, Area as ar,M_user as mu,PS_information as ps where reg.areaId=ar.areaId and mu.id=reg.userId and reg.psId=ps.id and reg.areaId=?";
 		Query query = session.createQuery(hql);
+		query.setString(0, areaId);
 		List list = query.list();
 		if(list==null||list.size()==0){
 			return null;
@@ -135,10 +136,11 @@ public class ReEngAreaPSImpl implements IReEngAreaPS {
 	}
 
 	@Override
-	public List<JointEngAreaPS> searchByUserName(String UserName) throws Exception {
+	public List<JointEngAreaPS> searchByUserId(int userId) throws Exception {
 		Session session = HibernateSessionFactory.getHibernateSession();
-		String hql = "select reg.id,ar.areaId,ps.id,mu.id ,mu.User_name,ar.areaName,ps.name from ReEngAreaPowerStation as reg, Area as ar,M_user as mu,PS_information as ps where reg.areaId=ar.areaId and mu.id=reg.userId and reg.psId=ps.id and mu.User_name like '%"+UserName+"%'";
+		String hql = "select reg.id,ar.areaId,ps.id,mu.id ,mu.User_name,ar.areaName,ps.name from ReEngAreaPowerStation as reg, Area as ar,M_user as mu,PS_information as ps where reg.areaId=ar.areaId and mu.id=reg.userId and reg.psId=ps.id and reg.userId=?";
 		Query query = session.createQuery(hql);
+		query.setInteger(0, userId);
 		List list = query.list();
 		if(list==null||list.size()==0){
 			return null;
@@ -163,10 +165,11 @@ public class ReEngAreaPSImpl implements IReEngAreaPS {
 	}
 
 	@Override
-	public List<JointEngAreaPS> searchByPSName(String psName) throws Exception {
+	public List<JointEngAreaPS> searchByPSId(int psId) throws Exception {
 		Session session = HibernateSessionFactory.getHibernateSession();
-		String hql = "select reg.id,ar.areaId,ps.id,mu.id ,mu.User_name,ar.areaName,ps.name from ReEngAreaPowerStation as reg, Area as ar,M_user as mu,PS_information as ps where reg.areaId=ar.areaId and mu.id=reg.userId and reg.psId=ps.id and ps.name like '%"+psName+"'%";
+		String hql = "select reg.id,ar.areaId,ps.id,mu.id ,mu.User_name,ar.areaName,ps.name from ReEngAreaPowerStation as reg, Area as ar,M_user as mu,PS_information as ps where reg.areaId=ar.areaId and mu.id=reg.userId and reg.psId=ps.id and reg.psId=?";
 		Query query = session.createQuery(hql);
+		query.setInteger(0, psId);
 		List list = query.list();
 		if(list==null||list.size()==0){
 			return null;

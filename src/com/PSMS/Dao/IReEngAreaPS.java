@@ -50,28 +50,28 @@ public interface IReEngAreaPS {
 	
 	/**
 	 * 根据区域名搜索
-	 * @param areaName 区域名称
+	 * @param areaId 区域id
 	 * @return
 	 * @throws Exception
 	 */
-	public List<JointEngAreaPS> searchByAreaName(String areaName) throws Exception;
+	public List<JointEngAreaPS> searchByAreaId(String areaId) throws Exception;
 	
 	/**
 	 * 根据用户名搜索
-	 * @param UserName 用户名
+	 * @param userId 用户
 	 * @return
 	 * @throws Exception
 	 */
-	public List<JointEngAreaPS> searchByUserName(String UserName) throws Exception;
+	public List<JointEngAreaPS> searchByUserId(int userId) throws Exception;
 	
 	
 	/**
-	 * 根据电站名搜索
-	 * @param psName
+	 * 根据电站id搜索
+	 * @param psId
 	 * @return
 	 * @throws Exception
 	 */
-	public List<JointEngAreaPS> searchByPSName(String psName) throws Exception;
+	public List<JointEngAreaPS> searchByPSId(int psId) throws Exception;
 	
 	
 	/**

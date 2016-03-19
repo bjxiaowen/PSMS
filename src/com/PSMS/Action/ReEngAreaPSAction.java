@@ -233,18 +233,18 @@ public class ReEngAreaPSAction {
 	/**
 	 * 根据区域名搜索
 	 * 
-	 * @param areaName
-	 *            区域名称
+	 * @param areaId
+	 *            区域Id
 	 * @return
 	 */
-	public String searchByAreaName() {
+	public String searchByAreaId() {
 		try {
 			HttpServletRequest request = ServletActionContext.getRequest();
 			request.setCharacterEncoding("utf-8");
-			String areaName = request.getParameter("areaName");
-			areaName = java.net.URLDecoder.decode(areaName, "UTF-8");
+			String areaId = request.getParameter("areaId");
+			areaId = java.net.URLDecoder.decode(areaId, "UTF-8");
 			engAreaPsService = new ReEngAreaPSServiceImpl();
-			List<JointEngAreaPS> list = engAreaPsService.searchByAreaName(areaName);
+			List<JointEngAreaPS> list = engAreaPsService.searchByAreaId(areaId);
 			JSONObject object = JSONObject.fromObject("{}");
 			object.put("total", list.size());
 			object.put("rows", list);
@@ -260,18 +260,18 @@ public class ReEngAreaPSAction {
 	/**
 	 * 根据用户名搜索
 	 * 
-	 * @param userName
+	 * @param userId
 	 *            用户名
 	 * @return
 	 */
-	public String searchByUserName() {
+	public String searchByUserId() {
 		try {
 			HttpServletRequest request = ServletActionContext.getRequest();
 			request.setCharacterEncoding("utf-8");
-			String UserName = request.getParameter("userName");
-			UserName = java.net.URLDecoder.decode(UserName, "UTF-8");
+			String userId = request.getParameter("userId");
+			userId = java.net.URLDecoder.decode(userId, "UTF-8");
 			engAreaPsService = new ReEngAreaPSServiceImpl();
-			List<JointEngAreaPS> list = engAreaPsService.searchByUserName(UserName);
+			List<JointEngAreaPS> list = engAreaPsService.searchByUserId(Integer.parseInt(userId));
 			JSONObject object = JSONObject.fromObject("{}");
 			object.put("total", list.size());
 			object.put("rows", list);
@@ -287,17 +287,17 @@ public class ReEngAreaPSAction {
 	/**
 	 * 根据电站名搜索
 	 * 
-	 * @param psName
+	 * @param psId
 	 * @return
 	 */
-	public String searchByPSName() {
+	public String searchByPSId() {
 		try {
 			HttpServletRequest request = ServletActionContext.getRequest();
 			request.setCharacterEncoding("utf-8");
-			String psName = request.getParameter("psName");
-			psName = java.net.URLDecoder.decode(psName, "UTF-8");
+			String psId = request.getParameter("psId");
+			psId = java.net.URLDecoder.decode(psId, "UTF-8");
 			engAreaPsService = new ReEngAreaPSServiceImpl();
-			List<JointEngAreaPS> list = engAreaPsService.searchByPSName(psName);
+			List<JointEngAreaPS> list = engAreaPsService.searchByPSId(Integer.parseInt(psId));
 			JSONObject object = JSONObject.fromObject("{}");
 			object.put("total", list.size());
 			object.put("rows", list);

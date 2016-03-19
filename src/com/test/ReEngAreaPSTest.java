@@ -35,25 +35,25 @@ public class ReEngAreaPSTest {
 	
 	
 	public static void searchByPSName(IReEngAreaPS dao) throws Exception{
-
+/*
 		List<JointEngAreaPS> list=dao.searchByPSName("天津");
 		for(JointEngAreaPS join:list){
 			System.out.println(join.toString());
-		}
+		}*/
 	}
 	
 	public static void searchByUserName(IReEngAreaPS dao) throws Exception{
-		List<JointEngAreaPS> list=dao.searchByUserName("tianjin");
+		/*List<JointEngAreaPS> list=dao.searchByUserName("tianjin");
 		for(JointEngAreaPS join:list){
 			System.out.println(join.toString());
-		}
+		}*/
 	}
 	
 	public static void searchByAreaName(IReEngAreaPS dao) throws Exception{
-		List<JointEngAreaPS> list=dao.searchByAreaName("北京");
+		/*List<JointEngAreaPS> list=dao.searchByAreaName("北京");
 		for(JointEngAreaPS join:list){
 			System.out.println(join.toString());
-		}
+		}*/
 	}
 	
 	public static void getAll(IReEngAreaPS dao) throws Exception{
