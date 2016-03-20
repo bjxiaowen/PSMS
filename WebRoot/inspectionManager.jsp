@@ -11,7 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <meta charset="UTF-8">
     <base href="<%=basePath%>inspection.jsp">
-    <title>运维管理</title>
+    <title>巡检管理</title>
     <link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
     <link rel="stylesheet" type="text/css" href="easyui/demo/demo.css">
@@ -29,8 +29,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </style>
 </head>
 <body>
-   <p style="font-weight:bold;color:#0E2D5F;font: bold 16px '宋体','微软雅黑';font-size:12px">故障管理->运维管理</p>
-    <table id="dg" title="运维管理列表" class="easyui-datagrid" style="width:100%;height:95%;text-align:center" 
+   <p style="font-weight:bold;color:#0E2D5F;font: bold 16px '宋体','微软雅黑';font-size:12px">故障管理->巡检管理</p>
+    <table id="dg" title="巡检管理列表" class="easyui-datagrid" style="width:100%;height:95%;text-align:center" 
             url="getAllInspectionManager.action"        
             toolbar="#toolbar" pagination="true" pageSize=20 pageList="[ 20, 30, 40 ]" //读取分页条数，即向后台读取数据时传过去的值
             autoRowHeight="true" striped="true" rownumbers="true" fitColumns="true"
@@ -91,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					 </c:forEach>
    			 	</select>(必填)
             </div>
-            <div class="fitem">
+            <div class="fitem" style="display:none;">
                 <label>设备ID</label>
                	<select id="equipmentId" class="easyui-combobox" name="equipmentId" editable="false" style="width:160px;" data-options="panelHeight:'auto'" >
                		<c:forEach items="${list_Equipment}" var="equipment">	  													
@@ -240,12 +240,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             var mm = vv.getMonth()+1;  
             var dd = vv.getDate(); 
             var nextDate = yy+"-"+(mm<10?('0'+mm):mm)+"-"+(dd<10?('0'+dd):dd);
-            console.log(psId);
-            console.log(areaId);
-            console.log(userId);
-            console.log(equipmentId);
-            console.log(inspectionPeriod);
-            console.log(nextDate);
 	   	 if(flag==0){//flag为0表示当前新建
 			    if(!checkLinkInformation(areaId,userId,equipmentId,psId,currDate,inspectionPeriod)){return false; }//校验信息
 			    else{
@@ -317,13 +311,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	if(psId==""){$.messager.confirm('警告','所属电站不能为空');return false;}
         	if(areaId==""){$.messager.confirm('警告','所属区域不能为空');return false;}
 			if(userId==""){$.messager.confirm('警告','负责人不能为空');return false;}
-			if(equipmentId==""){$.messager.confirm('警告','设备ID不能为空');return false;}
+			//if(equipmentId==""){$.messager.confirm('警告','设备ID不能为空');return false;}
 			if(currDate==""){$.messager.confirm('警告','开始日期不能为空');return false;}
 			if(inspectionPeriod==""){$.messager.confirm('警告','巡检周期不能为空');return false;}
 		
 			var result="";
 			$.ajax({
-	        url:'getCheckById.action?areaId='+encodeURI(encodeURI(areaId))
+	        url:'getManagerCheckById.action?areaId='+encodeURI(encodeURI(areaId))
 	             +'&userId='+encodeURI(encodeURI(userId))+'&psId='+encodeURI(encodeURI(psId))+'&equipmentId='+encodeURI(encodeURI(equipmentId)),
 			type:'GET',				
 			dataType:'json',
@@ -352,7 +346,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			{	
 				var result="";
 				$.ajax({
-			        url:'getCheckById.action?areaId='+encodeURI(encodeURI(areaId))
+			        url:'getManagerCheckById.action?areaId='+encodeURI(encodeURI(areaId))
 			             +'&userId='+encodeURI(encodeURI(userId))+'&psId='+encodeURI(encodeURI(psId))+'&equipmentId='+encodeURI(encodeURI(equipmentId)),
 					type:'GET',				
 					dataType:'json',

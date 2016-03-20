@@ -52,7 +52,8 @@
 	</bean>
 
 	<bean id="everyHourJob" class="com.PSMS.quartz.EveryHourJob"></bean>
-	<bean id="everyHourTask" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+	<bean id="everyHourTask"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
 		<property name="targetObject">
 			<ref bean="everyHourJob" />
 		</property>

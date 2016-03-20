@@ -136,6 +136,9 @@ public class InspectionManagerDaoImpl implements IInspectionManagerDao {
 		query.setInteger(1, userId);
 		query.setInteger(2, psId);
 		List list = query.list();
+		if (list == null || list.size() == 0) {
+			return null;
+		}
 		JointInspection inspection = new JointInspection();
 		for (int i = 0; i < list.size(); i++) {
 			Object[] obj = (Object[]) list.get(i);

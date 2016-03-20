@@ -62,7 +62,7 @@ public class InspectionDaoImpl implements IInspectionDao {
 		List list = query.list();
 		JointInspection inspection = new JointInspection();
 		if (list == null || list.size() == 0) {
-			return inspection;
+			return null;
 		}
 		for (int i = 0; i < list.size(); i++) {
 			Object[] obj = (Object[]) list.get(i);
@@ -119,11 +119,7 @@ public class InspectionDaoImpl implements IInspectionDao {
 		buff.append(" and inm.userId=mu.id ");
 		Query query = session.createQuery(buff.toString());
 		List<?> list = query.list();
-		if (list == null || list.size() == 0) {
-			return null;
-		}
 		List<JointInspection> reList = new ArrayList<JointInspection>();
-		
 		if (list == null || list.size() == 0) {
 			return reList;
 		}
@@ -186,7 +182,9 @@ public class InspectionDaoImpl implements IInspectionDao {
 		@SuppressWarnings("rawtypes")
 		List list = query.list();
 		List<JointInspection> reList=new ArrayList<JointInspection>();
-		
+		if (list == null || list.size() == 0) {
+			return reList;
+		}
 		for (int i = 0; i < list.size(); i++) {
 			JointInspection inspection = new JointInspection();
 			Object[] obj = (Object[]) list.get(i);
@@ -251,7 +249,9 @@ public class InspectionDaoImpl implements IInspectionDao {
 		@SuppressWarnings("rawtypes")
 		List list = query.list();
 		List<JointInspection> reList=new ArrayList<JointInspection>();
-		
+		if (list == null || list.size() == 0) {
+			return reList;
+		}
 		for (int i = 0; i < list.size(); i++) {
 			JointInspection inspection = new JointInspection();
 			Object[] obj = (Object[]) list.get(i);
@@ -314,11 +314,7 @@ public class InspectionDaoImpl implements IInspectionDao {
 		buff.append(" and inm.userId=mu.id and ins.inspectionStatus=0");
 		Query query = session.createQuery(buff.toString());
 		List<?> list = query.list();
-		if (list == null || list.size() == 0) {
-			return null;
-		}
 		List<JointInspection> reList = new ArrayList<JointInspection>();
-		
 		if (list == null || list.size() == 0) {
 			return reList;
 		}

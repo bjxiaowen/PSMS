@@ -27,10 +27,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			KindEditor.ready(function(K) {
 				editor = K.create('textarea[name="handleCondition"]', {
 					allowFileManager : true,
+					allowImageUpload : true, 
+					validateRequest: false ,
 					items:[
 					        'undo', 'redo', '|', 'cut', 'copy', 'paste','fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold',
 					        'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image'
-					]
+					],
+					uploadJson:'<%=request.getContextPath()%>/admin/upload_json.jsp',
+					fileManagerJson:'<%=request.getContextPath()%>/admin/file_manager_json.jsp'
 				});
 			});
 		</script>
@@ -58,11 +62,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <th field="userId" hidden="hidden" width="20">人员id</th>
                 <th field="predictTime" hidden="hidden" width="20">预计完成日期</th>
                 <th field="alertCause" hidden="hidden" width="20">故障原因</th>
-                <th field="handleCondition" width="20">处理状况</th>
+                <th field="handleCondition" hidden="hidden" width="20">处理状况</th>
                 <th field="maintainDate" hidden="hidden" width="20">维护日期</th>
                 <th field="checkDate" hidden="hidden" width="20">检验日期</th>
                 <th field="checkPerson" hidden="hidden" width="20">检验人</th>
-                <th field="checkText" width="20">检查批语</th>
+                <th field="checkText" hidden="hidden" width="20">检查批语</th>
                 <th field="psName" width="20" align="center" sortable="true">电站名称</th>
                 <th field="areaName" width="20" align="center" sortable="true">区域名称</th>
                 <th field="equipmentId" width="20" align="center" hidden="hidden" data-options="formatter:eIdChangeToString" sortable="true">设备ID</th>
@@ -87,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div id="dlg" class="easyui-dialog" style="width:630px;height:450px;padding:10px 20px"
             closed="true" buttons="#dlg-buttons">
         <div class="ftitle">查看详情</div>
-        <form id="fm" method="post" novalidate  style="height:">
+        <form id="fm" method="post" novalidate  style="height:" enctype="multipart/form-data">
         	<div class="fitem">
                 <label style="width:60px;">电站名称</label>
                 <input id="psName" name="psName" class="easyui-textbox" readonly/> &nbsp; &nbsp; &nbsp; &nbsp;

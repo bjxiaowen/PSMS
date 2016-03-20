@@ -24,9 +24,11 @@ public class FaultMessageTest {
 			//getFaultMessageById(dao);
 			//getAllJointFaultMessage(dao);
 			getNeedSendMailFaultMessage(dao);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 	
 //	

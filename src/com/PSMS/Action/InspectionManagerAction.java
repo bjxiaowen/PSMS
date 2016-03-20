@@ -182,6 +182,7 @@ public class InspectionManagerAction {
 		return null;
 	}
 	
+	@SuppressWarnings("unused")
 	public String getCheckById(){
 		try {
 
@@ -191,17 +192,17 @@ public class InspectionManagerAction {
 			String areaId = request.getParameter("areaId");
 			String userId = request.getParameter("userId");
 			String psId = request.getParameter("psId");
-			String equipmentId= request.getParameter("equipmentId");
+			//String equipmentId= request.getParameter("equipmentId");
 			areaId = java.net.URLDecoder.decode(areaId, "UTF-8");
 			userId = java.net.URLDecoder.decode(userId, "UTF-8");
 			psId = java.net.URLDecoder.decode(psId, "UTF-8");
-			equipmentId = java.net.URLDecoder.decode(equipmentId, "UTF-8");
+			//equipmentId = java.net.URLDecoder.decode(equipmentId, "UTF-8");
 			inspectionManagerService = new InspectionManagerServiceImpl();
-			JointInspection lists = inspectionManagerService.checkById(areaId,Integer.valueOf(psId) ,Integer.parseInt(userId) ,Integer.parseInt(equipmentId) );
-			if(lists!=null&&lists.getManageId()==null){
-				result="wrong";
-			}else{
+			JointInspection lists = inspectionManagerService.checkById(areaId,Integer.valueOf(psId) ,Integer.parseInt(userId) ,0);
+			if(lists==null){
 				result="correct";
+			}else{
+				result="wrong";
 			}
 			List<String> list=new ArrayList<String>();
 			list.add(result);
