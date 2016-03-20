@@ -84,8 +84,11 @@ public class ReEngAreaPSImpl implements IReEngAreaPS {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		String hql = "select reg.id,ar.areaId,ps.id,mu.id ,mu.User_name,ar.areaName,ps.name from ReEngAreaPowerStation as reg, Area as ar,M_user as mu,PS_information as ps where reg.areaId=ar.areaId and mu.id=reg.userId and reg.psId=ps.id";
 		Query query = session.createQuery(hql);
-		List list = query.list();
 		List<JointEngAreaPS> reList=new ArrayList<JointEngAreaPS>();
+		List list = query.list();
+		if(list==null||list.size()==0){
+			return reList;
+		}
 		for(int i=0;i<list.size();i++){
 			JointEngAreaPS join=new JointEngAreaPS();
 			Object[] obj=(Object[]) list.get(i);
@@ -112,10 +115,10 @@ public class ReEngAreaPSImpl implements IReEngAreaPS {
 		Query query = session.createQuery(hql);
 		query.setString(0, areaId);
 		List list = query.list();
-		if(list==null||list.size()==0){
-			return null;
-		}
 		List<JointEngAreaPS> reList=new ArrayList<JointEngAreaPS>();
+		if(list==null||list.size()==0){
+			return reList;
+		}
 		for(int i=0;i<list.size();i++){
 			JointEngAreaPS join=new JointEngAreaPS();
 			Object[] obj=(Object[]) list.get(i);
@@ -142,10 +145,11 @@ public class ReEngAreaPSImpl implements IReEngAreaPS {
 		Query query = session.createQuery(hql);
 		query.setInteger(0, userId);
 		List list = query.list();
-		if(list==null||list.size()==0){
-			return null;
-		}
 		List<JointEngAreaPS> reList=new ArrayList<JointEngAreaPS>();
+		if(list==null||list.size()==0){
+			return reList;
+		}
+		
 		for(int i=0;i<list.size();i++){
 			JointEngAreaPS join=new JointEngAreaPS();
 			Object[] obj=(Object[]) list.get(i);
@@ -171,10 +175,10 @@ public class ReEngAreaPSImpl implements IReEngAreaPS {
 		Query query = session.createQuery(hql);
 		query.setInteger(0, psId);
 		List list = query.list();
-		if(list==null||list.size()==0){
-			return null;
-		}
 		List<JointEngAreaPS> reList=new ArrayList<JointEngAreaPS>();
+		if(list==null||list.size()==0){
+			return reList;
+		}
 		for(int i=0;i<list.size();i++){
 			JointEngAreaPS join=new JointEngAreaPS();
 			Object[] obj=(Object[]) list.get(i);
