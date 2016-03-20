@@ -14,7 +14,7 @@
 			jdbc:sqlserver://localhost:1433;instanceName=StandardSERVER;DatabaseName=PSMS
 		</property>
 		 <property name="connection.username">sa</property>
-		<property name="connection.password">Andy</property>
+		<property name="connection.password">1234@qwer</property>
 		<property name="connection.driver_class">
 			com.microsoft.sqlserver.jdbc.SQLServerDriver
 		</property>

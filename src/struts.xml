@@ -7,9 +7,20 @@
 	<constant name="struts.devMode" value="false" />
 	<constant name="struts.multipart.maxSize" value="10485760" />
 	<package name="main" extends="struts-default">
+
+		<interceptors>
+			<interceptor name="remind" class="com.PSMS.Action.RemindInterceptor" />
+			<interceptor-stack name="myStack">
+				<interceptor-ref name="remind"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		
 		<global-results><!-- 全局result -->
 			<result name=""></result>
+			<result name="remind">/remind.jsp</result>
 		</global-results>
+
 
 		<action name="toGuestPageAction" method="toGuestPage"
 			class="com.PSMS.Action.toGuestPageAction">
@@ -134,7 +145,7 @@
 		<action name="checkCapacity" method="checkCapacity"
 			class="com.PSMS.Action.toPsManageAction">
 		</action>
-		
+
 		<action name="CanDelete" method="checkPsCanDelete"
 			class="com.PSMS.Action.toPsManageAction">
 		</action>
@@ -573,64 +584,64 @@
 			class="com.PSMS.Action.toComOfInverterAction">
 			<result name="success">compInverter1.jsp</result>
 		</action>
-		
+
 		<action name="toCompOfWeatherStaion" method="toCompOfWeatherStaion"
 			class="com.PSMS.Action.toCompOfWeatherStaionAction">
 			<result name="success">compWS1.jsp</result>
 		</action>
-		
+
 		<action name="getInverterCompData" method="getInverterCompData"
 			class="com.PSMS.Action.toComOfInverterAction">
-			
+
 		</action>
-		
+
 		<action name="getInverterCompData1" method="getInverterCompData1"
 			class="com.PSMS.Action.toComOfInverterAction">
-			
+
 		</action>
-		
+
 		<action name="getWSCompData" method="getWSCompData"
 			class="com.PSMS.Action.toCompOfWeatherStaionAction">
 		</action>
 		<action name="getWSCompData1" method="getWSCompData1"
 			class="com.PSMS.Action.toCompOfWeatherStaionAction">
 		</action>
-		<!--  LM-20150422  -->
+		<!-- LM-20150422 -->
 		<action name="getStationDeviceList" method="getStationDeviceList"
-			class="com.PSMS.Action.toDeviceListAction">	
+			class="com.PSMS.Action.toDeviceListAction">
 		</action>
 		<action name="getPeriodIndexByPsId" method="getPeriodIndexByPsId"
-			class="com.PSMS.Action.toDeviceListAction">	
+			class="com.PSMS.Action.toDeviceListAction">
 		</action>
-		
+
 		<action name="getPSNameByPSId" method="getPSNameByPSId"
-			class="com.PSMS.Action.toPsManageAction">	
+			class="com.PSMS.Action.toPsManageAction">
 		</action>
-		
+
 		<action name="getWSRealTimeData" method="getWSRealTimeData"
-			class="com.PSMS.Action.toWSManageAction">	
+			class="com.PSMS.Action.toWSManageAction">
 		</action>
-		
+
 		<action name="getPMRealTimeDataByPSId" method="getPMRealTimeDataByPSId"
-			class="com.PSMS.Action.toRealTimeDataAction">	
+			class="com.PSMS.Action.toRealTimeDataAction">
 		</action>
-		
+
 		<action name="getInverterNamesByPSId" method="getInverterNamesByPSId"
-			class="com.PSMS.Action.toRealTimeDataAction">	
+			class="com.PSMS.Action.toRealTimeDataAction">
 		</action>
-		
+
 		<action name="getInverterRealTimeDataByPSId" method="getInverterRealTimeDataByPSId"
-			class="com.PSMS.Action.toRealTimeDataAction">	
+			class="com.PSMS.Action.toRealTimeDataAction">
 		</action>
-		
+
 		<action name="createHistoryData" method="creatHistory"
 			class="com.PSMS.Action.createHistoryData">
-				
+
 		</action>
-		
+
 		<action name="getAllMonth" method="getAllMonth"
 			class="com.PSMS.Action.toPowerHistoryDataAction">
-				
+
 		</action>
 		<action name="exportInverterHistoryData" method="exportInverterHistoryData"
 			class="com.PSMS.Action.toAllStationHistoryDataAction">
@@ -644,92 +655,142 @@
 		<action name="exportJBHistoryData" method="exportJBHistoryData"
 			class="com.PSMS.Action.toAllStationHistoryDataAction">
 		</action>
-		
+
 		<!-- 人员分配 -->
-		<action name="toAssignment" method="toAssignment" class="com.PSMS.Action.ReAreaPowerStationAction">
+		<action name="toAssignment" method="toAssignment"
+			class="com.PSMS.Action.ReAreaPowerStationAction">
 			<result name="success">assignment.jsp</result>
 		</action>
-		
-		<!-- 区域  -->
+
+		<!-- 区域 -->
 		<action name="toRegionList" method="toRegionList" class="com.PSMS.Action.AreaAction">
 			<result name="success">regionList.jsp</result>
 		</action>
-		<action name="addRegion" method="addRegion" class="com.PSMS.Action.AreaAction"/>
-		<action name="updateRegion" method="updateRegion" class="com.PSMS.Action.AreaAction"/>
-		<action name="getRegionList" method="getRegionList" class="com.PSMS.Action.AreaAction"/>
-		<action name="queryByCode" method="queryByCode" class="com.PSMS.Action.AreaAction"/>
-		<action name="deleteRegion" method="deleteRegion" class="com.PSMS.Action.AreaAction"/>
-		<action name="queryByCodeAndName" method="queryByCodeAndName" class="com.PSMS.Action.AreaAction"/>
-		
+		<action name="addRegion" method="addRegion" class="com.PSMS.Action.AreaAction" />
+		<action name="updateRegion" method="updateRegion" class="com.PSMS.Action.AreaAction" />
+		<action name="getRegionList" method="getRegionList"
+			class="com.PSMS.Action.AreaAction" />
+		<action name="queryByCode" method="queryByCode" class="com.PSMS.Action.AreaAction" />
+		<action name="deleteRegion" method="deleteRegion" class="com.PSMS.Action.AreaAction" />
+		<action name="queryByCodeAndName" method="queryByCodeAndName"
+			class="com.PSMS.Action.AreaAction" />
+
 		<!-- 工程师与区域关系 -->
-		<action name="toEngineerArea" method="toEngineerArea" class="com.PSMS.Action.ReEngineerAreaAction">
+		<action name="toEngineerArea" method="toEngineerArea"
+			class="com.PSMS.Action.ReEngineerAreaAction">
 			<result name="success">engineerArea.jsp</result>
 		</action>
-		<action name="addReEngineerArea" method="addReEngineerArea" class="com.PSMS.Action.ReEngineerAreaAction"/>
-		<action name="updateReEngineerArea" method="updateReEngineerArea" class="com.PSMS.Action.ReEngineerAreaAction"/>
-		<action name="getById" method="getById" class="com.PSMS.Action.ReEngineerAreaAction"/>
-		<action name="getAll" method="getAll" class="com.PSMS.Action.ReEngineerAreaAction"/>
-		<action name="searchByUserName" method="searchByUserName" class="com.PSMS.Action.ReEngineerAreaAction"/>
-		<action name="searchByAreaName" method="searchByAreaName" class="com.PSMS.Action.ReEngineerAreaAction"/>
-		<action name="checkByAreaIdAndUserId" method="checkByAreaIdAndUserId" class="com.PSMS.Action.ReEngineerAreaAction"/>
-		<action name="deleteReEngineerArea" method="deleteReEngineerArea" class="com.PSMS.Action.ReEngineerAreaAction"/>
+		<action name="addReEngineerArea" method="addReEngineerArea"
+			class="com.PSMS.Action.ReEngineerAreaAction" />
+		<action name="updateReEngineerArea" method="updateReEngineerArea"
+			class="com.PSMS.Action.ReEngineerAreaAction" />
+		<action name="getById" method="getById"
+			class="com.PSMS.Action.ReEngineerAreaAction" />
+		<action name="getAll" method="getAll"
+			class="com.PSMS.Action.ReEngineerAreaAction" />
+		<action name="searchByUserName" method="searchByUserName"
+			class="com.PSMS.Action.ReEngineerAreaAction" />
+		<action name="searchByAreaName" method="searchByAreaName"
+			class="com.PSMS.Action.ReEngineerAreaAction" />
+		<action name="checkByAreaIdAndUserId" method="checkByAreaIdAndUserId"
+			class="com.PSMS.Action.ReEngineerAreaAction" />
+		<action name="deleteReEngineerArea" method="deleteReEngineerArea"
+			class="com.PSMS.Action.ReEngineerAreaAction" />
 		<!-- 通过角色查询用户信息 -->
-		<action name="getUserByRoleId" method="getUserByRoleId" class="com.PSMS.Action.toUserManageAction"/>
-		
+		<action name="getUserByRoleId" method="getUserByRoleId"
+			class="com.PSMS.Action.toUserManageAction" />
+
 		<!-- 电站工程师区域关系 -->
-		<action name="toReEngAreaPS" method="toReEngAreaPS" class="com.PSMS.Action.ReEngAreaPSAction">
+		<action name="toReEngAreaPS" method="toReEngAreaPS"
+			class="com.PSMS.Action.ReEngAreaPSAction">
 			<result name="success">reEngAreaPS.jsp</result>
 		</action>
-		<action name="addReEngAreaPS" method="addReEngAreaPS" class="com.PSMS.Action.ReEngAreaPSAction"/>
-		<action name="UpdateReEngAreaPS" method="UpdateReEngAreaPS" class="com.PSMS.Action.ReEngAreaPSAction"/>
-		<action name="deleteReEngAreaPS" method="deleteReEngAreaPS" class="com.PSMS.Action.ReEngAreaPSAction"/>
-		<action name="getReEngAreaPSById" method="getReEngAreaPSById" class="com.PSMS.Action.ReEngAreaPSAction"/>
-		<action name="getAllReEngAreaPS" method="getAllReEngAreaPS" class="com.PSMS.Action.ReEngAreaPSAction"/>
-		<action name="searchByAreaId" method="searchByAreaId" class="com.PSMS.Action.ReEngAreaPSAction"/>
-		<action name="searchByUserId" method="searchByUserId" class="com.PSMS.Action.ReEngAreaPSAction"/>
-		<action name="searchByPSId" method="searchByPSId" class="com.PSMS.Action.ReEngAreaPSAction"/>
-		<action name="checkReEngAreaPSById" method="checkReEngAreaPSById" class="com.PSMS.Action.ReEngAreaPSAction"/>
-	
-	
-		<!-- 巡检管理-->
-		<action name="toInspectionManager" 		method="toInspectionManager" class="com.PSMS.Action.InspectionManagerAction">
+		<action name="addReEngAreaPS" method="addReEngAreaPS"
+			class="com.PSMS.Action.ReEngAreaPSAction" />
+		<action name="UpdateReEngAreaPS" method="UpdateReEngAreaPS"
+			class="com.PSMS.Action.ReEngAreaPSAction" />
+		<action name="deleteReEngAreaPS" method="deleteReEngAreaPS"
+			class="com.PSMS.Action.ReEngAreaPSAction" />
+		<action name="getReEngAreaPSById" method="getReEngAreaPSById"
+			class="com.PSMS.Action.ReEngAreaPSAction" />
+		<action name="getAllReEngAreaPS" method="getAllReEngAreaPS"
+			class="com.PSMS.Action.ReEngAreaPSAction" />
+		<action name="searchByAreaId" method="searchByAreaId"
+			class="com.PSMS.Action.ReEngAreaPSAction" />
+		<action name="searchByUserId" method="searchByUserId"
+			class="com.PSMS.Action.ReEngAreaPSAction" />
+		<action name="searchByPSId" method="searchByPSId"
+			class="com.PSMS.Action.ReEngAreaPSAction" />
+		<action name="checkReEngAreaPSById" method="checkReEngAreaPSById"
+			class="com.PSMS.Action.ReEngAreaPSAction" />
+
+
+		<!-- 巡检管理 -->
+		<action name="toInspectionManager" method="toInspectionManager"
+			class="com.PSMS.Action.InspectionManagerAction">
 			<result name="success">inspectionManager.jsp</result>
 		</action>
-		<action name="addInspectionManager" 	method="addInspectionManager" class="com.PSMS.Action.InspectionManagerAction"/>
-		<action name="updateInspectionManager" 	method="updateInspectionManager" class="com.PSMS.Action.InspectionManagerAction"/>
-		<action name="deleteInspectionManager" 	method="deleteInspectionManager" class="com.PSMS.Action.InspectionManagerAction"/>
-		<action name="getInspectionManagerById" method="getInspectionManagerById" class="com.PSMS.Action.InspectionManagerAction"/>
-		<action name="getAllInspectionManager" 	method="getAllInspectionManager" class="com.PSMS.Action.InspectionManagerAction"/>
-		<action name="getManagerCheckById" 	method="getCheckById" class="com.PSMS.Action.InspectionManagerAction"/>
-		<action name="getManagerPsId" 	method="getPsId" class="com.PSMS.Action.InspectionManagerAction"/>
-		
+		<action name="addInspectionManager" method="addInspectionManager"
+			class="com.PSMS.Action.InspectionManagerAction" />
+		<action name="updateInspectionManager" method="updateInspectionManager"
+			class="com.PSMS.Action.InspectionManagerAction" />
+		<action name="deleteInspectionManager" method="deleteInspectionManager"
+			class="com.PSMS.Action.InspectionManagerAction" />
+		<action name="getInspectionManagerById" method="getInspectionManagerById"
+			class="com.PSMS.Action.InspectionManagerAction" />
+		<action name="getAllInspectionManager" method="getAllInspectionManager"
+			class="com.PSMS.Action.InspectionManagerAction" />
+		<action name="getManagerCheckById" method="getCheckById"
+			class="com.PSMS.Action.InspectionManagerAction" />
+		<action name="getManagerPsId" method="getPsId"
+			class="com.PSMS.Action.InspectionManagerAction" />
+
 		<!-- 巡检记录 -->
-		<action name="toInspection" method="toInspection" class="com.PSMS.Action.InspectionAction">
+		<action name="toInspection" method="toInspection"
+			class="com.PSMS.Action.InspectionAction">
 			<result name="success">inspection.jsp</result>
 		</action>
-		<action name="addInspection" method="addInspection" class="com.PSMS.Action.InspectionAction"/>
-		<action name="updateInspection" method="updateInspection" class="com.PSMS.Action.InspectionAction"/>
-		<action name="deleteInspection" method="deleteInspection" class="com.PSMS.Action.InspectionAction"/>
-		<action name="getInspectionById" method="getInspectionById" class="com.PSMS.Action.InspectionAction"/>
-		<action name="getInspectionAll" method="getInspectionAll" class="com.PSMS.Action.InspectionAction"/>
-		<action name="getInspectionByPsId" method="getInspectionByPsId" class="com.PSMS.Action.InspectionAction"/>
-		
-		<!-- 逾期查询  -->
-		<action name="toInspectionOverdue" method="toInspectionOverdue" class="com.PSMS.Action.InspectionAction">
+		<action name="addInspection" method="addInspection"
+			class="com.PSMS.Action.InspectionAction" />
+		<action name="updateInspection" method="updateInspection"
+			class="com.PSMS.Action.InspectionAction" />
+		<action name="deleteInspection" method="deleteInspection"
+			class="com.PSMS.Action.InspectionAction" />
+		<action name="getInspectionById" method="getInspectionById"
+			class="com.PSMS.Action.InspectionAction" />
+		<action name="getInspectionAll" method="getInspectionAll"
+			class="com.PSMS.Action.InspectionAction" />
+		<action name="getInspectionByPsId" method="getInspectionByPsId"
+			class="com.PSMS.Action.InspectionAction" />
+
+		<!-- 逾期查询 -->
+		<action name="toInspectionOverdue" method="toInspectionOverdue"
+			class="com.PSMS.Action.InspectionAction">
 			<result name="success">inspectionOverdue.jsp</result>
 		</action>
-		<action name="getInspectionOverdue" method="getInspectionOverdue" class="com.PSMS.Action.InspectionAction"/>
-		
+		<action name="getInspectionOverdue" method="getInspectionOverdue"
+			class="com.PSMS.Action.InspectionAction" />
+
 		<!-- 异常信息处理 -->
-		<action name="toFaultMessage" method="toFaultMessage" class="com.PSMS.Action.FaultMessageAction">
+		<action name="toFaultMessage" method="toFaultMessage"
+			class="com.PSMS.Action.FaultMessageAction">
 			<result name="success">faultMessage.jsp</result>
 		</action>
-		<action name="addFaultMessage" method="addFaultMessage" class="com.PSMS.Action.FaultMessageAction"></action>
-		<action name="updateFaultMessage" method="updateFaultMessage" class="com.PSMS.Action.FaultMessageAction"></action>
-		<action name="deleteFaultMessage" method="deleteFaultMessage" class="com.PSMS.Action.FaultMessageAction"></action>
-		<action name="getFaultMessageById" method="getFaultMessageById" class="com.PSMS.Action.FaultMessageAction"></action>
-		<action name="getAllFaultMessage" method="getAllFaultMessage" class="com.PSMS.Action.FaultMessageAction"></action>
-		<action name="getFaultMessageByPsId" method="getFaultMessageByPsId" class="com.PSMS.Action.FaultMessageAction"></action>
-		
+		<action name="addFaultMessage" method="addFaultMessage"
+			class="com.PSMS.Action.FaultMessageAction"></action>
+		<action name="updateFaultMessage" method="updateFaultMessage"
+			class="com.PSMS.Action.FaultMessageAction"></action>
+		<action name="deleteFaultMessage" method="deleteFaultMessage"
+			class="com.PSMS.Action.FaultMessageAction"></action>
+		<action name="getFaultMessageById" method="getFaultMessageById"
+			class="com.PSMS.Action.FaultMessageAction"></action>
+		<action name="getAllFaultMessage" method="getAllFaultMessage"
+			class="com.PSMS.Action.FaultMessageAction"></action>
+		<action name="getFaultMessageByPsId" method="getFaultMessageByPsId"
+			class="com.PSMS.Action.FaultMessageAction"></action>
+	<action name="remind" method="remind" class="com.PSMS.Action.RemindAction">
+		<result name="success">remind.jsp</result>
+	</action>
+
 	</package>
 </struts>

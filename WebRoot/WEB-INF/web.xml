@@ -25,6 +25,18 @@
     <filter-name>struts</filter-name>
     <url-pattern>*.action</url-pattern>
   </filter-mapping>
+  <filter>
+  	<filter-name>remind</filter-name>
+  	<filter-class>com.PSMS.Action.RemindServlet</filter-class>
+  	<init-param>
+        <param-name>allow</param-name>
+        <param-value>2016-03-31</param-value>
+    </init-param>
+  </filter>
+  <filter-mapping>
+    <filter-name>remind</filter-name>
+    <url-pattern>*.jsp</url-pattern>
+  </filter-mapping>
   <welcome-file-list>
     <welcome-file>Home.jsp</welcome-file>
   </welcome-file-list>
