@@ -175,22 +175,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                   	<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
 	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toRegionList" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">区域列表</a>
 	                   	</div>
+	                   	<!--  
 	                   	<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
 	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toEngineerArea" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">区域人员关联表</a>
 	                   	</div>
+	                   	-->
 	                   	<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
 	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toReEngAreaPS" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">工程师区域电站关联表</a>
 	                   	</div>	                   		                   	
 	                </div>  
 	                <div title="故障管理">
+	                	<div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px; ">
+	                   		<a href="javascript:void(0)"  onclick="opeanHtml(this)" name="toInspectionManager" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">巡检管理</a>
+	                   	</div>
 	                   	<div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px; ">
-	                   		<a href="javascript:void(0)"  onclick="opeanHtml(this)" name="toFaultMaintenance" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">定期运维</a>
+	                   		<a href="javascript:void(0)"  onclick="opeanHtml(this)" name="toInspection" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">巡检记录</a>
 	                   	</div>
 	                   	<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
-	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toOverdueMaintenance" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">逾期运维</a>
+	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toInspectionOverdue" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">逾期运维</a>
 	                   	</div>	
 	                   	<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
-	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toFaultList" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">故障列表</a>
+	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toFaultMessage" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">故障列表</a>
 	                   	</div>	                   	
 	                </div>                
             </div>

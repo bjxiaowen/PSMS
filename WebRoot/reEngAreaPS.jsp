@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <meta charset="UTF-8">
-    <base href="<%=basePath%>Inverter_parameter.jsp">
+    <base href="<%=basePath%>reEngAreaPS.jsp">
     <title>电站工程师区域关系</title>
     <link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             url="getAllReEngAreaPS.action"        
             toolbar="#toolbar" pagination="true" pageSize=20 pageList="[ 20, 30, 40 ]" //读取分页条数，即向后台读取数据时传过去的值
             autoRowHeight="true" striped="true" rownumbers="true" fitColumns="true"
-             singleSelect="true" sortName="areaId" sortOrder="asc" remoteSort="flase">
+             singleSelect="true" sortName="id" sortOrder="asc" remoteSort="flase">
         <thead>
             <tr> 
                 <th field="id" hidden="hidden" width="20">编号</th> 
@@ -51,9 +51,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newLink()">新建关联</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editLink()">编辑关联</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyLink()">删除关联</a>
-        <input id="search_name" name="search_name" class="easyui-searchbox" data-options="prompt:'根据区域名称查询',searcher:doSearch" style="width:150px"></input>
-        <input id="search_name2" name="search_name2" class="easyui-searchbox" data-options="prompt:'根据人员名称查询',searcher:doSearch2" style="width:150px"></input>
-        <input id="search_name3" name="search_name3" class="easyui-searchbox" data-options="prompt:'根据电站名查询',searcher:doSearch3" style="width:150px"></input>
+        <select class="easyui-combobox" name="search-station" style="width:160px;" data-options=" panelHeight:'auto'" >
+        	<option value="">根据电站查询</option>       
+        	<c:forEach items="${list_ps}" var="ps">											
+				<option value="${ps.id}">${ps.name}</option>
+			</c:forEach>
+        </select>
+       <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search"  onclick="queryInverterByPS()">查找</a>
     </div>
     
     <div id="dlg" class="easyui-dialog" style="width:430px;height:250px;padding:10px 20px"
@@ -98,85 +102,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             $('#fm').form('clear');
         }
          
-        
-        function doSearch(value){
-            var name = value;
-            if(name!=""){
+        function queryInverterByPS(){
+            var ps_id = document.getElementsByName("search-station")[0].value;
+            var url = 'searchByPSId.action?psId='+encodeURI(encodeURI(ps_id));
+            if(ps_id!=""){
             	$.ajax({
-	                url:'searchByAreaName.action?areaName='+encodeURI(encodeURI(name)),
+	                url:url,
 	                     type:'GET',
 			             dataType:'json',
 			             async:false,
 			             success:function(obj){
-				             if(obj.total==0)    				
+		                    if(obj.total==0)    				
 	        				{
-	        					$.messager.confirm('提示','没有符合该条件的区域');
+	        					$.messager.confirm('提示','没有符合该条件的电站');
 	     			//			$('#dg').datagrid('loadData', { total: 0, rows: [] });
 	        				}
 	        				else
 	        				{	$('#dg').datagrid('loadData',obj);
 	        				}
-	                   }
+	                    }
 	            });
-            }
-           else
-            {	$('#dg').datagrid('reload');
-            }
-           $('#search_name').searchbox('clear'); 
-        }
-        
-        
-        
-        function doSearch2(value){
-            var name = value;
-            if(name!=""){
-            	$.ajax({
-	                url:'searchByUserName.action?userName='+encodeURI(encodeURI(name)),
-	                     type:'GET',
-			             dataType:'json',
-			             async:false,
-			             success:function(obj){
-				             if(obj.total==0)    				
-	        				{
-	        					$.messager.confirm('提示','没有符合该条件的人员');
-	     			//			$('#dg').datagrid('loadData', { total: 0, rows: [] });
-	        				}
-	        				else
-	        				{	$('#dg').datagrid('loadData',obj);
-	        				}
-	                   }
-	            });
-            }
-           else
-            {	$('#dg').datagrid('reload');
-            }
-           $('#search_name2').searchbox('clear'); 
-        }
-        
-        function doSearch3(value){
-            var name = value;
-            if(name!=""){
-            	$.ajax({
-	                url:'searchByUserName.action?userName='+encodeURI(encodeURI(name)),
-	                     type:'GET',
-			             dataType:'json',
-			             async:false,
-			             success:function(obj){
-				             if(obj.total==0)    				
-	        				{
-	        					$.messager.confirm('提示','没有符合该条件的人员');
-	     			//			$('#dg').datagrid('loadData', { total: 0, rows: [] });
-	        				}
-	        				else
-	        				{	$('#dg').datagrid('loadData',obj);
-	        				}
-	                   }
-	            });
-            }
-           else
-            {	$('#dg').datagrid('reload');
-            }
-           $('#search_name2').searchbox('clear'); 
+            } 
+             else
+             {	$('#dg').datagrid('reload');
+             }
+          $('#search-station').searchbox('clear'); 
         }
         
         function pagerFilter(data){//分页显示数据
