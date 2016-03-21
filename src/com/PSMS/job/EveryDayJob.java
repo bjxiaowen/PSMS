@@ -87,7 +87,7 @@ public class EveryDayJob {
 					sendmail.setTo(mial);
 					sendmail.setSendhtml(false);
 					sendmail.setSubject("定期巡检");
-					sendmail.setContent(inspect.getUserName()+"你好！\n\n       "+inspect.getAreaName()+"的"+inspect.getPsName()+inspect.getEquipmentName()+"需要你"+shouldDate+"去检查");
+					sendmail.setContent(inspect.getUserName()+"你好！\n\n       "+inspect.getAreaName()+"的"+inspect.getPsName()+"需要你"+shouldDate+"去检查");
 					sendmail.sendMail();
 				}
 				

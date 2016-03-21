@@ -40,7 +40,7 @@ public class EveryHourJob {//0 0 0/1 * * ?
 				sendmail.setTo(mial);
 				sendmail.setSendhtml(false);
 				sendmail.setSubject("异常信息处理");
-				sendmail.setContent(message.getUserName()+"你好！\n\n       "+message.getAreaName()+"的"+message.getPsName()+message.getEquipmentName()+message.getFailureMeaning()+"需要你"+date+"去检查");
+				sendmail.setContent(message.getUserName()+"你好！\n\n       "+message.getAreaName()+"的"+message.getPsName()+message.getFailureMeaning()+"需要你"+date+"去检查");
 				if(sendmail.sendMail()){
 					dao.updateById("true", date,message.getFaultMessageId());
 				}
