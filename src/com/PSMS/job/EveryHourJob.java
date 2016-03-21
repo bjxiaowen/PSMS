@@ -1,16 +1,21 @@
-package com.PSMS.quartz;
+package com.PSMS.job;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import com.PSMS.Dao.IFaultMessageDao;
 import com.PSMS.Factory.DAOFactory;
 import com.PSMS.pojo.JointFaultMessage;
 import com.PSMS.util.MailUtils;
 
-public class EveryHourJob {
-
+@Component
+public class EveryHourJob {//0 0 0/1 * * ?
+	
+	@Scheduled(cron = "0 0 0/1 * * ?")
 	public void send() {
 		try {
 			System.out.println("###################################每小时执行的定时任务开始！###############################################");

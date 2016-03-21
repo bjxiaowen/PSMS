@@ -1,8 +1,11 @@
-package com.PSMS.quartz;
+package com.PSMS.job;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 
 import com.PSMS.Dao.IInspectionDao;
 import com.PSMS.Dao.IInspectionManagerDao;
@@ -14,7 +17,10 @@ import com.PSMS.util.GetTime;
 import com.PSMS.util.IDGenerate;
 import com.PSMS.util.MailUtils;
 
+@Component
 public class EveryDayJob {
+	
+	@Scheduled(cron = "0 0 23 * * ?")
 	public void work()  {  
 		System.out.println("定时任务开始！！！");  
 		IInspectionManagerDao manageDao = DAOFactory.getInspectionManagerDaoInstance();
