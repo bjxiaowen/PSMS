@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<!-- 工程师区域关系 -->
+	<class name="com.PSMS.pojo.SendRecord" table="bd_send_record">
+		<id name="id" type="java.lang.String">
+			<column name="id" />
+			<generator class="assigned" />
+		</id>
+		<property name="email" type="java.lang.String">
+			<column name="email" />
+		</property>
+		<property name="emailContent" type="java.lang.String">
+			<column name="email_content" />
+		</property>
+		<property name="emailDate" type="java.util.Date">
+			<column name="email_date"></column>
+		</property>
+		<property name="emailStatus" type="java.lang.String">
+			<column name="email_status"></column>
+		</property>
+		<property name="tel" type="java.lang.String">
+			<column name="tel"></column>
+		</property>
+		<property name="noteContent" type="java.lang.String">
+			<column name="note_content"></column>
+		</property>
+		<property name="noteDate" type="java.util.Date">
+			<column name="note_date"></column>
+		</property>
+		<property name="noteStatus" type="java.lang.String">
+			<column name="note_status"></column>
+		</property>
+	</class>
+</hibernate-mapping>

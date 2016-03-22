@@ -24,6 +24,7 @@ import com.PSMS.Dao.IReAreaPowerStationDao;
 import com.PSMS.Dao.IReEngAreaPS;
 import com.PSMS.Dao.IReEngineerAreaDao;
 import com.PSMS.Dao.IReEngineerPowerStationDao;
+import com.PSMS.Dao.ISendRecordDao;
 import com.PSMS.Dao.InverterDAO;
 import com.PSMS.Dao.InverterDAOImpl;
 import com.PSMS.Dao.Inverter_parameterDAO;
@@ -60,6 +61,7 @@ import com.PSMS.Dao.impl.ReAreaPowerStationDaoImpl;
 import com.PSMS.Dao.impl.ReEngAreaPSImpl;
 import com.PSMS.Dao.impl.ReEngineerAreaDaoImpl;
 import com.PSMS.Dao.impl.ReEngineerPowerStationDaoImpl;
+import com.PSMS.Dao.impl.SendRecordDaoImpl;
 /**
  * Dao工厂类
  * @author Andy
@@ -69,6 +71,10 @@ public class DAOFactory {
 	
 	public static IInspectionManagerDao getInspectionManagerDaoInstance(){
 		return new InspectionManagerDaoImpl();
+	}
+	
+	public static ISendRecordDao getSendRecordDaoInstance(){
+		return new SendRecordDaoImpl();
 	}
 	
 	public static IFaultMessageDao getFaultMessageInstance(){

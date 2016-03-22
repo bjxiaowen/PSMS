@@ -9,11 +9,14 @@ import org.springframework.stereotype.Component;
 
 import com.PSMS.Dao.IInspectionDao;
 import com.PSMS.Dao.IInspectionManagerDao;
+import com.PSMS.Dao.ISendRecordDao;
 import com.PSMS.Factory.DAOFactory;
 import com.PSMS.pojo.Inspection;
 import com.PSMS.pojo.JointInspection;
+import com.PSMS.pojo.SendRecord;
 import com.PSMS.util.DataUtils;
 import com.PSMS.util.GetTime;
+import com.PSMS.util.HttpSender;
 import com.PSMS.util.IDGenerate;
 import com.PSMS.util.MailUtils;
 
@@ -82,17 +85,23 @@ public class EveryDayJob {
 				System.out.println();
 				String mial=inspect.getEmail();
 				if(mial!=null&&!mial.equals("")){
+					String tel=inspect.getTel();
 					System.out.println(inspect.getTel());
+					String mialContent=inspect.getUserName()+"你好！\n\n      "+inspect.getAreaName()+"的"+inspect.getPsName()+"需要你"+shouldDate+"去检查";
+					String content=inspect.getAreaName()+"的"+inspect.getPsName()+"需要你"+shouldDate+"去检查";
 					MailUtils sendmail = new MailUtils();
 					sendmail.setTo(mial);
 					sendmail.setSendhtml(false);
 					sendmail.setSubject("定期巡检");
-					sendmail.setContent(inspect.getUserName()+"你好！\n\n       "+inspect.getAreaName()+"的"+inspect.getPsName()+"需要你"+shouldDate+"去检查");
-					sendmail.sendMail();
+					sendmail.setContent(mialContent);
+					boolean emailStatus=sendmail.sendMail();
+					//发送短信添加记录
+					String telResult=HttpSender.send("http://www.zjysms.com/send/gsend.asp?", "zxnygnjs", "zxnygnjs87", tel, content, null, null, "ccdx");
+					HttpSender.addSendRecord(mial, content, emailStatus+"", tel, content, telResult);
 				}
-				
 			}
 		}
 	} 
+	
 	
 }

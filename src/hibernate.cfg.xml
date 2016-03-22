@@ -28,5 +28,6 @@
 		<mapping resource="com/PSMS/pojo/inspection.hbm.xml" />
 		<mapping resource="com/PSMS/pojo/relation.hbm.xml" />
 		<mapping resource="com/PSMS/pojo/faultMessage.hbm.xml" />
+		<mapping resource="com/PSMS/pojo/sendRecord.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>
