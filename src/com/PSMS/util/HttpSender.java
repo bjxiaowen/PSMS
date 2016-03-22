@@ -18,7 +18,7 @@ public class HttpSender {
 	
 	public static void mian(String[] args){
 		try {
-			send("http://www.zjysms.com/send/gsend.asp?", "zxnygnjs", "zxnygnjs87", "13520029132", "我在测试短信接口", null, null, "ccdx");
+			send("http://www.zjysms.com/send/gsend.asp?", "zxnygnjs", "zxnygnjs87", "15810581483", "我在测试短信接口", null, null, "ccdx");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
