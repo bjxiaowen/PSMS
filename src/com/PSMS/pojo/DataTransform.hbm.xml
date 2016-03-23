@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.PSMS.pojo.DataTransform" table="bd_data_transform">
+		<id name="InverterDataID" type="java.lang.Integer">
+			<column name="InverterDataID" />
+			<generator class="assigned"/>
+		</id>
+		
+		<property name="InverterID" type="java.lang.String">
+			<column name="InverterID" />
+		</property>
+		
+		<property name="ReceiveData" type="java.lang.String">
+			<column name="ReceiveData" />	
+		</property>
+		
+		<property name="OperateDate" type="java.util.Date">
+			<column name="OperateDate" />	
+		</property>
+		
+		<property name="Type" type="java.lang.String">
+			<column name="Type"/>
+		</property>
+		
+		<property name="InputVoltage" type="java.math.BigDecimal">
+			<column name="InputVoltage"></column>
+		</property>
+		
+		<property name="BatteryVoltage" type="java.math.BigDecimal">
+			<column name="BatteryVoltage"></column>
+		</property>
+		
+		 <property name="OutputVoltage" type="java.math.BigDecimal">
+			<column name="OutputVoltage"></column>
+		</property>
+		
+		<property name="OutputCurrent" type="java.math.BigDecimal">
+			<column name="OutputCurrent"></column>
+		</property>
+		
+		<property name="CityPower" type="java.lang.Integer">
+			<column name="CityPower"></column>
+		</property>
+		
+		<property name="Undervoltage" type="java.lang.Integer">
+			<column name="Undervoltage"></column>
+		</property>
+		
+		<property name="Overvoltage" type="java.lang.Integer">
+			<column name="Overvoltage"></column>
+		</property>
+		
+		<property name="MachineState" type="java.lang.Integer">
+			<column name="MachineState"></column>
+		</property>
+		
+		<property name="ChargeDischarge" type="java.lang.Integer">
+			<column name="ChargeDischarge"></column>
+		</property>
+		
+		<property name="MachineObligate1" type="java.lang.Integer">
+			<column name="MachineObligate1"></column>
+		</property>
+		
+		<property name="OutputState" type="java.lang.Integer">
+			<column name="OutputState"></column>
+		</property>
+		
+		<property name="LineFrequency" type="java.lang.String">
+			<column name="LineFrequency"></column>
+		</property>
+		
+		<property name="CanMake" type="java.lang.Integer">
+			<column name="CanMake"></column>
+		</property>
+		
+		<property name="InCity" type="java.lang.Integer">
+			<column name="InCity"></column>
+		</property>
+		
+		<property name="ShowObligate5" type="java.lang.Integer">
+			<column name="ShowObligate5"></column>
+		</property>
+		
+		<property name="ShowObligate4" type="java.lang.Integer">
+			<column name="ShowObligate4"></column>
+		</property>
+		
+		<property name="ShowObligate3" type="java.lang.Integer">
+			<column name="ShowObligate3"></column>
+		</property>
+		
+		<property name="ShowObligate2" type="java.lang.Integer">
+			<column name="ShowObligate2"></column>
+		</property>
+		<property name="ShowObligate1" type="java.lang.Integer">
+			<column name="ShowObligate1"></column>
+		</property>
+		<property name="ShowObligate0" type="java.lang.Integer">
+			<column name="ShowObligate0"></column>
+		</property>
+		
+		<property name="MpptInVoltage" type="java.math.BigDecimal">
+			<column name="MpptInVoltage"></column>
+		</property>
+		
+		<property name="MpptOutVoltage" type="java.math.BigDecimal">
+			<column name="MpptOutVoltage"></column>
+		</property>
+		
+		<property name="MpptOutCurrent" type="java.math.BigDecimal">
+			<column name="MpptOutCurrent"></column>
+		</property>
+		
+		<property name="MpptTemp" type="java.math.BigDecimal">
+			<column name="MpptTemp"></column>
+		</property>
+	</class>
+</hibernate-mapping>

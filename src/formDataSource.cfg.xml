@@ -2,9 +2,6 @@
 <!DOCTYPE hibernate-configuration PUBLIC
           "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
           "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
-
-
-   
 <hibernate-configuration>
 	<session-factory>
 		<property name="dialect">
@@ -19,17 +16,6 @@
 			com.microsoft.sqlserver.jdbc.SQLServerDriver
 		</property>
 		 <property name="show_sql">true</property>
-		<mapping resource="com/PSMS/Hibernate/PSMS.hbm.xml" />
-		<mapping resource="com/PSMS/Hibernate/Inverter.hbm.xml" />
-		<mapping resource="com/PSMS/Hibernate/JunctionBox.hbm.xml" />
-		<mapping resource="com/PSMS/Hibernate/PowerMeter.hbm.xml" />
-		<mapping resource="com/PSMS/Hibernate/WeatherStation.hbm.xml" />
-		<mapping resource="com/PSMS/pojo/area.hbm.xml" />
-		<mapping resource="com/PSMS/pojo/inspection.hbm.xml" />
-		<mapping resource="com/PSMS/pojo/relation.hbm.xml" />
-		<mapping resource="com/PSMS/pojo/faultMessage.hbm.xml" />
-		<mapping resource="com/PSMS/pojo/sendRecord.hbm.xml" />
-		
-		
+		<mapping resource="com/PSMS/pojo/formData.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>
