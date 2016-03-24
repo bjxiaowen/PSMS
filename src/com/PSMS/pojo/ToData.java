@@ -10,7 +10,7 @@ import java.util.Date;
  * @author Andy
  *
  */
-public class DataTransform implements Serializable {
+public class ToData implements Serializable {
 
 	/**
 	 * serialVersionUID
