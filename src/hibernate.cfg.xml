@@ -29,7 +29,7 @@
 		<mapping resource="com/PSMS/pojo/relation.hbm.xml" />
 		<mapping resource="com/PSMS/pojo/faultMessage.hbm.xml" />
 		<mapping resource="com/PSMS/pojo/sendRecord.hbm.xml" />
-		
+		<mapping resource="com/PSMS/pojo/toDate.hbm.xml" />
 		
 	</session-factory>
 </hibernate-configuration>

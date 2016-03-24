@@ -8,7 +8,7 @@
 			org.hibernate.dialect.SQLServerDialect
 		</property>
 		 <property name="connection.url">
-			jdbc:sqlserver://localhost:1433;instanceName=StandardSERVER;DatabaseName=PSMS
+			jdbc:sqlserver://localhost:1433;instanceName=StandardSERVER;DatabaseName=base
 		</property>
 		 <property name="connection.username">sa</property>
 		<property name="connection.password">Andy</property>
