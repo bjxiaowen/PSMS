@@ -4,15 +4,30 @@ import java.util.Date;
 import java.util.List;
 
 import com.PSMS.Dao.IFromInverterInfo;
+import com.PSMS.Dao.IToDataDao;
 import com.PSMS.Factory.BaseDaoFactory;
+import com.PSMS.Factory.DAOFactory;
 import com.PSMS.pojo.FromData;
+import com.PSMS.pojo.ToData;
+import com.PSMS.util.DataTransformTools;
 
 public class FromDataTest {
 
 	public static void main(String[] args) {
 		IFromInverterInfo dao=BaseDaoFactory.getFromInverterInfoDaoInstance();
-		//addBase(dao);
-		getBase(dao);
+		IToDataDao tdao=DAOFactory.getToDataDaoInstance();
+		List<FromData> list=dao.getById(15629);
+		if(list!=null&&list.size()>0){
+			for(FromData fromData:list){
+				ToData toData=DataTransformTools.transform(fromData);
+				System.out.println(toData.toString());
+				try {
+					tdao.addToData(toData);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
 	}
 	
 	public static void addBase(IFromInverterInfo dao){

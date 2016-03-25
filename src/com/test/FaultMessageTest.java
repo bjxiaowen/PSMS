@@ -95,6 +95,7 @@ public class FaultMessageTest {
 	}
 	
 	public static void addFaultMessage(IFaultMessageDao dao) throws Exception{
+		SimpleDateFormat formatter =new  SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		FaultMessage fau=new FaultMessage();
 		fau.setFaultMessageId("Fa"+IDGenerate.getId());
 		fau.setAreaId("14571890456820001");

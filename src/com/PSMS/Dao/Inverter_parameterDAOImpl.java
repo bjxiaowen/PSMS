@@ -19,12 +19,13 @@ import org.hibernate.Session;
 import com.PSMS.Hibernate.HibernateSessionFactory;
 import com.PSMS.Hibernate.Inverter_parameter;
 
+/** 
+*逆变器信息管理需要的操作函数*
+* @author jiaojiao.wang  
+* @date 2014-11-18 
+*/ 
 public class Inverter_parameterDAOImpl implements Inverter_parameterDAO{
-	/** 
-	*逆变器信息管理需要的操作函数*
-	* @author jiaojiao.wang  
-	* @date 2014-11-18 
-	*/ 
+	
 
 	@Override
 	public List<Inverter_parameter> getAllInverter() {
@@ -189,10 +190,8 @@ public class Inverter_parameterDAOImpl implements Inverter_parameterDAO{
 			return k;
 		}
 
-		@Override
+		@Override//根据电站id和电站期数查询所有逆变器名称
 		public List<String> getInverterNamesByPsId(int ps_id, int period_num) {
-			// TODO Auto-generated method stub
-			//根据电站id和电站期数查询所有逆变器名称
 			Session session=HibernateSessionFactory.getHibernateSession();
 			HibernateSessionFactory.begainHibernateTransaction();
 			String hql=" select name from Inverter_parameter where PS_id = ? and Period_num = ?";
@@ -217,6 +216,19 @@ public class Inverter_parameterDAOImpl implements Inverter_parameterDAO{
 			query.setInteger(1,period_num);
 			query.setString(2, inverter_name);
 			Integer  k = (Integer)query.uniqueResult();
+			HibernateSessionFactory.commitHibernateTransaction();
+			HibernateSessionFactory.closeHibernateSession();
+			return k;
+		}
+
+		@Override
+		public List<Inverter_parameter> getInverterByItName(String name) {
+			Session session=HibernateSessionFactory.getHibernateSession();
+			HibernateSessionFactory.begainHibernateTransaction();
+			String hql=" from Inverter_parameter where name = ? ";
+			Query query = session.createQuery(hql);
+			query.setString(0,name);
+			List<Inverter_parameter> k=query.list();
 			HibernateSessionFactory.commitHibernateTransaction();
 			HibernateSessionFactory.closeHibernateSession();
 			return k;
