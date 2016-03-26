@@ -17,6 +17,7 @@ import com.PSMS.Dao.HistoryOfMonthDAOImpl;
 import com.PSMS.Dao.HistoryOfYearDAO;
 import com.PSMS.Dao.HistoryOfYearDAOImpl;
 import com.PSMS.Dao.IAreaDao;
+import com.PSMS.Dao.IBiPowerStationDao;
 import com.PSMS.Dao.IFaultMessageDao;
 import com.PSMS.Dao.IInspectionDao;
 import com.PSMS.Dao.IInspectionManagerDao;
@@ -55,6 +56,7 @@ import com.PSMS.Dao.WS_parameterDAOImpl;
 import com.PSMS.Dao.WeatherStationDAO;
 import com.PSMS.Dao.WeatherStationDAOImpl;
 import com.PSMS.Dao.impl.AreaDaoImpl;
+import com.PSMS.Dao.impl.BiPowerStationDaoImpl;
 import com.PSMS.Dao.impl.FaultMessageDaoImpl;
 import com.PSMS.Dao.impl.InspectionDaoImpl;
 import com.PSMS.Dao.impl.InspectionManagerDaoImpl;
@@ -70,6 +72,10 @@ import com.PSMS.Dao.impl.ToDataDaoImpl;
  * @date 2016-03-04
  */
 public class DAOFactory {
+	
+	public static IBiPowerStationDao getBiPowerStationDaoInstance(){
+		return new BiPowerStationDaoImpl();
+	}
 	
 	public static IInspectionManagerDao getInspectionManagerDaoInstance(){
 		return new InspectionManagerDaoImpl();

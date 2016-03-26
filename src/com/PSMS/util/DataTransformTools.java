@@ -70,14 +70,14 @@ public class DataTransformTools {
 			if(machineStatus!=null&&!machineStatus.equals("")){
 				String dlegth=Integer.toBinaryString(Integer.valueOf(machineStatus,16)).toString();
 				if(dlegth!=null&&!dlegth.equals("")&&dlegth.length()==8){
-					toData.setUndervoltage(dlegth.charAt(0));	//电池欠压  1：电池欠压  0：电池正常
-					toData.setCityPower(dlegth.charAt(1));		//1：市电中断  0：市电正常
-					toData.setOvervoltage(dlegth.charAt(2));	//1：电池过压   0：电池正常
-					toData.setMachineState(dlegth.charAt(3));   //1：机器失效  0：正常
-					toData.setChargeDischarge(dlegth.charAt(4));//0：电池充电 1：电池放电
-					toData.setMachineObligate1(dlegth.charAt(5));//预留
-					toData.setOutputState(dlegth.charAt(6));	//1：输出过载  0：输出正常
-					String hz=dlegth.charAt(6)==0?"50":"60";	//1:电网频率为60Hz ,0:电网频率为50HZ
+					toData.setUndervoltage(Integer.parseInt(dlegth.substring(0, 1)));	//电池欠压  1：电池欠压  0：电池正常
+					toData.setCityPower(Integer.parseInt(dlegth.substring(1, 2)));		//1：市电中断  0：市电正常
+					toData.setOvervoltage(Integer.parseInt(dlegth.substring(2, 3)));	//1：电池过压   0：电池正常
+					toData.setMachineState(Integer.parseInt(dlegth.substring(3, 4)));   //1：机器失效  0：正常
+					toData.setChargeDischarge(Integer.parseInt(dlegth.substring(4, 5)));//0：电池充电 1：电池放电
+					toData.setMachineObligate1(Integer.parseInt(dlegth.substring(5, 6)));//预留
+					toData.setOutputState(Integer.parseInt(dlegth.substring(6, 7)));	//1：输出过载  0：输出正常
+					String hz=dlegth.substring(7, 8)=="0"?"50":"60";	//1:电网频率为60Hz ,0:电网频率为50HZ
 					toData.setLineFrequency(hz);
 				}
 			}
@@ -86,14 +86,14 @@ public class DataTransformTools {
 			if(showStatus!=null&&!showStatus.equals("")){
 				String legth=Integer.toBinaryString(Integer.valueOf(showStatus,16)).toString();
 				if(legth!=null&&!legth.equals("")&&legth.length()==8){
-					toData.setCanMake(legth.charAt(0));//1:电池充电使能    0:电池充电禁止
-					toData.setInCity(legth.charAt(1));//1:进市电使能   0:进市电禁止
-					toData.setShowObligate5(legth.charAt(2));
-					toData.setShowObligate4(legth.charAt(3));
-					toData.setShowObligate3(legth.charAt(4));
-					toData.setShowObligate2(legth.charAt(5));
-					toData.setShowObligate1(legth.charAt(6));
-					toData.setShowObligate0(legth.charAt(7));
+					toData.setCanMake(Integer.parseInt(legth.substring(0, 1)));//1:电池充电使能    0:电池充电禁止
+					toData.setInCity(Integer.parseInt(legth.substring(1, 2)));//1:进市电使能   0:进市电禁止
+					toData.setShowObligate5(Integer.parseInt(legth.substring(2, 3)));
+					toData.setShowObligate4(Integer.parseInt(legth.substring(3, 4)));
+					toData.setShowObligate3(Integer.parseInt(legth.substring(4, 5)));
+					toData.setShowObligate2(Integer.parseInt(legth.substring(5, 6)));
+					toData.setShowObligate1(Integer.parseInt(legth.substring(6, 7)));
+					toData.setShowObligate0(Integer.parseInt(legth.substring(7, 8)));
 				}
 			}
 			

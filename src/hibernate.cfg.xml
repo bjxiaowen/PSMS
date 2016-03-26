@@ -7,9 +7,7 @@
    
 <hibernate-configuration>
 	<session-factory>
-		<property name="dialect">
-			org.hibernate.dialect.SQLServerDialect
-		</property>
+		<property name="dialect">com.PSMS.dialect.SqlServer2008Dialect</property>
 		 <property name="connection.url">
 			jdbc:sqlserver://localhost:1433;instanceName=StandardSERVER;DatabaseName=PSMS
 		</property>
