@@ -1,11 +1,10 @@
-package com.PSMS.Dao;
+package com.PSMS.Service;
 
 import java.util.List;
 
 import com.PSMS.pojo.PowerStationBase;
 
-public interface IBiPowerStationDao {
-	
+public interface IBiPowerStationService {
 	
 	/**
 	 * 通过日期和电站id查询电站状态
@@ -14,12 +13,11 @@ public interface IBiPowerStationDao {
 	 * @return
 	 */
 	public PowerStationBase  getPowerStationStatus(String dateTime,int psId);
-	
+
 	
 	/**
-	 * 组件获取一天的总数据 
-	 * @param dateTime  当前时间
-	 * @param psId  电站id
+	 * 组件获取一天的总数据
+	 * @param dateTime
 	 * @return
 	 * @throws Exception
 	 */
@@ -45,7 +43,7 @@ public interface IBiPowerStationDao {
 	
 	
 	/**
-	 * 蓄电池通过日期查询24小时
+	 * 蓄电池通过日期查询
 	 * @param dateTime
 	 * @return
 	 * @throws Exception

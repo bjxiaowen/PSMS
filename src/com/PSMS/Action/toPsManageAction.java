@@ -37,14 +37,15 @@ import com.PSMS.Hibernate.PS_period;
 
 import freemarker.core.ParseException;
 
+/** 
+* 设备信息管理，加载页面,将需要显示的设备信息通过json传回前台，新建电站, 删除选中的气象站信息,编辑电站后保存信息,根据电站名称查询电站信息,根据电站省份查询电站信息,根据电站建站时间查询电站信息,校验电站是否已存在,获取电站名字,获取用户所在电站信息,恢复曾经建立过的电站,根据电站id获取电站名称
+* @author jie.yang 
+* @date 2014-10-11
+* @param ps_informationService 
+* @param userService 		
+*/ 
 public class toPsManageAction {
-	/** 
-	* 设备信息管理，加载页面,将需要显示的设备信息通过json传回前台，新建电站, 删除选中的气象站信息,编辑电站后保存信息,根据电站名称查询电站信息,根据电站省份查询电站信息,根据电站建站时间查询电站信息,校验电站是否已存在,获取电站名字,获取用户所在电站信息,恢复曾经建立过的电站,根据电站id获取电站名称
-	* @author jie.yang 
-	* @date 2014-10-11
-	* @param ps_informationService 
-	* @param userService 		
-	*/ 
+	
 	PS_informationService ps_informationService;
 	private M_userService userService;
 	
@@ -87,8 +88,7 @@ public class toPsManageAction {
 		List<PS_information> ps_list=ps_informationService.getAllStation();
 		
 		List<ps_information> ps_list2=new ArrayList<ps_information>();
-		for(int i=0;i<ps_list.size();i++)
-		{			
+		for(int i=0;i<ps_list.size();i++){			
 				ps_information ps=new ps_information();
 				ps.setId(ps_list.get(i).getId());
 				ps.setName(ps_list.get(i).getName());
@@ -112,7 +112,6 @@ public class toPsManageAction {
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			ServletActionContext.getResponse().getWriter().write(object.toString());			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

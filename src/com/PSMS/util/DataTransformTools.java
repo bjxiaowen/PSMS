@@ -13,6 +13,7 @@ import com.PSMS.pojo.ToData;
  */
 public class DataTransformTools {
 	
+	
 	/**
 	 * 来源数据转化为目的数据
 	 * @param fromData
@@ -48,7 +49,7 @@ public class DataTransformTools {
 				toData.setBatteryVoltage(battery.multiply(batfactor).setScale(2,   BigDecimal.ROUND_HALF_UP));
 			}
 			
-			//8F：输出电压 143*1.57 = 224.51V
+			//8F：输出电压  143*1.57 = 224.51V
 			String three=datas[3];
 			if(three!=null&&!three.equals("")){
 				BigDecimal out=new BigDecimal(Integer.valueOf(three,16));

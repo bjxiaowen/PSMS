@@ -791,6 +791,11 @@
 	<action name="remind" method="remind" class="com.PSMS.Action.RemindAction">
 		<result name="success">remind.jsp</result>
 	</action>
+	
+	<!-- 数据图表 -->
+	<action name="toBiCharts" class="com.PSMS.Action.BiPowerStationAction">
+		<result name="success">bichart.jsp</result>
+	</action>
 
 	</package>
 </struts>
