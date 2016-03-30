@@ -230,12 +230,13 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		return power;
 	}
 
+	//组件的输出
 	@Override
 	public List<PowerStationBase> getControlPhotovoltaicHourByDate(String dateTime,int psId) throws Exception {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
 		buffer.append("  select ");
-		buffer.append(" sum(tod.MpptInVoltage) as voltage, ");
+		buffer.append(" max(tod.MpptInVoltage) as voltage, ");
 		buffer.append(" (sum((tod.MpptOutVoltage*tod.MpptOutCurrent)/tod.MpptInVoltage)) as curr, ");
 		buffer.append(" (sum(((tod.MpptOutVoltage*tod.MpptOutCurrent)/tod.MpptInVoltage)*tod.MpptInVoltage)) as power, ");
 		buffer.append(" DateName(hour,GetDate()) as currHour,  ");
@@ -266,14 +267,15 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		}
 		return reList;
 	}
-
+	
+	//控制器输出基本信息
 	@Override
 	public PowerStationBase getControlOutShowDayByDate(String dateTime,int psId) throws Exception {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
 		buffer.append(" select sum(tod.OutputVoltage) totalVoltage, ");
 		buffer.append(" sum(tod.OutputCurrent) totalCurrent, ");
-		buffer.append(" sum(distinct tod.ChargeDischarge)status, ");
+		buffer.append(" sum(distinct tod.OutputState)status, ");//输出过载或者正常
 		buffer.append(" DateName(hour,GetDate()) as currHour  ");
 		buffer.append(" from  Inverter_parameter inp   inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id  ");
@@ -300,14 +302,15 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		return power;
 	}
 
+	//控制器输出图表信息
 	@Override
 	public List<PowerStationBase> getControlOutShowHourByDate(String dateTime,int psId) throws Exception {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
 		buffer.append("  select ");
 		buffer.append(" sum(tod.OutputVoltage*tod.OutputCurrent)power, ");
-		buffer.append(" sum(tod.OutputVoltage) voltage, ");
-		buffer.append(" sum(tod.OutputCurrent)  curr , ");
+		buffer.append(" max(tod.OutputVoltage) voltage, ");
+		buffer.append(" max(tod.OutputCurrent)  curr , ");
 		buffer.append(" DateName(hour,GetDate()) as currHour, ");
 		buffer.append(" DateName(hour,tod.OperateDate) as groupHour ");
 		buffer.append(" from  Inverter_parameter inp ");
@@ -339,14 +342,15 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		return reList;
 	}
 
+	//电池的输入
 	@Override
-	public PowerStationBase getElectricDayByDate(String dateTime,int psId) throws Exception {
+	public PowerStationBase getControlInShowDayByDate(String dateTime,int psId) throws Exception {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
 		buffer.append("  select ");
 		buffer.append(" sum(tod.MpptOutVoltage * tod.MpptOutCurrent*DateName(hour,GetDate())) as totalPower,  ");
-		buffer.append(" sum(tod.MpptOutVoltage) totalVoltage,  ");
-		buffer.append(" sum(tod.MpptOutCurrent) totalCurrent,  ");
+		buffer.append(" max(tod.MpptOutVoltage) totalVoltage,  ");
+		buffer.append(" max(tod.MpptOutCurrent) totalCurrent,  ");
 		buffer.append(" DateName(hour,GetDate()) as currHour  ");
 		buffer.append(" from  Inverter_parameter inp   inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id  ");
@@ -373,7 +377,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 	}
 
 	@Override
-	public List<PowerStationBase> getElectricHourByDate(String dateTime,int psId) throws Exception {
+	public List<PowerStationBase> getControlInShowHourByDate(String dateTime,int psId) throws Exception {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
 		buffer.append("  select sum(tod.MpptOutVoltage * tod.MpptOutCurrent) as power,  ");

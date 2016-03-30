@@ -793,9 +793,26 @@
 	</action>
 	
 	<!-- 数据图表 -->
-	<action name="toBiCharts" class="com.PSMS.Action.BiPowerStationAction">
-		<result name="success">bichart.jsp</result>
+	<action name="toModule" method="toModule" class="com.PSMS.Action.BiPowerStationAction">
+		<result name="success">module.jsp</result>
 	</action>
-
+	<action name="getModule" method="getModule" class="com.PSMS.Action.BiPowerStationAction"></action>
+	
+	<action name="toBatteryVoltage" method="toBatteryVoltage" class="com.PSMS.Action.BiPowerStationAction">
+		<result name="success">battery.jsp</result>
+	</action>
+	<action name="getBatteryVoltage" method="getBatteryVoltage" class="com.PSMS.Action.BiPowerStationAction">
+	</action>
+	
+	<action name="toControlOutShow" method="toControlOutShow" class="com.PSMS.Action.BiPowerStationAction">
+		<result name="success">control.jsp</result>
+	</action>
+	
+	<action name="getControlOutShow" method="getControlOutShow" class="com.PSMS.Action.BiPowerStationAction">
+	</action>
+	
+	<action name="getControlInShow" method="getControlInShow" class="com.PSMS.Action.BiPowerStationAction">
+	</action>
+	
 	</package>
 </struts>

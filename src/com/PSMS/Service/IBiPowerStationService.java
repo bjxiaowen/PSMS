@@ -91,7 +91,7 @@ public interface IBiPowerStationService {
 	 * @return
 	 * @throws Exception
 	 */
-	public PowerStationBase getElectricDayByDate(String dateTime,int psId)throws Exception;
+	public PowerStationBase getControlInShowDayByDate(String dateTime,int psId)throws Exception;
 	
 	/**
 	 * 按小时来查询
@@ -99,7 +99,7 @@ public interface IBiPowerStationService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<PowerStationBase> getElectricHourByDate(String dateTime,int psId)throws Exception;
+	public List<PowerStationBase> getControlInShowHourByDate(String dateTime,int psId)throws Exception;
 	
 	/**
 	 * 每一天的发电量
