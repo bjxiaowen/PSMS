@@ -36,8 +36,12 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		}
 		for (int i = 0; i < list.size(); i++) {
 			Object[] obj = (Object[]) list.get(i);
-			power.setStatus(Integer.parseInt(obj[0] + ""));
-			power.setDate(new Date(obj[1] + ""));
+			if(obj[0]!=null){
+				power.setStatus(Integer.parseInt(obj[0] + ""));
+			}
+			if(obj[1]!=null){
+				power.setDate(new Date(obj[1] + ""));
+			}
 		}
 		return power;
 	}
@@ -66,9 +70,17 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		}
 		for (int i = 0; i < list.size(); i++) {
 			Object[] obj = (Object[]) list.get(i);
-			power.setTotalCapacity(new BigDecimal(obj[0] + ""));
-			power.setTotalPower(new BigDecimal(obj[1] + ""));
-			power.setCurrHour(Integer.parseInt(obj[2] + ""));
+			if(obj[0]!=null){
+				power.setTotalCapacity(new BigDecimal(obj[0] + ""));
+			}
+			
+			if(obj[1]!=null){
+				power.setTotalPower(new BigDecimal(obj[1] + ""));
+			}
+			
+			if(obj[2]!=null){
+				power.setCurrHour(Integer.parseInt(obj[2] + ""));
+			}
 		}
 		return power;
 	}
@@ -102,12 +114,23 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		for (int i = 0; i < list.size(); i++) {
 			PowerStationBase power = new PowerStationBase();
 			Object[] obj = (Object[]) list.get(i);
-			power.setTotalCapacity(new BigDecimal(obj[0] + ""));
-			power.setPower(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			// currHour, groupHour
-			power.setCurrHour(Integer.parseInt(obj[2] + ""));
-			power.setGroupHour(Integer.parseInt(obj[3] + ""));
-			power.setCurrent(new BigDecimal(obj[4] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			if(obj[0]!=null){
+				power.setTotalCapacity(new BigDecimal(obj[0] + ""));
+			}
+			if(obj[1]!=null){
+				power.setPower(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[2]!=null){
+				// currHour, groupHour
+				power.setCurrHour(Integer.parseInt(obj[2] + ""));
+			}
+			if(obj[3]!=null){
+				power.setGroupHour(Integer.parseInt(obj[3] + ""));
+			}
+			
+			if(obj[4]!=null){
+				power.setCurrent(new BigDecimal(obj[4] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
 			reList.add(power);
 		}
 		return reList;
@@ -142,15 +165,24 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		for (int i = 0; i < list.size(); i++) {//.setScale(2, BigDecimal.ROUND_HALF_UP)
 			Object[] obj = (Object[]) list.get(i);
 //			power.setTotalCapacity(new BigDecimal(obj[0] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setTotalPower(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			// currHour
-			power.setCurrHour(Integer.parseInt(obj[2] + ""));
-			// mpptTemp
-			power.setMpptTemp(new BigDecimal(obj[3] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			//totalVoltage ,totalCurrent,chargeDischarge
-			power.setTotalVoltage(new BigDecimal(obj[4] + ""));
-			power.setTotalCurrent(new BigDecimal(obj[5] + ""));
-			//power.setChargeDischarge(Integer.parseInt(obj[6] + ""));
+			if(obj[1]!=null){
+				power.setTotalPower(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[2]!=null){
+				// currHour
+				power.setCurrHour(Integer.parseInt(obj[2] + ""));
+			}
+			if(obj[3] !=null){
+				// mpptTemp
+				power.setMpptTemp(new BigDecimal(obj[3] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[4]!=null){
+				//totalVoltage ,totalCurrent,chargeDischarge
+				power.setTotalVoltage(new BigDecimal(obj[4] + ""));
+			}
+			if(obj[5]!=null){
+				power.setTotalCurrent(new BigDecimal(obj[5] + ""));
+			}
 		}
 		return power;
 	}
@@ -184,11 +216,21 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 			PowerStationBase power = new PowerStationBase();
 			Object[] obj = (Object[]) list.get(i);
 			//power,batteryVoltage,curr,currHour,groupHour
-			power.setPower(new BigDecimal(obj[0] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setVoltage(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setCurrent(new BigDecimal(obj[2] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setCurrHour(Integer.parseInt(obj[3] + ""));
-			power.setGroupHour(Integer.parseInt(obj[4] + ""));
+			if(obj[0]!=null){
+				power.setPower(new BigDecimal(obj[0] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[1]!=null){
+				power.setVoltage(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[2]!=null){
+				power.setCurrent(new BigDecimal(obj[2] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[3]!=null){
+				power.setCurrHour(Integer.parseInt(obj[3] + ""));
+			}
+			if(obj[4]!=null){
+				power.setGroupHour(Integer.parseInt(obj[4] + ""));
+			}
 			reList.add(power);
 		}
 		return reList;
@@ -222,10 +264,15 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 			
 			Object[] obj = (Object[]) list.get(i);
 			// totalPower,totalCurrent,currHour
-			power.setTotalVoltage(new BigDecimal(obj[0] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setTotalCurrent(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setCurrHour(Integer.parseInt(obj[2] + ""));
-			
+			if(obj[0]!=null){
+				power.setTotalVoltage(new BigDecimal(obj[0] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[1]!=null){
+				power.setTotalCurrent(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[2]!=null){
+				power.setCurrHour(Integer.parseInt(obj[2] + ""));
+			}
 		}
 		return power;
 	}
@@ -258,11 +305,22 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 			PowerStationBase power = new PowerStationBase();
 			Object[] obj = (Object[]) list.get(i);
 			// voltage,curr,currHour,power,currHour,groupHour
-			power.setVoltage(new BigDecimal(obj[0] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setCurrent(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setPower(new BigDecimal(obj[2] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setCurrHour(Integer.parseInt(obj[3] + ""));
-			power.setGroupHour(Integer.parseInt(obj[4] + ""));
+			if(obj[0]!=null){
+				power.setVoltage(new BigDecimal(obj[0] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[1]!=null){
+				power.setCurrent(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[2]!=null){
+				power.setPower(new BigDecimal(obj[2] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[3]!=null){
+				power.setCurrHour(Integer.parseInt(obj[3] + ""));
+			}
+			if(obj[4]!=null){
+				power.setGroupHour(Integer.parseInt(obj[4] + ""));
+			}
+			
 			reList.add(power);
 		}
 		return reList;
@@ -294,10 +352,18 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 			
 			Object[] obj = (Object[]) list.get(i);
 			// totalVoltage,totalCurrent,status,currHour
-			power.setTotalVoltage(new BigDecimal(obj[0] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setTotalCurrent(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setStatus(Integer.parseInt(obj[2] + ""));
-			power.setCurrHour(Integer.parseInt(obj[3] + ""));
+			if(obj[0]!=null){
+				power.setTotalVoltage(new BigDecimal(obj[0] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[1]!=null){
+				power.setTotalCurrent(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[2]!=null){
+				power.setStatus(Integer.parseInt(obj[2] + ""));
+			}
+			if(obj[3]!=null){
+				power.setCurrHour(Integer.parseInt(obj[3] + ""));
+			}
 		}
 		return power;
 	}
@@ -332,11 +398,21 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 			PowerStationBase power = new PowerStationBase();
 			Object[] obj = (Object[]) list.get(i);
 			// power,voltage,curr,currHour,groupHour
-			power.setPower(new BigDecimal(obj[0] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setVoltage(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setCurrent(new BigDecimal(obj[2] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setCurrHour(Integer.parseInt(obj[3] + ""));
-			power.setGroupHour(Integer.parseInt(obj[4] + ""));
+			if(obj[0]!=null){
+				power.setPower(new BigDecimal(obj[0] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[1]!=null){
+				power.setVoltage(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[2]!=null){
+				power.setCurrent(new BigDecimal(obj[2] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[3]!=null){
+				power.setCurrHour(Integer.parseInt(obj[3] + ""));
+			}
+			if(obj[4]!=null){
+				power.setGroupHour(Integer.parseInt(obj[4] + ""));
+			}
 			reList.add(power);
 		}
 		return reList;
@@ -368,10 +444,18 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		for (int i = 0; i < list.size(); i++) {
 			Object[] obj = (Object[]) list.get(i);
 			// totalPower,totalVoltage,totalCurrent,currHour
-			power.setTotalPower(new BigDecimal(obj[0] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setTotalVoltage(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setTotalCurrent(new BigDecimal(obj[2] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setCurrHour(Integer.parseInt(obj[3] + ""));
+			if(obj[0]!=null){
+				power.setTotalPower(new BigDecimal(obj[0] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[1]!=null){
+				power.setTotalVoltage(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[2]!=null){
+				power.setTotalCurrent(new BigDecimal(obj[2] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[3]!=null){
+				power.setCurrHour(Integer.parseInt(obj[3] + ""));
+			}
 		}
 		return power;
 	}
@@ -404,11 +488,21 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 			PowerStationBase power = new PowerStationBase();
 			Object[] obj = (Object[]) list.get(i);
 			// power,voltage,curr,currHour,groupHour
-			power.setPower(new BigDecimal(obj[0] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setVoltage(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setCurrent(new BigDecimal(obj[2] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setCurrHour(Integer.parseInt(obj[3] + ""));
-			power.setGroupHour(Integer.parseInt(obj[4] + ""));
+			if(obj[0]!=null){
+				power.setPower(new BigDecimal(obj[0] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[1]!=null){
+				power.setVoltage(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[2]!=null){
+				power.setCurrent(new BigDecimal(obj[2] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[3]!=null){
+				power.setCurrHour(Integer.parseInt(obj[3] + ""));
+			}
+			if(obj[4]!=null){
+				power.setGroupHour(Integer.parseInt(obj[4] + ""));
+			}
 			reList.add(power);
 		}
 		return reList;
@@ -439,10 +533,18 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 			PowerStationBase power = new PowerStationBase();
 			Object[] obj = (Object[]) list.get(i);
 			// power,voltage,curr,date
-			power.setPower(new BigDecimal(obj[0] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setVoltage(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setCurrent(new BigDecimal(obj[2] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			power.setDate(new Date(obj[3] + ""));
+			if(obj[0]!=null){
+				power.setPower(new BigDecimal(obj[0] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[1]!=null){
+				power.setVoltage(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[2]!=null){
+				power.setCurrent(new BigDecimal(obj[2] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[3]!=null){
+				power.setDate(new Date(obj[3] + ""));
+			}
 			reList.add(power);
 		}
 		return reList;
