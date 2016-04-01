@@ -12,6 +12,10 @@ import com.PSMS.pojo.PowerStationBase;
 
 public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 	
+	/**
+	 * 查询电站状态
+	 */
+	@SuppressWarnings("deprecation")
 	@Override
 	public PowerStationBase getPowerStationStatus(String dateTime, int psId) {
 		Session session = HibernateSessionFactory.getHibernateSession();
@@ -37,7 +41,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		for (int i = 0; i < list.size(); i++) {
 			Object[] obj = (Object[]) list.get(i);
 			if(obj[0]!=null){
-				power.setStatus(Integer.parseInt(obj[0] + ""));
+				power.setMachineState(Integer.parseInt(obj[0] + ""));
 			}
 			if(obj[1]!=null){
 				power.setDate(new Date(obj[1] + ""));
@@ -333,7 +337,6 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		StringBuffer buffer=new StringBuffer();
 		buffer.append(" select sum(tod.OutputVoltage) totalVoltage, ");
 		buffer.append(" sum(tod.OutputCurrent) totalCurrent, ");
-		buffer.append(" sum(distinct tod.OutputState)status, ");//输出过载或者正常
 		buffer.append(" DateName(hour,GetDate()) as currHour  ");
 		buffer.append(" from  Inverter_parameter inp   inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id  ");
@@ -359,9 +362,6 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 				power.setTotalCurrent(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
 			}
 			if(obj[2]!=null){
-				power.setStatus(Integer.parseInt(obj[2] + ""));
-			}
-			if(obj[3]!=null){
 				power.setCurrHour(Integer.parseInt(obj[3] + ""));
 			}
 		}
@@ -508,6 +508,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		return reList;
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public List<PowerStationBase> getElectricEveryDayByDate(int psId) throws Exception {
 		Session session = HibernateSessionFactory.getHibernateSession();
@@ -548,6 +549,46 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 			reList.add(power);
 		}
 		return reList;
+	}
+
+	/**
+	 * 查询电站最新输出状态
+	 */
+	@Override
+	public PowerStationBase getOutputStatus(String dateTime, int psId) throws Exception {
+		Session session = HibernateSessionFactory.getHibernateSession();
+		StringBuffer buffer=new StringBuffer();
+		buffer.append(" select ");
+		buffer.append(" top 1 tod.OutputState,tod.OperateDate,psi.id ,tod.MachineState ");
+		buffer.append(" from  Inverter_parameter inp ");
+		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID ");
+		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
+		buffer.append(" where CONVERT(varchar(100),tod.OperateDate, 23)= ? ");
+		buffer.append(" and  inp.PS_id=? ");
+		buffer.append(" order by tod.OperateDate desc ");
+		Query query = session.createSQLQuery(buffer.toString());
+		query.setString(0, dateTime);
+		query.setInteger(1, psId);
+		@SuppressWarnings("rawtypes")
+		List list = query.list();
+		HibernateSessionFactory.closeHibernateSession();
+		PowerStationBase rePs = new PowerStationBase();
+		if(list==null||list.size()==0){
+			return rePs;
+		}
+		for (int i = 0; i < list.size(); i++) {
+			Object[] obj = (Object[]) list.get(i);
+			if(obj[0]!=null){
+				rePs.setOutputState(Integer.parseInt(obj[0] + ""));
+			}
+			if(obj[2]!=null){
+				rePs.setPsId(Integer.parseInt(obj[2] + ""));
+			}
+			if(obj[3]!=null){
+				rePs.setMachineState(Integer.parseInt(obj[2] + ""));
+			}
+		}
+		return rePs;
 	}
 
 }

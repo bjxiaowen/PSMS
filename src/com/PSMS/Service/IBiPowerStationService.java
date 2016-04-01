@@ -109,5 +109,12 @@ public interface IBiPowerStationService {
 	 */
 	public List<PowerStationBase>  getElectricEveryDayByDate(int psId)throws Exception;
 	
-	
+	/**
+	 * 查询电站最新输出状态
+	 * @param dateTime
+	 * @param psId
+	 * @return
+	 * @throws Exception
+	 */
+	public PowerStationBase getOutputStatus(String dateTime,int psId)throws Exception;
 }

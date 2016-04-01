@@ -33,6 +33,8 @@ public class BiPowerStationAction {
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			ServletActionContext.getResponse().getWriter().write(object.toString());
+			request.setAttribute("total", total);
+			request.setAttribute("list", list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
@@ -61,6 +63,8 @@ public class BiPowerStationAction {
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			ServletActionContext.getResponse().getWriter().write(object.toString());
+			request.setAttribute("total", total);
+			request.setAttribute("list", list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
@@ -90,6 +94,8 @@ public class BiPowerStationAction {
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			ServletActionContext.getResponse().getWriter().write(object.toString());
+			request.setAttribute("total", total);
+			request.setAttribute("list", list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
@@ -119,6 +125,8 @@ public class BiPowerStationAction {
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			ServletActionContext.getResponse().getWriter().write(object.toString());
+			request.setAttribute("total", total);
+			request.setAttribute("list", list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
@@ -141,12 +149,16 @@ public class BiPowerStationAction {
 			int pId=Integer.parseInt(psId);
 			PowerStationBase total=biPowerStationService.getControlOutShowDayByDate(dateTime,pId);
 			List<PowerStationBase> list=biPowerStationService.getControlOutShowHourByDate(dateTime,pId);
+			PowerStationBase outStatus=biPowerStationService.getOutputStatus(dateTime, pId);//输出
 			JSONObject object = JSONObject.fromObject("{}");
 			object.put("total", total);
 			object.put("list", list);
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			ServletActionContext.getResponse().getWriter().write(object.toString());
+			request.setAttribute("total", total);
+			request.setAttribute("list", list);
+			request.setAttribute("outStatus", outStatus);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
@@ -175,6 +187,8 @@ public class BiPowerStationAction {
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			ServletActionContext.getResponse().getWriter().write(object.toString());
+			request.setAttribute("total", total);
+			request.setAttribute("list", list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
@@ -204,6 +218,8 @@ public class BiPowerStationAction {
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			ServletActionContext.getResponse().getWriter().write(object.toString());
+			request.setAttribute("total", total);
+			request.setAttribute("list", list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	
@@ -232,6 +248,8 @@ public class BiPowerStationAction {
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			ServletActionContext.getResponse().getWriter().write(object.toString());
+			request.setAttribute("total", total);
+			request.setAttribute("list", list);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}	

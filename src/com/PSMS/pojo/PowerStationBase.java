@@ -33,7 +33,7 @@ public class PowerStationBase {
 	
 	private BigDecimal power;//功率
 	
-	private int status;//状态
+	private int outputState;//输出状态  1：输出过载，0：输出正常
 	
 	private Date date;//日期
 	
@@ -44,6 +44,8 @@ public class PowerStationBase {
 	private int partNum;//光伏板数量
 	
 	private BigDecimal area;//电站占地面积
+	
+	private int machineState;// 1：机器失效，0：正常
 	
 	
 
@@ -136,16 +138,6 @@ public class PowerStationBase {
 		this.totalCurrent = totalCurrent;
 	}
 	
-	
-
-	public int getStatus() {
-		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
-	}
-
 	public Date getDate() {
 		return date;
 	}
@@ -153,13 +145,63 @@ public class PowerStationBase {
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
+
+	public int getPsId() {
+		return psId;
+	}
+
+	public void setPsId(int psId) {
+		this.psId = psId;
+	}
+
+	public String getPsName() {
+		return psName;
+	}
+
+	public void setPsName(String psName) {
+		this.psName = psName;
+	}
+
+	public int getPartNum() {
+		return partNum;
+	}
+
+	public void setPartNum(int partNum) {
+		this.partNum = partNum;
+	}
+
+	public BigDecimal getArea() {
+		return area;
+	}
+
+	public void setArea(BigDecimal area) {
+		this.area = area;
+	}
+
+	public int getOutputState() {
+		return outputState;
+	}
+
+	public void setOutputState(int outputState) {
+		this.outputState = outputState;
+	}
+
+	public int getMachineState() {
+		return machineState;
+	}
+
+	public void setMachineState(int machineState) {
+		this.machineState = machineState;
+	}
 
 	@Override
 	public String toString() {
 		return "PowerStationBase [totalCapacity=" + totalCapacity + ", totalPower=" + totalPower + ", totalVoltage="
 				+ totalVoltage + ", totalCurrent=" + totalCurrent + ", currHour=" + currHour + ", groupHour="
 				+ groupHour + ", mpptTemp=" + mpptTemp + ", chargeDischarge=" + chargeDischarge + ", voltage=" + voltage
-				+ ", current=" + current + ", power=" + power + ", status=" + status + ", date=" + date + "]";
+				+ ", current=" + current + ", power=" + power + ", outputState=" + outputState + ", date=" + date
+				+ ", psId=" + psId + ", psName=" + psName + ", partNum=" + partNum + ", area=" + area
+				+ ", machineState=" + machineState + "]";
 	}
-
 }

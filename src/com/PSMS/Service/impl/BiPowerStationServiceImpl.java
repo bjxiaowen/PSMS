@@ -66,9 +66,21 @@ public class BiPowerStationServiceImpl implements IBiPowerStationService {
 		return BiPowerStationTools.getListSize24(biDao.getElectricEveryDayByDate( psId));
 	}
 
+	/**
+	 * 电站状态
+	 */
 	@Override
 	public PowerStationBase getPowerStationStatus(String dateTime, int psId) {
 		return biDao.getPowerStationStatus(dateTime, psId);
 	}
 
+	/**
+	 * 电站机器输出状态
+	 */
+	@Override
+	public PowerStationBase getOutputStatus(String dateTime, int psId) throws Exception {
+		return biDao.getOutputStatus(dateTime, psId);
+	}
+
+	
 }
