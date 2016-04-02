@@ -75,6 +75,20 @@ public class ToData implements Serializable {
 	
 	private BigDecimal MpptTemp ;//mppt模块温度
 	
+	private int ShowObligate ;//预留
+	
+	private BigDecimal CurrHistoryQ;//直流侧历史发电量
+	
+	private   BigDecimal CurrDayQ;//直流侧日发电量
+	
+	private   BigDecimal    CurrPower;//直流侧功率
+	
+	private   BigDecimal    LoadHistoryQ ;//负载历史用电量
+	
+	private   BigDecimal    LoadDayQ;//负载日用电量
+	
+	private   BigDecimal   ExchangeOutPower;//交流输出功率
+	
 	
 	public int getInverterDataID() {
 		return InverterDataID;
@@ -278,20 +292,60 @@ public class ToData implements Serializable {
 	public void setMpptTemp(BigDecimal mpptTemp) {
 		MpptTemp = mpptTemp;
 	}
-	
-	
-	@Override
-	public String toString() {
-		return "DataTransform [InverterDataID=" + InverterDataID + ", InverterID=" + InverterID + ", ReceiveData="
-				+ ReceiveData + ", OperateDate=" + OperateDate + ", Type=" + Type + ", InputVoltage=" + InputVoltage
-				+ ", BatteryVoltage=" + BatteryVoltage + ", OutputVoltage=" + OutputVoltage + ", OutputCurrent="
-				+ OutputCurrent + ", CityPower=" + CityPower + ", Undervoltage=" + Undervoltage + ", Overvoltage="
-				+ Overvoltage + ", MachineState=" + MachineState + ", ChargeDischarge=" + ChargeDischarge
-				+ ", MachineObligate1=" + MachineObligate1 + ", OutputState=" + OutputState + ", LineFrequency="
-				+ LineFrequency + ", CanMake=" + CanMake + ", InCity=" + InCity + ", ShowObligate5=" + ShowObligate5
-				+ ", ShowObligate4=" + ShowObligate4 + ", ShowObligate3=" + ShowObligate3 + ", ShowObligate2="
-				+ ShowObligate2 + ", ShowObligate1=" + ShowObligate1 + ", ShowObligate0=" + ShowObligate0
-				+ ", MpptInVoltage=" + MpptInVoltage + ", MpptOutVoltage=" + MpptOutVoltage + ", MpptOutCurrent="
-				+ MpptOutCurrent + ", MpptTemp=" + MpptTemp + "]";
+
+	public int getShowObligate() {
+		return ShowObligate;
+	}
+
+	public void setShowObligate(int showObligate) {
+		ShowObligate = showObligate;
+	}
+
+	public BigDecimal getCurrHistoryQ() {
+		return CurrHistoryQ;
+	}
+
+	public void setCurrHistoryQ(BigDecimal currHistoryQ) {
+		CurrHistoryQ = currHistoryQ;
+	}
+
+	public BigDecimal getCurrDayQ() {
+		return CurrDayQ;
+	}
+
+	public void setCurrDayQ(BigDecimal currDayQ) {
+		CurrDayQ = currDayQ;
+	}
+
+	public BigDecimal getCurrPower() {
+		return CurrPower;
+	}
+
+	public void setCurrPower(BigDecimal currPower) {
+		CurrPower = currPower;
+	}
+
+	public BigDecimal getLoadHistoryQ() {
+		return LoadHistoryQ;
+	}
+
+	public void setLoadHistoryQ(BigDecimal loadHistoryQ) {
+		LoadHistoryQ = loadHistoryQ;
+	}
+
+	public BigDecimal getLoadDayQ() {
+		return LoadDayQ;
+	}
+
+	public void setLoadDayQ(BigDecimal loadDayQ) {
+		LoadDayQ = loadDayQ;
+	}
+
+	public BigDecimal getExchangeOutPower() {
+		return ExchangeOutPower;
+	}
+
+	public void setExchangeOutPower(BigDecimal exchangeOutPower) {
+		ExchangeOutPower = exchangeOutPower;
 	}
 }

@@ -16,7 +16,7 @@ public class FromDataTest {
 	public static void main(String[] args) {
 		IFromInverterInfo dao=BaseDaoFactory.getFromInverterInfoDaoInstance();
 		IToDataDao tdao=DAOFactory.getToDataDaoInstance();
-		List<FromData> list=dao.getById(15629);
+		List<FromData> list=dao.getById(15628);
 		if(list!=null&&list.size()>0){
 			for(FromData fromData:list){
 				ToData toData=DataTransformTools.transform(fromData);

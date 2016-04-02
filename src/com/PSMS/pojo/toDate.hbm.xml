@@ -117,5 +117,28 @@
 		<property name="MpptTemp" type="java.math.BigDecimal">
 			<column name="MpptTemp"></column>
 		</property>
+		
+		<property name="ShowObligate" type="java.lang.Integer">
+			<column name="ShowObligate"></column>
+		</property>
+		<property name="CurrHistoryQ" type="java.math.BigDecimal">
+			<column name="CurrHistoryQ"></column>
+		</property>
+		
+		<property name="CurrDayQ" type="java.math.BigDecimal">
+			<column name="CurrDayQ"></column>
+		</property>
+		<property name="CurrPower" type="java.math.BigDecimal">
+			<column name="CurrPower"></column>
+		</property>
+		<property name="LoadHistoryQ" type="java.math.BigDecimal">
+			<column name="LoadHistoryQ"></column>
+		</property>
+		<property name="LoadDayQ" type="java.math.BigDecimal">
+			<column name="LoadDayQ"></column>
+		</property>
+		<property name="ExchangeOutPower" type="java.math.BigDecimal">
+			<column name="ExchangeOutPower"></column>
+		</property>
 	</class>
 </hibernate-mapping>
