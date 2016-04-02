@@ -19,6 +19,7 @@ public class PS_information {
 	private Integer Station_num;
 	private Integer User_num;
 	private Integer Delete_flag;
+	private Integer MachineState;//机器状态
 	public Integer getDelete_flag() {
 		return Delete_flag;
 	}
@@ -125,6 +126,12 @@ public class PS_information {
 	public void setUser_num(Integer user_num) {
 		User_num = user_num;
 	}
+	public Integer getMachineState() {
+		return MachineState;
+	}
+	public void setMachineState(Integer machineState) {
+		MachineState = machineState;
+	}
 	@Override
 	public String toString() {
 		return "PS_information [id=" + id + ", name=" + name + ", capacity=" + capacity + ", area=" + area
@@ -132,6 +139,6 @@ public class PS_information {
 				+ ", longitude=" + longitude + ", latitude=" + latitude + ", Build_time=" + Build_time
 				+ ", Station_manage=" + Station_manage + ", User_manage=" + User_manage + ", Device_manage="
 				+ Device_manage + ", Station_num=" + Station_num + ", User_num=" + User_num + ", Delete_flag="
-				+ Delete_flag + "]";
+				+ Delete_flag + ", MachineState=" + MachineState + "]";
 	}
 }

@@ -47,6 +47,9 @@ public class PowerStationBase {
 	
 	private int machineState;// 1：机器失效，0：正常
 	
+	private int undervoltage;//1：电池欠压  0：电池正常
+	
+	
 	
 
 	public BigDecimal getTotalCapacity() {
@@ -195,6 +198,17 @@ public class PowerStationBase {
 		this.machineState = machineState;
 	}
 
+
+
+	public int getUndervoltage() {
+		return undervoltage;
+	}
+
+	public void setUndervoltage(int undervoltage) {
+		this.undervoltage = undervoltage;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "PowerStationBase [totalCapacity=" + totalCapacity + ", totalPower=" + totalPower + ", totalVoltage="
@@ -202,6 +216,7 @@ public class PowerStationBase {
 				+ groupHour + ", mpptTemp=" + mpptTemp + ", chargeDischarge=" + chargeDischarge + ", voltage=" + voltage
 				+ ", current=" + current + ", power=" + power + ", outputState=" + outputState + ", date=" + date
 				+ ", psId=" + psId + ", psName=" + psName + ", partNum=" + partNum + ", area=" + area
-				+ ", machineState=" + machineState + "]";
+				+ ", machineState=" + machineState + ", undervoltage=" + undervoltage + "]";
 	}
+	
 }

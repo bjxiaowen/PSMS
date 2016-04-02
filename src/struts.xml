@@ -799,19 +799,27 @@
 	<action name="getModule" method="getModule" class="com.PSMS.Action.BiPowerStationAction"></action>
 	
 	<action name="toBatteryVoltage" method="toBatteryVoltage" class="com.PSMS.Action.BiPowerStationAction">
-		<result name="success">battery.jsp</result>
+		<result name="success">charts/battery.jsp</result>
 	</action>
 	<action name="getBatteryVoltage" method="getBatteryVoltage" class="com.PSMS.Action.BiPowerStationAction">
 	</action>
 	
 	<action name="toControlOutShow" method="toControlOutShow" class="com.PSMS.Action.BiPowerStationAction">
-		<result name="success">control.jsp</result>
+		<result name="success">charts/control.jsp</result>
 	</action>
 	
 	<action name="getControlOutShow" method="getControlOutShow" class="com.PSMS.Action.BiPowerStationAction">
 	</action>
 	
 	<action name="getControlInShow" method="getControlInShow" class="com.PSMS.Action.BiPowerStationAction">
+	</action>
+	
+	<action name="charts" method="charts" class="com.PSMS.Action.BiPowerStationAction">
+		<result name="success">charts/module.jsp</result>
+	</action>
+	
+	<action name="getPowerStationAllInfo" method="getPowerStationAllInfo" class="com.PSMS.Action.BiPowerStationAction">
+		<result name="success">charts/psMap.jsp</result>
 	</action>
 	
 	</package>

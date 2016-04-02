@@ -559,7 +559,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
 		buffer.append(" select ");
-		buffer.append(" top 1 tod.OutputState,tod.OperateDate,psi.id ,tod.MachineState ");
+		buffer.append(" top 1 tod.OutputState,tod.OperateDate,psi.id ,tod.MachineState,tod.Undervoltage,tod.ChargeDischarge ");
 		buffer.append(" from  Inverter_parameter inp ");
 		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
@@ -585,7 +585,15 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 				rePs.setPsId(Integer.parseInt(obj[2] + ""));
 			}
 			if(obj[3]!=null){
-				rePs.setMachineState(Integer.parseInt(obj[2] + ""));
+				rePs.setMachineState(Integer.parseInt(obj[3] + ""));
+			}
+			//Undervoltage
+			if(obj[4]!=null){
+				rePs.setUndervoltage(Integer.parseInt(obj[4] + ""));
+			}
+			
+			if(obj[5]!=null){
+				rePs.setChargeDischarge(Integer.parseInt(obj[5] + ""));
 			}
 		}
 		return rePs;
