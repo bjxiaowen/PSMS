@@ -49,68 +49,65 @@ public class toPsManageAction {
 	PS_informationService ps_informationService;
 	private M_userService userService;
 	
-	public String toPsSearch() 
-	{
-		/** 
-		*加载页面*
-		* @author jie.yang 
-		* @date 2014-10-11 	
-		*/ 
+	/** 
+	*加载页面*
+	* @author jie.yang 
+	* @date 2014-10-11 	
+	*/ 
+	public String toPsSearch() {
+		
 		HttpServletRequest request =ServletActionContext.getRequest();
+		
 		HttpServletResponse response =ServletActionContext.getResponse();	
+		
 		try {
 			request.setCharacterEncoding("utf-8");
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return"success";
 	}
 	
-	public String getPsInformation() //获得所有电站的所有信息
-	{
-		/** 
-		*将需要显示的设备信息通过json传回前台*
-		* @author liu.yang 
-		* @date 2014-10-11
-	    * @param ps_list
-	    * @param ps_list2 
-		*/ 
-		HttpServletRequest request =ServletActionContext.getRequest();
-		HttpServletResponse response =ServletActionContext.getResponse();	
+
+	/** 
+	*将需要显示的设备信息通过json传回前台*
+	*获得所有电站的所有信息
+	* @author liu.yang 
+	* @date 2014-10-11
+    * @param ps_list
+    * @param ps_list2 
+	*/ 
+	public String getPsInformation() {
 		try {
+			HttpServletRequest request =ServletActionContext.getRequest();
 			request.setCharacterEncoding("utf-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ps_informationService = new PS_informationServiceImpl();
-		List<PS_information> ps_list=ps_informationService.getAllStation();
-		
-		List<ps_information> ps_list2=new ArrayList<ps_information>();
-		for(int i=0;i<ps_list.size();i++){			
-				ps_information ps=new ps_information();
-				ps.setId(ps_list.get(i).getId());
-				ps.setName(ps_list.get(i).getName());
-				ps.setCapacity(ps_list.get(i).getCapacity());
-				ps.setArea(ps_list.get(i).getArea());
-				if(ps_list.get(i).getPart_num()!=null){ps.setPart_num(ps_list.get(i).getPart_num());}
-				else {ps.setPart_num(null);}
-				ps.setOwner(ps_list.get(i).getOwner());
-				ps.setInvestor(ps_list.get(i).getInvestor());
-				ps.setProvince(ps_list.get(i).getProvince());
-				ps.setLongitude(ps_list.get(i).getLongitude());
-				ps.setLatitude(ps_list.get(i).getLatitude());
-				ps.setBuild_time(ps_list.get(i).getBuild_time());
-          		ps_list2.add(ps);
-		}	
-		JSONObject object=JSONObject.fromObject("{}");		
-		object.put("total", ps_list2.size());
-		object.put("rows", ps_list2);		
-		try {
+			ps_informationService = new PS_informationServiceImpl();
+			List<PS_information> ps_list=ps_informationService.getAllStation();
+			List<ps_information> ps_list2=new ArrayList<ps_information>();
+			for(int i=0;i<ps_list.size();i++){			
+					ps_information ps=new ps_information();
+					ps.setId(ps_list.get(i).getId());
+					ps.setName(ps_list.get(i).getName());
+					ps.setCapacity(ps_list.get(i).getCapacity());
+					ps.setArea(ps_list.get(i).getArea());
+					if(ps_list.get(i).getPart_num()!=null){ps.setPart_num(ps_list.get(i).getPart_num());}
+					else {ps.setPart_num(null);}
+					ps.setOwner(ps_list.get(i).getOwner());
+					ps.setInvestor(ps_list.get(i).getInvestor());
+					ps.setProvince(ps_list.get(i).getProvince());
+					ps.setLongitude(ps_list.get(i).getLongitude());
+					ps.setLatitude(ps_list.get(i).getLatitude());
+					ps.setBuild_time(ps_list.get(i).getBuild_time());
+					ps.setMachineState(ps_list.get(i).getMachineState());
+	          		ps_list2.add(ps);
+			}	
+			JSONObject object=JSONObject.fromObject("{}");		
+			object.put("total", ps_list2.size());
+			object.put("rows", ps_list2);	
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
-			ServletActionContext.getResponse().getWriter().write(object.toString());			
+			ServletActionContext.getResponse().getWriter().write(object.toString());
+			System.err.println(object.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -119,26 +116,25 @@ public class toPsManageAction {
 	
 	
 	
-	
-	public String addPs() 
-	{
-		/** 
-		*新建电站*
-		* @author jie.yang 
-		* @date 2014-10-11
-	    * @param ps_name 
-		* @param ps_owner  
-		* @param ps_investor
-	    * @param ps_province 
-		* @param ps_build_time 
-		* @param first_capacity   
-		* @param capacity
-		* @param area  
-		* @param part_num
-		* @param longitude
-		* @param latitude	
-		* @param result
-		*/ 
+	/** 
+	*新建电站*
+	* @author jie.yang 
+	* @date 2014-10-11
+    * @param ps_name 
+	* @param ps_owner  
+	* @param ps_investor
+    * @param ps_province 
+	* @param ps_build_time 
+	* @param first_capacity   
+	* @param capacity
+	* @param area  
+	* @param part_num
+	* @param longitude
+	* @param latitude	
+	* @param result
+	*/
+	public String addPs() {
+		 
 		HttpServletRequest request =ServletActionContext.getRequest();
 		HttpServletResponse response =ServletActionContext.getResponse();	
 		try {
@@ -223,15 +219,15 @@ public class toPsManageAction {
 		return null;
 	}
 	
+	/** 
+	* 删除选中的气象站信息 *
+	* @author jie.yang 
+	* @date 2014-10-11
+    * @param ps_id
+    * @param id 	
+    * @param ps
+	*/ 
 	public String deletePs(){ 
-		/** 
-		* 删除选中的气象站信息 *
-		* @author jie.yang 
-		* @date 2014-10-11
-	    * @param ps_id
-	    * @param id 	
-	    * @param ps
-		*/ 
 		HttpServletRequest request =ServletActionContext.getRequest();
 		HttpServletResponse response =ServletActionContext.getResponse();	
 		try {
@@ -253,32 +249,31 @@ public class toPsManageAction {
 		return null;
 	}
 	
-	public String updatePs()
-	{
-		/** 
-		* 编辑电站后保存信息 *
-		* @author jie.yang 
-		* @date 2014-10-11
-	    * @param ps_name 
-		* @param ps_owner  
-		* @param ps_investor
-	    * @param ps_province 
-		* @param ps_build_time 
-		* @param id   
-		* @param capacity
-		* @param area  
-		* @param part_num
-		* @param longitude
-		* @param latitude	
-		* @param user_num
-		* @param result
-		*/ 
+	/** 
+	* 编辑电站后保存信息 *
+	* @author jie.yang 
+	* @date 2014-10-11
+    * @param ps_name 
+	* @param ps_owner  
+	* @param ps_investor
+    * @param ps_province 
+	* @param ps_build_time 
+	* @param id   
+	* @param capacity
+	* @param area  
+	* @param part_num
+	* @param longitude
+	* @param latitude	
+	* @param user_num
+	* @param result
+	*/ 
+	public String updatePs(){
+		
 		HttpServletRequest request =ServletActionContext.getRequest();
 		HttpServletResponse response =ServletActionContext.getResponse();	
 		try {
 			request.setCharacterEncoding("utf-8");
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}		
 		String ps_name = request.getParameter("name");		
@@ -349,16 +344,16 @@ public class toPsManageAction {
 		return null;
 	}
 	
-	public String searchPsByName()
-	{
-		/** 
-		*根据电站名称查询电站信息*
-		* @author jie.yang 
-		* @date 2014-10-11
-	    * @param ps_name
-	    * @param ps_list 
-		* @param ps_list2          
-		*/ 
+	
+	/** 
+	*根据电站名称查询电站信息*
+	* @author jie.yang 
+	* @date 2014-10-11
+    * @param ps_name
+    * @param ps_list 
+	* @param ps_list2          
+	*/ 
+	public String searchPsByName(){
 		HttpServletRequest request =ServletActionContext.getRequest();
 		HttpServletResponse response =ServletActionContext.getResponse();	
 		try {
@@ -411,16 +406,16 @@ public class toPsManageAction {
 		return null;
 	}
 	
-	public String searchPsByProvince()
-	{
-		/** 
-		*根据电站省份查询电站信息*
-		* @author jie.yang 
-		* @date 2014-10-11
-	    * @param ps_province
-	    * @param ps_list 
-		* @param ps_list2          
-		*/ 
+	
+	/** 
+	*根据电站省份查询电站信息*
+	* @author jie.yang 
+	* @date 2014-10-11
+    * @param ps_province
+    * @param ps_list 
+	* @param ps_list2          
+	*/ 
+	public String searchPsByProvince(){
 		HttpServletRequest request =ServletActionContext.getRequest();
 		HttpServletResponse response =ServletActionContext.getResponse();	
 		try {
@@ -475,15 +470,16 @@ public class toPsManageAction {
 		return null;
 	}
 	
+	
+	/** 
+	*根据电站建站时间查询电站信息*
+	* @author jie.yang 
+	* @date 2014-10-11
+    * @param date1
+    * @param ps_list
+	* @param ps_list2          
+	*/ 
 	public String searchPsByTime(){
-		/** 
-		*根据电站建站时间查询电站信息*
-		* @author jie.yang 
-		* @date 2014-10-11
-	    * @param date1
-	    * @param ps_list
-		* @param ps_list2          
-		*/ 
 		HttpServletRequest request =ServletActionContext.getRequest();
 		HttpServletResponse response =ServletActionContext.getResponse();	
 		try {
@@ -497,11 +493,8 @@ public class toPsManageAction {
 		ps_informationService = new PS_informationServiceImpl();
 		List<PS_information> ps_list=ps_informationService.getStationByTime(date1,date2);//根据电站建站起止时间查询电站信息		
 		List<ps_information> ps_list2=new ArrayList<ps_information>();
-		for(int i=0;i<ps_list.size();i++)
-		{
-			if(ps_list.get(i).getDelete_flag()==0)
-			{
-			
+		for(int i=0;i<ps_list.size();i++){
+			if(ps_list.get(i).getDelete_flag()==0){
 				ps_information ps=new ps_information();
 				ps.setId(ps_list.get(i).getId());
 				ps.setName(ps_list.get(i).getName());
@@ -533,20 +526,20 @@ public class toPsManageAction {
 		return null;
 	}
 	
+	
+	/** 
+	*校验电站是否已存在*
+	* @author jie.yang 
+	* @date 2014-10-11
+    * @param name
+    * @param result  	
+	*/
 	public String checkPsNameIsLegal() {
-		/** 
-		*校验电站是否已存在*
-		* @author jie.yang 
-		* @date 2014-10-11
-	    * @param name
-	    * @param result  	
-		*/ 
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		try {
 			request.setCharacterEncoding("utf-8");
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String name = request.getParameter("name");
@@ -584,13 +577,15 @@ public class toPsManageAction {
 		return null;
 	}
 	
+	
+	/** 
+	*获取电站名字*
+	* @author jie.yang 
+	* @date 2014-10-11
+    * @param list_ps_name 	
+	*/
 	public String getPsNames(){
-		/** 
-		*获取电站名字*
-		* @author jie.yang 
-		* @date 2014-10-11
-	    * @param list_ps_name 	
-		*/ 
+		 
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		try {
@@ -618,14 +613,15 @@ public class toPsManageAction {
 		return null;
 	}
 	
+	
+	/** 
+	*获取用户所在电站信息*
+	* @author jie.yang 
+	* @date 2014-10-11
+    * @param user_name 
+    * @param list_authority	
+	*/
 	public String getAuthority(){
-		/** 
-		*获取用户所在电站信息*
-		* @author jie.yang 
-		* @date 2014-10-11
-	    * @param user_name 
-	    * @param list_authority	
-		*/ 
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		try {
@@ -660,16 +656,15 @@ public class toPsManageAction {
 		return null;		
 	}
 	
-								
+	/** 
+	*恢复曾经建立过的电站*
+	* @author jie.yang 
+	* @date 2014-10-11
+    * @param ps_name 
+    * @param id	
+    * @param result	
+	*/							
 	public String recoverPS(){ 
-		/** 
-		*恢复曾经建立过的电站*
-		* @author jie.yang 
-		* @date 2014-10-11
-	    * @param ps_name 
-	    * @param id	
-	    * @param result	
-		*/ 
 		HttpServletRequest request =ServletActionContext.getRequest();
 		HttpServletResponse response =ServletActionContext.getResponse();	
 		try {
@@ -709,15 +704,16 @@ public class toPsManageAction {
 		return null;
 	}
 	
+	
+	/** 
+	*根据电站id获取电站名称*
+	* @author jie.yang 
+	* @date 2014-10-11
+    * @param ps_id 
+    * @param ps_name	
+    * @param list	
+	*/
 	public String getPSNameByPSId(){
-		/** 
-		*根据电站id获取电站名称*
-		* @author jie.yang 
-		* @date 2014-10-11
-	    * @param ps_id 
-	    * @param ps_name	
-	    * @param list	
-		*/ 
 		HttpServletRequest request =ServletActionContext.getRequest();
 		HttpServletResponse response =ServletActionContext.getResponse();	
 		try {
@@ -743,15 +739,15 @@ public class toPsManageAction {
 		}
 		return null;
 	}
-	public String checkPsCanDelete()
-	{
-		/** 
-		*根据是否有分期判断能否删除*
-		* @author yaning.liu
-		* @date 2015-10-9
-	    * @param ps_province
-	    * @param result      
-		*/ 
+	
+	/** 
+	*根据是否有分期判断能否删除*
+	* @author yaning.liu
+	* @date 2015-10-9
+    * @param ps_province
+    * @param result      
+	*/
+	public String checkPsCanDelete(){
 		HttpServletRequest request =ServletActionContext.getRequest();
 		HttpServletResponse response =ServletActionContext.getResponse();	
 		try {
@@ -787,15 +783,15 @@ public class toPsManageAction {
 		return null;
 	}
 	
-	public String checkCapacity()
-	{
-		/** 
-		*判断是否可以修改电站容量*
-		* @author yaning.liu
-		* @date 2015-10-9
-	    * @param ps_name
-	    * @param result      
-		*/ 
+	
+	/** 
+	*判断是否可以修改电站容量*
+	* @author yaning.liu
+	* @date 2015-10-9
+    * @param ps_name
+    * @param result      
+	*/
+	public String checkCapacity(){
 		HttpServletRequest request =ServletActionContext.getRequest();
 		HttpServletResponse response =ServletActionContext.getResponse();	
 		try {

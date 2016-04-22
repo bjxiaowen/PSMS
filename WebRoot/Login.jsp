@@ -56,14 +56,17 @@
 				async : false,
 				success : function(obj) {
 					var result = obj[0];
-					
 					if (result == "Role1") {
 						location.href = 'superManageDesk.jsp';
 					} else if (result == "Role2") {
 						location.href = 'superResearchDesk.jsp';
 					} else if (result == "Role3") {
 						location.href = 'psResearchDesk.jsp';
-					} else {
+					} else if (result == "Role4") {
+						location.href = 'psResearchDesk.jsp';
+					} else if (result == "Role5") {
+						location.href = 'psResearchDesk.jsp';
+					}else {
 						location.href = 'Login.jsp';
 					}
 				}

@@ -11,8 +11,8 @@ public class PS_information {
 	private String investor;
 	private String province;
 	private String longitude;
-	private String latitude;
-	private String Build_time;
+	private String  latitude;
+	private String  Build_time;
 	private Integer Station_manage;
 	private Integer User_manage;
 	private Integer Device_manage;

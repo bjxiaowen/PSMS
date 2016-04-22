@@ -822,5 +822,9 @@
 		<result name="success">charts/psMap.jsp</result>
 	</action>
 	
+	<action name="toPSMap" method="toPSMap" class="com.PSMS.Action.BiPowerStationAction">
+		<result name="success">charts/psMap.jsp</result>
+	</action>
+	
 	</package>
 </struts>

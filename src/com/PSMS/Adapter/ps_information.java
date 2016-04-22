@@ -18,6 +18,7 @@ public class ps_information {
 	private String Device_manage;
 	private Integer Station_num;
 	private Integer User_num;
+	private Integer MachineState;//机器状态
 	public int getId() {
 		return id;
 	}
@@ -116,7 +117,11 @@ public class ps_information {
 	public void setUser_num(Integer user_num) {
 		User_num = user_num;
 	}
+	public Integer getMachineState() {
+		return MachineState;
+	}
+	public void setMachineState(Integer machineState) {
+		MachineState = machineState;
+	}
 
-	
-	
 }

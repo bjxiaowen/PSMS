@@ -1,5 +1,6 @@
 package com.PSMS.Action;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,13 +31,44 @@ import net.sf.json.JSONObject;
 public class BiPowerStationAction {
 	
 	private IBiPowerStationService biPowerStationService;
-	
 	private PS_informationService ps_informationService ;
 	private Inverter_parameterService inverterParameterService;
 	private InverterService inverterService;
 	private WeatherStationService weatherStationService;
 	private WS_parameterService wsParameterService;
 	private HistoryOfDayService historyOfDayService;
+	
+	/**
+	 * 电站地图数据
+	 * @return
+	 */
+	public String toPSMap(){
+		try {
+			HttpServletRequest request =ServletActionContext.getRequest();
+			request.setCharacterEncoding("utf-8");
+			ps_informationService = new PS_informationServiceImpl();
+			biPowerStationService=new BiPowerStationServiceImpl();
+			List<PS_information> ps_list=ps_informationService.getAllStation();//查询电站信息
+			String dateTime=GetTime.getCurrentTime3();
+			for(PS_information psInfo:ps_list){//通过电站查询电站状态
+				int pId=psInfo.getId();
+				PowerStationBase power=biPowerStationService.getPowerStationStatus(dateTime, pId);
+				psInfo.setMachineState(power.getMachineState());
+			}
+			JSONObject object = JSONObject.fromObject("{}");
+			object.put("list", ps_list);
+			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
+			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
+			ServletActionContext.getResponse().getWriter().write(object.toString());
+			request.setAttribute("list", ps_list);
+			System.out.println(object.toString());
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		return "success";
+	}
+	
+	
 	/**
 	 * 组件
 	 * @return
