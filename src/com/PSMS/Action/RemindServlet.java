@@ -45,7 +45,6 @@ public class RemindServlet extends HttpServlet implements Filter  {
 		}
         Date currtTime = new Date();
         int i = allTime.compareTo(currtTime); 
-        System.out.println(i < 0); 
         if(i<0){
         	resp.sendRedirect(((HttpServletRequest) request).getContextPath() + "/remind.action"); 
         	//request.getRequestDispatcher("/remind.action");

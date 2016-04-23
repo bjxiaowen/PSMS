@@ -130,6 +130,64 @@ public class DataTransformTools {
 				BigDecimal outCurr=new BigDecimal(Integer.valueOf(tf,16));//00 00：mppt模块温度 0/10 = 0度
 				toData.setMpptTemp(outCurr.divide(factor));
 			}
+			
+			if(datas.length>26){
+				String obligate=datas[15];
+				if(obligate!=null&&!obligate.equals("")){
+					Integer showObligate=Integer.valueOf(obligate,16);//预留字段
+					toData.setShowObligate(showObligate);
+				}
+				
+				//直流侧历史发电量
+				String historyQ=datas[16];
+				if(historyQ!=null&&!historyQ.equals("")){
+					BigDecimal historyQNum=new BigDecimal(Integer.valueOf(historyQ,16));
+					toData.setCurrHistoryQ(historyQNum);
+				}
+				
+				//直流侧日发电量
+				String currDayQ=datas[17];
+				if(currDayQ!=null&&!currDayQ.equals("")){
+					BigDecimal currDayQNum=new BigDecimal(Integer.valueOf(currDayQ,16));
+					toData.setCurrDayQ(currDayQNum);
+				}
+				
+				//直流侧功率
+				String currPower=datas[18];
+				if(currPower!=null&&!currPower.equals("")){
+					BigDecimal currPowerNum=new BigDecimal(Integer.valueOf(currPower,16));
+					toData.setCurrPower(currPowerNum);
+				}
+				
+				//负载历史用电量
+				String loadHistoryQ=datas[19];
+				if(loadHistoryQ!=null&&!loadHistoryQ.equals("")){
+					BigDecimal loadHistoryQNum=new BigDecimal(Integer.valueOf(loadHistoryQ,16));
+					toData.setLoadHistoryQ(loadHistoryQNum);
+				}
+				
+				
+				//负载日用电量
+				String loadDayQ=datas[20];
+				if(loadDayQ!=null&&!loadDayQ.equals("")){
+					BigDecimal loadDayQNum=new BigDecimal(Integer.valueOf(loadDayQ,16));
+					toData.setLoadDayQ(loadDayQNum);
+				}
+				
+				//交流输出功率
+				String exchangeOutPower=datas[21];
+				if(exchangeOutPower!=null&&!exchangeOutPower.equals("")){
+					BigDecimal exchange=new BigDecimal(Integer.valueOf(exchangeOutPower,16));
+					toData.setExchangeOutPower(exchange);
+				}
+				
+				//二氧化碳
+				String carbon=datas[22];
+				if(carbon!=null&&!carbon.equals("")){
+					BigDecimal carbonNum=new BigDecimal(Integer.valueOf(carbon,16));
+					toData.setCarbon(carbonNum);
+				}
+			}
 		}
 		return toData;
 	}

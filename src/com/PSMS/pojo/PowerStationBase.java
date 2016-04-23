@@ -10,7 +10,6 @@ import java.util.Date;
  */
 public class PowerStationBase {
 	
-	
 	private BigDecimal totalCapacity;//电站容量
 	
 	private BigDecimal totalPower;//总数输出功率
@@ -21,7 +20,11 @@ public class PowerStationBase {
 	
 	private int currHour;//统计时间
 	
-	private int groupHour;//分组时间
+	private int groupHour;//按小时分组时间
+	
+	private int groupMonth;//按月分组
+	
+	private int groupDay;//按天分组
 	
 	private BigDecimal mpptTemp;//温度
 	
@@ -49,9 +52,24 @@ public class PowerStationBase {
 	
 	private int undervoltage;//1：电池欠压  0：电池正常
 	
+	private BigDecimal currDayQ;//当天日发电量
+	
+	private BigDecimal currDayCountQ;// 当天累计发电量
+	
+	private BigDecimal currMonthQ;//当月发电量
+	
+	private BigDecimal currMonthCountQ;//当月累计发电量
+	
+	private BigDecimal currYearQ;//当年每月发电量
+	
+	private BigDecimal currYearCountQ;//当年总发电量
+	
+	private BigDecimal historyCountQ;//历史发电量
+	
+	private BigDecimal countCarbon;//二氧化碳
 	
 	
-
+	
 	public BigDecimal getTotalCapacity() {
 		return totalCapacity;
 	}
@@ -207,16 +225,86 @@ public class PowerStationBase {
 	public void setUndervoltage(int undervoltage) {
 		this.undervoltage = undervoltage;
 	}
-	
-	
-	@Override
-	public String toString() {
-		return "PowerStationBase [totalCapacity=" + totalCapacity + ", totalPower=" + totalPower + ", totalVoltage="
-				+ totalVoltage + ", totalCurrent=" + totalCurrent + ", currHour=" + currHour + ", groupHour="
-				+ groupHour + ", mpptTemp=" + mpptTemp + ", chargeDischarge=" + chargeDischarge + ", voltage=" + voltage
-				+ ", current=" + current + ", power=" + power + ", outputState=" + outputState + ", date=" + date
-				+ ", psId=" + psId + ", psName=" + psName + ", partNum=" + partNum + ", area=" + area
-				+ ", machineState=" + machineState + ", undervoltage=" + undervoltage + "]";
+
+	public BigDecimal getCurrDayQ() {
+		return currDayQ;
 	}
+
+	public void setCurrDayQ(BigDecimal currDayQ) {
+		this.currDayQ = currDayQ;
+	}
+
+	public BigDecimal getCurrDayCountQ() {
+		return currDayCountQ;
+	}
+
+	public void setCurrDayCountQ(BigDecimal currDayCountQ) {
+		this.currDayCountQ = currDayCountQ;
+	}
+
+	public BigDecimal getCurrMonthQ() {
+		return currMonthQ;
+	}
+
+	public void setCurrMonthQ(BigDecimal currMonthQ) {
+		this.currMonthQ = currMonthQ;
+	}
+
+	public BigDecimal getCurrMonthCountQ() {
+		return currMonthCountQ;
+	}
+
+	public void setCurrMonthCountQ(BigDecimal currMonthCountQ) {
+		this.currMonthCountQ = currMonthCountQ;
+	}
+
+	public BigDecimal getCurrYearQ() {
+		return currYearQ;
+	}
+
+	public void setCurrYearQ(BigDecimal currYearQ) {
+		this.currYearQ = currYearQ;
+	}
+
+	public BigDecimal getCurrYearCountQ() {
+		return currYearCountQ;
+	}
+
+	public void setCurrYearCountQ(BigDecimal currYearCountQ) {
+		this.currYearCountQ = currYearCountQ;
+	}
+
+	public int getGroupMonth() {
+		return groupMonth;
+	}
+
+	public void setGroupMonth(int groupMonth) {
+		this.groupMonth = groupMonth;
+	}
+
+	public int getGroupDay() {
+		return groupDay;
+	}
+
+	public void setGroupDay(int groupDay) {
+		this.groupDay = groupDay;
+	}
+
+	public BigDecimal getHistoryCountQ() {
+		return historyCountQ;
+	}
+
+	public void setHistoryCountQ(BigDecimal historyCountQ) {
+		this.historyCountQ = historyCountQ;
+	}
+
+	public BigDecimal getCountCarbon() {
+		return countCarbon;
+	}
+
+	public void setCountCarbon(BigDecimal countCarbon) {
+		this.countCarbon = countCarbon;
+	}
+
 	
 }

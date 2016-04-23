@@ -17,7 +17,6 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 	/**
 	 * 查询电站状态
 	 */
-	@SuppressWarnings("deprecation")
 	@Override
 	public PowerStationBase getPowerStationStatus(String dateTime, int psId) {
 		Session session = HibernateSessionFactory.getHibernateSession();

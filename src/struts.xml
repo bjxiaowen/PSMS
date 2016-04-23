@@ -8,13 +8,13 @@
 	<constant name="struts.multipart.maxSize" value="10485760" />
 	<package name="main" extends="struts-default">
 
-		<interceptors>
+<!-- 		<interceptors>
 			<interceptor name="remind" class="com.PSMS.Action.RemindInterceptor" />
 			<interceptor-stack name="myStack">
 				<interceptor-ref name="remind"></interceptor-ref>
 				<interceptor-ref name="defaultStack"></interceptor-ref>
 			</interceptor-stack>
-		</interceptors>
+		</interceptors> -->
 		
 		<global-results><!-- 全局result -->
 			<result name=""></result>
