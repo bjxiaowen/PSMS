@@ -1,6 +1,7 @@
 package com.PSMS.Action;
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -29,14 +30,23 @@ public class RemindServlet extends HttpServlet implements Filter  {
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
+			throws IOException, ServletException{
 		HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
-        String allowDate=getAllow();
-        String sDate=GetTime.getCurrentTime3();
-        if(allowDate.equals(sDate)){
+        String allowDate=getAllow();//到期时间
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date allTime = null;
+		try {
+			allTime = dateFormat.parse(allowDate);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+        Date currtTime = new Date();
+        int i = allTime.compareTo(currtTime); 
+        System.out.println(i < 0); 
+        if(i<0){
         	resp.sendRedirect(((HttpServletRequest) request).getContextPath() + "/remind.action"); 
         	//request.getRequestDispatcher("/remind.action");
         	//request.getServletContext().getRequestDispatcher ("/remind.jsp"); 

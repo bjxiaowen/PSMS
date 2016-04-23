@@ -89,6 +89,8 @@ public class ToData implements Serializable {
 	
 	private   BigDecimal   ExchangeOutPower;//交流输出功率
 	
+	private BigDecimal Carbon;//二氧化碳
+	
 	
 	public int getInverterDataID() {
 		return InverterDataID;
@@ -348,4 +350,13 @@ public class ToData implements Serializable {
 	public void setExchangeOutPower(BigDecimal exchangeOutPower) {
 		ExchangeOutPower = exchangeOutPower;
 	}
+
+	public BigDecimal getCarbon() {
+		return Carbon;
+	}
+
+	public void setCarbon(BigDecimal carbon) {
+		Carbon = carbon;
+	}
+	
 }

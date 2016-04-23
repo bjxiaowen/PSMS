@@ -1,6 +1,8 @@
 package com.PSMS.Dao.impl;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +46,14 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 				power.setMachineState(Integer.parseInt(obj[0] + ""));
 			}
 			if(obj[1]!=null){
-				power.setDate(new Date(obj[1] + ""));
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd ");  
+			    try {
+					Date date = sdf.parse(obj[1] + "");
+					power.setDate(date);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}  
+				
 			}
 		}
 		return power;
