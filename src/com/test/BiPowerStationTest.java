@@ -27,7 +27,7 @@ public class BiPowerStationTest {
 		}
 	}
 	
-	public static void getPowerStationDayByDate(IBiPowerStationDao dao){
+/*	public static void getPowerStationDayByDate(IBiPowerStationDao dao){
 		PowerStationBase power = null;
 		try {
 			power = dao.getPowerStationDayByDate("2016-03-26",92);
@@ -35,9 +35,9 @@ public class BiPowerStationTest {
 			e.printStackTrace();
 		}
 		System.out.println(power.toString());
-	}
+	}*/
 	
-	public static void getPowerStationHourByDate(IBiPowerStationDao dao){
+/*	public static void getPowerStationHourByDate(IBiPowerStationDao dao){
 		try {
 			List<PowerStationBase> list=dao.getPowerStationHourByDate("2016-03-26",92);
 			for(PowerStationBase power:list){
@@ -46,7 +46,7 @@ public class BiPowerStationTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 	
 	public static void getBatteryVoltageDayByDate(IBiPowerStationDao dao){
 		try {

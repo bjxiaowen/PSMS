@@ -13,12 +13,14 @@ public class BiPowerStationServiceImpl implements IBiPowerStationService {
 
 	@Override
 	public PowerStationBase getPowerStationDayByDate(String dateTime,int psId) throws Exception {
-		return biDao.getPowerStationDayByDate(dateTime,psId);
+		return null;
+//		return biDao.getPowerStationDayByDate(dateTime,psId);
 	}
 
 	@Override
 	public List<PowerStationBase> getPowerStationHourByDate(String dateTime,int psId) throws Exception {
-		return BiPowerStationTools.getListSize24(biDao.getPowerStationHourByDate(dateTime,psId));
+		return null;
+//		return BiPowerStationTools.getListSize24(biDao.getPowerStationHourByDate(dateTime,psId));
 	}
 
 	@Override
