@@ -796,6 +796,9 @@
 	<action name="toModule" method="toModule" class="com.PSMS.Action.BiPowerStationAction">
 		<result name="success">module.jsp</result>
 	</action>
+	<action name="toBiIndex" method="toBiIndex" class="com.PSMS.Action.BiIndexAction">
+		<result name="success">charts/total.jsp</result>
+	</action>
 	<action name="getModule" method="getModule" class="com.PSMS.Action.BiPowerStationAction"></action>
 	
 	<action name="toBatteryVoltage" method="toBatteryVoltage" class="com.PSMS.Action.BiPowerStationAction">

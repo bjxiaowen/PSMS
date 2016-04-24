@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import org.joda.time.DateTime;
 
@@ -79,6 +80,20 @@ public class GetTime {
 		String time = formattertime.format(s);
 		return time;
 	}
+	
+	public static String getCurrentMonth() {
+		SimpleDateFormat formattertime = new SimpleDateFormat("yyyy-MM");
+		Date s = new Date();
+		String time = formattertime.format(s);
+		return time;
+	}
+	
+	public static String getCurrentYear() {
+		SimpleDateFormat formattertime = new SimpleDateFormat("yyyy");
+		Date s = new Date();
+		String time = formattertime.format(s);
+		return time;
+	}
 
 	public static String getBackupTime() {
 		SimpleDateFormat formattertime = new SimpleDateFormat("yyyy-MM-dd(HH_mm_ss)");
@@ -135,5 +150,11 @@ public class GetTime {
 		day = day * 24 * 60 * 60 * 1000;
 		time += day;
 		return new Date(time);
+	}
+	
+	public static int getMonthOfDay(){
+		Calendar aCalendar = Calendar.getInstance(Locale.CHINA);
+		int day=aCalendar.getActualMaximum(Calendar.DATE);
+		return day;
 	}
 }

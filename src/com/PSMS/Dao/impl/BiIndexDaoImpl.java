@@ -76,9 +76,9 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 			return power;
 		}
 		for (int i = 0; i < list.size(); i++) {
-			Object[] obj = (Object[]) list.get(i);
-			if(obj[0]!=null){
-				power.setCurrDayCountQ(new BigDecimal(obj[0] + ""));
+			Object obj=list.get(i);
+			if(obj!=null){
+				power.setCurrDayCountQ(new BigDecimal(obj + "").setScale(2, BigDecimal.ROUND_HALF_UP));
 			}
 		}
 		return power;
@@ -146,9 +146,9 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 			return power;
 		}
 		for (int i = 0; i < list.size(); i++) {
-			Object[] obj = (Object[]) list.get(i);
-			if(obj[0]!=null){
-				power.setCurrMonthCountQ(new BigDecimal(obj[0] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			Object obj = list.get(i);
+			if(obj!=null){
+				power.setCurrMonthCountQ(new BigDecimal(obj + "").setScale(2, BigDecimal.ROUND_HALF_UP));
 			}
 		}
 		return power;
@@ -213,9 +213,9 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 			return power;
 		}
 		for (int i = 0; i < list.size(); i++) {
-			Object[] obj = (Object[]) list.get(i);
-			if(obj[0]!=null){
-				power.setCurrYearCountQ(new BigDecimal(obj[0] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			Object obj = (Object) list.get(i);
+			if(obj!=null){
+				power.setCurrYearCountQ(new BigDecimal(obj + "").setScale(2, BigDecimal.ROUND_HALF_UP));
 			}
 		}
 		return power;
@@ -234,7 +234,7 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 		buffer.append(" where inp.PS_id=? ");
 		buffer.append(" order by tod.OperateDate desc ");
 		Query query = session.createSQLQuery(buffer.toString());
-		query.setInteger(1, psId);
+		query.setInteger(0, psId);
 		@SuppressWarnings("rawtypes")
 		List list = query.list();
 		HibernateSessionFactory.closeHibernateSession();
@@ -268,9 +268,8 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 		buffer.append(" inner join Inverter_parameter inp  on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
 		buffer.append(" where inp.PS_id=? ");
-		buffer.append(" order by tod.OperateDate desc ");
 		Query query = session.createSQLQuery(buffer.toString());
-		query.setInteger(1, psId);
+		query.setInteger(0, psId);
 		@SuppressWarnings("rawtypes")
 		List list = query.list();
 		HibernateSessionFactory.closeHibernateSession();
