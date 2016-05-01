@@ -35,18 +35,25 @@ import com.PSMS.Service.Inverter_parameterServiceImpl;
 import com.PSMS.Service.PS_informationService;
 import com.PSMS.Service.PS_informationServiceImpl;
 import com.PSMS.Service.RoleServiceImpl;
-
+/** 
+* 逆变器设备信息管理，加载页面,将需要显示的设备信息通过json传回前台,
+* 删除选中的逆变器信息,
+* 新建逆变器,校验逆变器是否已存在,
+* 根据逆变器名查询信息,
+* 根据所属电站查询逆变器信息,
+* 根据设备类型和品牌显示对应的设备型号
+* @author jiaojiao.wang 
+* @date 2014-11-18
+* @param inverterService 
+* @param ps_informationService 
+* @param equipmentService 		
+*/ 
 public class toInverterManageAction {
-	/** 
-	* 逆变器设备信息管理，加载页面,将需要显示的设备信息通过json传回前台,删除选中的逆变器信息,新建逆变器,校验逆变器是否已存在,根据逆变器名查询信息,根据所属电站查询逆变器信息,根据设备类型和品牌显示对应的设备型号
-	* @author jiaojiao.wang 
-	* @date 2014-11-18
-	* @param inverterService 
-	* @param ps_informationService 
-	* @param equipmentService 		
-	*/ 
+	
 	private Inverter_parameterService inverterService;
+	
 	private PS_informationService ps_informationService;
+	
 	private EquipmentService equipmentService;
 	/** 
 	*加载页面*
@@ -59,35 +66,30 @@ public class toInverterManageAction {
 	*/ 
 	public String toInverterManage(){
 		HttpServletRequest request =ServletActionContext.getRequest();
-		HttpServletResponse response =ServletActionContext.getResponse();	
 		try {
 			request.setCharacterEncoding("utf-8");
+			ps_informationService = new PS_informationServiceImpl();
+			equipmentService = new EquipmentServiceImpl();
+			List<String> list_station_name = ps_informationService.getAllStationName();//显示所有电站名称
+//			List<String> list_type = equipmentService.getAllTypeName();//显示所有设备类型
+			List<String> list_brand = equipmentService.getAllBrand(); //获取所有的品牌		
+			request.setAttribute("list_station_name", list_station_name);//返回给前台显示
+			request.setAttribute("list_brand", list_brand);//返回给前台显示   
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ps_informationService = new PS_informationServiceImpl();
-		equipmentService = new EquipmentServiceImpl();
-		
-		List<String> list_station_name = ps_informationService.getAllStationName();//显示所有电站名称
-		List<String> list_type = equipmentService.getAllTypeName();//显示所有设备类型
-		String type="逆变器";	//设备类型默认为逆变器	
-		List<String> list_brand = equipmentService.getAllBrandName(type); //根据设备类型查询设备品牌			
-		request.setAttribute("list_station_name", list_station_name);//返回给前台显示
-		request.setAttribute("list_type", list_type);//返回给前台显示		
-		request.setAttribute("list_brand", list_brand);//返回给前台显示   
 		return "success";
 	}
-
+	
+	/** 
+	*将需要显示的设备信息通过json传回前台*
+	* @author jiaojiao.wang
+	* @date 2014-11-18
+    * @param list_all_inverter
+    * @param list_ps_name 
+	* @param inverter_parameter_list 	
+	*/ 
 	public String getInverterInformation(){
-		/** 
-		*将需要显示的设备信息通过json传回前台*
-		* @author jiaojiao.wang
-		* @date 2014-11-18
-	    * @param list_all_inverter
-	    * @param list_ps_name 
-		* @param inverter_parameter_list 	
-		*/ 
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		try {
@@ -128,112 +130,91 @@ public class toInverterManageAction {
 		object.put("total", inverter_parameter_list.size());
 		object.put("rows", inverter_parameter_list);
 		try {
-			ServletActionContext.getResponse().setContentType(
-					"application/json;charset=UTF-8");
+			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
-			ServletActionContext.getResponse().getWriter()
-					.write(object.toString());
-
+			ServletActionContext.getResponse().getWriter().write(object.toString());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;	
 	}
 	
+	/** 
+	* 校验逆变器 是否已存在*
+	* @author jiaojiao.wang
+	* @date 2014-11-18
+    * @param name
+    * @param ps_name 
+	* @param result  
+	* @param ps_id	
+	*/ 
 	public String checkInverterNameIsLegal() {
-		/** 
-		*校验逆变器 是否已存在*
-		* @author jiaojiao.wang
-		* @date 2014-11-18
-	    * @param name
-	    * @param ps_name 
-		* @param result  
-		* @param ps_id	
-		*/ 
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		try {
 			request.setCharacterEncoding("utf-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String name = request.getParameter("name");
-		String ps_name = request.getParameter("ps_name");
-		try {
+			String name = request.getParameter("name");
+			String ps_name = request.getParameter("ps_name");
 			name = java.net.URLDecoder.decode(name, "UTF-8");
 			ps_name = java.net.URLDecoder.decode(ps_name, "UTF-8");// 以上为获取前台数据，转码
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		inverterService = new Inverter_parameterServiceImpl();
-		ps_informationService = new PS_informationServiceImpl();
-		String result = "";//用result存放提示信息，并将其传回前台
-		
+			inverterService = new Inverter_parameterServiceImpl();
+			ps_informationService = new PS_informationServiceImpl();
+			String result = "";//用result存放提示信息，并将其传回前台
+			
 			int ps_id = ps_informationService.getPS_idByName(ps_name);//根据电站名称获得对应的电站id
 			if (!(inverterService.checkInverterNameExistById(name, ps_id)))//校验逆变器 在该电站中是否已存在
 				result = "correct";
 			else
 				result = "wrong";		// 电站内部逆变器不重名时返回correct
-		ArrayList list = new ArrayList();
-		list.add(result);//通过json将校验结果传回到前台显示
-		JSONArray obj = JSONArray.fromObject(list);
-		try {
+			ArrayList list = new ArrayList();
+			list.add(result);//通过json将校验结果传回到前台显示
+			JSONArray obj = JSONArray.fromObject(list);
 			response.setHeader("Cache-Control", "no-cache");
 			response.setContentType("aplication/json;charset=UTF-8");
 			response.getWriter().print(obj);
-
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
-	public String addInverter()
-	{
-		/** 
-		*新建逆变器*
-		* @author jiaojiao.wang
-		* @date 2014-11-18
-	    * @param id
-	    * @param ps_name 
-		* @param name  
-		* @param type
-	    * @param brand 
-		* @param model 
-		* @param purchase_time   
-		* @param rate_power
-	    * @param rated_voltage 
-		* @param max_power  
-		* @param power_factor
-		* @param i_parameter  
-		* @param ps_id
-		* @param result	
-		*/ 
+	/** 
+	*新建逆变器*
+	* @author jiaojiao.wang
+	* @date 2014-11-18
+    * @param id
+    * @param ps_name 
+	* @param name  
+	* @param type
+    * @param brand 
+	* @param model 
+	* @param purchase_time   
+	* @param rate_power
+    * @param rated_voltage 
+	* @param max_power  
+	* @param power_factor
+	* @param i_parameter  
+	* @param ps_id
+	* @param result	
+	*/
+	public String addInverter(){
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		try {
 			request.setCharacterEncoding("utf-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String id = request.getParameter("id");
-		String ps_name = request.getParameter("ps_name");
-		String name = request.getParameter("name");
-		String type = request.getParameter("type");
-		String brand = request.getParameter("brand");
-		String model = request.getParameter("model");
-		String purchase_time = request.getParameter("purchase_time");
-		String rate_power = request.getParameter("rate_power");
-		String rated_voltage = request.getParameter("rated_voltage");
-		String max_power = request.getParameter("max_power");
-		String power_factor = request.getParameter("power_factor");
-		
-		try {
+			String id = request.getParameter("id");
+			String ps_name = request.getParameter("ps_name");
+			String name = request.getParameter("name");
+			String type = request.getParameter("type");
+			String brand = request.getParameter("brand");
+			String model = request.getParameter("model");
+			String purchase_time = request.getParameter("purchase_time");
+			String rate_power = request.getParameter("rate_power");
+			String rated_voltage = request.getParameter("rated_voltage");
+			String max_power = request.getParameter("max_power");
+			String power_factor = request.getParameter("power_factor");
 			ps_name = java.net.URLDecoder.decode(ps_name, "UTF-8");
 			name = java.net.URLDecoder.decode(name, "UTF-8");
 			type = java.net.URLDecoder.decode(type, "UTF-8");
@@ -241,64 +222,60 @@ public class toInverterManageAction {
 			model = java.net.URLDecoder.decode(model, "UTF-8");
 			purchase_time = java.net.URLDecoder.decode(purchase_time, "UTF-8");
 			
-		
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		ps_informationService = new PS_informationServiceImpl();
-		inverterService = new Inverter_parameterServiceImpl();		// 以上为初始化
-		
-		inverter_parameter u = new inverter_parameter();
-		Inverter_parameter i_parameter = new Inverter_parameter();
-		int ps_id = ps_informationService.getPS_idByName(ps_name);//根据电站名称获得对应的电站id
-		if(id!=null){
-			i_parameter.setId(Integer.parseInt(id));
-		}
-		i_parameter.setType(type);
-		i_parameter.setModel(model);
-		i_parameter.setName(name);
-		i_parameter.setBrand(brand);
-		i_parameter.setPS_id(ps_id);
-		i_parameter.setPurchase_time(purchase_time);// 将数据存入u类中
-		if(rate_power==""){//判断额定功率若没有填写则默认为空
-			i_parameter.setRate_power(null);
-		}else {	i_parameter.setRate_power(rate_power);}
-		if(rated_voltage==""){//判断额定电压若没有填写则默认为空
-			i_parameter.setRated_voltage(null);
-		}else {	i_parameter.setRated_voltage(rated_voltage);}
-		if(max_power==""){//判断最大功率若没有填写则默认为空
-			i_parameter.setMax_power(null);
-		}else {	i_parameter.setMax_power(max_power);}
-		if(power_factor==""){//判断功率因数若没有填写则默认为空
-			i_parameter.setPower_factor(null);
-		}else {	i_parameter.setPower_factor(power_factor);}
-		inverterService.addInverter(i_parameter);
-		
-		ArrayList list = new ArrayList();
-		String result = "逆变器保存成功！";//用result存放提示信息，并将其传回前台
-		list.add(result);//通过json将校验结果传回到前台显示
-		JSONArray obj = JSONArray.fromObject(list);
-		try {
+			ps_informationService = new PS_informationServiceImpl();
+			inverterService = new Inverter_parameterServiceImpl();		// 以上为初始化
+			
+			inverter_parameter u = new inverter_parameter();
+			Inverter_parameter i_parameter = new Inverter_parameter();
+			int ps_id = ps_informationService.getPS_idByName(ps_name);//根据电站名称获得对应的电站id
+			if(id!=null){
+				i_parameter.setId(Integer.parseInt(id));
+			}
+			i_parameter.setType(type);
+			i_parameter.setModel(model);
+			i_parameter.setName(name);
+			i_parameter.setBrand(brand);
+			i_parameter.setPS_id(ps_id);
+			i_parameter.setPurchase_time(purchase_time);// 将数据存入u类中
+			if(rate_power==""){//判断额定功率若没有填写则默认为空
+				i_parameter.setRate_power(null);
+			}else {	i_parameter.setRate_power(rate_power);}
+			if(rated_voltage==""){//判断额定电压若没有填写则默认为空
+				i_parameter.setRated_voltage(null);
+			}else {	i_parameter.setRated_voltage(rated_voltage);}
+			if(max_power==""){//判断最大功率若没有填写则默认为空
+				i_parameter.setMax_power(null);
+			}else {	i_parameter.setMax_power(max_power);}
+			if(power_factor==""){//判断功率因数若没有填写则默认为空
+				i_parameter.setPower_factor(null);
+			}else {	i_parameter.setPower_factor(power_factor);}
+			inverterService.addInverter(i_parameter);
+			
+			ArrayList list = new ArrayList();
+			String result = "设备保存成功！";//用result存放提示信息，并将其传回前台
+			list.add(result);//通过json将校验结果传回到前台显示
+			JSONArray obj = JSONArray.fromObject(list);
+			
 			response.setHeader("Cache-Control", "no-cache");
 			response.setContentType("aplication/json;charset=UTF-8");
 			response.getWriter().print(obj);
-
+			
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
+	/** 
+	* 删除选中的逆变器信息 *
+	* @author jiaojiao.wang 
+	* @date 2014-11-18
+    * @param inverter_id
+    * @param id 	
+	*/
 	public String deleteInverter() {
-		/** 
-		* 删除选中的逆变器信息 *
-		* @author jiaojiao.wang 
-		* @date 2014-11-18
-	    * @param inverter_id
-	    * @param id 	
-		*/ 
 		HttpServletRequest request = ServletActionContext.getRequest();
 		HttpServletResponse response = ServletActionContext.getResponse();
 		try {
@@ -313,19 +290,19 @@ public class toInverterManageAction {
 		inverterService.deleteInverterById(id);// 根据id删除该逆变器
 		return null;
 	}
-
+	
+	/** 
+	*根据逆变器名查询信息*
+	* @author jiaojiao.wang 
+	* @date 2014-11-18
+    * @param inverter_name
+    * @param list_inverter 
+	* @param list_ps_name 
+	* @param i_list 
+	* @param ps_id	 
+	* @param ps_name
+	*/
 	public String queryInverterByName(){
-		/** 
-		*根据逆变器名查询信息*
-		* @author jiaojiao.wang 
-		* @date 2014-11-18
-	    * @param inverter_name
-	    * @param list_inverter 
-		* @param list_ps_name 
-		* @param i_list 
-		* @param ps_id	 
-		* @param ps_name
-		*/ 
 		HttpServletRequest request =ServletActionContext.getRequest();
 		HttpServletResponse response =ServletActionContext.getResponse();	
 		try {
@@ -383,20 +360,20 @@ public class toInverterManageAction {
 		return null;
 	}
 	
+	/** 
+	*根据所属电站查询逆变器信息*
+	* @author jiaojiao.wang 
+	* @date 2014-11-18
+    * @param ps_name
+    * @param inverter_name 
+	* @param ps_id  
+	* @param list_inverter	 
+	* @param list_ps_name
+	* @param i_list	 
+	* @param ps_id
+	* @param ps_name1         
+	*/
 	public String queryInverterByPS_name(){
-		/** 
-		*根据所属电站查询逆变器信息*
-		* @author jiaojiao.wang 
-		* @date 2014-11-18
-	    * @param ps_name
-	    * @param inverter_name 
-		* @param ps_id  
-		* @param list_inverter	 
-		* @param list_ps_name
-		* @param i_list	 
-		* @param ps_id
-		* @param ps_name1         
-		*/ 
 		HttpServletRequest request =ServletActionContext.getRequest();
 		HttpServletResponse response =ServletActionContext.getResponse();	
 		try {
@@ -467,53 +444,93 @@ public class toInverterManageAction {
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			ServletActionContext.getResponse().getWriter().write(obj.toString());			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
 
-	
-	public String  setModelByTypeAndBrandI()
-	{	
-		/** 
-		*根据设备类型和品牌显示对应的设备型号*
-		* @author jiaojiao.wang 
-		* @date 2014-11-18
-	    * @param brand
-	    * @param type 
-		* @param list_model          
-		*/ 
-
+	/** 
+	*根据品牌显示对应的设备类型和设备型号*
+	* @author jiaojiao.wang 
+	* @date 2014-11-18
+    * @param brand
+    * @param type 
+	* @param list_model          
+	*/ 
+	public String  setModelByTypeAndBrandI(){	
 		HttpServletRequest request =ServletActionContext.getRequest();
 		HttpServletResponse response =ServletActionContext.getResponse();	
 		try {
 			request.setCharacterEncoding("utf-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String brand = request.getParameter("brand");
-		try {
+			String brand = request.getParameter("brand");
 			brand = java.net.URLDecoder.decode(brand, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		equipmentService = new EquipmentServiceImpl();
-		String type="逆变器";//设备类型默认为逆变器
-		List<String> list_model = equipmentService.getAllModelName(type,brand); //根据设备类型与设备品牌查询设备型号
-		ArrayList list = new ArrayList();	//返回给前台显示	
-		list.add(list_model);	//通过json将校验结果传回到前台显示
-		JSONArray obj = JSONArray.fromObject(list);
-		try {
+			equipmentService = new EquipmentServiceImpl();
+			List<String> list_model = equipmentService.getAllModelName(null,brand); //根据设备类型与设备品牌查询设备型号
+			ArrayList list = new ArrayList();	//返回给前台显示	
+			list.add(list_model);	//通过json将校验结果传回到前台显示
+			JSONArray obj = JSONArray.fromObject(list);
 			response.setHeader("Cache-Control", "no-cache");
 			response.setContentType("aplication/json;charset=UTF-8");
 			response.getWriter().print(obj);
-
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * 通过品牌查询类型
+	 * @return
+	 */
+	public String  getTypeByBrand(){
+		HttpServletRequest request =ServletActionContext.getRequest();
+		HttpServletResponse response =ServletActionContext.getResponse();	
+		try {
+			request.setCharacterEncoding("utf-8");
+			String brand = request.getParameter("brand");
+			brand = java.net.URLDecoder.decode(brand, "UTF-8");
+			equipmentService = new EquipmentServiceImpl();
+			List<String> types = equipmentService.getTypeByBrand(brand); //根据设备类型与设备品牌查询设备型号
+			ArrayList list = new ArrayList();	//返回给前台显示	
+			list.add(types);	//通过json将校验结果传回到前台显示
+			JSONArray obj = JSONArray.fromObject(list);
+			response.setHeader("Cache-Control", "no-cache");
+			response.setContentType("aplication/json;charset=UTF-8");
+			response.getWriter().print(obj);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+//	 * 通过品牌,类型查询型号
+	 * @return
+	 */
+	public String  getModelByBrandAndType(){
+		HttpServletRequest request =ServletActionContext.getRequest();
+		HttpServletResponse response =ServletActionContext.getResponse();	
+		try {
+			request.setCharacterEncoding("utf-8");
+			String brand = request.getParameter("brand");
+			String type = request.getParameter("type");
+			brand = java.net.URLDecoder.decode(brand, "UTF-8");
+			type = java.net.URLDecoder.decode(type, "UTF-8");
+			equipmentService = new EquipmentServiceImpl();
+			List<String> list_model = equipmentService.getModelByBrandAndType(brand,type); //根据设备类型与设备品牌查询设备型号
+			ArrayList list = new ArrayList();	//返回给前台显示	
+			list.add(list_model);	//通过json将校验结果传回到前台显示
+			JSONArray obj = JSONArray.fromObject(list);
+			response.setHeader("Cache-Control", "no-cache");
+			response.setContentType("aplication/json;charset=UTF-8");
+			response.getWriter().print(obj);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return null;

@@ -29,8 +29,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </style>
 </head>
 <body>
-   <p style="font-weight:bold;color:#0E2D5F;font: bold 16px '宋体','微软雅黑';font-size:12px">设备管理->逆变器</p>
-    <table id="dg" title="逆变器列表" class="easyui-datagrid" style="width:100%;height:95%;text-align:center" 
+   <p style="font-weight:bold;color:#0E2D5F;font: bold 16px '宋体','微软雅黑';font-size:12px">设备管理->设备信息</p>
+    <table id="dg" title="设备列表" class="easyui-datagrid" style="width:100%;height:95%;text-align:center" 
             url="getInverterInformation.action"        
             toolbar="#toolbar" pagination="true" pageSize=20 pageList="[ 20, 30, 40 ]" //读取分页条数，即向后台读取数据时传过去的值
             autoRowHeight="true" striped="true" rownumbers="true" fitColumns="true"
@@ -39,9 +39,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <tr> 
                 <th field="id" hidden="hidden" width="20">编号</th>  
                 <th field="ps_name" width="25" align="center" sortable="true">所属电站</th>
-                <th field="name" width="20" align="center" sortable="true">设备名称</th>
-                <th field="type" width="20" align="center" >设备类型</th>
+                <th field="name" width="20" align="center" sortable="true">设备id</th>
                 <th field="brand" width="20" align="center" sortable="true">设备品牌</th>
+                <th field="type" width="20" align="center" >设备类型</th>
                 <th field="model" width="20" align="center" sortable="true">设备型号</th>
                 <th field="purchase_time" width="30" align="center" sortable="true">购买时间</th>
                 <th field="rate_power" width="15" align="center" sortable="true">额定功率</th>
@@ -55,7 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newInverter()">新建设备</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editInverter()">编辑设备</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyInverter()">删除设备</a>
-        <input id="search_name" name="search_name" class="easyui-searchbox" data-options="prompt:'根据逆变器名查询',searcher:doSearch" style="width:130px"></input>
+        <input id="search_name" name="search_name" class="easyui-searchbox" data-options="prompt:'根据设备名称查询',searcher:doSearch" style="width:130px"></input>
         <select class="easyui-combobox" name="search-station" style="width:160px;" data-options=" panelHeight:'auto'" >
         	<option value="">根据电站查询</option>       
         	<c:forEach items="${list_station_name}" var="list3">	  													
@@ -65,8 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search"  onclick="queryInverterByPS_name()">查找</a>
     </div>
     
-    <div id="dlg" class="easyui-dialog" style="width:430px;height:450px;padding:10px 20px"
-            closed="true" buttons="#dlg-buttons">
+    <div id="dlg" class="easyui-dialog" style="width:430px;height:450px;padding:10px 20px" closed="true" buttons="#dlg-buttons">
         <div class="ftitle">设备信息</div>
         <form id="fm" method="post" novalidate  style="height:">
         	<div class="fitem">
@@ -79,19 +78,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			 	<input id="ex_ps_name" name="ex_ps_name" type="hidden"></input> 
             </div>
             <div class="fitem">
-                <label>设备名称</label>
+                <label>设备id</label>
                 <input id="name" name="name" class="easyui-textbox" >(必填)</input>
                 <input id="ex_name" name="ex_name" type="hidden" ></input>  
             </div>
           
-            <div class="fitem">
-                <label>设备类型</label>
-                 <input id="type" name="type" class="easyui-textbox" ></input>
-                 <input id="ex_type" name="ex_type" type="hidden" ></input> 
-            </div>
-            <div class="fitem">
+          <div class="fitem">
                 <label>设备品牌</label>
-               		 <select id="brand" class="easyui-combobox" name="brand" editable="false" style="width:160px;" data-options="panelHeight:'auto', onSelect:setModelByTypeAndBrandI" >
+               		 <select id="brand" class="easyui-combobox" name="brand" editable="false" style="width:160px;" data-options="panelHeight:'auto', onSelect:getTypeByBrand" >
                		 <c:forEach items="${list_brand}" var="list71">	  													
 						<option value="${list71}">${list71}</option>
 					 </c:forEach>
@@ -99,12 +93,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <input id="ex_brand" name="ex_brand" type="hidden" ></input> 
             </div>
             <div class="fitem">
+                <label>设备类型</label>
+                <select id="type" class="easyui-combobox" name="type" editable="false" style="width:160px;" data-options=" panelHeight:'auto', valueField: 'id',textField: 'text', onSelect:getModelByBrandAndType" >
+                </select>(必选类型)
+                <input id="ex_type" name="ex_type" type="hidden" ></input> 
+            </div>
+              <div class="fitem">
                 <label>设备型号</label>
-                <select id="model" class="easyui-combobox" name="model" editable="false" style="width:160px;" data-options=" panelHeight:'auto',  valueField: 'id',textField: 'text'">
+                <select id="model" class="easyui-combobox" name="model" editable="false" style="width:160px;"  data-options=" panelHeight:'auto', valueField: 'id',textField: 'text' ">
    			 	</select>(先选品牌)
                 <input id="ex_model" name="ex_model" type="hidden" ></input> 
             </div>
-                
             <div class="fitem">
                 <label>购买时间</label>
                 <input id="purchase_time" class="easyui-datebox" name="purchase_time"class="easyui-datetimebox" >
@@ -143,10 +142,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         function newInverter(){
             $('#dlg').dialog('open').dialog('setTitle','新建设备');
             $('#fm').form('clear');
-            $('#type').textbox('setValue','逆变器');
-            $('#type').textbox('readonly',true);
+/*             $('#type').textbox('setValue','逆变器');
+            $('#type').textbox('readonly',true); */
             
             $('#model').combobox('loadData',[]); //重新选择设备类型后，需要清空设备型号
+            $('#type').combobox('loadData',[]); 
         	var curr_time = new Date();
   		    var strDate = curr_time.getFullYear()+"-";
   			strDate += curr_time.getMonth()+1+"-";
@@ -154,27 +154,68 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			$('#purchase_time').datebox('setValue', strDate); //,默认购买时间为当天
         }
          
-         function setModelByTypeAndBrandI(rec)
-       {
+         function setModelByTypeAndBrandI(rec){
        	        var brand=rec.value;
-       	        var type="逆变器";
        			$.ajax({
-			        url:'setModelByTypeAndBrandI.action?brand='+encodeURI(encodeURI(brand))+'&type='+encodeURI(encodeURI(type)),			       
+			        url:'setModelByTypeAndBrandI.action?brand='+encodeURI(encodeURI(brand)),			       
 					type:'GET',
 					dataType:'json',
 					async:false,
 			  	    success:function(obj){
-			  	    		$('#model').combobox('clear'); 
+			  	    		$('#model').combobox('clear');//清楚设备型号
 			  	  			var data = [];
 				  		    for(var i=0;i<obj[0].length;i++){
 		  						var model = obj[0][i];		  						
 								data.push({ "text":model, "id":model });
 			  				}
-							 $('#model').combobox('loadData',data);	   
-				  		           		       				
+							$('#model').combobox('loadData',data);	   
 				  	   }
 				    });
 			}
+         
+         function getTypeByBrand(rec){//通过品牌查询类型
+        	 var brand=rec.value;
+        	 $.ajax({
+			        url:'getTypeByBrand.action?brand='+encodeURI(encodeURI(brand)),			       
+					type:'GET',
+					dataType:'json',
+					async:false,
+			  	    success:function(obj){
+			  	    		$('#type').combobox('clear');//清楚设备型号
+			  	    		$('#model').combobox('clear');//清楚设备型号
+			  	  			var data = [];
+				  		    for(var i=0;i<obj[0].length;i++){
+		  						var model = obj[0][i];		  						
+								data.push({ "text":model, "id":model });
+			  				}
+							$('#type').combobox('loadData',data);	   
+				  	   }
+				    });
+         }
+         
+         function getModelByBrandAndType(){//通过品牌类型查询型号
+       	 		var brand=$('#brand').combobox('getValue');
+        		var type=$('#type').combobox('getValue');
+        		/* 	console.log("brand:"+brand);
+        			console.log("type:"+type); */
+        			$.ajax({
+ 			        url:'getModelByBrandAndType.action?brand='+encodeURI(encodeURI(brand))+'&type='+encodeURI(encodeURI(type)),			       
+ 					type:'GET',
+ 					dataType:'json',
+ 					async:false,
+ 			  	    success:function(obj){
+ 			  	    		$('#model').combobox('clear'); 
+ 			  	  			var data = [];
+ 				  		    for(var i=0;i<obj[0].length;i++){
+ 		  						var model = obj[0][i];		  						
+ 								data.push({ "text":model, "id":model });
+ 			  				}
+ 							 $('#model').combobox('loadData',data);	   
+ 				  		           		       				
+ 				  	   }
+ 				    });
+  			
+         }
         
         function doSearch(value){
             var name = value;
@@ -249,7 +290,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			             success:function(obj){
 		                    if(obj.total==0)    				
 	        				{
-	        					$.messager.confirm('提示','没有符合该条件的逆变器');
+	        					$.messager.confirm('提示','没有符合该条件的设备');
 	     			//			$('#dg').datagrid('loadData', { total: 0, rows: [] });
 	        				}
 	        				else
@@ -270,8 +311,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	flag = 1;
                 $('#dlg').dialog('open').dialog('setTitle','编辑设备');
                 $('#fm').form('load',row); 
-                $('#type').textbox('setValue','逆变器');
-                $('#type').textbox('readonly',true);
+/*                 $('#type').textbox('setValue','逆变器');
+                $('#type').textbox('readonly',true); */
                 var ex_ps_name = document.getElementsByName("ex_ps_name");
                 ex_ps_name[0].value= row.ps_name;
                 var ex_name = document.getElementsByName("ex_name");
@@ -292,10 +333,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 ex_max_power[0].value= row.max_power;
                 var ex_power_factor = document.getElementsByName("ex_power_factor");
                 ex_power_factor[0].value= row.power_factor;
-                var type="逆变器";
                 var brand=row.brand;
                  $.ajax({
- 			        url:'setModelByTypeAndBrandI.action?brand='+encodeURI(encodeURI(brand))+'&type='+encodeURI(encodeURI(type)),			       
+ 			        url:'setModelByTypeAndBrandI.action?brand='+encodeURI(encodeURI(brand)),			       
  					type:'GET',
  					dataType:'json',
  					async:false,
@@ -313,12 +353,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             }
         }
         function saveInverter(){          
-        
             var ps_name = document.getElementsByName("ps_name")[0].value;
 	   	    var name = trim(document.getElementsByName("name")[0].value);
 	   	    var type = trim(document.getElementsByName("type")[0].value);
 	        var brand = trim(document.getElementsByName("brand")[0].value);
-	        var model = trim(document.getElementsByName("model")[0].value);
+	        //var model = trim(document.getElementsByName("model")[0].value);
+	        var model=$('#model').combobox('getValue');
+	        console.log("model:"+model);
 	        var purchase_time = document.getElementsByName("purchase_time")[0].value;
 	        var rate_power = trim(document.getElementsByName("rate_power")[0].value); 
             var rated_voltage = trim(document.getElementsByName("rated_voltage")[0].value);
@@ -336,11 +377,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             var ex_max_power = document.getElementsByName("ex_max_power")[0].value;	
             var ex_power_factor = document.getElementsByName("ex_power_factor")[0].value;
             	
-            if(flag==0){//flag为0表示当前为新建逆变器
-		    if(!checkInverterInformation(ps_name,name,rate_power,rated_voltage,max_power,power_factor)){return false; }//校验逆变器信息
-		    else{
+            if(flag==0){//flag为0表示当前为新建
+		    if(!checkInverterInformation(ps_name,name,rate_power,rated_voltage,max_power,power_factor)){//校验逆变器信息
+		    	return false; 
+		    	
+		    }else{
            		 $.ajax({
-                url:'addInverter.action?ps_name='+encodeURI(encodeURI(ps_name))+'&name='+encodeURI(encodeURI(name))+
+                 url:'addInverter.action?ps_name='+encodeURI(encodeURI(ps_name))+'&name='+encodeURI(encodeURI(name))+
         			'&type='+encodeURI(encodeURI(type))+'&brand='+encodeURI(encodeURI(brand))+'&model='+encodeURI(encodeURI(model))+
        				'&purchase_time='+encodeURI(encodeURI(purchase_time))+'&rate_power='+rate_power+
        				'&rated_voltage='+rated_voltage+'&max_power='+max_power+
@@ -359,7 +402,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                        $('#dlg').dialog('close');        // close the dialog
 	                        $('#dg').datagrid('reload');    // reload the user data
 	                    }
-	                    $.messager.confirm('提示','新建逆变器成功！'); 
+	                    $.messager.confirm('提示','新建设备成功！'); 
                     }
             });
             }
@@ -376,7 +419,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        				'&rated_voltage='+rated_voltage+'&max_power='+max_power+
        				'&power_factor='+power_factor+'&ex_name='+encodeURI(encodeURI(ex_name))+
        				'&ex_ps_name='+encodeURI(encodeURI(ex_ps_name)),
-			       
 					type:'GET',
 					dataType:'json',
 					async:false,
@@ -410,44 +452,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 });
              }
         }
+        
+        //校验
         function checkInverterInformation(ps_name,name,rate_power,rated_voltage,max_power,power_factor){
 	
 			if(ps_name==""){$.messager.confirm('警告','所属电站不能为空');return false;}
-			if((name=="")){$.messager.confirm('警告','逆变器名不能为空');return false;}
-			if( isNaN(rate_power)==true)
-		    {
+			if((name=="")){$.messager.confirm('警告','设备id不能为空');return false;}
+			if( isNaN(rate_power)==true){
 		    	$.messager.alert('提示','额定功率请输入数字!');
 		    	return false;
 		    }
-		    if( isNaN(rated_voltage)==true)
-		    {
+		    if( isNaN(rated_voltage)==true){
 		    	$.messager.alert('提示','额定电压请输入数字!');
 		    	return false;
 		    }
-		    if( isNaN(max_power)==true)
-		    {
+		    if( isNaN(max_power)==true){
 		    	$.messager.alert('提示','最大功率请输入数字!');
 		    	return false;
 		    }
-		    if( isNaN(power_factor)==true)
-		    {
+		    if( isNaN(power_factor)==true){
 		    	$.messager.alert('提示','功率因数请输入数字!');
 		    	return false;
 		    }
 			var result="";
 			$.ajax({
-	        url:'checkInverterNameIsLegal.action?name='+encodeURI(encodeURI(name))
-	             +'&ps_name='+encodeURI(encodeURI(ps_name)),
+	        url:'checkInverterNameIsLegal.action?name='+encodeURI(encodeURI(name))+'&ps_name='+encodeURI(encodeURI(ps_name)),
 			type:'GET',				
 			dataType:'json',
 			async:false,
 		  	success:function(obj){
 		  		 result = obj[0];
-		  	}
-	    });
-			if(result == "wrong"){$.messager.confirm('警告','逆变器名在此电站中已存在');return false;}
+		  		}
+	    	});
+			if(result == "wrong"){$.messager.confirm('警告','设备在此电站中已存在');return false;}
 			if(result=="correct"){return true;}
-			
 		    return false;
 		}
 		function trim(str){//去掉两边空格   

@@ -136,8 +136,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			$('#purchase_time').datebox('setValue', strDate); //,默认购买时间为当天
         }
         
-         function setModelByTypeAndBrand(rec)
-       {
+         function setModelByTypeAndBrand(rec){
        			var brand=rec.value;
        			var type="电表";
        			$.ajax({
@@ -291,8 +290,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               $('#fm').form('load',row); 
             }
         }
-        function savePM(){          
-        
+        function savePM(){
             var ps_name = document.getElementsByName("ps_name")[0].value;
 	   	    var name = trim(document.getElementsByName("name")[0].value);
 	   	    var type = trim(document.getElementsByName("type")[0].value);

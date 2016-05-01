@@ -17,7 +17,9 @@ import com.PSMS.Dao.HistoryOfMonthDAOImpl;
 import com.PSMS.Dao.HistoryOfYearDAO;
 import com.PSMS.Dao.HistoryOfYearDAOImpl;
 import com.PSMS.Dao.IAreaDao;
+import com.PSMS.Dao.IBiBatteryDao;
 import com.PSMS.Dao.IBiIndexDao;
+import com.PSMS.Dao.IBiModuleDao;
 import com.PSMS.Dao.IBiPowerStationDao;
 import com.PSMS.Dao.IFaultMessageDao;
 import com.PSMS.Dao.IInspectionDao;
@@ -57,7 +59,9 @@ import com.PSMS.Dao.WS_parameterDAOImpl;
 import com.PSMS.Dao.WeatherStationDAO;
 import com.PSMS.Dao.WeatherStationDAOImpl;
 import com.PSMS.Dao.impl.AreaDaoImpl;
+import com.PSMS.Dao.impl.BiBatteryDaoImpl;
 import com.PSMS.Dao.impl.BiIndexDaoImpl;
+import com.PSMS.Dao.impl.BiModuleDaoImpl;
 import com.PSMS.Dao.impl.BiPowerStationDaoImpl;
 import com.PSMS.Dao.impl.FaultMessageDaoImpl;
 import com.PSMS.Dao.impl.InspectionDaoImpl;
@@ -75,10 +79,17 @@ import com.PSMS.Dao.impl.ToDataDaoImpl;
  */
 public class DAOFactory {
 	
-	public static IBiIndexDao getBiIndexDaoInstance(){
+	public static IBiIndexDao getBiIndexDaoInstance(){//首页
 		return new BiIndexDaoImpl();
 	}
 	
+	public static IBiModuleDao getBiModuleDaoInstance(){//首页
+		return new BiModuleDaoImpl();
+	}
+	
+	public static IBiBatteryDao  getBiBatteryDaoInstance(){
+		return new BiBatteryDaoImpl();
+	}
 	
 	public static IBiPowerStationDao getBiPowerStationDaoInstance(){
 		return new BiPowerStationDaoImpl();

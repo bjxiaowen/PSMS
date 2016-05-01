@@ -29,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </style>
 </head>
 <body>
-    <p style="font-weight:bold;color:#0E2D5F;font: bold 16px '宋体','微软雅黑';font-size:12px">设备型号->设备型号管理</p>  
+    <p style="font-weight:bold;color:#0E2D5F;font: bold 16px '宋体','微软雅黑';font-size:12px">品牌管理->品牌型号</p>  
     <table id="dg" title="设备查看" class="easyui-datagrid" style="width:100%;height:95%;text-align:center" 
             url="getEquipmentInformation.action"        
             toolbar="#toolbar" pagination="true" pageSize=20 pageList="[ 20, 30, 40 ]" //读取分页条数，即向后台读取数据时传过去的值
@@ -39,9 +39,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <tr>   
                 <th field="id" hidden="hidden" align="center" width="20" >设备编号</th>           
                 <th field="brand" align="center" width="20" sortable="true">设备品牌</th>
-                <th field="model" align="center" width="20" sortable="true">设备型号</th>
                 <th field="type" align="center" width="20" sortable="true">设备类型</th>
-                
+                <th field="model" align="center" width="20" sortable="true">设备型号</th>
             </tr>
         </thead>
     </table>
@@ -53,8 +52,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          <input id="search_name" name="search_name" class="easyui-searchbox" data-options="prompt:'请输入设备品牌查找',searcher:doSearch" style="width:200px"></input>
       <input id="search_model" name="search_model" class="easyui-searchbox" data-options="prompt:'请输入设备型号查找',searcher:doSearch2" style="width:200px"/>
     <select class="easyui-combobox" name="search-station" style="width:160px;" data-options=" panelHeight:'auto'">
-        	<option value="">根据设备类型查询</option>       
-        	<option value="逆变器">逆变器</option>												
+        	<option value="">根据设备类型查询</option>
+        	<option value="组件">组件</option>
+        	<option value="控制器">控制器</option>       
+        	<option value="逆变器">逆变器</option>	
+        	<option value="蓄电池">蓄电池</option>
+        	<option value="控逆一体机">控逆一体机</option>										
 			<option value="汇流箱">汇流箱</option>
 			<option value="电表">电表</option>
 			<option value="气象站">气象站</option>	
@@ -73,23 +76,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <input id="ex_brand" name="ex_brand" type="hidden" ></input>  
             </div>
             <div class="fitem">
+                <label>设备类型</label>
+                <select id="type" class="easyui-combobox" name="type" style="width:160px;" editable="false" data-options=" panelHeight:'auto'" >
+               		  <option value="组件">组件</option>
+			        	<option value="控制器">控制器</option>       
+			        	<option value="逆变器">逆变器</option>	
+			        	<option value="蓄电池">蓄电池</option>
+			        	<option value="控逆一体机">控逆一体机</option>										
+						<option value="汇流箱">汇流箱</option>
+						<option value="电表">电表</option>
+						<option value="气象站">气象站</option>				
+   			 	</select>(必填,先选型号)
+   			 	<input id="ex_type" name="ex_type" type="hidden"></input> 
+            </div>
+            <div class="fitem">
                 <label>设备型号</label>
                 <input id="model" name="model" class="easyui-textbox"  />(必填,先选品牌)
                 <input id="ex_model" name="ex_model" type="hidden" ></input>  
             </div>
-            <div class="fitem">
-                <label>设备类型</label>
-                <select id="type" class="easyui-combobox" name="type" style="width:160px;" editable="false" data-options=" panelHeight:'auto'" >
-               		  	<option value="逆变器">逆变器</option>												
-						<option value="汇流箱">汇流箱</option>
-						<option value="电表">电表</option>
-						<option value="气象站">气象站</option>					
-   			 	</select>(必填,先选型号)
-   			 	<input id="ex_type" name="ex_type" type="hidden"></input> 
-            </div>
-            
-            
-             
         </form>
     </div>
     <div id="dlg-buttons">
@@ -249,7 +253,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
         function saveEquipment(){  
            var row = $('#dg').datagrid('getSelected');
-            
             // var id;
             // alert(row.id);
             var brand = trim(document.getElementsByName("brand")[0].value);
@@ -365,12 +368,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    });	
 			if(result == "wrong"){$.messager.confirm('警告','设备型号已存在');return false;}
 			if(result=="correct"){return true;}
-		
 			return false;   //////////////////////////
-		
 		}
 		
-		 
 		function trim(str){//去掉两边空格   
    			 return str.replace(/^(\s|\xA0)+|(\s|\xA0)+$/g, '');   
         }

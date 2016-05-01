@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">  
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <title>蓄电池</title>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"
+    />
+    <!--[if lt IE 9]>
+      <link rel="stylesheet" type="text/css" href="plugins/jquery-ui/jquery.ui.1.10.2.ie.css"
+      />
+    <![endif]-->
+    <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/responsive.css" rel="stylesheet" type="text/css"
+    />
+    <link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="assets/css/fontawesome/font-awesome.min.css">
+    <!--[if IE 7]>
+      <link rel="stylesheet" href="assets/css/fontawesome/font-awesome-ie7.min.css">
+    <![endif]-->
+    <!--[if IE 8]>
+      <link href="assets/css/ie8.css" rel="stylesheet" type="text/css" />
+    <![endif]-->
+    <!-- <link href='http://fonts.useso.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'> -->
+    <script type="text/javascript" src="assets/js/libs/jquery-1.10.2.min.js">
+    </script>
+    <script type="text/javascript" src="plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js">
+    </script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js">
+    </script>
+    <script type="text/javascript" src="assets/js/libs/lodash.compat.min.js">
+    </script>
+    <!--[if lt IE 9]>
+      <script src="assets/js/libs/html5shiv.js">
+      </script>
+    <![endif]-->
+    <script type="text/javascript" src="plugins/touchpunch/jquery.ui.touch-punch.min.js">
+    </script>
+    <script type="text/javascript" src="plugins/event.swipe/jquery.event.move.js">
+    </script>
+    <script type="text/javascript" src="plugins/event.swipe/jquery.event.swipe.js">
+    </script>
+    <script type="text/javascript" src="assets/js/libs/breakpoints.js">
+    </script>
+    <script type="text/javascript" src="plugins/respond/respond.min.js">
+    </script>
+    <script type="text/javascript" src="plugins/cookie/jquery.cookie.min.js">
+    </script>
+    <script type="text/javascript" src="plugins/slimscroll/jquery.slimscroll.min.js">
+    </script>
+    <script type="text/javascript" src="plugins/slimscroll/jquery.slimscroll.horizontal.min.js">
+    </script>
+    <!--[if lt IE 9]>
+      <script type="text/javascript" src="plugins/flot/excanvas.min.js">
+      </script>
+    <![endif]-->
+    <script type="text/javascript" src="assets/js/app.js">
+    </script>
+    <!-- 公共文件引入 -->
+    <script type="text/javascript" src="js/chart-pub.js"></script>
+    <!-- ECharts单文件引入 -->
+    <script type="text/javascript" src="plugins/echart/echarts2.js"></script>
+     <script type="text/javascript" src="js/xudianchi-01.js"></script>
+     <script type="text/javascript" src="js/xudianchi-02.js"></script>
+    <script>
+      $(document).ready(function() {
+        App.init();
+      });
+    </script>
+    <style>
+      .navbar{
+        background: #2677af;
+        border-bottom: 2px solid #2a4053;
+      }
+      ul.stats li strong, ul.stats li small {
+    /* padding: 5px 0; */
+     display: inline; 
+    /* text-align: center; */
+}
+ul.stats li {
+    display: table-cell;
+    padding: 10px;
+}
+ul.stats li strong {
+    font-size: 15px;
+    font-weight: bold;
+}
+    </style>
+  </head>
+  
+  <body>
+    <header class="header navbar navbar-fixed-top" role="banner">
+      <div class="container">
+        <ul class="nav navbar-nav">
+          <li class="nav-toggle">
+            <a href="javascript:void(0);" title="">
+              <i class="icon-reorder">
+              </i>
+            </a>
+          </li>
+        </ul>
+        <a class="navbar-brand" href="index.html">
+          <img src="assets/img/logo.png" alt="logo" height="30" width="30" />
+          <strong>
+            中兴能源 PSMS
+          </strong>
+        </a>
+        <a href="#" class="toggle-sidebar bs-tooltip" data-placement="bottom"
+        data-original-title="Toggle navigation">
+          <i class="icon-reorder">
+          </i>
+        </a>
+        <ul class="nav navbar-nav navbar-left hidden-xs hidden-sm">
+          <li>
+            <a href="#">
+              控制台
+            </a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <div id="container">
+      <div id="sidebar" class="sidebar-fixed">
+        
+        <div id="divider" class="resizeable">
+        </div>
+      </div>
+      <div id="content">
+        <div class="container">
+          <div class="crumbs">
+             <div class="current-time" style="    padding: 10px 15px;font-size: 14px;font-weight: bold;
+    float: left;">采集时刻：
+            </div>
+          </div>
+          <div class="page-header">
+            <div class="page-title" style="padding: 8px 0 0px 0px;">
+              <h3 style="margin-bottom: 0px;">
+              </h3>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="widget box">
+                <div class="widget-content">
+                  <ul class="stats">
+                    <li>
+                      <strong>
+                        蓄电池电压：95.6 V
+                      </strong>
+                    </li>
+                    <li>
+                      <strong>
+                        蓄电池电压状态：<span class="label label-warning">电池欠压</span>
+                      </strong>
+                    </li>
+                    <li>
+                      <strong>
+                        蓄电池电流：6.7 A
+                      </strong>
+                    </li>
+                    <li>
+                      <strong>
+                        蓄电池功率：0.64 KW
+                      </strong>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-3">
+              <div class="widget box">
+                <div class="widget-content" style="text-align: center;">
+                  <img src="./assets/img/demo/dianchi.png" alt="">
+                </div>
+                <div class="divider">
+                </div>
+                <div class="widget-content">
+                  <ul class="stats">
+                    <li>
+                      <strong>
+                        剩余容量：85%
+                      </strong>
+                    </li>
+                    <li><strong>
+                       状态：</strong> <span class="label label-info">充电</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+             <div class="col-md-3">
+              <div class="widget box">
+                <div class="widget-content" style="text-align: center;">
+                  <img src="./assets/img/demo/wenduji.png" alt="">
+                </div>
+                <div class="divider">
+                </div>
+                <div class="widget-content">
+                  <ul class="stats" style="text-align: center;">
+                    <li>
+                      <strong>
+                        蓄电池温度：43°C
+                      </strong>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+             <div class="col-md-3">
+              <div class="widget box">
+                <div class="widget-content">
+                  <div id="chart001" class="chart" style="height: 323px;">
+                  </div>
+                </div>
+                <div class="divider">
+                </div>
+                <div class="widget-content">
+                  <ul class="stats" style="text-align: center;">
+                    <li>
+                      <strong>
+                        蓄电池电压
+                      </strong>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+             <div class="col-md-3">
+              <div class="widget box">
+                <div class="widget-content">
+                  <div id="chart002" class="chart" style="height: 323px;">
+                  </div>
+                </div>
+                <div class="divider">
+                </div>
+                <div class="widget-content">
+                  <ul class="stats" style="text-align: center;">
+                    <li>
+                      <strong>
+                        蓄电池电流
+                      </strong>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+
+</html>

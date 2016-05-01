@@ -45,10 +45,12 @@ public class EquipmentDAOImpl implements EquipmentDAO{
 		Session session=HibernateSessionFactory.getHibernateSession();
 		HibernateSessionFactory.begainHibernateTransaction();
 		Query query;
-		String hql = "select distinct model from Equipment where type=? and brand=?";
+//		String hql = "select distinct model from Equipment where type=? and brand=?";
+		String hql = "select distinct model from Equipment where  brand=?";
 		query = session.createQuery(hql); 
-		query.setString(0,type);
-		query.setString(1,brand);
+//		query.setString(0,type);
+//		query.setString(1,brand);
+		query.setString(0,brand);
 		List<String> k =query.list();
 		HibernateSessionFactory.commitHibernateTransaction();
 		HibernateSessionFactory.closeHibernateSession();
@@ -262,6 +264,41 @@ public class EquipmentDAOImpl implements EquipmentDAO{
 		return k;
 	}
 
+	@Override
+	public List<String> getTypeByBrand(String brand) {
+		Session session=HibernateSessionFactory.getHibernateSession();
+		Query query;
+		String hql = "select distinct type from Equipment where  brand=?";
+		query = session.createQuery(hql); 
+		query.setString(0,brand);
+		List<String> k =query.list();
+		HibernateSessionFactory.closeHibernateSession();
+		return k;
+	}
 
+	@Override
+	public List<String> getModelByBrandAndType(String brand, String type) {
+		Session session=HibernateSessionFactory.getHibernateSession();
+		Query query;
+		String hql = "select distinct model from Equipment where type=? and brand=?";
+		query = session.createQuery(hql); 
+		query.setString(0,type);
+		query.setString(1,brand);
+		List<String> k =query.list();
+		HibernateSessionFactory.closeHibernateSession();
+		return k;
+	}
 
+	@Override
+	public List<String> getAllBrand() {
+		Session session=HibernateSessionFactory.getHibernateSession();
+		HibernateSessionFactory.begainHibernateTransaction();
+		Query query;
+		String hql = "select distinct brand from Equipment ";		
+		query = session.createQuery(hql); 
+		List<String> u =query.list();
+		HibernateSessionFactory.commitHibernateTransaction();
+		HibernateSessionFactory.closeHibernateSession();
+		return u;
+	}
 }

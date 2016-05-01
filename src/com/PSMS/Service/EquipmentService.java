@@ -50,8 +50,12 @@ public interface EquipmentService {
 	List<Equipment> getEquipmentByTM(String type, String model);//根据设备类型型号查询设备信息
 
 	List<Equipment> getEquipmentByBM(String brand, String model);//根据设备型号和品牌查询设备信息
-
 	
+	public List<String> getAllBrand();//获取所有的品牌
+
+	public List<String> getTypeByBrand(String brand);//通过品牌查询设备类型
+
+	public List<String> getModelByBrandAndType(String brand,String type);//通过品牌和类型查询设备型号
 
 	
 }

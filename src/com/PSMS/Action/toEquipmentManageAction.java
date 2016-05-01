@@ -374,37 +374,27 @@ public class toEquipmentManageAction {
 		HttpServletResponse response = ServletActionContext.getResponse();
 		try {
 			request.setCharacterEncoding("utf-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		String brand = request.getParameter("brand");
-		String model = request.getParameter("model");
-		String type = request.getParameter("type");
-		try {
+			String brand = request.getParameter("brand");
+			String model = request.getParameter("model");
+			String type = request.getParameter("type");
 			brand = java.net.URLDecoder.decode(brand, "UTF-8");
 			model = java.net.URLDecoder.decode(model, "UTF-8");
 			type = java.net.URLDecoder.decode(type, "UTF-8");//以上为获取前台数据，转码
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		equipmentService = new EquipmentServiceImpl();//初始化		
-		String result = "";//用result存放提示信息，并将其传回前台
-			if (!(equipmentService.checkEquipmentExist(brand,model,type)))//判断设备是否已存在
-				result = "correct";
-			else
-				result = "wrong";		// 电站内部设备不重名时返回correct
-		ArrayList list = new ArrayList();
-		list.add(result);//通过json将校验结果传回到前台显示
-		JSONArray obj = JSONArray.fromObject(list);
-		try {
+			equipmentService = new EquipmentServiceImpl();//初始化		
+			String result = "";//用result存放提示信息，并将其传回前台
+				if (!(equipmentService.checkEquipmentExist(brand,model,type)))//判断设备是否已存在
+					result = "correct";
+				else
+					result = "wrong";		// 电站内部设备不重名时返回correct
+			ArrayList list = new ArrayList();
+			list.add(result);//通过json将校验结果传回到前台显示
+			JSONArray obj = JSONArray.fromObject(list);
 			response.setHeader("Cache-Control", "no-cache");
 			response.setContentType("aplication/json;charset=UTF-8");
 			response.getWriter().print(obj);
-
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;

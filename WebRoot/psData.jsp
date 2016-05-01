@@ -136,9 +136,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                   	<div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px; ">
 	                   		<a href="javascript:void(0)"  onclick="opeanHtml(this)" name="toPsHistoryData" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">电站数据</a>
 	                   	</div>
-	                   	<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
+	                   	<!-- <div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
 	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toFailureHistoryPage" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">设备故障数据</a>
-	                   	</div>	                   	
+	                   	</div>	 -->                   	
 	                </div>
 	                <div title="发电量数据" data-options="selected:true" >
 	                   	<div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px; ">
@@ -151,7 +151,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toDayPowerHistory" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">日发电量数据</a>
 	                   	</div>	                   	
 	                </div>
-	                <div title="数据对比"  >
+	                <!-- <div title="数据对比"  >
 	                    <div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px;">
 	                   		<a href="javascript:void(0)" onclick="opeanHtml(this)" name="toCompPowerAndIrradPage" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:  '宋体','微软雅黑';">发电量-辐射量对比</a>
 	                   	</div>
@@ -170,7 +170,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                   		<a href="javascript:void(0)" onclick="opeanHtml(this)" name="toCompOfWeatherStaion" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;">站内气象站对比</a>
 	                   	</div>
 	                                       	
-	                </div>	
+	                </div>	 -->
 	                <div title="人员管控">
 	                   	<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
 	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toRegionList" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">区域列表</a>
@@ -196,7 +196,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                   	</div>	
 	                   	<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
 	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toFaultMessage" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">故障列表</a>
-	                   	</div>	                   	
+	                   	</div>	 
+	                   	<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
+	                   		<a href="toModule.action" name="toModule" psId="92" target="_blank" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">组件图表</a>
+	                   	</div>                  	
 	                </div>                
             </div>
         </div>

@@ -170,6 +170,20 @@ public class EquipmentServiceImpl implements EquipmentService{
 		* @date 2014-11-6
 		*/ 
 		return dao.getEquipmentByBM(brand, model);
+	}
+	
+	@Override
+	public List<String> getTypeByBrand(String brand) {
+		return dao.getTypeByBrand(brand);
+	}
+	@Override
+	public List<String> getModelByBrandAndType(String brand, String type) {
+		return dao.getModelByBrandAndType(brand, type);
+	}
+	
+	@Override
+	public List<String> getAllBrand() {
+		return dao.getAllBrand();
 	}	
 
 }

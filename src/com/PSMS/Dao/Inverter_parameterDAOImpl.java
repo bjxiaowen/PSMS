@@ -45,19 +45,15 @@ public class Inverter_parameterDAOImpl implements Inverter_parameterDAO{
 	}
 
 	@Override
-	public boolean checkInverterNameExistById(String name, int ps_id) {
-		// TODO Auto-generated method stub
-		//校验 逆变器是否已存在于电站中
+	public boolean checkInverterNameExistById(String name, int ps_id) {//校验 逆变器是否已存在于电站中
 		Session session=HibernateSessionFactory.getHibernateSession();
-		HibernateSessionFactory.begainHibernateTransaction();
 		String hql="from  Inverter_parameter p where p.name= ? and p.PS_id = ?";
 		Query query = session.createQuery(hql);
 		query.setString(0, name);
 		query.setInteger(1, ps_id);
-		Inverter_parameter p = (Inverter_parameter) query.uniqueResult();
-		HibernateSessionFactory.commitHibernateTransaction();
+		List<Inverter_parameter> p = (List<Inverter_parameter>) query.list();
 		HibernateSessionFactory.closeHibernateSession();
-		if (p!=null)
+		if (p!=null&&p.size()!=0)
 			return true;
 		return false;
 	}

@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" type="text/css" href="easyui/themes/default/easyui.css">
     <link rel="stylesheet" type="text/css" href="easyui/themes/icon.css">
     <link href="css/font-awesome.min.css" rel="stylesheet" type="text/css" /> 
-    <link rel="stylesheet" type="text/css" href="easyui/demo.css">
+    <link rel="stylesheet" type="text/css" href="easyui/demo/demo.css">
     <script src="js/jquery-1.6.2.min.js" type="text/javascript"></script>  
     <script type="text/javascript" src="easyui/jquery.min.js"></script>
     <script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>
@@ -150,16 +150,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                   		<a href="javascript:void(0)" onclick="opeanHtml(this)" name="toPsPeriod" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;">电站分期</a>
 	                   	    </div>
 	                </div>
-	                <div title="设备型号"  >
+	                <div title="品牌管理"  >
 	                   	<div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px;">
-	                   		<a href="javascript:void(0)" onclick="opeanHtml(this)" name="toEquipmentManage" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;">设备型号管理</a>
+	                   		<a href="javascript:void(0)" onclick="opeanHtml(this)" name="toEquipmentManage" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;">品牌型号</a>
 	                   	</div>	
 	                </div>
 	                <div title="设备管理" >
 	                    <div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px;">
-	                   		<a href="javascript:void(0)" onclick="opeanHtml(this)" name="toInverterManage" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;">逆变器</a>
+	                   		<a href="javascript:void(0)" onclick="opeanHtml(this)" name="toInverterManage" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;">设备信息</a>
 	                   	</div>
-	                   	<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
+	   <!--                 	<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
 	                   		<a href="javascript:void(0)" onclick="opeanHtml(this)" name="toJunctionManage" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;">汇流箱</a>
 	                   	</div>
 	                   	 <div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px;">
@@ -167,7 +167,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                   	</div>
 	                    <div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
 	                   		<a href="javascript:void(0)" onclick="opeanHtml(this)" name="toPMManage" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;">电表</a>
-	                   	</div>
+	                   	</div> -->
 	                </div>
 	                <div title="故障管理" >
 	                    <div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px;">

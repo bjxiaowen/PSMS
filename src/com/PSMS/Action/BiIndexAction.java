@@ -46,7 +46,7 @@ public class BiIndexAction {
 			object.put("history", history);
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
-			ServletActionContext.getResponse().getWriter().write(object.toString());
+//			ServletActionContext.getResponse().getWriter().write(object.toString());
 			request.setAttribute("list", object.toString());
 			System.out.println(object.toString());
 		}catch(IOException e){
