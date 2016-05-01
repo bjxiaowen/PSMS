@@ -140,6 +140,9 @@ public class userLoginAction {
 		this.roleService = roleService;
 	}
 	
+	public String toLogin(){
+		return "success";
+	}
 	
 	/** 
 	* 通过前台传来的用户名和密码登录到系统

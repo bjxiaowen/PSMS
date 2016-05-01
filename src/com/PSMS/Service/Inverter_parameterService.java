@@ -46,6 +46,8 @@ public interface Inverter_parameterService {
 	List<Inverter_parameter>getInverterByPsId(int ps_id);//根据电站id获得逆变器信息
 
 	List<Integer> getPeriodIndexByPsId(int ps_id);//根据电站id分期
+	
+	public List<Inverter_parameter> getParameter(int ps_id,String type);//通过电站和类型查询设备信息
 
 	List<String> getInverterNamesByPsId(int ps_id, int period_num);//根据电站id和电站期数查询所有逆变器名称
 

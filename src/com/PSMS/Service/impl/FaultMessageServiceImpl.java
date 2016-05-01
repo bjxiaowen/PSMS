@@ -43,4 +43,9 @@ public class FaultMessageServiceImpl implements IFaultMessageService {
 		return  dao.getFaultMessageByPsId(psId);
 	}
 
+	@Override
+	public List<JointFaultMessage> getFaultMessageByUserId(int userId) throws Exception {
+		return dao.getFaultMessageByUserId(userId);
+	}
+
 }

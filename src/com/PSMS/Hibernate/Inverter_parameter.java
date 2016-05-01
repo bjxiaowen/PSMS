@@ -11,25 +11,25 @@
 package com.PSMS.Hibernate;
 
 import java.util.Date;
-
+/** 
+* 设备信息类，对应数据库中Inverter_parameter表，其中id是主键，type，brand，model和PS_id是（来自Equipment和PS_information表）的外键*
+* @author jiaojiao.wang 
+* @date 2014-11-18 
+* @param id 
+* @param PS_id 
+* @param name 
+* @param brand 
+* @param model
+* @param type	 
+* @param Purchase_time 
+* @param Rate_power
+* @param Rated_voltage	
+* @param Max_power 
+* @param Power_factor
+* @param Period_num	
+*/ 
 public class Inverter_parameter {
-	/** 
-	* 逆变器信息类，对应数据库中Inverter_parameter表，其中id是主键，type，brand，model和PS_id是（来自Equipment和PS_information表）的外键*
-	* @author jiaojiao.wang 
-	* @date 2014-11-18 
-	* @param id 
-	* @param PS_id 
-	* @param name 
-	* @param brand 
-	* @param model
-	* @param type	 
-	* @param Purchase_time 
-	* @param Rate_power
-	* @param Rated_voltage	
-	* @param Max_power 
-	* @param Power_factor
-	* @param Period_num	
-	*/ 
+
 	private int id;
 	private int PS_id;
 	private String name;

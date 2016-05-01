@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.apache.struts2.ServletActionContext;
 import com.PSMS.Hibernate.Equipment;
 import com.PSMS.Hibernate.M_user;
@@ -163,7 +165,20 @@ public class FaultMessageAction {
 			HttpServletRequest request = ServletActionContext.getRequest();
 			request.setCharacterEncoding("utf-8");
 			faultMessageService=new FaultMessageServiceImpl();
-			List<JointFaultMessage> list = faultMessageService.getAllJointFaultMessage();
+			HttpSession session=request.getSession();
+			M_user user=(M_user) session.getAttribute("user");
+			List<JointFaultMessage> list=null;
+			if(user!=null){
+				int roleId=user.getRole_id();
+				if(roleId==5||roleId==4||roleId==3){
+					list = faultMessageService.getFaultMessageByUserId(user.getId());
+				}else{
+					list = faultMessageService.getAllJointFaultMessage();
+				}
+			}else{
+				list=new ArrayList<JointFaultMessage>();
+			}
+			
 			JSONObject object = JSONObject.fromObject("{}");
 			object.put("total", list.size());
 			object.put("rows", list);

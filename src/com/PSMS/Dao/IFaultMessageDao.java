@@ -45,6 +45,13 @@ public interface IFaultMessageDao {
 	 */
 	public List<JointFaultMessage> getAllJointFaultMessage() throws Exception;
 	
+	/**
+	 * 通过用户id查询故障信息
+	 * @return
+	 * @throws Exception
+	 */
+	public List<JointFaultMessage> getFaultMessageByUserId(int userId) throws Exception;
+	
 	
 	/**
 	 * 获取需要发短信或邮件的信息

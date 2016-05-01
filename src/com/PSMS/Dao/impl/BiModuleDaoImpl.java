@@ -33,6 +33,7 @@ public class BiModuleDaoImpl implements IBiModuleDao {
 		buffer.append(" from  Inverter_parameter inp   inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
 		buffer.append(" where CONVERT(varchar(100),OperateDate, 23)=? and inp.PS_id=? ");
+		buffer.append(" and inp.type='组件' ");//组件
 		Query query = session.createSQLQuery(buffer.toString());
 		query.setString(0, dateTime);
 		query.setInteger(1, psId);
@@ -81,6 +82,7 @@ public class BiModuleDaoImpl implements IBiModuleDao {
 		buffer.append(" from  Inverter_parameter inp   inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
 		buffer.append(" where CONVERT(varchar(100),OperateDate, 23)=? and inp.PS_id=? ");
+		buffer.append(" and inp.type='组件' ");//组件
 		buffer.append(" group by DateName(hour,tod.OperateDate) ");
 		Query query = session.createSQLQuery(buffer.toString());
 		query.setString(0, dateTime);

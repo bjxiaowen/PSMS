@@ -53,5 +53,12 @@ public interface IFaultMessageService {
 	 * @throws Exception
 	 */
 	public List<JointFaultMessage> getFaultMessageByPsId(String psId) throws Exception;
+	
+	/**
+	 * 通过用户id查询故障信息
+	 * @return
+	 * @throws Exception
+	 */
+	public List<JointFaultMessage> getFaultMessageByUserId(int userId) throws Exception;
 
 }

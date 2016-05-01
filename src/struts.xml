@@ -26,6 +26,10 @@
 		<action name="getStationPosition" method="getStationPosition"
 			class="com.PSMS.Action.toGuestPageAction">
 		</action>
+		
+		<action name="toLogin" method="toLogin" class="com.PSMS.Action.userLoginAction">
+			<result name="success">Login.jsp</result>
+		</action>
 
 
 		<action name="toUserManage" method="toUserManage"
