@@ -3,6 +3,7 @@ import java.util.List;
 
 import com.PSMS.Dao.IBiPowerStationDao;
 import com.PSMS.Factory.DAOFactory;
+import com.PSMS.Hibernate.Inverter_parameter;
 import com.PSMS.Service.IBiPowerStationService;
 import com.PSMS.pojo.PowerStationBase;
 import com.PSMS.util.BiPowerStationTools;
@@ -82,6 +83,21 @@ public class BiPowerStationServiceImpl implements IBiPowerStationService {
 	@Override
 	public PowerStationBase getOutputStatus(String dateTime, int psId) throws Exception {
 		return biDao.getOutputStatus(dateTime, psId);
+	}
+
+	@Override
+	public PowerStationBase getNewestStatus(String dateTime, int psId, String type) throws Exception {
+		return biDao.getNewestStatus(dateTime, psId, type);
+	}
+
+	@Override
+	public PowerStationBase getPSOutOneData(String dateTime, int psId, String type) throws Exception {
+		return biDao.getPSOutOneData(dateTime, psId, type);
+	}
+
+	@Override
+	public List<Inverter_parameter> getParameter(int ps_id, String type) {
+		return biDao.getParameter(ps_id, type);
 	}
 
 	

@@ -17,7 +17,7 @@ public interface IBiModuleService {
 	 * @return
 	 * @throws Exception
 	 */
-	public PowerStationBase getPowerStationDayByDate(String dateTime,int psId)throws Exception;
+	public PowerStationBase getPowerStationDayByDate(String dateTime,int psId,String type)throws Exception;
 	
 
 	/**

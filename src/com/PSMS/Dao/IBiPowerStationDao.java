@@ -2,6 +2,7 @@ package com.PSMS.Dao;
 
 import java.util.List;
 
+import com.PSMS.Hibernate.Inverter_parameter;
 import com.PSMS.pojo.PowerStationBase;
 
 public interface IBiPowerStationDao {
@@ -104,5 +105,32 @@ public interface IBiPowerStationDao {
 	public PowerStationBase getOutputStatus(String dateTime,int psId)throws Exception;
 	
 	
+	/**
+	 * 查询设备最新状态
+	 * @param dateTime 
+	 * @param psId 电站id
+	 * @param type 设备类型
+	 * @return
+	 * @throws Exception
+	 */
+	public PowerStationBase getNewestStatus(String dateTime,int psId,String type)throws Exception;
 	
+	/**
+	 * 设备输出的数据
+	 * @param dateTime
+	 * @param psId
+	 * @param type
+	 * @return
+	 * @throws Exception
+	 */
+	public PowerStationBase getPSOutOneData(String dateTime, int psId,String type) throws Exception;
+	
+	/**
+	 * 通过电站和类型查询设备信息
+	 * @param ps_id
+	 * @param type
+	 * @return
+	 */
+	public List<Inverter_parameter> getParameter(int ps_id,String type);
+
 }

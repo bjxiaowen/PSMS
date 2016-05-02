@@ -14,8 +14,8 @@ public class BiModuleServiceImpl implements IBiModuleService {
 	
 
 	@Override
-	public PowerStationBase getPowerStationDayByDate(String dateTime, int psId) throws Exception {
-		return dao.getPowerStationDayByDate(dateTime, psId);
+	public PowerStationBase getPowerStationDayByDate(String dateTime, int psId,String type) throws Exception {
+		return dao.getPowerStationDayByDate(dateTime, psId,type);
 	}
 
 	@Override

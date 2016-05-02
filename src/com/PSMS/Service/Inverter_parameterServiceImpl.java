@@ -13,6 +13,7 @@ import com.PSMS.Hibernate.Inverter_parameter;
  * @date 2016-05-01
  */
 public class Inverter_parameterServiceImpl implements Inverter_parameterService {
+	
 
 	Inverter_parameterDAO dao = DAOFactory.getInverter_parameterDAOInstance();
 
