@@ -100,5 +100,11 @@ public class BiPowerStationServiceImpl implements IBiPowerStationService {
 		return biDao.getParameter(ps_id, type);
 	}
 
+	@Override
+	public List<PowerStationBase> getPSHourlyData(String dateTime, int psId, String type) throws Exception {
+		List<PowerStationBase> list=biDao.getPSHourlyData(dateTime, psId,type);
+		return  BiPowerStationTools.getListSize24(list);
+	}
+
 	
 }

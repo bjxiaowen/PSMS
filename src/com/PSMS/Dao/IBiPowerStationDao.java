@@ -132,5 +132,15 @@ public interface IBiPowerStationDao {
 	 * @return
 	 */
 	public List<Inverter_parameter> getParameter(int ps_id,String type);
+	
+	/**
+	 * 获取一天每小时数据
+	 * @param dateTime
+	 * @param psId
+	 * @param type
+	 * @return
+	 * @throws Exception
+	 */
+	public List<PowerStationBase> getPSHourlyData(String dateTime, int psId,String type) throws Exception;
 
 }

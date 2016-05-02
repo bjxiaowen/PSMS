@@ -634,4 +634,53 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		return parame;
 	}
 
+	@Override
+	public List<PowerStationBase> getPSHourlyData(String dateTime, int psId, String type) throws Exception {
+		Session session = HibernateSessionFactory.getHibernateSession();
+		StringBuffer buffer=new StringBuffer();
+		buffer.append(" select ");
+		buffer.append(" (tod.MpptOutVoltage * tod.MpptOutCurrent) as power, ");//功率
+		buffer.append(" tod.MpptOutVoltage  voltage ,");//电压
+		buffer.append(" tod.MpptOutCurrent  curr , ");//电流
+		buffer.append(" DateName(hour,GetDate()) as groupHour ");
+		buffer.append(" from  Inverter_parameter inp   inner join bd_to_data tod on inp.name=tod.InverterID ");
+		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
+		buffer.append(" where CONVERT(varchar(100),OperateDate, 23)=? and inp.PS_id=? ");
+		buffer.append(" and inp.type=? ");//组件
+		buffer.append(" group by DateName(hour,tod.OperateDate) ");
+		Query query = session.createSQLQuery(buffer.toString());
+		query.setString(0, dateTime);
+		query.setInteger(1, psId);
+		query.setString(2, type);
+		List list = query.list();
+		HibernateSessionFactory.closeHibernateSession();
+		List<PowerStationBase> reList = new ArrayList<PowerStationBase>();
+		if (list == null || list.size() == 0) {
+			return reList;
+		}
+		
+		for (int i = 0; i < list.size(); i++) {
+			Object[] obj = (Object[]) list.get(i);
+			PowerStationBase power = new PowerStationBase();
+			
+			if(obj[0]!=null){
+				power.setPower(new BigDecimal(obj[0] + ""));
+			}
+			
+			if(obj[1]!=null){
+				power.setVoltage(new BigDecimal(obj[1] + ""));
+			}
+			
+			if(obj[2]!=null){
+				power.setCurrent(new BigDecimal(obj[2] + ""));
+			}
+			
+			if(obj[3]!=null){
+				power.setGroupHour(Integer.parseInt(obj[3] + ""));
+			}
+			reList.add(power);
+		}
+		return reList;
+	}
+
 }

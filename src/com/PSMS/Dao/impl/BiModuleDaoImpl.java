@@ -76,9 +76,9 @@ public class BiModuleDaoImpl implements IBiModuleDao {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
 		buffer.append(" select ");
-		buffer.append(" (tod.MpptOutVoltage * tod.MpptOutCurrent) as power, ");//输出功率
-		buffer.append(" tod.MpptOutVoltage  voltage ,");//组件电压
-		buffer.append(" tod.MpptOutCurrent  curr , ");//组件电流
+		buffer.append(" (tod.MpptOutVoltage * tod.MpptOutCurrent) as power, ");//功率
+		buffer.append(" tod.MpptOutVoltage  voltage ,");//电压
+		buffer.append(" tod.MpptOutCurrent  curr , ");//电流
 		buffer.append(" DateName(hour,GetDate()) as groupHour ");
 		buffer.append(" from  Inverter_parameter inp   inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
