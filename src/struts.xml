@@ -800,55 +800,59 @@
 		</action>
 
 		<!-- 数据图表 -->
-		<action name="toModule" method="toModule"
-			class="com.PSMS.Action.BiPowerStationAction">
+		<action name="toModule" method="toModule" class="com.PSMS.Action.BiPowerStationAction">
 			<result name="success">module.jsp</result>
 		</action>
+		
+		<!-- 图表首页 -->
 		<action name="toBiIndex" method="toBiIndex" class="com.PSMS.Action.BiIndexAction">
 			<result name="success">charts/total.jsp</result>
 		</action>
-
+		
+		<!-- 组件 -->
 		<action name="toBiModule" method="toBiModule" class="com.PSMS.Action.BiModuleAction">
 			<result name="success">charts/zijian.jsp</result>
 		</action>
-		
 
-		<action name="getModule" method="getModule"
-			class="com.PSMS.Action.BiPowerStationAction"></action>
+		<action name="getModule" method="getModule" class="com.PSMS.Action.BiPowerStationAction">
+		</action>
 
+		<!-- 蓄电池 -->
 		<action name="toBatteryVoltage" method="toBatteryVoltage"
 			class="com.PSMS.Action.BiPowerStationAction">
-			<result name="success">charts/battery.jsp</result>
+			<result name="success">charts/xudianchi.jsp</result>
 		</action>
 		<action name="getBatteryVoltage" method="getBatteryVoltage"
 			class="com.PSMS.Action.BiPowerStationAction">
 		</action>
-
-		<action name="toControlOutShow" method="toControlOutShow"
-			class="com.PSMS.Action.BiPowerStationAction">
-			<result name="success">charts/control.jsp</result>
+		
+		<!-- 控制器 -->
+		<action name="toControlOutShow" method="toControlOutShow" class="com.PSMS.Action.BiPowerStationAction">
+			<result name="success">charts/kongzhiqi.jsp</result>
+		</action>
+		
+		<!-- 逆变器 -->
+		<action name="toBiInverter" method="toBiInverter" class="com.PSMS.Action.BiInverterAction">
+			<result name="success">charts/nibianqi.jsp</result>
 		</action>
 
-		<action name="getControlOutShow" method="getControlOutShow"
-			class="com.PSMS.Action.BiPowerStationAction">
+		<!-- 控逆一体机 -->
+		<action name="toControlAndInverter" method="toControlAndInverter" class="com.PSMS.Action.BiControlAndInverter">
+			<result name="success">charts/yitiji.jsp</result>
 		</action>
 
-		<action name="getControlInShow" method="getControlInShow"
-			class="com.PSMS.Action.BiPowerStationAction">
+		<action name="getControlInShow" method="getControlInShow" class="com.PSMS.Action.BiPowerStationAction">
 		</action>
 
-		<action name="charts" method="charts"
-			class="com.PSMS.Action.BiPowerStationAction">
+		<action name="charts" method="charts" class="com.PSMS.Action.BiPowerStationAction">
 			<result name="success">charts/module.jsp</result>
 		</action>
 
-		<action name="getPowerStationAllInfo" method="getPowerStationAllInfo"
-			class="com.PSMS.Action.BiPowerStationAction">
+		<action name="getPowerStationAllInfo" method="getPowerStationAllInfo" 	class="com.PSMS.Action.BiPowerStationAction">
 			<result name="success">charts/psMap.jsp</result>
 		</action>
 
-		<action name="toPSMap" method="toPSMap"
-			class="com.PSMS.Action.BiPowerStationAction">
+		<action name="toPSMap" method="toPSMap" class="com.PSMS.Action.BiPowerStationAction">
 			<result name="success">charts/psMap.jsp</result>
 		</action>
 
