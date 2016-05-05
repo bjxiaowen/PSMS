@@ -8,7 +8,7 @@
 
 option2 = {
     title : {
-        text: '组件电压'
+        text: '组件电压(V)'
     },
     tooltip : {
         trigger: 'axis'
@@ -17,7 +17,7 @@ option2 = {
         data:['组件电压']
     },
     toolbox: {
-        show : true,
+        show : false,
         feature : {
             mark : {show: true},
             dataView : {show: true, readOnly: false},
@@ -38,7 +38,7 @@ option2 = {
         {
             type : 'value',
             axisLabel : {
-                formatter: '{value}(V)'
+                formatter: '{value}'
             }
         }
     ],

@@ -24,6 +24,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript">
     	//后台取出数据
     	var v = '${list}';
+    	var data_json = $.parseJSON(v);
+    	var currDayQ = data_json["currDayQ"];
+    	var currMonthQ = data_json["currMonthQ"];
+    	var currYearQ = data_json["currYearQ"];
     </script>
     
     <style>
@@ -132,7 +136,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="col-md-6">
               <div class="widget box" style="border: 1px solid #2b5797;">
               <div class="widget-header">
-                  <h4>历史发电量</h4>
+                  <h4>历史发电量</h4>   运行累计20天
                 </div>
                 <div class="widget-content" style="height: 270px;background: #2b5797;">
                 <h2 style="

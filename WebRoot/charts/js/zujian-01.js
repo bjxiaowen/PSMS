@@ -8,7 +8,7 @@
 
 option1 = {
     title : {
-        text: '光伏组件输出功率曲线'
+        text: '光伏组件输出功率曲线(kW)'
     },
     tooltip : {
         trigger: 'axis'
@@ -17,7 +17,7 @@ option1 = {
         data:['光伏组件']
     },
     toolbox: {
-        show : true,
+        show : false,
         feature : {
             mark : {show: true},
             dataView : {show: true, readOnly: false},
@@ -38,7 +38,7 @@ option1 = {
         {
             type : 'value',
             axisLabel : {
-                formatter: '{value}(kW)'
+                formatter: '{value}'
             }
         }
     ],

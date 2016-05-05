@@ -8,7 +8,7 @@
 		        formatter: "{a} <br/>{c} {b}"
 		    },
 		    toolbox: {
-		        show : true,
+		        show : false,
 		        feature : {
 		            mark : {show: true},
 		            restore : {show: true},

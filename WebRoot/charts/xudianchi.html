@@ -23,6 +23,10 @@
     <!--[if IE 8]>
       <link href="assets/css/ie8.css" rel="stylesheet" type="text/css" />
     <![endif]-->
+    <!--电池电量,温度计必要样式-->
+    <link rel="stylesheet" type="text/css" href="assets/css/component.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/custom-bars.css" />
+
     <!-- <link href='http://fonts.useso.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'> -->
     <script type="text/javascript" src="assets/js/libs/jquery-1.10.2.min.js">
     </script>
@@ -70,23 +74,24 @@
       });
     </script>
     <style>
-      .navbar{
-        background: #2677af;
-        border-bottom: 2px solid #2a4053;
+       .vertical{
+         width: 170px;
+         height: 8px;
+         margin-left: -60px;
+         transform: rotate(-90deg);
       }
-      ul.stats li strong, ul.stats li small {
-    /* padding: 5px 0; */
-     display: inline; 
-    /* text-align: center; */
-}
-ul.stats li {
-    display: table-cell;
-    padding: 10px;
-}
-ul.stats li strong {
-    font-size: 15px;
-    font-weight: bold;
-}
+      .bg{
+        height: 200px;
+        width: 50px;
+        background: green;
+        margin: 0 auto;
+        padding: 90px 0 0 0;
+      }
+       .progress {
+         -webkit-border-radius: 0;
+         -moz-border-radius: 0;
+         border-radius: 10px;
+       }
     </style>
   </head>
   
@@ -123,7 +128,50 @@ ul.stats li strong {
     </header>
     <div id="container">
       <div id="sidebar" class="sidebar-fixed">
-        
+        <div id="sidebar-content">
+          <ul id="nav">
+           <li>
+              <a href="total.html">
+                <i class="icon-cog" style="font-size: 20px;width: 30px;"></i>
+                首页
+              </a>
+            </li>
+            <li>
+              <a href="zujian.html">
+                <i class="icon-cog" style="font-size: 20px;width: 30px;"></i>
+                组件
+              </a>
+            </li>
+            <li class="current">
+              <a href="xudianchi.html">
+                <i class="icon-retweet" style="font-size: 20px;width: 30px;">
+                </i>
+                蓄电池
+              </a>
+            </li>
+            <li>
+              <a href="kongzhiqi.html">
+                <i class="icon-dashboard" style="font-size: 20px;width: 30px;">
+                </i>
+                控制器
+              </a>
+            </li>
+            <li>
+              <a href="nibianqi.html">
+                <i class="icon-folder-open-alt " style="font-size: 20px;width: 30px;">
+                </i>
+                逆变器
+              </a>
+            </li>
+            <li>
+              <a href="yitiji.html">
+                <i class="icon-folder-open-alt " style="font-size: 20px;width: 30px;">
+                </i>
+                控制逆变一体机
+              </a>
+            </li>
+          </ul>
+        </div>
         <div id="divider" class="resizeable">
         </div>
       </div>
@@ -141,40 +189,109 @@ ul.stats li strong {
             </div>
           </div>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-4">
+              <div class="widget box" >
+                <div class="widget-content u1" style="background: #f1f1f1">
+                  <h4><strong  style="">设备基本参数</strong></h4>
+                  <ul class="list-group ">
+                    <li class="list-group-item">额定容量：32 AH</li>
+                    <li class="list-group-item">额定电压：2 V</li>
+                    <li class="list-group-item">无</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
               <div class="widget box">
-                <div class="widget-content">
-                  <ul class="stats">
-                    <li>
-                      <strong>
-                        蓄电池电压：95.6 V
-                      </strong>
-                    </li>
-                    <li>
-                      <strong>
-                        蓄电池电压状态：<span class="label label-warning">电池欠压</span>
-                      </strong>
-                    </li>
-                    <li>
-                      <strong>
-                        蓄电池电流：6.7 A
-                      </strong>
-                    </li>
-                    <li>
-                      <strong>
-                        蓄电池功率：0.64 KW
-                      </strong>
-                    </li>
+                <div class="widget-content u2" style="background: #f1f1f1">
+                  <h4><strong>输出参数</strong></h4>
+                  <ul class="list-group ">
+                    <li class="list-group-item">功率：4,344 KW</li>
+                    <li class="list-group-item">电压：2,232 V</li>
+                    <li class="list-group-item">电流 A</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="widget box">
+                <div class="widget-content u3" style="background: #f1f1f1">
+                  <h4><strong>状态值</strong></h4>
+                  <ul class="list-group ">
+                    <li class="list-group-item">蓄电池温度：32 °C</li>
+                    <li class="list-group-item">蓄电池状态：<span class="label label-info">输出正常</span></li>
+                    <li class="list-group-item">
+                      充放电状态：充电
+                      </li>
                   </ul>
                 </div>
               </div>
             </div>
           </div>
+          <!--<div class="row">-->
+            <!--<div class="col-md-12">-->
+              <!--<div class="widget box">-->
+                <!--<div class="widget-content">-->
+                  <!--<ul class="stats">-->
+                    <!--<li>-->
+                      <!--<strong>-->
+                        <!--蓄电池电压：95.6 V-->
+                      <!--</strong>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                      <!--<strong>-->
+                        <!--蓄电池电压状态：<span class="label label-warning">电池欠压</span>-->
+                      <!--</strong>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                      <!--<strong>-->
+                        <!--蓄电池电流：6.7 A-->
+                      <!--</strong>-->
+                    <!--</li>-->
+                    <!--<li>-->
+                      <!--<strong>-->
+                        <!--蓄电池功率：0.64 KW-->
+                      <!--</strong>-->
+                    <!--</li>-->
+                  <!--</ul>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+          <!--</div>-->
           <div class="row">
             <div class="col-md-3">
               <div class="widget box">
                 <div class="widget-content" style="text-align: center;">
-                  <img src="./assets/img/demo/dianchi.png" alt="">
+
+
+                  <article class="flexy-grid" style="height:200px;">
+                    <h3>电池容量</h3>
+                    <div class="flexy-column">
+                      <div class="progress-factor flexy-item">
+                        <div class="progress-bar">
+                          <div class="bar has-rotation has-colors red heat-gradient move " role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+
+                            <div class="bar-face face-position roof percentage"></div>
+                            <div class="bar-face face-position back percentage"></div>
+                            <div class="bar-face face-position floor percentage volume-lights"></div>
+                            <div class="bar-face face-position left"></div>
+                            <div class="bar-face face-position right"></div>
+                            <div class="bar-face face-position front percentage volume-lights shine">
+                              <div class="tooltip heat-gradient-tooltip"></div>
+                              <div style="line-height: 1em;
+    font-size: 32px;
+    position: absolute;
+    height: 1em;
+    width: 1em;
+    margin: .4em .4em .4em .8em;">80%</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+
+
                 </div>
                 <div class="divider">
                 </div>
@@ -186,7 +303,7 @@ ul.stats li strong {
                       </strong>
                     </li>
                     <li><strong>
-                       状态：</strong> <span class="label label-info">充电</span>
+                      状态：</strong> <span class="label label-info">充电</span>
                     </li>
                   </ul>
                 </div>
@@ -195,8 +312,15 @@ ul.stats li strong {
              <div class="col-md-3">
               <div class="widget box">
                 <div class="widget-content" style="text-align: center;">
-                  <img src="./assets/img/demo/wenduji.png" alt="">
-                </div>
+                  <!--<img src="./assets/img/demo/wenduji.png" alt="" style="height: 200px;">-->
+                  <div class="bg" style="height: 200px;">
+                    <div class="progress vertical">
+                      <div class="progress-bar " role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                        <span class="sr-only">60% Complete</span>
+                      </div>
+                    </div>
+                  </div>
+                  </div>
                 <div class="divider">
                 </div>
                 <div class="widget-content">
@@ -213,7 +337,7 @@ ul.stats li strong {
              <div class="col-md-3">
               <div class="widget box">
                 <div class="widget-content">
-                  <div id="chart001" class="chart" style="height: 323px;">
+                  <div id="chart001" class="chart" style="height: 200px;">
                   </div>
                 </div>
                 <div class="divider">
@@ -232,7 +356,7 @@ ul.stats li strong {
              <div class="col-md-3">
               <div class="widget box">
                 <div class="widget-content">
-                  <div id="chart002" class="chart" style="height: 323px;">
+                  <div id="chart002" class="chart" style="height: 200px;">
                   </div>
                 </div>
                 <div class="divider">
@@ -249,6 +373,7 @@ ul.stats li strong {
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>

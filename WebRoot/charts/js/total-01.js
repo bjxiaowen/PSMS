@@ -1,14 +1,16 @@
+
   $(document).ready(function() {
         App.init();
         // Plugins.init();
         // FormComponents.init()
  var myChart = echarts.init(document.getElementById('chart_001')),
-        data = [0,0,0,0,0,0,0,0,1,5, 10, 12, 13, 15, 16, 14,12,11,8,4,1,0,0,0];
-        // data1 = [13, 10,18,12,6,15,20,14,17,14,20,21,12,10,12,16,15,20,14,12,16,15,20,14];
 
+        data = _.map(currDayQ,"totalVoltage");
+        // data1 = [13, 10,18,12,6,15,20,14,17,14,20,21,12,10,12,16,15,20,14,12,16,15,20,14];
+ 		
 option = {
     title : {
-        text: '日输出电量'
+        text: '日输出电量 kwh'
     },
     tooltip : {
         trigger: 'axis'
@@ -17,7 +19,7 @@ option = {
         data:['日发电量']
     },
     toolbox: {
-        show : true,
+        show : false,
         feature : {
             mark : {show: true},
             dataView : {show: true, readOnly: false},
@@ -38,7 +40,7 @@ option = {
         {
             type : 'value',
             axisLabel : {
-                formatter: '{value}(kWh)'
+                formatter: '{value}'
             }
         }
     ],

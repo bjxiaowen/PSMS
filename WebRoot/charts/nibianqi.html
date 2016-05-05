@@ -62,9 +62,14 @@
     <script type="text/javascript" src="js/chart-pub.js"></script>
     <!-- ECharts单文件引入 -->
     <script type="text/javascript" src="plugins/echart/echarts2.js"></script>
-    <script type="text/javascript" src="js/zujian-01.js"></script>
-    <script type="text/javascript" src="js/zujian-02.js"></script>
-    <script type="text/javascript" src="js/zujian-03.js"></script>
+    <script type="text/javascript" src="js/nibianqi-01.js"></script>
+    <script>
+      $(document).ready(function() {
+        App.init();
+        // Plugins.init();
+        // FormComponents.init()
+      });
+    </script>
     <style>
 
     </style>
@@ -105,14 +110,14 @@
       <div id="sidebar" class="sidebar-fixed">
         <div id="sidebar-content">
           <ul id="nav">
-          	<li>
+          <li>
               <a href="total.html">
                 <i class="icon-cog" style="font-size: 20px;width: 30px;"></i>
                 首页
               </a>
             </li>
-            <li class="current">
-              <a href="zijian.html">
+            <li>
+              <a href="zujian.html">
                 <i class="icon-cog" style="font-size: 20px;width: 30px;"></i>
                 组件
               </a>
@@ -131,7 +136,7 @@
                 控制器
               </a>
             </li>
-            <li>
+            <li class="current">
               <a href="nibianqi.html">
                 <i class="icon-folder-open-alt " style="font-size: 20px;width: 30px;">
                 </i>
@@ -146,11 +151,6 @@
               </a>
             </li>
           </ul>
-          <div class="sidebar-title">
-            <span>
-              版权所有
-            </span>
-          </div>
         </div>
         <div id="divider" class="resizeable">
         </div>
@@ -163,19 +163,29 @@
             </div>
           </div>
           <div class="page-header">
-            <div class="page-title" style="padding: 8px 0 0px 0px;">
-              <h3 style="margin-bottom: 0px;">
-              </h3>
-            </div>
           </div>
           <div class="row">
-            <div class="col-md-4">
-              <div class="widget box" >
+          <div class="col-md-4">
+          <div class="widget box" >
                 <div class="widget-content u1" style="background: #f1f1f1">
                   <h4><strong  style="">设备基本参数</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">组件额定功率：32 KW</li>
-                    <li class="list-group-item">无</li>
+                    <li class="list-group-item">额定功率：32 KW</li>
+                    <li class="list-group-item">额定输入电压：2 V</li>
+                    <li class="list-group-item">额定输出电压：220 V</li>
+                    <li class="list-group-item">额定输出频率：49.8 Hz</li>
+                  </ul>
+                </div>
+            </div>
+          </div>
+            <div class="col-md-4">
+              <div class="widget box">
+                <div class="widget-content u2" style="background: #f1f1f1">
+                  <h4><strong>输入参数</strong></h4>
+                  <ul class="list-group ">
+                    <li class="list-group-item">直流功率：22 KW</li>
+                    <li class="list-group-item">直流电压：22 V</li>
+                    <li class="list-group-item">直流电流：22 A</li>
                     <li class="list-group-item">无</li>
                   </ul>
                 </div>
@@ -183,86 +193,35 @@
             </div>
             <div class="col-md-4">
               <div class="widget box">
-                <div class="widget-content u2" style="background: #f1f1f1">
-                  <h4><strong>输出</strong></h4>
+                <div class="widget-content u3" style="background: #f1f1f1">
+                  <h4><strong>输出参数</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">组件功率：1111 KW</li>
-                    <li class="list-group-item">组件电压：2,232 V</li>
-                    <li class="list-group-item">组件电流：23 A</li>
+                    <li class="list-group-item">功率：32 KW</li>
+                    <li class="list-group-item">电压：32 V</li>
+                    <li class="list-group-item">电流：2 A</li>
+                    <li class="list-group-item">频率：22 Hz</li>
                   </ul>
                 </div>
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
               <div class="widget box">
                 <div class="widget-content">
-                  <div id="chart_filled_blue" class="chart">
+                  <div id="chart001" class="chart" style="height: 422px;">
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-<div class="row">
-            <div class="col-md-12">
-              <div class="widget box widget-closed">
-                <div class="widget-header">
-                  <h4>
-                    <i class="icon-reorder">
-                    </i>
-                    组件电压(
-                    <span class="blue">
-                      186.66V
-                    </span>
-                    )
-                  </h4>
-                  <div class="toolbar no-padding">
-                    <div class="btn-group">
-                      <span class="btn btn-xs widget-collapse widget-collapse-2">
-                        <i class="icon-angle-down">
-                        </i>
-                      </span>
-                    </div>
-                  </div>
-                </div>
+            <div class="col-md-6">
+              <div class="widget box">
                 <div class="widget-content">
-                  <div id="chart_002" class="chart">
-                  </div>
+                  <img src="./assets/img/demo/nibianqi.gif" alt="" width="900">
                 </div>
               </div>
             </div>
           </div>
-<div class="row">
-            <div class="col-md-12">
-              <div class="widget box widget-closed">
-                <div class="widget-header">
-                  <h4>
-                    <i class="icon-reorder">
-                    </i>
-                    组件电流(
-                    <span class="blue">
-                      12.12 A
-                    </span>
-                    )
-                  </h4>
-                  <div class="toolbar no-padding">
-                    <div class="btn-group">
-                      <span class="btn btn-xs widget-collapse widget-collapse-3">
-                        <i class="icon-angle-down">
-                        </i>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div class="widget-content">
-                  <div id="chart_003" class="chart">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </div>
       </div>
     </div>

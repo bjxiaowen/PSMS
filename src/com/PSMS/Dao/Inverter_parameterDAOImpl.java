@@ -33,7 +33,7 @@ public class Inverter_parameterDAOImpl implements Inverter_parameterDAO {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		HibernateSessionFactory.begainHibernateTransaction();
 		String hql = "SELECT A.id,PS_id,A.name,type,brand,model,"
-				+ "Purchase_time,Rate_power,Rated_voltage,Max_power,Power_factor,Period_num "
+				+ "Purchase_time,Rate_power,Rated_voltage,Max_power,Power_factor,Period_num,BatteryCapacity "
 				+ "from Inverter_parameter A,PS_information B where A.PS_id = B.id and B.Delete_flag = 0";
 		Query query = session.createSQLQuery(hql).addEntity(Inverter_parameter.class);
 		List<Inverter_parameter> p = query.list();

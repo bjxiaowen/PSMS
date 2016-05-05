@@ -48,6 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <th field="rated_voltage" width="15" align="center" sortable="true">额定电压</th>
                 <th field="max_power" width="15" align="center" sortable="true">最大功率</th>
                 <th field="power_factor" width="15" align="center" sortable="true">功率因数</th>
+                <th field="batteryCapacity" width="15" align="center" sortable="true">电池容量</th>
             </tr>
         </thead>
     </table>
@@ -128,6 +129,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <label>功率因数</label>
                 <input id="power_factor" class="easyui-textbox" name="power_factor" >
                 <input id="ex_power_factor" name="ex_power_factor" type="hidden" ></input>  
+            </div>
+            <div class="fitem">
+                <label>电池容量</label>
+                <input id="batteryCapacity" class="easyui-textbox" name="batteryCapacity" >
+                <input id="ex_batteryCapacity" name="ex_batteryCapacity" type="hidden" ></input>  
             </div>
         </form>
     </div>
@@ -333,6 +339,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 ex_max_power[0].value= row.max_power;
                 var ex_power_factor = document.getElementsByName("ex_power_factor");
                 ex_power_factor[0].value= row.power_factor;
+                var ex_batteryCapacity = document.getElementsByName("ex_batteryCapacity");
+                ex_batteryCapacity[0].value= row.batteryCapacity;
                 var brand=row.brand;
                  $.ajax({
  			        url:'setModelByTypeAndBrandI.action?brand='+encodeURI(encodeURI(brand)),			       
@@ -364,7 +372,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        var rate_power = trim(document.getElementsByName("rate_power")[0].value); 
             var rated_voltage = trim(document.getElementsByName("rated_voltage")[0].value);
             var max_power = trim(document.getElementsByName("max_power")[0].value);  
-            var power_factor = trim(document.getElementsByName("power_factor")[0].value);  
+            var power_factor = trim(document.getElementsByName("power_factor")[0].value); 
+            var batteryCapacity = trim(document.getElementsByName("batteryCapacity")[0].value); 
 		    //--------------------------以上为获取新建的值并且去掉输入值两边的空格
 		    var ex_ps_name = document.getElementsByName("ex_ps_name")[0].value;               
             var ex_name = document.getElementsByName("ex_name")[0].value;              
@@ -376,18 +385,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             var ex_rated_voltage = document.getElementsByName("ex_rated_voltage")[0].value;
             var ex_max_power = document.getElementsByName("ex_max_power")[0].value;	
             var ex_power_factor = document.getElementsByName("ex_power_factor")[0].value;
-            	
+            var ex_batteryCapacity = document.getElementsByName("ex_batteryCapacity")[0].value;	
             if(flag==0){//flag为0表示当前为新建
 		    if(!checkInverterInformation(ps_name,name,rate_power,rated_voltage,max_power,power_factor)){//校验逆变器信息
 		    	return false; 
 		    	
 		    }else{
+		    	console.log('batteryCapacity:'+batteryCapacity);
            		 $.ajax({
                  url:'addInverter.action?ps_name='+encodeURI(encodeURI(ps_name))+'&name='+encodeURI(encodeURI(name))+
         			'&type='+encodeURI(encodeURI(type))+'&brand='+encodeURI(encodeURI(brand))+'&model='+encodeURI(encodeURI(model))+
        				'&purchase_time='+encodeURI(encodeURI(purchase_time))+'&rate_power='+rate_power+
        				'&rated_voltage='+rated_voltage+'&max_power='+max_power+
-       				'&power_factor='+power_factor,
+       				'&power_factor='+power_factor+'&batteryCapacity='+batteryCapacity,
                      type:'GET',
 		             dataType:'json',
 		             async:false,
@@ -418,7 +428,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        				'&purchase_time='+encodeURI(encodeURI(purchase_time))+'&rate_power='+rate_power+
        				'&rated_voltage='+rated_voltage+'&max_power='+max_power+
        				'&power_factor='+power_factor+'&ex_name='+encodeURI(encodeURI(ex_name))+
-       				'&ex_ps_name='+encodeURI(encodeURI(ex_ps_name)),
+       				'&ex_ps_name='+encodeURI(encodeURI(ex_ps_name))+'&ex_batteryCapacity='+ex_batteryCapacity,
 					type:'GET',
 					dataType:'json',
 					async:false,

@@ -6,24 +6,18 @@ option = {
         x:'center'
     },
     tooltip : {
-        trigger: 'item',
-        formatter: function (v) {
-            console.log(v);
-            return v[1].replace(':', ' > ');
-        }
+        trigger: 'item'
     },
     legend: {
         orient: 'vertical',
         x:'left',
-        data:['']
+        data:['功率']
     },
     dataRange: {
         min : 0,
         max : 500,
-        calculable : true,
-        x: 'left',
-        y: 'bottom',
-        color: ['lightgreen','red']
+        calculable : false,
+        color: ['maroon','purple','red','orange','yellow','lightgreen']
     },
     toolbox: {
         show : true,
@@ -37,24 +31,13 @@ option = {
             saveAsImage : {show: true}
         }
     },
-    roamController: {
-        show: true,
-        x: 'right',
-        mapTypeControl: {
-            'china': true
-        }
-    },
     series : [
         {
             name: '功率',
             type: 'map',
             mapType: 'china',
-            hoverable: true,
-            roam:false,
-            itemStyle:{
-                normal:{label:{show:true}},
-                emphasis:{label:{show:true}}
-            },
+            hoverable: false,
+            roam:true,
             data : [],
             markPoint : {
                 symbolSize: 5,       // 标注大小，半宽（半径）参数，当图形为方向或菱形则总宽度为symbolSize * 2
@@ -124,10 +107,6 @@ option = {
             name: '电站信息',
             type: 'map',
             mapType: 'china',
-            itemStyle:{
-                normal:{label:{show:true}},
-                emphasis:{label:{show:true}}
-            },
             data:[],
             markPoint : {
                 symbol:'emptyCircle',
@@ -140,7 +119,7 @@ option = {
                 },
                 itemStyle:{
                     normal:{
-                        label:{show:true}
+                        label:{show:false}
                     }
                 },
                 data : [
@@ -148,7 +127,7 @@ option = {
                     {name: "菏泽", value: 194},
                     {name: "合肥", value: 229},
                     {name: "武汉", value: 273},
-                    {name: "大庆", value: 27}
+                    {name: "大庆", value: 279}
                 ]
             }
         }
@@ -162,7 +141,6 @@ option = {
 // })
         // 为echarts对象加载数据 
         myChart.setOption(option);
-        myChart.setTheme("roma");
         var au = $(".au"); 
     au.each(function(){
         var audio_btn = $(this).find(".audio_btn");

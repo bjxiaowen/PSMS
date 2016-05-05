@@ -14,6 +14,9 @@ public class inverter_parameter {
 	private String Rated_voltage;
 	private String Max_power;
 	private String Power_factor;
+	
+	private String BatteryCapacity;//电池容量
+	
 	public int getId() {
 		return id;
 	}
@@ -80,6 +83,12 @@ public class inverter_parameter {
 	}
 	public void setPower_factor(String power_factor) {
 		Power_factor = power_factor;
+	}
+	public String getBatteryCapacity() {
+		return BatteryCapacity;
+	}
+	public void setBatteryCapacity(String batteryCapacity) {
+		BatteryCapacity = batteryCapacity;
 	}
 	
 	

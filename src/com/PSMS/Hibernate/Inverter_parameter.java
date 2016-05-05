@@ -42,46 +42,60 @@ public class Inverter_parameter {
 	private String Max_power;
 	private String Power_factor;
 	private Integer Period_num;
+	private String BatteryCapacity;//电池容量
 	
 	public Integer getPeriod_num() {
 		return Period_num;
 	}
+	
 	public void setPeriod_num(Integer period_num) {
 		Period_num = period_num;
 	}
+	
 	public int getId() {
 		return id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public int getPS_id() {
 		return PS_id;
 	}
+	
 	public void setPS_id(int pS_id) {
 		PS_id = pS_id;
 	}
+	
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public String getType() {
 		return type;
 	}
+	
 	public void setType(String type) {
 		this.type = type;
 	}
+	
 	public String getBrand() {
 		return brand;
 	}
+	
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
+	
 	public String getModel() {
 		return model;
 	}
+	
 	public void setModel(String model) {
 		this.model = model;
 	}
@@ -89,34 +103,49 @@ public class Inverter_parameter {
 	public String getPurchase_time() {
 		return Purchase_time;
 	}
+	
 	public void setPurchase_time(String purchase_time) {
 		Purchase_time = purchase_time;
 	}
+	
 	public String getRate_power() {
 		return Rate_power;
 	}
+	
 	public void setRate_power(String rate_power) {
 		Rate_power = rate_power;
 	}
+	
 	public String getRated_voltage() {
 		return Rated_voltage;
 	}
+	
 	public void setRated_voltage(String rated_voltage) {
 		Rated_voltage = rated_voltage;
 	}
+	
 	public String getMax_power() {
 		return Max_power;
 	}
+	
 	public void setMax_power(String max_power) {
 		Max_power = max_power;
 	}
+	
 	public String getPower_factor() {
 		return Power_factor;
 	}
+	
 	public void setPower_factor(String power_factor) {
 		Power_factor = power_factor;
 	}
 	
+	public String getBatteryCapacity() {
+		return BatteryCapacity;
+	}
 	
+	public void setBatteryCapacity(String batteryCapacity) {
+		BatteryCapacity = batteryCapacity;
+	}
 	
 }

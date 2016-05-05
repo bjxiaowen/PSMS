@@ -67,6 +67,7 @@
 		<property name="Max_power"></property>
 		<property name="Power_factor"></property>
 		<property name="Period_num"></property>
+		<property name="BatteryCapacity"></property>
 	</class>
 	
 	<class name="com.PSMS.Hibernate.WS_parameter">

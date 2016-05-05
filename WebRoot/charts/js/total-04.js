@@ -4,13 +4,14 @@ $(document).ready(
 			// Plugins.init();
 			// FormComponents.init()
 			var myChart = echarts.init(document.getElementById('chart_004'));
-			data4 = [ 111, 111, 151, 110 ];
+//			data4 = [ 111, 111, 151, 110 ];
+			data4 = _.map(currYearQ,"totalVoltage");
 			// data1 = [13,
 			// 10,18,12,6,15,20,14,17,14,20,21,12,10,12,16,15,20,14,12,16,15,20,14];
 
 			option4 = {
 				title : {
-					text : '当年月发电量'
+					text : year+'年月发电量 kwh'
 				},
 				tooltip : {
 					trigger : 'axis'
@@ -19,7 +20,7 @@ $(document).ready(
 					data : [ '当年月发电量' ]
 				},
 				toolbox : {
-					show : true,
+					show : false,
 					feature : {
 						mark : {
 							show : true
@@ -50,7 +51,7 @@ $(document).ready(
 				yAxis : [ {
 					type : 'value',
 					axisLabel : {
-						formatter : '{value}(kWh)'
+						formatter : '{value}'
 					}
 				} ],
 				series : [ {

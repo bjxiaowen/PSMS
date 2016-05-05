@@ -1,22 +1,23 @@
 $(document).ready(
 		function() {
 			var myChart = echarts.init(document.getElementById('chart_003'));
-			data3 = [ 11, 11, 15, 13, 12, 13, 10, 8, 2, 6 ];
+//			data3 = [ 11, 11, 15, 13, 12, 13, 10, 8, 2, 6 ];
+			data3 = _.map(currMonthQ,"totalVoltage");
 			// data1 = [13,
 			// 10,18,12,6,15,20,14,17,14,20,21,12,10,12,16,15,20,14,12,16,15,20,14];
 
 			option3 = {
 				title : {
-					text : '当月日发电量'
+					text : month+'月日发电量 kwh'
 				},
 				tooltip : {
 					trigger : 'axis'
 				},
 				legend : {
-					data : [ '当月日发电量' ]
+					data : [ month+'月日发电量' ]
 				},
 				toolbox : {
-					show : true,
+					show : false,
 					feature : {
 						mark : {
 							show : true
@@ -49,11 +50,11 @@ $(document).ready(
 				yAxis : [ {
 					type : 'value',
 					axisLabel : {
-						formatter : '{value}(kWh)'
+						formatter : '{value}'
 					}
 				} ],
 				series : [ {
-					name : '当月日发电量',
+					name : month+'月日发电量',
 					type : 'bar',
 					data : data3,
 					markPoint : {

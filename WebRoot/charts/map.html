@@ -58,15 +58,37 @@
     <![endif]-->
     <script type="text/javascript" src="assets/js/app.js">
     </script>
-    <!-- 公共文件引入 -->
-    <script type="text/javascript" src="js/chart-pub.js"></script>
     <!-- ECharts单文件引入 -->
     <script type="text/javascript" src="plugins/echart/echarts2.js"></script>
-    <script type="text/javascript" src="js/zujian-01.js"></script>
-    <script type="text/javascript" src="js/zujian-02.js"></script>
-    <script type="text/javascript" src="js/zujian-03.js"></script>
+    <script type="text/javascript" src="js/chart011.js"></script>
+    <script>
+      $(document).ready(function() {
+        App.init();
+        // Plugins.init();
+        // FormComponents.init()
+      });
+    </script>
     <style>
-
+      .navbar{
+        background: #2677af;
+        border-bottom: 2px solid #2a4053;
+      }
+      ul.stats li strong, ul.stats li small {
+    /* padding: 5px 0; */
+     display: inline; 
+    /* text-align: center; */
+}
+ul.stats li {
+    display: table-cell;
+    padding: 10px;
+}
+ul.stats li strong {
+    font-size: 15px;
+    font-weight: bold;
+}
+.page-title h3{
+  font-weight: bold;
+}
     </style>
   </head>
   
@@ -105,44 +127,31 @@
       <div id="sidebar" class="sidebar-fixed">
         <div id="sidebar-content">
           <ul id="nav">
-          	<li>
-              <a href="total.html">
-                <i class="icon-cog" style="font-size: 20px;width: 30px;"></i>
-                首页
-              </a>
-            </li>
             <li class="current">
-              <a href="zijian.html">
+              <a href="index.html">
                 <i class="icon-cog" style="font-size: 20px;width: 30px;"></i>
                 组件
               </a>
             </li>
             <li>
-              <a href="xudianchi.html">
+              <a href="index2.html">
                 <i class="icon-retweet" style="font-size: 20px;width: 30px;">
                 </i>
                 蓄电池
               </a>
             </li>
             <li>
-              <a href="kongzhiqi.html">
+              <a href="index4.html">
                 <i class="icon-dashboard" style="font-size: 20px;width: 30px;">
                 </i>
                 控制器
               </a>
             </li>
             <li>
-              <a href="nibianqi.html">
+              <a href="index5.html">
                 <i class="icon-folder-open-alt " style="font-size: 20px;width: 30px;">
                 </i>
                 逆变器
-              </a>
-            </li>
-            <li>
-              <a href="yitiji.html">
-                <i class="icon-folder-open-alt " style="font-size: 20px;width: 30px;">
-                </i>
-                控制逆变一体机
               </a>
             </li>
           </ul>
@@ -157,112 +166,74 @@
       </div>
       <div id="content">
         <div class="container">
-          <div class="crumbs">
-            <div class="current-time" style="    padding: 10px 15px;font-size: 14px;font-weight: bold;
-    float: left;">采集时刻：
-            </div>
-          </div>
-          <div class="page-header">
-            <div class="page-title" style="padding: 8px 0 0px 0px;">
-              <h3 style="margin-bottom: 0px;">
-              </h3>
-            </div>
-          </div>
           <div class="row">
-            <div class="col-md-4">
-              <div class="widget box" >
-                <div class="widget-content u1" style="background: #f1f1f1">
-                  <h4><strong  style="">设备基本参数</strong></h4>
-                  <ul class="list-group ">
-                    <li class="list-group-item">组件额定功率：32 KW</li>
-                    <li class="list-group-item">无</li>
-                    <li class="list-group-item">无</li>
-                  </ul>
-                </div>
-              </div>
+            <div class="col-md-2">
+            <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th width="70%">
+                          电站名称
+                        </th>
+                        <th width="30%">
+                          报警
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div style="height: 30px; line-height: 30px;">新疆克孜勒苏柯电站</div>
+                        </td>
+                        <td>
+                          <div class="au">
+                          <audio class="music" src="./assets/img/icons/901095.wav" autoplay="autoplay" loop>你的浏览器不支持audio标签。</audio>
+                            <a class="audio_btn"><img src="./assets/img/icons/play.gif" width="30" height="30" class="music_btn" border="0"></a>
+                            </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div style="height: 30px; line-height: 30px;">新疆A电站</div>
+                        </td>
+                        <td>
+                          <div class="au">
+                          <audio class="music" src="./assets/img/icons/901095.wav" autoplay="autoplay" loop>你的浏览器不支持audio标签。</audio>
+                            <a class="audio_btn"><img src="./assets/img/icons/play.gif" width="30" height="30" class="music_btn" border="0"></a>
+                            </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div style="height: 30px; line-height: 30px;">新疆B电站</div>
+                        </td>
+                        <td>
+                          <div class="au">
+                          <audio class="music" src="./assets/img/icons/901095.wav" autoplay="autoplay" loop>你的浏览器不支持audio标签。</audio>
+                            <a class="audio_btn"><img src="./assets/img/icons/play.gif" width="30" height="30" class="music_btn" border="0"></a>
+                            </div>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div style="height: 30px; line-height: 30px;">新疆C站</div>
+                        </td>
+                        <td>
+                          <div class="au">
+                          <audio class="music" src="./assets/img/icons/901095.wav" autoplay="autoplay" loop>你的浏览器不支持audio标签。</audio>
+                            <a class="audio_btn"><img src="./assets/img/icons/play.gif" width="30" height="30" class="music_btn" border="0"></a>
+                            </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
             </div>
-            <div class="col-md-4">
-              <div class="widget box">
-                <div class="widget-content u2" style="background: #f1f1f1">
-                  <h4><strong>输出</strong></h4>
-                  <ul class="list-group ">
-                    <li class="list-group-item">组件功率：1111 KW</li>
-                    <li class="list-group-item">组件电压：2,232 V</li>
-                    <li class="list-group-item">组件电流：23 A</li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="widget box">
-                <div class="widget-content">
-                  <div id="chart_filled_blue" class="chart">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-<div class="row">
-            <div class="col-md-12">
-              <div class="widget box widget-closed">
-                <div class="widget-header">
-                  <h4>
-                    <i class="icon-reorder">
-                    </i>
-                    组件电压(
-                    <span class="blue">
-                      186.66V
-                    </span>
-                    )
-                  </h4>
-                  <div class="toolbar no-padding">
-                    <div class="btn-group">
-                      <span class="btn btn-xs widget-collapse widget-collapse-2">
-                        <i class="icon-angle-down">
-                        </i>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div class="widget-content">
-                  <div id="chart_002" class="chart">
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-<div class="row">
-            <div class="col-md-12">
-              <div class="widget box widget-closed">
-                <div class="widget-header">
-                  <h4>
-                    <i class="icon-reorder">
-                    </i>
-                    组件电流(
-                    <span class="blue">
-                      12.12 A
-                    </span>
-                    )
-                  </h4>
-                  <div class="toolbar no-padding">
-                    <div class="btn-group">
-                      <span class="btn btn-xs widget-collapse widget-collapse-3">
-                        <i class="icon-angle-down">
-                        </i>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <div class="widget-content">
-                  <div id="chart_003" class="chart">
-                  </div>
+            <div class="col-md-10">
+              <div class="widget-content">
+                <div id="chart1" class="chart" style="height: 800px; /*width:1000px;*/ /* width: 778px !important; */ overflow: hidden; padding: 10px; margin-bottom: 10px; border: 1px solid #e3e3e3; -webkit-border-radius: 4px; -moz-border-radius: 4px; border-radius: 4px; -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05); box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);">
                 </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>

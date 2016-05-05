@@ -62,7 +62,7 @@
     <script type="text/javascript" src="js/chart-pub.js"></script>
     <!-- ECharts单文件引入 -->
     <script type="text/javascript" src="plugins/echart/echarts2.js"></script>
-    <script type="text/javascript" src="js/kongzhiqi-01.js"></script>
+    <script type="text/javascript" src="js/yitiji-01.js"></script>
     <script>
       $(document).ready(function() {
         App.init();
@@ -71,38 +71,7 @@
       });
     </script>
     <style>
-      .navbar{
-        background: #2677af;
-        border-bottom: 2px solid #2a4053;
-      }
-      ul.stats li strong, ul.stats li small {
-    /* padding: 5px 0; */
-     display: inline; 
-    /* text-align: center; */
-}
-ul.stats li {
-    display: table-cell;
-    padding: 10px;
-}
-ul.stats li strong {
-    font-size: 15px;
-    font-weight: bold;
-}
-.page-title h3{
-  font-weight: bold;
-}
-.u1 strong,.u2 strong,.u3 strong{
-  color: #1d1d1d ;font-size: 28px; padding: 5px;
-}
-.u1 .list-group-item{
-  background: #9f00a7; color: white
-}
-.u2 .list-group-item{
-  background: #b91d47; color: white
-}
-.u3 .list-group-item{
-  background: #2b5797; color: white
-}
+
     </style>
   </head>
   
@@ -196,28 +165,56 @@ ul.stats li strong {
           <div class="page-header">
           </div>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-4">
+              <div class="widget box" >
+                <div class="widget-content u1" style="background: #f1f1f1">
+                  <h4><strong  style="">设备基本参数</strong></h4>
+                  <ul class="list-group ">
+                    <li class="list-group-item">额定功率：5 KW</li>
+                    <li class="list-group-item">额定直流电压：96 V</li>
+                    <li class="list-group-item">额定输出电压：220 VC</li>
+                    <li class="list-group-item">额定输出频率：50 Hz</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
               <div class="widget box">
-                <div class="widget-content">
-                  <div id="chart001" class="chart">
-                  </div>
+                <div class="widget-content u2" style="background: #f1f1f1">
+                  <h4><strong>输入参数</strong></h4>
+                  <ul class="list-group ">
+                    <li class="list-group-item">组件电压：4,344 V</li>
+                    <li class="list-group-item">组件电流：2,232 A</li>
+                    <li class="list-group-item">蓄电池电压：22 V</li>
+                    <li class="list-group-item">蓄电池电流：22 A</li>
+                  </ul>
                 </div>
-                <div class="divider">
-                </div>
-                <div class="widget-content">
-                  <ul class="stats ">
-                    <li>控制器额定功率：5 KW</li>
-                    <li>额定直流电压：96 V</li>
-                    <li>额定输出功率：4.4 KW</li>
-                    <li>额定输出电压：220 VC</li>
-                     <li>额定输出频率：50 Hz</li>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="widget box">
+                <div class="widget-content u3" style="background: #f1f1f1">
+                  <h4><strong>输出参数</strong></h4>
+                  <ul class="list-group ">
+                    <li class="list-group-item">功率：32 KW</li>
+                    <li class="list-group-item">电压：2 V</li>
+                    <li class="list-group-item">电流：2 A</li>
+                    <li class="list-group-item">频率：2 Hz</li>
                   </ul>
                 </div>
               </div>
             </div>
           </div>
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
+              <div class="widget box">
+                <div class="widget-content">
+                  <div id="chart001" class="chart" style="height: 422px;">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
               <div class="widget box">
                 <div class="widget-content" style="text-align: center;">
                   <img src="./assets/img/demo/yitiji.gif" alt="" width="900">

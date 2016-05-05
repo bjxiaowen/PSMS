@@ -55,6 +55,9 @@ public class toInverterManageAction {
 	private PS_informationService ps_informationService;
 	
 	private EquipmentService equipmentService;
+	
+	private String BatteryCapacity ;
+	
 	/** 
 	*加载页面*
 	* @author jiaojiao.wang 
@@ -121,6 +124,7 @@ public class toInverterManageAction {
 			u.setRated_voltage(list_all_inverter.get(i).getRated_voltage());
 			u.setMax_power(list_all_inverter.get(i).getMax_power());
 			u.setPower_factor(list_all_inverter.get(i).getPower_factor());
+			u.setBatteryCapacity(list_all_inverter.get(i).getBatteryCapacity());
 			inverter_parameter_list.add(u);
 		}		
 	
@@ -133,6 +137,7 @@ public class toInverterManageAction {
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			ServletActionContext.getResponse().getWriter().write(object.toString());
+			System.out.println(object.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -215,11 +220,13 @@ public class toInverterManageAction {
 			String rated_voltage = request.getParameter("rated_voltage");
 			String max_power = request.getParameter("max_power");
 			String power_factor = request.getParameter("power_factor");
+			String BatteryCapacity=request.getParameter("batteryCapacity");
 			ps_name = java.net.URLDecoder.decode(ps_name, "UTF-8");
 			name = java.net.URLDecoder.decode(name, "UTF-8");
 			type = java.net.URLDecoder.decode(type, "UTF-8");
 			brand = java.net.URLDecoder.decode(brand, "UTF-8");
 			model = java.net.URLDecoder.decode(model, "UTF-8");
+			BatteryCapacity= java.net.URLDecoder.decode(BatteryCapacity, "UTF-8");
 			purchase_time = java.net.URLDecoder.decode(purchase_time, "UTF-8");
 			
 			ps_informationService = new PS_informationServiceImpl();
@@ -236,6 +243,7 @@ public class toInverterManageAction {
 			i_parameter.setName(name);
 			i_parameter.setBrand(brand);
 			i_parameter.setPS_id(ps_id);
+			i_parameter.setBatteryCapacity(BatteryCapacity);
 			i_parameter.setPurchase_time(purchase_time);// 将数据存入u类中
 			if(rate_power==""){//判断额定功率若没有填写则默认为空
 				i_parameter.setRate_power(null);
@@ -342,6 +350,7 @@ public class toInverterManageAction {
 			u.setRated_voltage(list_inverter.get(i).getRated_voltage());
 			u.setMax_power(list_inverter.get(i).getMax_power());
 			u.setPower_factor(list_inverter.get(i).getPower_factor());
+			u.setBatteryCapacity(list_inverter.get(i).getBatteryCapacity());
 			i_list.add(u);
 		}
 		JSONObject obj=JSONObject.fromObject("{}");		
@@ -434,6 +443,7 @@ public class toInverterManageAction {
 			u.setRated_voltage(list_inverter.get(i).getRated_voltage());
 			u.setMax_power(list_inverter.get(i).getMax_power());
 			u.setPower_factor(list_inverter.get(i).getPower_factor());
+			u.setBatteryCapacity(list_inverter.get(i).getBatteryCapacity());
 			i_list.add(u);
 		}
 		JSONObject obj=JSONObject.fromObject("{}");		
@@ -535,4 +545,13 @@ public class toInverterManageAction {
 		}
 		return null;
 	}
+
+	public String getBatteryCapacity() {
+		return BatteryCapacity;
+	}
+
+	public void setBatteryCapacity(String batteryCapacity) {
+		BatteryCapacity = batteryCapacity;
+	}
+	
 }
