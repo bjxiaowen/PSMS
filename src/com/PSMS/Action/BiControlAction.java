@@ -41,6 +41,21 @@ public class BiControlAction {
 			object.put("hourlyData", hourlyData);//实时数据
 			List<Inverter_parameter> parameters=biPSService.getParameter(pId, "控制器");
 			object.put("parameters", parameters);//设备基本参数
+			
+			//组件
+			PowerStationBase modelData=biPSService.getPSOutOneData(dateTime, pId,"组件");
+			object.put("modelData", modelData);
+			PowerStationBase modelStatus=biPSService.getNewestStatus(dateTime, pId,"组件");
+			object.put("modelStatus", modelStatus);
+			
+			//蓄电池
+			PowerStationBase batteryData=biPSService.getPSOutOneData(dateTime, pId,"蓄电池");
+			object.put("batteryData", batteryData);
+			
+			//逆变器
+			PowerStationBase InverterData=biPSService.getPSOutOneData(dateTime, pId,"逆变器");
+			object.put("InverterData", InverterData);
+			
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			request.setAttribute("list", object.toString());

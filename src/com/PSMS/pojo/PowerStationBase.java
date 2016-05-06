@@ -68,6 +68,8 @@ public class PowerStationBase {
 	
 	private BigDecimal countCarbon;//二氧化碳
 	
+	private String batteryCapacity;//蓄电池容量
+	
 	
 	
 	public BigDecimal getTotalCapacity() {
@@ -304,6 +306,14 @@ public class PowerStationBase {
 
 	public void setCountCarbon(BigDecimal countCarbon) {
 		this.countCarbon = countCarbon;
+	}
+
+	public String getBatteryCapacity() {
+		return batteryCapacity;
+	}
+
+	public void setBatteryCapacity(String batteryCapacity) {
+		this.batteryCapacity = batteryCapacity;
 	}
 
 	
