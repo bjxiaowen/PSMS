@@ -811,7 +811,7 @@
 		
 		<!-- 组件 -->
 		<action name="toBiModule" method="toBiModule" class="com.PSMS.Action.BiModuleAction">
-			<result name="success">charts/zijian.jsp</result>
+			<result name="success">charts/zujian.jsp</result>
 		</action>
 
 		<action name="getModule" method="getModule" class="com.PSMS.Action.BiPowerStationAction">

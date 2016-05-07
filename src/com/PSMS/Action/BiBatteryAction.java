@@ -31,6 +31,7 @@ public class BiBatteryAction {
 	
 
 	public String toBattery(){
+		
 		try {
 			HttpServletRequest request =ServletActionContext.getRequest();
 			request.setCharacterEncoding("utf-8");
