@@ -50,6 +50,11 @@ public class BiIndexAction {
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 //			ServletActionContext.getResponse().getWriter().write(object.toString());
 			request.setAttribute("list", object.toString());
+			request.setAttribute("dashboard", dashboard);
+			request.setAttribute("history", history);//currDayCountQ
+			request.setAttribute("currDayCountQ", currDayCountQ);
+			request.setAttribute("currYearCountQ", currYearCountQ);
+			request.setAttribute("currMonthCountQ",currMonthCountQ);
 			System.out.println(object.toString());
 		}catch(IOException e){
 			e.printStackTrace();

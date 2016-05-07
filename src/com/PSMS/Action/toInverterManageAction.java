@@ -243,7 +243,7 @@ public class toInverterManageAction {
 			i_parameter.setName(name);
 			i_parameter.setBrand(brand);
 			i_parameter.setPS_id(ps_id);
-			i_parameter.setBatteryCapacity(BatteryCapacity);
+			
 			i_parameter.setPurchase_time(purchase_time);// 将数据存入u类中
 			if(rate_power==""){//判断额定功率若没有填写则默认为空
 				i_parameter.setRate_power(null);
@@ -256,7 +256,14 @@ public class toInverterManageAction {
 			}else {	i_parameter.setMax_power(max_power);}
 			if(power_factor==""){//判断功率因数若没有填写则默认为空
 				i_parameter.setPower_factor(null);
-			}else {	i_parameter.setPower_factor(power_factor);}
+			}else {	i_parameter.setPower_factor(power_factor);
+			
+			}
+			if(BatteryCapacity!=null&&BatteryCapacity!=""){
+				i_parameter.setBatteryCapacity(BatteryCapacity);
+			}else{
+				i_parameter.setBatteryCapacity("0");
+			}
 			inverterService.addInverter(i_parameter);
 			
 			ArrayList list = new ArrayList();

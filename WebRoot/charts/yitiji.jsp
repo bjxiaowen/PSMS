@@ -1,7 +1,18 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page import="com.PSMS.pojo.PowerStationBase" %>
+<%@ page import="com.PSMS.Hibernate.Inverter_parameter" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.math.BigDecimal" %>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	Inverter_parameter parameter=(Inverter_parameter)request.getAttribute("parameter");
+	PowerStationBase outData=(PowerStationBase)request.getAttribute("outData");
+	
+	PowerStationBase modelData=(PowerStationBase)request.getAttribute("modelData");
+	
+	PowerStationBase batteryData=(PowerStationBase)request.getAttribute("batteryData");
+
 %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -14,25 +25,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     />
     <title>首页</title>
   <%@ include file="sysJs.jsp"%>
-  <!-- 公共文件引入 -->
-    <script type="text/javascript">
-    	//后台取出数据
-    	v = '${list}';
-    </script>
+    <!-- 公共文件引入 -->
+    <script>
+		  //后台取出数据
+		  v = '${list}';
+  	</script>
     <script type="text/javascript" src="charts/js/chart-pub.js"></script>
     <!-- ECharts单文件引入 -->
     <script type="text/javascript" src="charts/plugins/echart/echarts2.js"></script>
-    <script type="text/javascript" src="charts/js/nibianqi-01.js"></script>
+    <script type="text/javascript" src="charts/js/jtopo-0.4.8-min.js"></script>
+    <script type="text/javascript" src="charts/js/yitiji-01.js"></script>
+    <script type="text/javascript" src="charts/js/yitiji-02.js"></script>
     <script>
-      $(document).ready(function() {
-        App.init();
-        // Plugins.init();
-        // FormComponents.init()
-      });
+    	var hourlyData = data_json["hourlyData"];
     </script>
-    <style>
-
-    </style>
   </head>
   
   <body>
@@ -40,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <jsp:include page="sysHead.html"/>
     </header>
     <div id="container">
-      <div id="sidebar" class="sidebar-fixed">
+     <div id="sidebar" class="sidebar-fixed">
         <jsp:include page="sysSidebar.html" />
         <div id="divider" class="resizeable">
         </div>
@@ -55,28 +61,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <div class="page-header">
           </div>
           <div class="row">
-          <div class="col-md-4">
-          <div class="widget box" >
+            <div class="col-md-4">
+              <div class="widget box" >
                 <div class="widget-content u1" style="background: #f1f1f1">
                   <h4><strong  style="">设备基本参数</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">额定功率：32 KW</li>
-                    <li class="list-group-item">额定输入电压：2 V</li>
-                    <li class="list-group-item">额定输出电压：220 V</li>
-                    <li class="list-group-item">额定输出频率：49.8 Hz</li>
+                    <li class="list-group-item">额定功率：<%=parameter.getRate_power() %> KW</li>
+                    <li class="list-group-item">额定直流电压：<%=parameter.getRated_voltage() %> V</li>
+                    <li class="list-group-item">额定输出电压：FF VC</li>
+                    <li class="list-group-item">额定输出频率：FF Hz</li>
                   </ul>
                 </div>
+              </div>
             </div>
-          </div>
             <div class="col-md-4">
               <div class="widget box">
                 <div class="widget-content u2" style="background: #f1f1f1">
                   <h4><strong>输入参数</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">直流功率：22 KW</li>
-                    <li class="list-group-item">直流电压：22 V</li>
-                    <li class="list-group-item">直流电流：22 A</li>
-                    <li class="list-group-item">无</li>
+                    <li class="list-group-item">组件电压：<%=modelData.getTotalVoltage() %> V</li>
+                    <li class="list-group-item">组件电流：<%=modelData.getTotalCurrent() %> A</li>
+                    <li class="list-group-item">蓄电池电压：<%=batteryData.getTotalVoltage() %> V</li>
+                    <li class="list-group-item">蓄电池电流：<%=batteryData.getTotalCurrent() %> A</li>
                   </ul>
                 </div>
               </div>
@@ -86,10 +92,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="widget-content u3" style="background: #f1f1f1">
                   <h4><strong>输出参数</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">功率：32 KW</li>
-                    <li class="list-group-item">电压：32 V</li>
-                    <li class="list-group-item">电流：2 A</li>
-                    <li class="list-group-item">频率：22 Hz</li>
+                    <li class="list-group-item">功率：<%=outData.getTotalPower() %> KW</li>
+                    <li class="list-group-item">电压：<%=outData.getTotalVoltage() %> V</li>
+                    <li class="list-group-item">电流：<%=outData.getTotalCurrent() %> A</li>
+                    <li class="list-group-item">频率：FF Hz</li>
                   </ul>
                 </div>
               </div>
@@ -106,8 +112,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
             <div class="col-md-6">
               <div class="widget box">
-                <div class="widget-content">
-                  <img src="./assets/img/demo/nibianqi.gif" alt="" width="900">
+                <div class="widget-content" style="text-align: center;">
+                  <canvas width="850" height="550" id="canvas"></canvas>	
                 </div>
               </div>
             </div>

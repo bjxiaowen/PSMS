@@ -1,8 +1,8 @@
 $(function(){
+	App.init();
     var myChart = echarts.init(document.getElementById('chart001')); 
-        data = [0, 0,0,0,0,0,0.32,1.53,1.53,1.53,1.51,2.03,1.37,2.48,,,,,,,,,,];
-        data3 = [0, 0,0,0,0,0,0.35,1.67,1.67,1.67,1.65,2.22,1.50,2.71,,,,,,,,,,];
-
+    data = _.map(hourlyData,"power");
+    
 option = {
     title : {
         text: '功率(kW)'
@@ -11,7 +11,7 @@ option = {
         trigger: 'axis'
     },
     legend: {
-        data:['输出功率','输入功率']
+        data:['输入功率']
     },
     toolbox: {
         show : false,
@@ -41,25 +41,9 @@ option = {
     ],
     series : [
         {
-            name:'输出功率',
-            type:'line',
-            data:data,
-            markPoint : {
-                data : [
-                    {type : 'max', name: '最大值'},
-                    {type : 'min', name: '最小值'}
-                ]
-            },
-            markLine : {
-                data : [
-                    {type : 'average', name: '平均值'}
-                ]
-            }
-        },
-        {
             name:'输入功率',
             type:'line',
-            data:data3,
+            data:data,
             markPoint : {
                 data : [
                     {type : 'max', name: '最大值'},

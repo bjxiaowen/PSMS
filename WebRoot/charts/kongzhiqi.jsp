@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="charts/js/chart-pub.js"></script>
     <!-- ECharts单文件引入 -->
     <script type="text/javascript" src="charts/plugins/echart/echarts2.js"></script>
-    <script type="text/javascript" src="charts/js/nibianqi-01.js"></script>
+    <script type="text/javascript" src="charts/js/kongzhiqi-01.js"></script>
     <script>
       $(document).ready(function() {
         App.init();
@@ -31,7 +31,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       });
     </script>
     <style>
-
     </style>
   </head>
   
@@ -40,11 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <jsp:include page="sysHead.html"/>
     </header>
     <div id="container">
-      <div id="sidebar" class="sidebar-fixed">
-        <jsp:include page="sysSidebar.html" />
-        <div id="divider" class="resizeable">
-        </div>
-      </div>
+      <jsp:include page="sysSidebar.html" />
       <div id="content">
         <div class="container">
           <div class="crumbs">
@@ -61,39 +56,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <h4><strong  style="">设备基本参数</strong></h4>
                   <ul class="list-group ">
                     <li class="list-group-item">额定功率：32 KW</li>
-                    <li class="list-group-item">额定输入电压：2 V</li>
-                    <li class="list-group-item">额定输出电压：220 V</li>
-                    <li class="list-group-item">额定输出频率：49.8 Hz</li>
+                    <li class="list-group-item">额定直流电压：2 V</li>
+                    <li class="list-group-item">充电电流：33 A</li>
+                    <li class="list-group-item">无</li>
                   </ul>
                 </div>
             </div>
           </div>
-            <div class="col-md-4">
-              <div class="widget box">
+          <div class="col-md-4">
+            <div class="widget box">
                 <div class="widget-content u2" style="background: #f1f1f1">
                   <h4><strong>输入参数</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">直流功率：22 KW</li>
-                    <li class="list-group-item">直流电压：22 V</li>
-                    <li class="list-group-item">直流电流：22 A</li>
-                    <li class="list-group-item">无</li>
+                    <li class="list-group-item">组件电压：4,344 V</li>
+                    <li class="list-group-item">组件电流：2,232 A</li>
+                    <li class="list-group-item">蓄电池电压：22 V</li>
+                    <li class="list-group-item">蓄电池电流：22 A</li>
                   </ul>
                 </div>
-              </div>
             </div>
-            <div class="col-md-4">
-              <div class="widget box">
+          </div>
+          <div class="col-md-4">
+          <div class="widget box">
                 <div class="widget-content u3" style="background: #f1f1f1">
                   <h4><strong>输出参数</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">功率：32 KW</li>
                     <li class="list-group-item">电压：32 V</li>
                     <li class="list-group-item">电流：2 A</li>
-                    <li class="list-group-item">频率：22 Hz</li>
+                    <li class="list-group-item">功率：22 KW</li>
+                    <li class="list-group-item">无</li>
                   </ul>
                 </div>
-              </div>
             </div>
+          </div>
           </div>
           <div class="row">
             <div class="col-md-6">
@@ -107,7 +102,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="col-md-6">
               <div class="widget box">
                 <div class="widget-content">
-                  <img src="./assets/img/demo/nibianqi.gif" alt="" width="900">
+                  <img src="./assets/img/demo/kongzhiqi.gif" alt="" width="900">
                 </div>
               </div>
             </div>

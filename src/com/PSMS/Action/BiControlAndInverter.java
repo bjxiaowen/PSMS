@@ -36,6 +36,8 @@ public class BiControlAndInverter {
 			int pId=Integer.parseInt(psId);
 			JSONObject object = JSONObject.fromObject("{}");
 			PowerStationBase outData=biPSService.getPSOutOneData(dateTime, pId,"逆变器");
+			PowerStationBase newestStatus=biPSService.getNewestStatus(dateTime, pId,"逆变器");
+			object.put("newestStatus", newestStatus);//输出
 			object.put("outData", outData);//输出
 			List<PowerStationBase> hourlyData=biPSService.getPSHourlyData(dateTime, pId,"逆变器");
 			object.put("hourlyData", hourlyData);//实时数据
@@ -55,9 +57,33 @@ public class BiControlAndInverter {
 			object.put("psId", pId);
 			object.put("yitiji", "yitiji");
 			
+			PowerStationBase modelNewes=biPSService.getNewesData(dateTime, pId, "组件");
+			object.put("modelNewes", modelNewes);
+			
+			
+			PowerStationBase batteryNewes=biPSService.getNewesData(dateTime, pId, "电池");
+			object.put("batteryNewes", batteryNewes);
+			
+			PowerStationBase controlAndInverteNewes=biPSService.getNewesData(dateTime, pId, "电池");
+			object.put("controlAndInverteNewes", controlAndInverteNewes);
+			
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
+			
+			request.setAttribute("modelStatus", modelStatus);
+			request.setAttribute("batteryData", batteryData);
+			request.setAttribute("modelData", modelData);
+			request.setAttribute("outData", outData);
+			request.setAttribute("modelNewes", modelNewes);
+			request.setAttribute("batteryNewes", batteryNewes);
+			request.setAttribute("controlAndInverteNewes", controlAndInverteNewes);
+			
+			if(parameters!=null&&parameters.size()>0){
+				request.setAttribute("parameter", parameters.get(0));//设备基本参数
+			}
+			
 			request.setAttribute("list", object.toString());
+			
 			System.out.println(object.toString());
 		}catch(IOException e){
 			e.printStackTrace();

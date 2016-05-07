@@ -106,5 +106,10 @@ public class BiPowerStationServiceImpl implements IBiPowerStationService {
 		return  BiPowerStationTools.getListSize24(list);
 	}
 
+	@Override
+	public PowerStationBase getNewesData(String dateTime, int psId, String type) throws Exception {
+		return biDao.getNewesData(dateTime, psId, type);
+	}
+
 	
 }

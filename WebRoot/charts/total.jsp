@@ -1,7 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page import="com.PSMS.pojo.PowerStationBase" %>
+<%@ page import="java.math.BigDecimal" %>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	PowerStationBase currDayCountQs=(PowerStationBase)request.getAttribute("currDayCountQ");
+	PowerStationBase currYearCountQ=(PowerStationBase)request.getAttribute("currYearCountQ");
+	PowerStationBase currMonthCountQ=(PowerStationBase)request.getAttribute("currMonthCountQ");
+	PowerStationBase history=(PowerStationBase)request.getAttribute("history");
 %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -15,6 +21,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <title>首页</title>
   <%@ include file="sysJs.jsp"%>
   <!-- 公共文件引入 -->
+  	<script>
+		  //后台取出数据
+		  v = '${list}';
+  	</script>
     <script type="text/javascript" src="charts/js/chart-pub.js"></script>
     <script type="text/javascript" src="charts/plugins/echart/echarts2.js"></script>
     <script type="text/javascript" src="charts/js/total-01.js"></script>
@@ -22,14 +32,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="charts/js/total-03.js"></script>
     <script type="text/javascript" src="charts/js/total-04.js"></script>
     <script type="text/javascript">
-    	//后台取出数据
-    	var v = '${list}';
-    	var data_json = $.parseJSON(v);
     	var currDayQ = data_json["currDayQ"];
     	var currMonthQ = data_json["currMonthQ"];
     	var currYearQ = data_json["currYearQ"];
+    	var currV = data_json["dashboard"]["voltage"];
+    	var currC = data_json["dashboard"]["current"];
+    	var currKw = data_json["dashboard"]["power"];
     </script>
-    
     <style>
       .navbar{
         background: #2677af;
@@ -91,9 +100,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   <h4>
                     <i class="icon-reorder">
                     </i>
-                    当天日发电量:
+                   	 当天日发电量:
                     <span class="blue">
-                      53.9KWh
+                     <%=currDayCountQs.getCurrDayCountQ() %>KWh
                     </span>
                   </h4>
                 </div>
@@ -123,7 +132,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </i>
                     本月累计发电量:
                     <span class="blue">
-                      101KWh
+                      <%=currMonthCountQ.getCurrMonthCountQ() %>KWh
                     </span>
                   </h4>
                 </div>
@@ -136,7 +145,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="col-md-6">
               <div class="widget box" style="border: 1px solid #2b5797;">
               <div class="widget-header">
-                  <h4>历史发电量</h4>   运行累计20天
+                  <h4>历史发电量</h4>   运行累计<%=history.getDayCount() %>天
                 </div>
                 <div class="widget-content" style="height: 270px;background: #2b5797;">
                 <h2 style="
@@ -158,7 +167,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </i>
                     本年累计发电量:
                     <span class="blue">
-                      480KWh
+                      <%=currYearCountQ.getCurrYearCountQ() %>KWh
                     </span>
                   </h4>
                 </div>
@@ -179,7 +188,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 text-align: center;
                 color: white;
                 line-height: 200px;
-                text-shadow:3px 3px 3px black;">17.198<span style="font-size: 62px;">ton</span></h2>
+                text-shadow:3px 3px 3px black;"><%=history.getCountCarbon() %><span style="font-size: 62px;">ton</span></h2>
                 </div>
               </div>
             </div>

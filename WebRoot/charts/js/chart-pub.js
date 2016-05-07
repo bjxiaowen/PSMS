@@ -1,11 +1,20 @@
-		var now = new Date();
-       
-        var year = now.getFullYear();       //年
-        var month = now.getMonth() + 1;     //月
-        var day = now.getDate();            //日
-       
-        var hh = now.getHours();            //时
-        var mm = now.getMinutes();          //分
+var now = new Date();   
+var year = now.getFullYear();       //年
+var month = now.getMonth() + 1;     //月
+var day = now.getDate();            //日   
+var hh = now.getHours();            //时
+var mm = now.getMinutes();          //分
+var v,data_json,psId;
+
+//公共变量
+data_json = $.parseJSON(v);
+psId = data_json["psId"];
+var sideBarUrlArr = ['toBiIndex','toBiModule','toBattery','toBiControl','toBiInverter','toControlAndInverter'];
+function sideBarUrl(){
+	$("#nav li").each(function(i,v){
+		$(this).find("a").attr('href',sideBarUrlArr[i]+'.action?psId='+psId); 
+	});
+}
 function CurentTime()
     { 
         
@@ -33,4 +42,5 @@ function CurentTime()
 var currenTime = CurentTime();
 $(function(){
     $(".current-time").append(currenTime);
+    sideBarUrl();
 })

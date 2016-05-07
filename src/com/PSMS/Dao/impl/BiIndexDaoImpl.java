@@ -1,6 +1,5 @@
 package com.PSMS.Dao.impl;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Query;
@@ -8,6 +7,7 @@ import org.hibernate.Session;
 import com.PSMS.Dao.IBiIndexDao;
 import com.PSMS.Hibernate.HibernateSessionFactory;
 import com.PSMS.pojo.PowerStationBase;
+import com.PSMS.util.DataUtils;
 
 /**
  * 首页bi数据
@@ -41,14 +41,8 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 		for (int i = 0; i < list.size(); i++) {
 			PowerStationBase power = new PowerStationBase();
 			Object[] obj = (Object[]) list.get(i);
-			
-			if(obj[0]!=null){
-				power.setGroupHour(Integer.parseInt(obj[0] + ""));
-			}
-			
-			if(obj[1]!=null){
-				power.setCurrDayQ(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			}
+			power.setGroupHour(DataUtils.getInteger(obj[0]));
+			power.setCurrDayQ(DataUtils.getDecimal(obj[1]));
 			reList.add(power);
 		}
 		return reList;
@@ -77,9 +71,7 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 		}
 		for (int i = 0; i < list.size(); i++) {
 			Object obj=list.get(i);
-			if(obj!=null){
-				power.setCurrDayCountQ(new BigDecimal(obj + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			}
+			power.setCurrDayCountQ(DataUtils.getDecimal(obj));
 		}
 		return power;
 	}
@@ -112,14 +104,8 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 		for (int i = 0; i < list.size(); i++) {
 			PowerStationBase power = new PowerStationBase();
 			Object[] obj = (Object[]) list.get(i);
-			
-			if(obj[0]!=null){
-				power.setGroupDay(Integer.parseInt(obj[0] + ""));
-			}
-			
-			if(obj[1]!=null){
-				power.setCurrMonthQ(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			}
+			power.setGroupDay(DataUtils.getInteger(obj[0]));
+			power.setCurrMonthQ(DataUtils.getDecimal(obj[1]));
 			reList.add(power);
 		}
 		return reList;
@@ -147,9 +133,7 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 		}
 		for (int i = 0; i < list.size(); i++) {
 			Object obj = list.get(i);
-			if(obj!=null){
-				power.setCurrMonthCountQ(new BigDecimal(obj + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			}
+			power.setCurrMonthCountQ(DataUtils.getDecimal(obj));
 		}
 		return power;
 	}
@@ -180,12 +164,8 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 		for (int i = 0; i < list.size(); i++) {
 			PowerStationBase power = new PowerStationBase();
 			Object[] obj = (Object[]) list.get(i);
-			if(obj[0]!=null){
-				power.setGroupMonth(Integer.parseInt(obj[0] + ""));
-			}
-			if(obj[1]!=null){
-				power.setCurrYearQ(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			}
+			power.setGroupMonth(DataUtils.getInteger(obj[0]));
+			power.setCurrYearQ(DataUtils.getDecimal(obj[1]));
 			reList.add(power);
 		}
 		return reList;
@@ -214,9 +194,7 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 		}
 		for (int i = 0; i < list.size(); i++) {
 			Object obj = (Object) list.get(i);
-			if(obj!=null){
-				power.setCurrYearCountQ(new BigDecimal(obj + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			}
+			power.setCurrYearCountQ(DataUtils.getDecimal(obj));
 		}
 		return power;
 	}
@@ -244,16 +222,9 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 		}
 		for (int i = 0; i < list.size(); i++) {
 			Object[] obj = (Object[]) list.get(i);
-			if(obj[0]!=null){
-				power.setVoltage(new BigDecimal(obj[0] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			}
-			if(obj[1]!=null){
-				power.setCurrent(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			}
-			
-			if(obj[2]!=null){
-				power.setPower(new BigDecimal(obj[2] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			}
+			power.setVoltage(DataUtils.getDecimal(obj[0]));
+			power.setCurrent(DataUtils.getDecimal(obj[1]));
+			power.setPower(DataUtils.getDecimal(obj[2]));
 		}
 		return power;
 	}
@@ -264,7 +235,7 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 		StringBuffer buffer=new StringBuffer();
 		buffer.append(" select ");
 		buffer.append(" sum(tod.CurrHistoryQ) CurrHistoryQ,sum(tod.Carbon) Carbon, ");
-		buffer.append(" DATEDIFF (day , Build_time , convert(varchar(10),getdate(),120) ) dayCount ");
+		buffer.append(" sum(DISTINCT (DATEDIFF (day , psi.Build_time , convert(varchar(10),getdate(),120) ))) dayCount ");
 		buffer.append(" from bd_to_data tod   ");
 		buffer.append(" inner join Inverter_parameter inp  on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
@@ -280,15 +251,9 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 		}
 		for (int i = 0; i < list.size(); i++) {
 			Object[] obj = (Object[]) list.get(i);
-			if(obj[0]!=null){
-				power.setHistoryCountQ(new BigDecimal(obj[0] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			}
-			if(obj[1]!=null){
-				power.setCountCarbon(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
-			}
-			if(obj[2]!=null){
-				power.setDayCount(Integer.parseInt(obj[2]+""));
-			}
+			power.setHistoryCountQ(DataUtils.getDecimal(obj[0]));
+			power.setCountCarbon(DataUtils.getDecimal(obj[1]));
+			power.setDayCount(DataUtils.getInteger(obj[2]));
 		}
 		return power;
 	}

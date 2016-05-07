@@ -818,16 +818,15 @@
 		</action>
 
 		<!-- 蓄电池 -->
-		<action name="toBatteryVoltage" method="toBatteryVoltage"
-			class="com.PSMS.Action.BiPowerStationAction">
+		<action name="toBattery" method="toBattery" class="com.PSMS.Action.BiBatteryAction">
 			<result name="success">charts/xudianchi.jsp</result>
 		</action>
-		<action name="getBatteryVoltage" method="getBatteryVoltage"
+		<!-- <action name="getBatteryVoltage" method="getBatteryVoltage"
 			class="com.PSMS.Action.BiPowerStationAction">
-		</action>
+		</action> -->
 		
 		<!-- 控制器 -->
-		<action name="toControlOutShow" method="toControlOutShow" class="com.PSMS.Action.BiPowerStationAction">
+		<action name="toBiControl" method="toBiControl" class="com.PSMS.Action.BiControlAction">
 			<result name="success">charts/kongzhiqi.jsp</result>
 		</action>
 		

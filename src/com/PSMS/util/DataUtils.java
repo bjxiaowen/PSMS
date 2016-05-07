@@ -1,5 +1,8 @@
 package com.PSMS.util;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 import com.PSMS.pojo.InspectionManager;
 import com.PSMS.pojo.JointInspection;
 
@@ -17,4 +20,17 @@ public class DataUtils {
 		insm.setNextDate(nextDate);
 		return insm;
 	}
+	
+	public static BigDecimal getDecimal(Object obj ){
+		return obj==null?new BigDecimal(0):new BigDecimal(obj + "").setScale(2, BigDecimal.ROUND_HALF_UP);
+	}
+	
+	public static Integer getInteger(Object obj){
+		return obj==null?Integer.parseInt("0"):Integer.parseInt(obj+"");
+	}
+	
+	public static Date getDate(Object obj){
+		return obj==null?new Date():new Date(obj + "");
+	}
+	
 }

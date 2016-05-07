@@ -56,7 +56,7 @@
 		                },
 		                formatter:"{value} KW"
 		            },
-		            data:[{value: 2.47, name: '功率'}]
+		            data:[{value: currKw, name: '功率'}]
 		        },
 		        {
 		            name:'电压',
@@ -104,7 +104,7 @@
 		                },
 		                formatter:"{value} V"
 		            },
-		            data:[{value: 220.8,name:"电压"}]
+		            data:[{value: currV,name:"电压"}]
 		        },
 		        {
 		            name:'电流',
@@ -151,7 +151,7 @@
 		                },
 		                formatter:"{value} A"
 		            },
-		            data:[{value: 11.19,name:"电流"}]
+		            data:[{value: currC,name:"电流"}]
 		        }
 		    ]
 		};

@@ -156,6 +156,17 @@ public interface IBiPowerStationService {
 	 * @throws Exception
 	 */
 	public List<PowerStationBase> getPSHourlyData(String dateTime, int psId,String type) throws Exception;
+	
+	
+	/**
+	 * 获取最新的设备数据
+	 * @param dateTime
+	 * @param psId
+	 * @param type
+	 * @return
+	 * @throws Exception
+	 */
+	public PowerStationBase getNewesData(String dateTime, int psId,String type)throws Exception;
 
 
 }	
