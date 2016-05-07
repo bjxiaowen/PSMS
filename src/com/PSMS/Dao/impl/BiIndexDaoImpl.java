@@ -263,7 +263,8 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
 		buffer.append(" select ");
-		buffer.append(" sum(tod.CurrHistoryQ) CurrHistoryQ,sum(tod.Carbon) Carbon ");
+		buffer.append(" sum(tod.CurrHistoryQ) CurrHistoryQ,sum(tod.Carbon) Carbon, ");
+		buffer.append(" DATEDIFF (day , Build_time , convert(varchar(10),getdate(),120) ) dayCount ");
 		buffer.append(" from bd_to_data tod   ");
 		buffer.append(" inner join Inverter_parameter inp  on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
@@ -284,6 +285,9 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 			}
 			if(obj[1]!=null){
 				power.setCountCarbon(new BigDecimal(obj[1] + "").setScale(2, BigDecimal.ROUND_HALF_UP));
+			}
+			if(obj[2]!=null){
+				power.setDayCount(Integer.parseInt(obj[2]+""));
 			}
 		}
 		return power;

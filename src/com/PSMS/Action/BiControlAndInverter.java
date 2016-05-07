@@ -52,6 +52,9 @@ public class BiControlAndInverter {
 			PowerStationBase batteryData=biPSService.getPSOutOneData(dateTime, pId,"蓄电池");
 			object.put("batteryData", batteryData);
 			
+			object.put("psId", pId);
+			object.put("yitiji", "yitiji");
+			
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			request.setAttribute("list", object.toString());

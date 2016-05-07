@@ -44,6 +44,9 @@ public class BiInverterAction {
 			PowerStationBase ControlStatus=biPSService.getNewestStatus(dateTime, pId,"控制器");
 			object.put("ControlStatus", ControlStatus);
 			
+			object.put("psId", pId);
+			object.put("nibianqi", "nibianqi");
+			
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			request.setAttribute("list", object.toString());

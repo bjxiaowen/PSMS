@@ -47,6 +47,10 @@ public class BiBatteryAction {
 			object.put("parameters", parameters);//设备基本参数
 			PowerStationBase newestStatus=biPSService.getNewestStatus(dateTime, pId,"蓄电池");
 			object.put("newestStatus", newestStatus);//蓄电池最新状态
+			
+			object.put("psId", pId);
+			object.put("xudianchi", "xudianchi");
+			
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			request.setAttribute("list", object.toString());

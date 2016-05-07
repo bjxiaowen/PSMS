@@ -56,6 +56,9 @@ public class BiControlAction {
 			PowerStationBase InverterData=biPSService.getPSOutOneData(dateTime, pId,"逆变器");
 			object.put("InverterData", InverterData);
 			
+			object.put("psId", pId);
+			object.put("kongzhiqi", "kongzhiqi");
+			
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			request.setAttribute("list", object.toString());

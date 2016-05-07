@@ -70,6 +70,8 @@ public class PowerStationBase {
 	
 	private String batteryCapacity;//蓄电池容量
 	
+	private int dayCount;//运行天数
+	
 	
 	
 	public BigDecimal getTotalCapacity() {
@@ -316,5 +318,11 @@ public class PowerStationBase {
 		this.batteryCapacity = batteryCapacity;
 	}
 
-	
+	public int getDayCount() {
+		return dayCount;
+	}
+
+	public void setDayCount(int dayCount) {
+		this.dayCount = dayCount;
+	}
 }
