@@ -1,6 +1,4 @@
-function CurentTime()
-    { 
-        var now = new Date();
+		var now = new Date();
        
         var year = now.getFullYear();       //年
         var month = now.getMonth() + 1;     //月
@@ -8,6 +6,9 @@ function CurentTime()
        
         var hh = now.getHours();            //时
         var mm = now.getMinutes();          //分
+function CurentTime()
+    { 
+        
        
         var clock = year + "-";
        

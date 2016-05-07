@@ -1,68 +1,25 @@
-<!DOCTYPE html>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<%@ taglib uri="/struts-tags" prefix="s"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="en">  
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
-    <title>组件动态实时曲线</title>
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"
-    />
-    <!--[if lt IE 9]>
-      <link rel="stylesheet" type="text/css" href="plugins/jquery-ui/jquery.ui.1.10.2.ie.css"
-      />
-    <![endif]-->
-    <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/plugins.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/responsive.css" rel="stylesheet" type="text/css"
-    />
-    <link href="assets/css/icons.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="assets/css/fontawesome/font-awesome.min.css">
-    <!--[if IE 7]>
-      <link rel="stylesheet" href="assets/css/fontawesome/font-awesome-ie7.min.css">
-    <![endif]-->
-    <!--[if IE 8]>
-      <link href="assets/css/ie8.css" rel="stylesheet" type="text/css" />
-    <![endif]-->
-    <!-- <link href='http://fonts.useso.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'> -->
-    <script type="text/javascript" src="assets/js/libs/jquery-1.10.2.min.js">
-    </script>
-    <script type="text/javascript" src="plugins/jquery-ui/jquery-ui-1.10.2.custom.min.js">
-    </script>
-    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js">
-    </script>
-    <script type="text/javascript" src="assets/js/libs/lodash.compat.min.js">
-    </script>
-    <!--[if lt IE 9]>
-      <script src="assets/js/libs/html5shiv.js">
-      </script>
-    <![endif]-->
-    <script type="text/javascript" src="plugins/touchpunch/jquery.ui.touch-punch.min.js">
-    </script>
-    <script type="text/javascript" src="plugins/event.swipe/jquery.event.move.js">
-    </script>
-    <script type="text/javascript" src="plugins/event.swipe/jquery.event.swipe.js">
-    </script>
-    <script type="text/javascript" src="assets/js/libs/breakpoints.js">
-    </script>
-    <script type="text/javascript" src="plugins/respond/respond.min.js">
-    </script>
-    <script type="text/javascript" src="plugins/cookie/jquery.cookie.min.js">
-    </script>
-    <script type="text/javascript" src="plugins/slimscroll/jquery.slimscroll.min.js">
-    </script>
-    <script type="text/javascript" src="plugins/slimscroll/jquery.slimscroll.horizontal.min.js">
-    </script>
-    <!--[if lt IE 9]>
-      <script type="text/javascript" src="plugins/flot/excanvas.min.js">
-      </script>
-    <![endif]-->
-    <script type="text/javascript" src="assets/js/app.js">
-    </script>
+    <title>首页</title>
+  <%@ include file="sysJs.jsp"%>
+  <!-- 公共文件引入 -->
     <!-- 公共文件引入 -->
-    <script type="text/javascript" src="js/chart-pub.js"></script>
+    <script type="text/javascript" src="charts/js/chart-pub.js"></script>
     <!-- ECharts单文件引入 -->
-    <script type="text/javascript" src="plugins/echart/echarts2.js"></script>
-    <script type="text/javascript" src="js/nibianqi-01.js"></script>
+    <script type="text/javascript" src="charts/plugins/echart/echarts2.js"></script>
+    <script type="text/javascript" src="charts/js/nibianqi-01.js"></script>
     <script>
       $(document).ready(function() {
         App.init();
@@ -77,81 +34,11 @@
   
   <body>
     <header class="header navbar navbar-fixed-top" role="banner">
-      <div class="container">
-        <ul class="nav navbar-nav">
-          <li class="nav-toggle">
-            <a href="javascript:void(0);" title="">
-              <i class="icon-reorder">
-              </i>
-            </a>
-          </li>
-        </ul>
-        <a class="navbar-brand" href="index.html">
-          <img src="assets/img/logo.png" alt="logo" height="30" width="30" />
-          <strong>
-            中兴能源 PSMS
-          </strong>
-        </a>
-        <a href="#" class="toggle-sidebar bs-tooltip" data-placement="bottom"
-        data-original-title="Toggle navigation">
-          <i class="icon-reorder">
-          </i>
-        </a>
-        <ul class="nav navbar-nav navbar-left hidden-xs hidden-sm">
-          <li>
-            <a href="#">
-              控制台
-            </a>
-          </li>
-        </ul>
-      </div>
+      <jsp:include page="sysHead.html"/>
     </header>
     <div id="container">
       <div id="sidebar" class="sidebar-fixed">
-        <div id="sidebar-content">
-          <ul id="nav">
-          <li>
-              <a href="total.html">
-                <i class="icon-cog" style="font-size: 20px;width: 30px;"></i>
-                首页
-              </a>
-            </li>
-            <li>
-              <a href="zujian.html">
-                <i class="icon-cog" style="font-size: 20px;width: 30px;"></i>
-                组件
-              </a>
-            </li>
-            <li>
-              <a href="xudianchi.html">
-                <i class="icon-retweet" style="font-size: 20px;width: 30px;">
-                </i>
-                蓄电池
-              </a>
-            </li>
-            <li>
-              <a href="kongzhiqi.html">
-                <i class="icon-dashboard" style="font-size: 20px;width: 30px;">
-                </i>
-                控制器
-              </a>
-            </li>
-            <li class="current">
-              <a href="nibianqi.html">
-                <i class="icon-folder-open-alt " style="font-size: 20px;width: 30px;">
-                </i>
-                逆变器
-              </a>
-            </li>
-            <li>
-              <a href="yitiji.html">
-                <i class="icon-folder-open-alt " style="font-size: 20px;width: 30px;">
-                </i>
-                控制逆变一体机
-              </a>
-            </li>
-          </ul>
-        </div>
+        <jsp:include page="sysSidebar.html" />
         <div id="divider" class="resizeable">
         </div>
       </div>
