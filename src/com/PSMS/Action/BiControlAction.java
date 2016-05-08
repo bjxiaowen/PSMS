@@ -9,6 +9,7 @@ import com.PSMS.Service.IBiModuleService;
 import com.PSMS.Service.IBiPowerStationService;
 import com.PSMS.Service.impl.BiModuleServiceImpl;
 import com.PSMS.Service.impl.BiPowerStationServiceImpl;
+import com.PSMS.pojo.InParameter;
 import com.PSMS.pojo.PowerStationBase;
 import com.PSMS.util.GetTime;
 import net.sf.json.JSONObject;
@@ -56,11 +57,19 @@ public class BiControlAction {
 			PowerStationBase InverterData=biPSService.getPSOutOneData(dateTime, pId,"逆变器");
 			object.put("InverterData", InverterData);
 			
+			InParameter inParameter=biPSService.getInParameter(dateTime, pId);//输入参数
+			
+			
 			object.put("psId", pId);
 			object.put("kongzhiqi", "kongzhiqi");
 			
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
+			request.setAttribute("inParameter", inParameter);
+			request.setAttribute("outData", outData);
+			if(parameters!=null&&parameters.size()>0){
+				request.setAttribute("parameter", parameters.get(0));//设备基本参数
+			}
 			request.setAttribute("list", object.toString());
 			System.out.println(object.toString());
 		}catch(IOException e){
