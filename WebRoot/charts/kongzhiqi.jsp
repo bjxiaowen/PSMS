@@ -4,6 +4,7 @@
 <%@ page import="com.PSMS.Hibernate.Inverter_parameter" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.math.BigDecimal" %>
+<%@ page contentType="text/html;charset=utf-8" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -17,7 +18,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="en">  
   <head>
-    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
     <title>首页</title>

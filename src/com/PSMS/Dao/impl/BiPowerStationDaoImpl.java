@@ -644,7 +644,8 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		buffer.append("  select ");
 		buffer.append(" sum(tod.InputVoltage) modelInVoltage,  ");
 		buffer.append(" sum(tod.ShowObligate) modelInCurrent,  ");
-		buffer.append(" max(tod.BatteryVoltage) batteryVoltage,  ");
+		buffer.append(" sum(tod.BatteryVoltage) batteryVoltage,  ");
+		buffer.append(" sum(tod.CurrPower) CurrPower,");
 		buffer.append(" DateName(hour,GetDate()) as currHour  ");
 		buffer.append(" from  Inverter_parameter inp   inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id  ");
@@ -664,6 +665,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 			power.setModelInVoltage(DataUtils.getDecimal(obj[0]));
 			power.setModelInCurrent(DataUtils.getDecimal(obj[1]));
 			power.setBatteryInVoltage(DataUtils.getDecimal(obj[2]));
+			power.setCurrPower(DataUtils.getDecimal(obj[2]));
 		}
 		return power;
 	}

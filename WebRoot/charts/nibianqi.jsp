@@ -1,7 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page import="com.PSMS.pojo.PowerStationBase" %>
+<%@ page import="com.PSMS.pojo.InParameter" %>
+<%@ page import="com.PSMS.Hibernate.Inverter_parameter" %>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	Inverter_parameter parameter=(Inverter_parameter)request.getAttribute("parameter");
+	PowerStationBase outData=(PowerStationBase)request.getAttribute("outData");
+	InParameter inParameter=(InParameter)request.getAttribute("inParameter");
 %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -60,10 +66,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="widget-content u1" style="background: #f1f1f1">
                   <h4><strong  style="">设备基本参数</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">额定功率：32 KW</li>
-                    <li class="list-group-item">额定输入电压：2 V</li>
-                    <li class="list-group-item">额定输出电压：220 V</li>
-                    <li class="list-group-item">额定输出频率：49.8 Hz</li>
+                    <li class="list-group-item">额定功率：<%=parameter.getRate_power() %> KW</li>
+                    <li class="list-group-item">额定输入电压：<%=parameter.getRated_voltage() %> V</li>
+                    <li class="list-group-item">额定输出电压：FF V</li>
+                    <li class="list-group-item">额定输出频率：FF Hz</li>
                   </ul>
                 </div>
             </div>
@@ -73,9 +79,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="widget-content u2" style="background: #f1f1f1">
                   <h4><strong>输入参数</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">直流功率：22 KW</li>
-                    <li class="list-group-item">直流电压：22 V</li>
-                    <li class="list-group-item">直流电流：22 A</li>
+                    <li class="list-group-item">直流功率：<%=inParameter.getCurrPower() %> KW</li>
+                    <li class="list-group-item">直流电压：FF V</li>
+                    <li class="list-group-item">直流电流：FF A</li>
                     <li class="list-group-item">无</li>
                   </ul>
                 </div>
@@ -86,10 +92,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="widget-content u3" style="background: #f1f1f1">
                   <h4><strong>输出参数</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">功率：32 KW</li>
-                    <li class="list-group-item">电压：32 V</li>
-                    <li class="list-group-item">电流：2 A</li>
-                    <li class="list-group-item">频率：22 Hz</li>
+                    <li class="list-group-item">功率：<%=outData.getTotalPower() %> KW</li>
+                    <li class="list-group-item">电压：<%=outData.getTotalVoltage() %> V</li>
+                    <li class="list-group-item">电流：<%=outData.getTotalCurrent() %> A</li>
+                    <li class="list-group-item">频率：FF Hz</li>
                   </ul>
                 </div>
               </div>

@@ -7,6 +7,7 @@ import org.apache.struts2.ServletActionContext;
 import com.PSMS.Hibernate.Inverter_parameter;
 import com.PSMS.Service.IBiPowerStationService;
 import com.PSMS.Service.impl.BiPowerStationServiceImpl;
+import com.PSMS.pojo.InParameter;
 import com.PSMS.pojo.PowerStationBase;
 import com.PSMS.util.GetTime;
 
@@ -47,6 +48,13 @@ public class BiInverterAction {
 			object.put("psId", pId);
 			object.put("nibianqi", "nibianqi");
 			
+			InParameter inParameter=biPSService.getInParameter(dateTime, pId);//输入参数
+			
+			if(parameters!=null&&parameters.size()>0){
+				request.setAttribute("parameter", parameters.get(0));//设备基本参数
+			}
+			request.setAttribute("inParameter", inParameter);
+			request.setAttribute("outData", outData);//输出
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			request.setAttribute("list", object.toString());
