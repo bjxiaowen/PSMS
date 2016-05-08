@@ -69,16 +69,10 @@ ul.stats li strong {
 					<i class="icon-reorder"> </i>
 			</a></li>
 		</ul>
-		<a class="navbar-brand" href="index.html"> <img
+		<a class="navbar-brand" href="#"> <img
 			src="charts/assets/img/logo.png" alt="logo" height="30" width="30" />
 			<strong> 中兴能源PSMS </strong>
-		</a> <a href="#" class="toggle-sidebar bs-tooltip" data-placement="bottom"
-			data-original-title="Toggle navigation"> <i class="icon-reorder">
-		</i>
-		</a>
-		<ul class="nav navbar-nav navbar-left hidden-xs hidden-sm">
-			<li><a href="#"> 控制台 </a></li>
-		</ul>
+		</a> 
 	</div>
 	</header>
 	<div id="container">
@@ -95,7 +89,9 @@ ul.stats li strong {
 			</div>
 		</div>
 	</div>
-	<input type="hidden" id="titleText" name="titleText" value="'电站总数：'+<%=psTotal.getTotalPS() %>+'\r\n总装机容量：'+<%=psTotal.getTotalCapacity()%>+'\r\n历史总发电量：'+<%=psTotal.getTotalHistoryQ() %>">
+	<input type="hidden" id="psNum" name="psNum" value="<%=psTotal.getTotalPS() %>">
+	<input type="hidden" id="Capacity" name="Capacity" value="<%=psTotal.getTotalCapacity()%>">
+	<input type="hidden" id="HistoryQ" name="HistoryQ" value="<%=psTotal.getTotalHistoryQ() %>">
 	<script id="alertTpl" type="text/html">
     				 <table class="table table-hover">
                             <thead>
@@ -116,7 +112,7 @@ ul.stats li strong {
                                   </td>
                                   <td>
                                     <div class="au">
-                                    <audio class="music" src="charts/assets/img/icons/90109500.wav" autoplay="autoplay" loop>报警</audio>
+                                    <audio class="music" src="charts/assets/img/icons/901095.wav" autoplay="autoplay" loop>报警</audio>
                                       <a class="audio_btn"><img src="charts/assets/img/icons/play.gif" width="30" height="30" class="music_btn" border="0"></a>
                                       </div>
                                   </td>

@@ -4,30 +4,20 @@ $(function(){
     
     var scene = new JTopo.Scene(stage);
     
- // 光伏阵列
-    var guangfu = new JTopo.Node("光伏阵列");
+ // 控制器
+    var guangfu = new JTopo.Node("控制器");
     guangfu.alpha = 0.9;
-    guangfu.setImage('./charts/assets/img/demo/guangfu.png');
-    guangfu.setBound(50, 110, 97, 95);
+    guangfu.setImage('./charts/assets/img/demo/kongzhiqi.jpg');
+    guangfu.setBound(50, 200, 100, 100);
     guangfu.font = 'bold 20px 微软雅黑';
     guangfu.fontColor = "255,255,255";
     guangfu.textOffsetY = 8;
     guangfu.showSelected = false; // 不显示选中矩形
     scene.add(guangfu); 
-    // 蓄电池
-    var xudianchi = new JTopo.Node("蓄电池");
-    xudianchi.alpha = 0.9;
-    xudianchi.setImage('./charts/assets/img/demo/xudianchi.png');
-    xudianchi.setBound(54, 310, 89, 77);
-    xudianchi.font = 'bold 20px 微软雅黑';
-    xudianchi.fontColor = "255,255,255";
-    xudianchi.textOffsetY = 8;
-    xudianchi.showSelected = false; // 不显示选中矩形
-    scene.add(xudianchi); 
-    // 一体机
+    // 逆变器
     var dcac = new JTopo.Node("DC/AC");
     dcac.alpha = 1;
-    dcac.setImage('./charts/assets/img/demo/yitiji.png');
+    dcac.setImage('./charts/assets/img/demo/nibianqi.png');
     dcac.setBound(320, 160, 200, 200);
     dcac.font = 'bold 20px 微软雅黑';
     dcac.fontColor = "255,255,255";
@@ -39,7 +29,7 @@ $(function(){
     // ac
     var ac = new JTopo.Node("AC");
     ac.alpha = 0.9;
-    ac.setImage('./charts/assets/img/demo/ac100.png');
+    ac.setImage('./charts/assets/img/demo/ac.png');
     ac.setBound(650, 210, 100, 100);
     ac.font = 'bold 20px 微软雅黑';
     ac.fontColor = "255,255,255";
@@ -50,34 +40,17 @@ $(function(){
     // 连线一
     var l1 = new JTopo.AnimateNode('./charts/assets/img/demo/gifgif.png', 1, 5, 1000, 0);
     l1.setSize(120, 12);
-    l1.setLocation(180, 200);                                
+    l1.setLocation(180, 260);                                
     l1.repeatPlay = true;            
     l1.play();
     scene.add(l1); 
     
     
-    // 连线二
-    if(data_json["outData"]["chargeDischarge "]){
-    	var l2 = new JTopo.AnimateNode('./charts/assets/img/demo/gifgif.png', 1, 5, 1000, 0);
-    	l2.setSize(120, 12);
-    	l2.setLocation(200, 290);                                
-    	l2.repeatPlay = true;            
-    	l2.play();
-        scene.add(l2); 
-    }else{
-    	var l2 = new JTopo.AnimateNode('./charts/assets/img/demo/gifgif02.png', 1, 5, 1000, 0);
-    	l2.setSize(120, 12);
-    	l2.setLocation(180, 300);                                
-    	l2.repeatPlay = true;            
-    	l2.play();
-        scene.add(l2); 
-    }
-    
     
     // 连线三
     var l3 = new JTopo.AnimateNode('./charts/assets/img/demo/gifgif.png', 1, 5, 1000, 0);
     l3.setSize(120, 12);
-    l3.setLocation(520, 260);                                
+    l3.setLocation(510, 260);                                
     l3.repeatPlay = true;            
     l3.play();
     scene.add(l3); 
@@ -116,24 +89,19 @@ $(function(){
     }   
    
     var nodeB1 = nodeBlock(40,10,3);
-    nodeB1.textNode0.text = '电流：'+ data_json["modelNewes"]["current"];
-    nodeB1.textNode1.text = '电压：'+ data_json["modelNewes"]["voltage"];
-    nodeB1.textNode2.text = '功率：'+ data_json["modelNewes"]["power"];
+    nodeB1.textNode0.text = '电流：'+ data_json["newesControlData"]["current"];
+    nodeB1.textNode1.text = '电压：'+ data_json["newesControlData"]["voltage"];
+    nodeB1.textNode2.text = '功率：'+ data_json["newesControlData"]["power"];
     
     var nodeB2 = nodeBlock(330,10,2);
-    nodeB2.textNode0.text = 'MPPT模块温度：'+ data_json["newestStatus"]["mpptTemp"];
-    nodeB2.textNode1.text = data_json["newestStatus"]["chargeDischarge "]?"放电":"充电";
+    nodeB2.textNode0.text = '内部温度：'+ data_json["ControlStatus"]["mpptTemp"];
+    nodeB2.textNode1.text = data_json["ControlStatus"]["chargeDischarge "]?"放电":"充电";
     
     var nodeB3 = nodeBlock(620,10,3);
-    nodeB3.textNode0.text = '电流：'+ data_json["controlAndInverteNewes"]["current"];
-    nodeB3.textNode1.text = '电压：'+ data_json["controlAndInverteNewes"]["voltage"];
-    nodeB3.textNode2.text = '功率：'+ data_json["controlAndInverteNewes"]["power"];
+    nodeB3.textNode0.text = '电流：'+ data_json["newesInverterData"]["current"];
+    nodeB3.textNode1.text = '电压：'+ data_json["newesInverterData"]["voltage"];
+    nodeB3.textNode2.text = '功率：'+ data_json["newesInverterData"]["power"];
     nodeB3.node.setSize(150,80);
-
-    var nodeB4 = nodeBlock(40,440,3);
-    nodeB4.textNode0.text = '电流：'+ data_json["batteryNewes"]["current"];
-    nodeB4.textNode1.text = '电压：'+ data_json["batteryNewes"]["voltage"];
-    nodeB4.textNode2.text = '功率：'+ data_json["batteryNewes"]["power"];
     
     
     

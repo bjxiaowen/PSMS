@@ -45,9 +45,14 @@ public class BiInverterAction {
 			PowerStationBase ControlStatus=biPSService.getNewestStatus(dateTime, pId,"控制器");
 			object.put("ControlStatus", ControlStatus);
 			
-			object.put("psId", pId);
-			object.put("nibianqi", "nibianqi");
+			PowerStationBase newesControlData=biPSService.getNewesData(dateTime, pId,"控制器");
+			object.put("newesControlData", newesControlData);
 			
+			PowerStationBase newesInverterData=biPSService.getNewesData(dateTime, pId,"逆变器");
+			object.put("newesInverterData", newesInverterData);
+			
+			object.put("psId", pId);
+			object.put("pageName", "nibianqi");
 			InParameter inParameter=biPSService.getInParameter(dateTime, pId);//输入参数
 			
 			if(parameters!=null&&parameters.size()>0){

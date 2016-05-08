@@ -16,7 +16,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
-    <title>首页</title>
+    <title>组件</title>
   <%@ include file="sysJs.jsp"%>
     <!-- 公共文件引入 -->
     <script type="text/javascript">
@@ -29,15 +29,19 @@
     <script type="text/javascript" src="charts/js/zujian-01.js"></script>
     <script type="text/javascript" src="charts/js/zujian-02.js"></script>
     <script type="text/javascript" src="charts/js/zujian-03.js"></script>
-    
+    <script>
+    	var current = _.map(data_json["hourlyData"],"current");
+    	var vv = _.map(data_json["hourlyData"],"voltage");
+    	var power = _.map(data_json["hourlyData"],"power");
+    </script>
   </head>
   
   <body>
     <header class="header navbar navbar-fixed-top" role="banner">
-      <jsp:include page="sysHead.html"/>
+      <jsp:include page="sysHead.jsp"/>
     </header>
     <div id="container">
-      <jsp:include page="sysSidebar.html" />
+      <jsp:include page="sysSidebar.jsp" />
       <div id="content">
         <div class="container">
           <div class="crumbs">

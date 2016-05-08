@@ -18,7 +18,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
-    <title>首页</title>
+    <title>逆变器</title>
   <%@ include file="sysJs.jsp"%>
   <!-- 公共文件引入 -->
     <script type="text/javascript">
@@ -28,13 +28,17 @@
     <script type="text/javascript" src="charts/js/chart-pub.js"></script>
     <!-- ECharts单文件引入 -->
     <script type="text/javascript" src="charts/plugins/echart/echarts2.js"></script>
+    <script type="text/javascript" src="charts/js/jtopo-0.4.8-min.js"></script>
     <script type="text/javascript" src="charts/js/nibianqi-01.js"></script>
+    <script type="text/javascript" src="charts/js/nibianqi-02.js"></script>
     <script>
       $(document).ready(function() {
         App.init();
         // Plugins.init();
         // FormComponents.init()
       });
+      var hourlyData = data_json["hourlyData"];
+      var kw = _.map(hourlyData,"power");
     </script>
     <style>
 
@@ -43,11 +47,11 @@
   
   <body>
     <header class="header navbar navbar-fixed-top" role="banner">
-      <jsp:include page="sysHead.html"/>
+      <jsp:include page="sysHead.jsp"/>
     </header>
     <div id="container">
       <div id="sidebar" class="sidebar-fixed">
-        <jsp:include page="sysSidebar.html" />
+        <jsp:include page="sysSidebar.jsp" />
         <div id="divider" class="resizeable">
         </div>
       </div>
@@ -112,8 +116,8 @@
             </div>
             <div class="col-md-6">
               <div class="widget box">
-                <div class="widget-content">
-                  <img src="./assets/img/demo/nibianqi.gif" alt="" width="900">
+                <div class="widget-content topo_bg" style="text-align: center;background-color: #25a;">
+                  <canvas width="850" height="550" id="canvas"></canvas>	
                 </div>
               </div>
             </div>

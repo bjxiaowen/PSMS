@@ -46,7 +46,7 @@ option3 = {
         {
             name:'组件电流',
             type:'line',
-            data:data3,
+            data:current,
             markPoint : {
                 data : [
                     {type : 'max', name: '最大值'},

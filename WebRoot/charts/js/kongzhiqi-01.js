@@ -11,7 +11,7 @@ option = {
         trigger: 'axis'
     },
     legend: {
-        data:['输出功率','输入功率']
+        data:['输出功率']
     },
     toolbox: {
         show : false,
@@ -43,23 +43,7 @@ option = {
         {
             name:'输出功率',
             type:'line',
-            data:data,
-            markPoint : {
-                data : [
-                    {type : 'max', name: '最大值'},
-                    {type : 'min', name: '最小值'}
-                ]
-            },
-            markLine : {
-                data : [
-                    {type : 'average', name: '平均值'}
-                ]
-            }
-        },
-        {
-            name:'输入功率',
-            type:'line',
-            data:data3,
+            data:kw,
             markPoint : {
                 data : [
                     {type : 'max', name: '最大值'},

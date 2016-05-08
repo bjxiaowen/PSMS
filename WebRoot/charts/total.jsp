@@ -62,10 +62,10 @@
   <body>
   	<header class="header navbar navbar-fixed-top" role="banner">
     
-    <jsp:include page="sysHead.html"/>
+    <jsp:include page="sysHead.jsp"/>
     </header>
     <div id="container">
-    <jsp:include page="sysSidebar.html" />
+    <jsp:include page="sysSidebar.jsp" />
        <div id="content">
         <div class="container">
           <div class="crumbs">

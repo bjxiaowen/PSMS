@@ -43,8 +43,7 @@ public class BiModuleAction {
 			object.put("parameters", parameters);//设备基本参数
 			
 			object.put("psId", pId);
-			object.put("zujian", "zujian");
-			
+			object.put("pageName", "zujian");
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			if(parameters!=null&&parameters.size()>0){

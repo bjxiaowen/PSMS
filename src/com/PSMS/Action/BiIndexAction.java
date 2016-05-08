@@ -45,7 +45,7 @@ public class BiIndexAction {
 			PowerStationBase history=biIndeService.getHistoryQAndObligate(pId);//历史发电量  减排二氧化碳
 			object.put("history", history);
 			object.put("psId", pId);
-			object.put("total", "total");
+			object.put("pageName", "total");
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 //			ServletActionContext.getResponse().getWriter().write(object.toString());

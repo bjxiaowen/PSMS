@@ -1,14 +1,13 @@
+<%@ page contentType="text/html; charset=utf-8"%>
 <script>
-$(function(){
-	
-})
-</script>
+     /*  var pageName = data_json["pageName"]; */
+    </script>
 <div id="sidebar" class="sidebar-fixed">
         <div id="sidebar-content">
           <ul id="nav">
           <li data-cur="total">
               <a href="#">
-                <i class="icon-cog" style="font-size: 20px;width: 30px;"></i>
+                <i class="icon-home" style="font-size: 20px;width: 30px;"></i>
                 首页
               </a>
             </li>
@@ -34,7 +33,7 @@ $(function(){
             </li>
             <li data-cur="nibianqi">
               <a href="nibianqi.html">
-                <i class="icon-folder-open-alt " style="font-size: 20px;width: 30px;">
+                <i class="icon-adjust" style="font-size: 20px;width: 30px;">
                 </i>
                 逆变器
               </a>

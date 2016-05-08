@@ -52,9 +52,10 @@ public class BiBatteryAction {
 			
 			List<PowerStationBase> hourlyData=biPSService.getPSHourlyData(dateTime, pId,"蓄电池");
 			object.put("hourlyData", hourlyData);//实时数据
-			
+			PowerStationBase newesData=biPSService.getNewesData(dateTime, pId,"蓄电池");
+			object.put("newesData", newesData);
 			object.put("psId", pId);
-			object.put("xudianchi", "xudianchi");
+			object.put("pageName", "xudianchi");
 			if(parameters!=null&&parameters.size()>0){
 				request.setAttribute("parameter", parameters.get(0));//设备基本参数
 			}

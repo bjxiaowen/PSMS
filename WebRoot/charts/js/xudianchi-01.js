@@ -15,7 +15,7 @@ option1 = {
     },
     series : [
         {
-            name:'速度',
+            name:'电压',
             type:'gauge',radius : '100%',
             z: 3,
             min:0,
@@ -51,16 +51,11 @@ option1 = {
                     fontWeight: 'bolder'
                 }
             },
-            data:[{value: 40, name: 'V'}]
+            data:[{value: vv, name: 'V'}]
         }
     ]
 };
-
-clearInterval(timeTicket);
-var timeTicket = setInterval(function (){
-    option1.series[0].data[0].value = (Math.random()*100).toFixed(2) - 0;
-    myChart1.setOption(option1,true);
-},2000)
+myChart1.setOption(option1,true);
                            
                     
 })

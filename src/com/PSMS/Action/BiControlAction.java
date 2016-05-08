@@ -46,6 +46,7 @@ public class BiControlAction {
 			//组件
 			PowerStationBase modelData=biPSService.getPSOutOneData(dateTime, pId,"组件");
 			object.put("modelData", modelData);
+			
 			PowerStationBase modelStatus=biPSService.getNewestStatus(dateTime, pId,"组件");
 			object.put("modelStatus", modelStatus);
 			
@@ -54,14 +55,26 @@ public class BiControlAction {
 			object.put("batteryData", batteryData);
 			
 			//逆变器
-			PowerStationBase InverterData=biPSService.getPSOutOneData(dateTime, pId,"逆变器");
+			PowerStationBase InverterData=biPSService.getPSOutOneData(dateTime, pId,"控制器");
 			object.put("InverterData", InverterData);
 			
 			InParameter inParameter=biPSService.getInParameter(dateTime, pId);//输入参数
 			
+			PowerStationBase newesModelData=biPSService.getNewesData(dateTime, pId,"组件");
+			object.put("newesModelData", newesModelData);
+			
+			PowerStationBase newesBatteryData=biPSService.getNewesData(dateTime, pId,"蓄电池");
+			object.put("newesBatteryData", newesBatteryData);
+			
+			PowerStationBase newesControlData=biPSService.getNewesData(dateTime, pId,"控制器");
+			object.put("newesControlData", newesControlData);
+			
+			PowerStationBase controlStatus=biPSService.getNewestStatus(dateTime, pId,"控制器");
+			object.put("controlStatus", controlStatus);
+			
 			
 			object.put("psId", pId);
-			object.put("kongzhiqi", "kongzhiqi");
+			object.put("pageName", "kongzhiqi");
 			
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");

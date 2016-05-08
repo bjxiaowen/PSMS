@@ -51,16 +51,11 @@ option2 = {
                     fontWeight: 'bolder'
                 }
             },
-            data:[{value: 40, name: 'A'}]
+            data:[{value: c, name: 'A'}]
         }
     ]
 };
-
-clearInterval(timeTicket);
-var timeTicket = setInterval(function (){
-    option2.series[0].data[0].value = (Math.random()*100).toFixed(2) - 0;
-    myChart2.setOption(option2,true);
-},2000)
+myChart2.setOption(option2,true);
                            
                     
 })

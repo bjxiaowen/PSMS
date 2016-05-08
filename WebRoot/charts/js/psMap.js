@@ -71,7 +71,7 @@ $(function(){
                     backgroundColor: '#044062',
                     color: ['gold','aqua','lime'],
                     title : {
-                        text: '光伏电站分布图\r\n总电站数：20\r\n总装机容量：20.00 mwh\r\n历史发电总量：50.00 mwh',
+                    text: '光伏电站分布图\r\n总电站数：'+$("#psNum").val()+'\r\n总装机容量：'+$("#Capacity").val()+' mwh\r\n历史发电总量：'+$("#HistoryQ").val()+' mwh',
                         subtext:'',
                         x:'left',
                         textStyle : {

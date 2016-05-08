@@ -22,7 +22,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
-    <title>首页</title>
+    <title>控逆一体机</title>
   <%@ include file="sysJs.jsp"%>
     <!-- 公共文件引入 -->
     <script>
@@ -42,11 +42,11 @@
   
   <body>
     <header class="header navbar navbar-fixed-top" role="banner">
-      <jsp:include page="sysHead.html"/>
+      <jsp:include page="sysHead.jsp"/>
     </header>
     <div id="container">
      <div id="sidebar" class="sidebar-fixed">
-        <jsp:include page="sysSidebar.html" />
+        <jsp:include page="sysSidebar.jsp" />
         <div id="divider" class="resizeable">
         </div>
       </div>
@@ -111,7 +111,7 @@
             </div>
             <div class="col-md-6">
               <div class="widget box">
-                <div class="widget-content" style="text-align: center;">
+                <div class="widget-content topo_bg" style="text-align: center;background-color: #25a;">
                   <canvas width="850" height="550" id="canvas"></canvas>	
                 </div>
               </div>

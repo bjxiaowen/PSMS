@@ -46,7 +46,7 @@ option2 = {
         {
             name:'组件电压',
             type:'line',
-            data:data2,
+            data:vv,
             markPoint : {
                 data : [
                     {type : 'max', name: '最大值'},

@@ -11,7 +11,7 @@ option = {
         trigger: 'axis'
     },
     legend: {
-        data:['输入功率']
+        data:['输出功率']
     },
     toolbox: {
         show : false,
@@ -41,7 +41,7 @@ option = {
     ],
     series : [
         {
-            name:'输入功率',
+            name:'输出功率',
             type:'line',
             data:data,
             markPoint : {

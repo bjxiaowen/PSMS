@@ -59,8 +59,7 @@ public class BiControlAndInverter {
 			object.put("batteryData", batteryData);
 			
 			object.put("psId", pId);
-			object.put("yitiji", "yitiji");
-			
+			object.put("pageName", "yitiji");
 			PowerStationBase modelNewes=biPSService.getNewesData(dateTime, pId, "组件");
 			object.put("modelNewes", modelNewes);
 			

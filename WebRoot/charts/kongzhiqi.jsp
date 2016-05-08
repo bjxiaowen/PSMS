@@ -4,7 +4,6 @@
 <%@ page import="com.PSMS.Hibernate.Inverter_parameter" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.math.BigDecimal" %>
-<%@ page contentType="text/html;charset=utf-8" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -18,10 +17,10 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="en">  
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
-    <title>首页</title>
+    <title>控制器</title>
   <%@ include file="sysJs.jsp"%>
   <!-- 公共文件引入 -->
     <script type="text/javascript">
@@ -31,13 +30,17 @@
     <script type="text/javascript" src="charts/js/chart-pub.js"></script>
     <!-- ECharts单文件引入 -->
     <script type="text/javascript" src="charts/plugins/echart/echarts2.js"></script>
+    <script type="text/javascript" src="charts/js/jtopo-0.4.8-min.js"></script>
     <script type="text/javascript" src="charts/js/kongzhiqi-01.js"></script>
+    <script type="text/javascript" src="charts/js/kongzhiqi-02.js"></script>
     <script>
       $(document).ready(function() {
         App.init();
         // Plugins.init();
         // FormComponents.init()
       });
+      var hourlyData = data_json["hourlyData"];
+      var kw = _.map(hourlyData,"power");
     </script>
     <style>
     </style>
@@ -45,10 +48,10 @@
   
   <body>
     <header class="header navbar navbar-fixed-top" role="banner">
-      <jsp:include page="sysHead.html"/>
+      <jsp:include page="sysHead.jsp"/>
     </header>
     <div id="container">
-      <jsp:include page="sysSidebar.html" />
+      <jsp:include page="sysSidebar.jsp" />
       <div id="content">
         <div class="container">
           <div class="crumbs">
@@ -110,8 +113,8 @@
             </div>
             <div class="col-md-6">
               <div class="widget box">
-                <div class="widget-content">
-                  <img src="./assets/img/demo/kongzhiqi.gif" alt="" width="900">
+                <div class="widget-content topo_bg" style="text-align: center;background-color: #25a;">
+                  <canvas width="850" height="550" id="canvas"></canvas>	
                 </div>
               </div>
             </div>

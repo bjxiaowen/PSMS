@@ -23,7 +23,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
-    <title>首页</title>
+    <title>蓄电池</title>
   <%@ include file="sysJs.jsp"%>
   <!-- 公共文件引入 -->
   <script type="text/javascript">
@@ -39,35 +39,40 @@
       $(document).ready(function() {
         App.init();
       });
+      var vv = data_json["newesData"]["voltage"];
+      var c = data_json["newesData"]["current"]; 
     </script>
+    
+    <!--电池电量,温度计必要样式-->
+    <link rel="stylesheet" type="text/css" href="charts/assets/css/component.css" />
+    <link rel="stylesheet" type="text/css" href="charts/assets/css/custom-bars.css" />
+    
     <style>
        .vertical{
-         width: 170px;
-         height: 8px;
-         margin-left: -60px;
-         transform: rotate(-90deg);
+         width: 135px;
+    height: 8px;
+    margin-left: -39px;
+    transform: rotate(-90deg);
       }
-      .bg{
-        height: 200px;
-        width: 50px;
-        background: green;
-        margin: 0 auto;
-        padding: 90px 0 0 0;
-      }
+      
        .progress {
          -webkit-border-radius: 0;
          -moz-border-radius: 0;
          border-radius: 10px;
        }
+       .progress .progress-bar {
+    background-image: none;
+    background-color: #89231f;
+}
     </style>
   </head>
   
   <body>
     <header class="header navbar navbar-fixed-top" role="banner">
-      <jsp:include page="sysHead.html"/>
+      <jsp:include page="sysHead.jsp"/>
     </header>
     <div id="container">
-      <jsp:include page="sysSidebar.html" />
+      <jsp:include page="sysSidebar.jsp" />
       <div id="content">
         <div class="container">
           <div class="crumbs">
@@ -158,7 +163,7 @@
 
 
                   <article class="flexy-grid" style="height:200px;">
-                    <h3>电池容量</h3>
+                    <h3>电池状态</h3>
                     <div class="flexy-column">
                       <div class="progress-factor flexy-item">
                         <div class="progress-bar">
@@ -170,13 +175,13 @@
                             <div class="bar-face face-position left"></div>
                             <div class="bar-face face-position right"></div>
                             <div class="bar-face face-position front percentage volume-lights shine">
-                              <div class="tooltip heat-gradient-tooltip"></div>
+                              <div class="tooltip heat-gradient-tooltip" style="display:none"></div>
                               <div style="line-height: 1em;
     font-size: 32px;
     position: absolute;
     height: 1em;
-    width: 1em;
-    margin: .4em .4em .4em .8em;">80%</div>
+    width: 2em;
+    margin: .4em .4em .4em .8em;"><%=cd %></div>
                             </div>
                           </div>
                         </div>
@@ -189,12 +194,7 @@
                 <div class="divider">
                 </div>
                 <div class="widget-content">
-                  <ul class="stats">
-                    <li>
-                      <strong>
-                        剩余容量：85%
-                      </strong>
-                    </li>
+                  <ul class="stats" style="text-align: center;">
                     <li><strong>
                       状态：</strong> <span class="label label-info"><%=cd %></span>
                     </li>
@@ -206,9 +206,9 @@
               <div class="widget box">
                 <div class="widget-content" style="text-align: center;">
                   <!--<img src="./assets/img/demo/wenduji.png" alt="" style="height: 200px;">-->
-                  <div class="bg" style="height: 200px;">
+                  <div class="bg_wenduji" style="height: 200px;">
                     <div class="progress vertical">
-                      <div class="progress-bar " role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                      <div class="progress-bar " role="progressbar" aria-valuenow="60" aria-valuemin="-20" aria-valuemax="100" style="width: <%=newestStatus.getMpptTemp() %>%;">
                         <span class="sr-only">60% Complete</span>
                       </div>
                     </div>

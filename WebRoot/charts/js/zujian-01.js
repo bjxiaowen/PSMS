@@ -46,7 +46,7 @@ option1 = {
         {
             name:'光伏组件',
             type:'line',
-            data:data1,
+            data:power,
             markPoint : {
                 data : [
                     {type : 'max', name: '最大值'},
