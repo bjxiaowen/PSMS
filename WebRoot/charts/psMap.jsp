@@ -1,9 +1,14 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page import="com.PSMS.pojo.PSTotal" %>
+<%@ page import="java.util.*" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	
+	PSTotal psTotal=(PSTotal)request.getAttribute("psTotal");
 %>
+
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -24,6 +29,7 @@
 	$(document).ready(function() {
 		App.init();
 	});
+	
 
 	//
 </script>
@@ -89,6 +95,7 @@ ul.stats li strong {
 			</div>
 		</div>
 	</div>
+	<input type="hidden" id="titleText" name="titleText" value="'电站总数：'+<%=psTotal.getTotalPS() %>+'\r\n总装机容量：'+<%=psTotal.getTotalCapacity()%>+'\r\n历史总发电量：'+<%=psTotal.getTotalHistoryQ() %>">
 	<script id="alertTpl" type="text/html">
     				 <table class="table table-hover">
                             <thead>

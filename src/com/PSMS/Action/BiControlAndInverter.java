@@ -10,6 +10,7 @@ import org.apache.struts2.ServletActionContext;
 import com.PSMS.Hibernate.Inverter_parameter;
 import com.PSMS.Service.IBiPowerStationService;
 import com.PSMS.Service.impl.BiPowerStationServiceImpl;
+import com.PSMS.pojo.InParameter;
 import com.PSMS.pojo.PowerStationBase;
 import com.PSMS.util.GetTime;
 
@@ -35,13 +36,16 @@ public class BiControlAndInverter {
 			psId = java.net.URLDecoder.decode(psId, "UTF-8");
 			int pId=Integer.parseInt(psId);
 			JSONObject object = JSONObject.fromObject("{}");
-			PowerStationBase outData=biPSService.getPSOutOneData(dateTime, pId,"逆变器");
-			PowerStationBase newestStatus=biPSService.getNewestStatus(dateTime, pId,"逆变器");
+			
+			PowerStationBase outData=biPSService.getPSOutOneData(dateTime, pId,"控逆一体机");
+			PowerStationBase newestStatus=biPSService.getNewestStatus(dateTime, pId,"控逆一体机");
+			
 			object.put("newestStatus", newestStatus);//输出
 			object.put("outData", outData);//输出
-			List<PowerStationBase> hourlyData=biPSService.getPSHourlyData(dateTime, pId,"逆变器");
+			List<PowerStationBase> hourlyData=biPSService.getPSHourlyData(dateTime, pId,"控逆一体机");
 			object.put("hourlyData", hourlyData);//实时数据
-			List<Inverter_parameter> parameters=biPSService.getParameter(pId, "逆变器");
+			
+			List<Inverter_parameter> parameters=biPSService.getParameter(pId, "控逆一体机");
 			object.put("parameters", parameters);//设备基本参数
 			
 			//组件
@@ -64,8 +68,11 @@ public class BiControlAndInverter {
 			PowerStationBase batteryNewes=biPSService.getNewesData(dateTime, pId, "电池");
 			object.put("batteryNewes", batteryNewes);
 			
-			PowerStationBase controlAndInverteNewes=biPSService.getNewesData(dateTime, pId, "电池");
+			PowerStationBase controlAndInverteNewes=biPSService.getNewesData(dateTime, pId, "控逆一体机");
 			object.put("controlAndInverteNewes", controlAndInverteNewes);
+			
+			InParameter inParameter=biPSService.getInParameter(dateTime, pId);//输入参数
+			object.put("inParameter", inParameter);
 			
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
@@ -77,6 +84,7 @@ public class BiControlAndInverter {
 			request.setAttribute("modelNewes", modelNewes);
 			request.setAttribute("batteryNewes", batteryNewes);
 			request.setAttribute("controlAndInverteNewes", controlAndInverteNewes);
+			request.setAttribute("inParameter", inParameter);
 			
 			if(parameters!=null&&parameters.size()>0){
 				request.setAttribute("parameter", parameters.get(0));//设备基本参数

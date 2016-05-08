@@ -1,6 +1,19 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ page import="com.PSMS.pojo.PowerStationBase" %>
+<%@ page import="com.PSMS.Hibernate.Inverter_parameter" %>
 <%@ page import="java.math.BigDecimal" %>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	Inverter_parameter parameter=(Inverter_parameter)request.getAttribute("parameter");
+	
+	PowerStationBase outData=(PowerStationBase)request.getAttribute("outData");
+	
+	PowerStationBase newestStatus=(PowerStationBase)request.getAttribute("newestStatus");
+	
+	String cd=newestStatus.getChargeDischarge()==0?"充电":"放电";
+	String mState=newestStatus.getMachineState()==0?"正常":"机器失效";//1：机器失效，0：正常
+%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -74,8 +87,8 @@
                 <div class="widget-content u1" style="background: #f1f1f1">
                   <h4><strong  style="">设备基本参数</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">额定容量：32 AH</li>
-                    <li class="list-group-item">额定电压：2 V</li>
+                    <li class="list-group-item">额定容量：<%=parameter.getBatteryCapacity() %> AH</li>
+                    <li class="list-group-item">额定电压：<%=parameter.getRated_voltage() %> V</li>
                     <li class="list-group-item">无</li>
                   </ul>
                 </div>
@@ -86,9 +99,9 @@
                 <div class="widget-content u2" style="background: #f1f1f1">
                   <h4><strong>输出参数</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">功率：4,344 KW</li>
-                    <li class="list-group-item">电压：2,232 V</li>
-                    <li class="list-group-item">电流 A</li>
+                    <li class="list-group-item">功率：<%=outData.getTotalPower() %> KW</li>
+                    <li class="list-group-item">电压：<%=outData.getTotalVoltage() %> V</li>
+                    <li class="list-group-item">电流 :<%=outData.getTotalCurrent() %>A</li>
                   </ul>
                 </div>
               </div>
@@ -98,10 +111,10 @@
                 <div class="widget-content u3" style="background: #f1f1f1">
                   <h4><strong>状态值</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">蓄电池温度：32 °C</li>
-                    <li class="list-group-item">蓄电池状态：<span class="label label-info">输出正常</span></li>
+                    <li class="list-group-item">蓄电池温度：<%=newestStatus.getMpptTemp() %> °C</li>
+                    <li class="list-group-item">蓄电池状态：<span class="label label-info"><%=mState %></span></li>
                     <li class="list-group-item">
-                      充放电状态：充电
+                      充放电状态：<%=cd %>
                       </li>
                   </ul>
                 </div>
@@ -183,7 +196,7 @@
                       </strong>
                     </li>
                     <li><strong>
-                      状态：</strong> <span class="label label-info">充电</span>
+                      状态：</strong> <span class="label label-info"><%=cd %></span>
                     </li>
                   </ul>
                 </div>
@@ -207,7 +220,7 @@
                   <ul class="stats" style="text-align: center;">
                     <li>
                       <strong>
-                        蓄电池温度：43°C
+                        蓄电池温度：<%=newestStatus.getMpptTemp() %>°C
                       </strong>
                     </li>
                   </ul>

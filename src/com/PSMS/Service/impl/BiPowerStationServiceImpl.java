@@ -5,6 +5,8 @@ import com.PSMS.Dao.IBiPowerStationDao;
 import com.PSMS.Factory.DAOFactory;
 import com.PSMS.Hibernate.Inverter_parameter;
 import com.PSMS.Service.IBiPowerStationService;
+import com.PSMS.pojo.InParameter;
+import com.PSMS.pojo.PSTotal;
 import com.PSMS.pojo.PowerStationBase;
 import com.PSMS.util.BiPowerStationTools;
 
@@ -109,6 +111,16 @@ public class BiPowerStationServiceImpl implements IBiPowerStationService {
 	@Override
 	public PowerStationBase getNewesData(String dateTime, int psId, String type) throws Exception {
 		return biDao.getNewesData(dateTime, psId, type);
+	}
+
+	@Override
+	public PSTotal getPSTotalData() throws Exception {
+		return biDao.getPSTotalData();
+	}
+
+	@Override
+	public InParameter getInParameter(String dateTime, int psId) throws Exception {
+		return biDao.getInParameter(dateTime, psId);
 	}
 
 	

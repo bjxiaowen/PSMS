@@ -23,6 +23,7 @@ import com.PSMS.Service.WS_parameterServiceImpl;
 import com.PSMS.Service.WeatherStationService;
 import com.PSMS.Service.WeatherStationServiceImpl;
 import com.PSMS.Service.impl.BiPowerStationServiceImpl;
+import com.PSMS.pojo.PSTotal;
 import com.PSMS.pojo.PowerStationBase;
 import com.PSMS.util.GetTime;
 
@@ -55,14 +56,18 @@ public class BiPowerStationAction {
 				PowerStationBase power=biPowerStationService.getPowerStationStatus(dateTime, pId);
 				psInfo.setMachineState(power.getMachineState());
 			}
+			PSTotal psTotal=biPowerStationService.getPSTotalData();
 			JSONObject object = JSONObject.fromObject("{}");
 			object.put("list", ps_list);
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			ServletActionContext.getResponse().getWriter().write(object.toString());
 			request.setAttribute("list", object.toString());
+			request.setAttribute("psTotal", psTotal);
 			System.out.println(object.toString());
 		}catch(IOException e){
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "success";

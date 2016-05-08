@@ -81,13 +81,13 @@ public class ToData implements Serializable {
 	
 	private   BigDecimal CurrDayQ;//直流侧日发电量
 	
-	private   BigDecimal    CurrPower;//直流侧功率
+	private   BigDecimal CurrPower;//直流侧功率
 	
-	private   BigDecimal    LoadHistoryQ ;//负载历史用电量
+	private   BigDecimal LoadHistoryQ ;//负载历史用电量
 	
-	private   BigDecimal    LoadDayQ;//负载日用电量
+	private   BigDecimal LoadDayQ;//负载日用电量
 	
-	private   BigDecimal   ExchangeOutPower;//交流输出功率
+	private   BigDecimal ExchangeOutPower;//交流输出功率
 	
 	private BigDecimal Carbon;//二氧化碳
 	

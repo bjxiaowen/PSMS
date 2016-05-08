@@ -1,7 +1,11 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page import="com.PSMS.pojo.PowerStationBase" %>
+<%@ page import="com.PSMS.Hibernate.Inverter_parameter" %>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	Inverter_parameter parameter=(Inverter_parameter)request.getAttribute("parameter");
+	PowerStationBase outData=(PowerStationBase)request.getAttribute("outData");
 %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -53,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="widget-content u1" style="background: #f1f1f1">
                   <h4><strong  style="">设备基本参数</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">组件额定功率：32 KW</li>
+                    <li class="list-group-item">组件额定功率：<%=parameter.getRate_power() %> KW</li>
                     <li class="list-group-item">无</li>
                     <li class="list-group-item">无</li>
                   </ul>
@@ -65,9 +69,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="widget-content u2" style="background: #f1f1f1">
                   <h4><strong>输出</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">组件功率：1111 KW</li>
-                    <li class="list-group-item">组件电压：2,232 V</li>
-                    <li class="list-group-item">组件电流：23 A</li>
+                    <li class="list-group-item">组件功率：<%=outData.getTotalPower() %> KW</li>
+                    <li class="list-group-item">组件电压：：<%=outData.getTotalVoltage() %> V</li>
+                    <li class="list-group-item">组件电流：<%=outData.getTotalCurrent() %> A</li>
                   </ul>
                 </div>
               </div>
@@ -92,7 +96,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </i>
                     组件电压(
                     <span class="blue">
-                      186.66V
+                      <%=outData.getTotalVoltage() %>V
                     </span>
                     )
                   </h4>
@@ -121,7 +125,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </i>
                     组件电流(
                     <span class="blue">
-                      12.12 A
+                      <%=outData.getTotalCurrent() %>A
                     </span>
                     )
                   </h4>

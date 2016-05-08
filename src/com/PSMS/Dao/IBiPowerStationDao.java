@@ -3,6 +3,8 @@ package com.PSMS.Dao;
 import java.util.List;
 
 import com.PSMS.Hibernate.Inverter_parameter;
+import com.PSMS.pojo.InParameter;
+import com.PSMS.pojo.PSTotal;
 import com.PSMS.pojo.PowerStationBase;
 
 public interface IBiPowerStationDao {
@@ -153,4 +155,21 @@ public interface IBiPowerStationDao {
 	 * @throws Exception
 	 */
 	public PowerStationBase getNewesData(String dateTime, int psId,String type)throws Exception;
+	
+	/**
+	 * 获取电站总数据
+	 * @return
+	 * @throws Exception
+	 */
+	public PSTotal getPSTotalData()throws Exception;
+	
+	/**
+	 * 获取输入参数
+	 * @param dateTime
+	 * @param psId
+	 * @return
+	 * @throws Exception
+	 */
+	public InParameter getInParameter(String dateTime,int psId)throws Exception;
+	
 }

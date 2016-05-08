@@ -11,6 +11,8 @@ import org.hibernate.Session;
 import com.PSMS.Dao.IBiPowerStationDao;
 import com.PSMS.Hibernate.HibernateSessionFactory;
 import com.PSMS.Hibernate.Inverter_parameter;
+import com.PSMS.pojo.InParameter;
+import com.PSMS.pojo.PSTotal;
 import com.PSMS.pojo.PowerStationBase;
 import com.PSMS.util.DataUtils;
 
@@ -65,7 +67,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
 		buffer.append(" select ");
-		buffer.append("  sum(psi.capacity) totalCapacity, ");
+		buffer.append(" sum(psi.capacity) totalCapacity, ");
 		buffer.append(" sum(tod.MpptOutVoltage) * sum(tod.MpptOutCurrent) as totalPower, ");
 		buffer.append(" DateName(hour,GetDate()) as currHour, ");
 		buffer.append(" avg(tod.MpptTemp) mpptTemp,  ");
@@ -476,9 +478,10 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 			power.setCurrent(DataUtils.getDecimal(obj[1]));//电流
 			power.setPower(DataUtils.getDecimal(obj[2]));//功率
 			power.setUndervoltage(DataUtils.getInteger(obj[3]));
-			power.setMpptTemp(DataUtils.getDecimal(obj[4]));
-			power.setCurrHour(DataUtils.getInteger(obj[5]));
-			power.setMachineState(DataUtils.getInteger(obj[6]));
+			power.setChargeDischarge(DataUtils.getInteger(obj[4]));
+			power.setMpptTemp(DataUtils.getDecimal(obj[5]));
+			power.setCurrHour(DataUtils.getInteger(obj[6]));
+			power.setMachineState(DataUtils.getInteger(obj[7]));
 		}
 		return power;
 	
@@ -601,6 +604,66 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 			power.setPower(DataUtils.getDecimal(obj[0]));
 			power.setVoltage(DataUtils.getDecimal(obj[1]));
 			power.setCurrent(DataUtils.getDecimal(obj[2]));
+		}
+		return power;
+	}
+
+	@Override
+	public PSTotal getPSTotalData() throws Exception {
+		Session session = HibernateSessionFactory.getHibernateSession();
+		StringBuffer buffer=new StringBuffer();
+		buffer.append(" select ");
+		buffer.append(" count(distinct psi.id) totalPS, ");
+		buffer.append(" sum(psi.capacity) totalCapacity, ");
+		buffer.append(" sum(tod.LoadHistoryQ) totalHistoryQ  ");
+		buffer.append(" from  PS_information psi ");
+		buffer.append(" left join Inverter_parameter inp on inp.PS_id=psi.id ");
+		buffer.append(" left join bd_to_data tod   on inp.name=tod.InverterID ");
+		
+		Query query = session.createSQLQuery(buffer.toString());
+		@SuppressWarnings("rawtypes")
+		List list = query.list();
+		HibernateSessionFactory.closeHibernateSession();
+		PSTotal total=new PSTotal();
+		if (list == null || list.size() == 0) {
+			return total;
+		}
+		for (int i = 0; i < list.size(); i++) {
+			Object[] obj = (Object[]) list.get(i);
+			total.setTotalPS(DataUtils.getInteger(obj[0]));
+			total.setTotalCapacity(DataUtils.getDecimal(obj[1]));
+			total.setTotalHistoryQ(DataUtils.getDecimal(obj[2]));
+		}
+		return total;
+	}
+
+	@Override
+	public InParameter getInParameter(String dateTime, int psId) throws Exception {
+		Session session = HibernateSessionFactory.getHibernateSession();
+		StringBuffer buffer=new StringBuffer();
+		buffer.append("  select ");
+		buffer.append(" sum(tod.InputVoltage) modelInVoltage,  ");
+		buffer.append(" sum(tod.ShowObligate) modelInCurrent,  ");
+		buffer.append(" max(tod.BatteryVoltage) batteryVoltage,  ");
+		buffer.append(" DateName(hour,GetDate()) as currHour  ");
+		buffer.append(" from  Inverter_parameter inp   inner join bd_to_data tod on inp.name=tod.InverterID ");
+		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id  ");
+		buffer.append(" where CONVERT(varchar(100),OperateDate, 23)= ? and inp.PS_id= ?  ");
+		Query query = session.createSQLQuery(buffer.toString());
+		query.setString(0, dateTime);
+		query.setInteger(1, psId);
+		@SuppressWarnings("rawtypes")
+		List list = query.list();
+		HibernateSessionFactory.closeHibernateSession();
+		InParameter power = new InParameter();
+		if (list == null || list.size() == 0) {
+			return power;
+		}
+		for (int i = 0; i < list.size(); i++) {
+			Object[] obj = (Object[]) list.get(i);
+			power.setModelInVoltage(DataUtils.getDecimal(obj[0]));
+			power.setModelInCurrent(DataUtils.getDecimal(obj[1]));
+			power.setBatteryInVoltage(DataUtils.getDecimal(obj[2]));
 		}
 		return power;
 	}

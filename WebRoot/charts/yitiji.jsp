@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ page import="com.PSMS.pojo.PowerStationBase" %>
+<%@ page import="com.PSMS.pojo.InParameter" %>
 <%@ page import="com.PSMS.Hibernate.Inverter_parameter" %>
 <%@ page import="java.util.*" %>
 <%@ page import="java.math.BigDecimal" %>
@@ -9,9 +10,7 @@
 	Inverter_parameter parameter=(Inverter_parameter)request.getAttribute("parameter");
 	PowerStationBase outData=(PowerStationBase)request.getAttribute("outData");
 	
-	PowerStationBase modelData=(PowerStationBase)request.getAttribute("modelData");
-	
-	PowerStationBase batteryData=(PowerStationBase)request.getAttribute("batteryData");
+	InParameter inParameter=(InParameter)request.getAttribute("inParameter");
 
 %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
@@ -79,10 +78,10 @@
                 <div class="widget-content u2" style="background: #f1f1f1">
                   <h4><strong>输入参数</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">组件电压：<%=modelData.getTotalVoltage() %> V</li>
-                    <li class="list-group-item">组件电流：<%=modelData.getTotalCurrent() %> A</li>
-                    <li class="list-group-item">蓄电池电压：<%=batteryData.getTotalVoltage() %> V</li>
-                    <li class="list-group-item">蓄电池电流：<%=batteryData.getTotalCurrent() %> A</li>
+                    <li class="list-group-item">组件电压：<%=inParameter.getModelInVoltage() %> V</li>
+                    <li class="list-group-item">组件电流：<%=inParameter.getModelInCurrent() %> A</li>
+                    <li class="list-group-item">蓄电池电压：<%=inParameter.getBatteryInVoltage() %> V</li>
+                    <li class="list-group-item">蓄电池电流：FF A</li>
                   </ul>
                 </div>
               </div>

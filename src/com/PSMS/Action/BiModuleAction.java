@@ -47,6 +47,10 @@ public class BiModuleAction {
 			
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
+			if(parameters!=null&&parameters.size()>0){
+				request.setAttribute("parameter", parameters.get(0));//设备基本参数
+			}
+			request.setAttribute("outData", outData);//输出
 			request.setAttribute("list", object.toString());
 			System.out.println(object.toString());
 		}catch(IOException e){

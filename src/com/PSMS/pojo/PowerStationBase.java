@@ -73,7 +73,6 @@ public class PowerStationBase {
 	private int dayCount;//运行天数
 	
 	
-	
 	public BigDecimal getTotalCapacity() {
 		return totalCapacity;
 	}
@@ -325,4 +324,8 @@ public class PowerStationBase {
 	public void setDayCount(int dayCount) {
 		this.dayCount = dayCount;
 	}
+
+	
+	
+	
 }
