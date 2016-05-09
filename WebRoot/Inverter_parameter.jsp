@@ -484,7 +484,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    	$.messager.alert('提示','功率因数请输入数字!');
 		    	return false;
 		    }
-			var result="";
+			/* var result="";
 			$.ajax({
 	        url:'checkInverterNameIsLegal.action?name='+encodeURI(encodeURI(name))+'&ps_name='+encodeURI(encodeURI(ps_name)),
 			type:'GET',				
@@ -495,8 +495,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  		}
 	    	});
 			if(result == "wrong"){$.messager.confirm('警告','设备在此电站中已存在');return false;}
-			if(result=="correct"){return true;}
-		    return false;
+			if(result=="correct"){return true;} */
+		    return true;
 		}
 		function trim(str){//去掉两边空格   
    			 return str.replace(/^(\s|\xA0)+|(\s|\xA0)+$/g, '');   
