@@ -7,6 +7,7 @@ import org.apache.struts2.ServletActionContext;
 import com.PSMS.Hibernate.Inverter_parameter;
 import com.PSMS.Service.IBiPowerStationService;
 import com.PSMS.Service.impl.BiPowerStationServiceImpl;
+import com.PSMS.pojo.BIPSBaseData;
 import com.PSMS.pojo.InParameter;
 import com.PSMS.pojo.PowerStationBase;
 import com.PSMS.util.GetTime;
@@ -32,24 +33,19 @@ public class BiInverterAction {
 			psId = java.net.URLDecoder.decode(psId, "UTF-8");
 			int pId=Integer.parseInt(psId);
 			JSONObject object = JSONObject.fromObject("{}");
-			PowerStationBase outData=biPSService.getPSOutOneData(dateTime, pId,"逆变器");
-			object.put("outData", outData);//输出
-			List<PowerStationBase> hourlyData=biPSService.getPSHourlyData(dateTime, pId,"逆变器");
-			object.put("hourlyData", hourlyData);//实时数据
+			
+			
+			BIPSBaseData newes=biPSService.getNewesData("2016-03-01", pId);
+			object.put("newes", newes);
+			request.setAttribute("newes", newes);
+			
+			List<PowerStationBase> hourlyData=biPSService.getPSHourlyData("2016-03-01", pId,"");//dateTime
+			object.put("hourlyData", hourlyData);//曲线数据
+			request.setAttribute("hourlyData", hourlyData);
+			
 			List<Inverter_parameter> parameters=biPSService.getParameter(pId, "逆变器");
 			object.put("parameters", parameters);//设备基本参数
 			
-			PowerStationBase ControlData=biPSService.getPSOutOneData(dateTime, pId,"控制器");
-			object.put("ControlData", ControlData);//输出
-			
-			PowerStationBase ControlStatus=biPSService.getNewestStatus(dateTime, pId,"控制器");
-			object.put("ControlStatus", ControlStatus);
-			
-			PowerStationBase newesControlData=biPSService.getNewesData(dateTime, pId,"控制器");
-			object.put("newesControlData", newesControlData);
-			
-			PowerStationBase newesInverterData=biPSService.getNewesData(dateTime, pId,"逆变器");
-			object.put("newesInverterData", newesInverterData);
 			
 			object.put("psId", pId);
 			object.put("pageName", "nibianqi");
@@ -59,7 +55,7 @@ public class BiInverterAction {
 				request.setAttribute("parameter", parameters.get(0));//设备基本参数
 			}
 			request.setAttribute("inParameter", inParameter);
-			request.setAttribute("outData", outData);//输出
+			
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 			request.setAttribute("list", object.toString());

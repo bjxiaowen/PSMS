@@ -116,27 +116,24 @@ $(function(){
     }   
    
     var nodeB1 = nodeBlock(40,10,3);
-    nodeB1.textNode0.text = '电流：'+ data_json["modelNewes"]["current"];
-    nodeB1.textNode1.text = '电压：'+ data_json["modelNewes"]["voltage"];
-    nodeB1.textNode2.text = '功率：'+ data_json["modelNewes"]["power"];
+    nodeB1.textNode0.text = '电流：'+ data_json["newes"]["X_TPV_Voltage"];
+    nodeB1.textNode1.text = '电压：'+ data_json["newes"]["X_TPV_Current"];
+    nodeB1.textNode2.text = '功率：'+ data_json["newes"]["X_TPV_Power"];
     
     var nodeB2 = nodeBlock(330,10,2);
-    nodeB2.textNode0.text = 'MPPT模块温度：'+ data_json["newestStatus"]["mpptTemp"];
-    nodeB2.textNode1.text = data_json["newestStatus"]["chargeDischarge "]?"放电":"充电";
+    nodeB2.textNode0.text = 'MPPT模块温度：'+ data_json["newes"]["MpptTemp"];
+    nodeB2.textNode1.text = data_json["newes"]["chargeDischarge "]?"放电":"充电";
     
     var nodeB3 = nodeBlock(620,10,3);
-    nodeB3.textNode0.text = '电流：'+ data_json["controlAndInverteNewes"]["current"];
-    nodeB3.textNode1.text = '电压：'+ data_json["controlAndInverteNewes"]["voltage"];
-    nodeB3.textNode2.text = '功率：'+ data_json["controlAndInverteNewes"]["power"];
+    nodeB3.textNode0.text = '电流：'+ data_json["newes"]["X_Battery_Current"];
+    nodeB3.textNode1.text = '电压：'+ data_json["newes"]["BatteryVoltage"];
+    nodeB3.textNode2.text = '功率：'+ data_json["newes"]["BatteryPower"];
     nodeB3.node.setSize(150,80);
 
     var nodeB4 = nodeBlock(40,440,3);
-    nodeB4.textNode0.text = '电流：'+ data_json["batteryNewes"]["current"];
-    nodeB4.textNode1.text = '电压：'+ data_json["batteryNewes"]["voltage"];
-    nodeB4.textNode2.text = '功率：'+ data_json["batteryNewes"]["power"];
+    nodeB4.textNode0.text = '电流：'+ data_json["newes"]["OutputVoltage"];
+    nodeB4.textNode1.text = '电压：'+ data_json["newes"]["OutputCurrent"];
+    nodeB4.textNode2.text = '功率：'+ data_json["newes"]["ExchangeOutPower"];
     
-    
-    
-   
 
 })

@@ -1,13 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ page import="com.PSMS.pojo.PowerStationBase" %>
-<%@ page import="com.PSMS.pojo.InParameter" %>
+<%@ page import="com.PSMS.pojo.BIPSBaseData" %>
 <%@ page import="com.PSMS.Hibernate.Inverter_parameter" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 	Inverter_parameter parameter=(Inverter_parameter)request.getAttribute("parameter");
-	PowerStationBase outData=(PowerStationBase)request.getAttribute("outData");
-	InParameter inParameter=(InParameter)request.getAttribute("inParameter");
+	
+	BIPSBaseData newes=(BIPSBaseData)request.getAttribute("newes");
 %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -83,9 +83,9 @@
                 <div class="widget-content u2" style="background: #f1f1f1">
                   <h4><strong>输入参数</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">直流功率：<%=inParameter.getCurrPower() %> KW</li>
-                    <li class="list-group-item">直流电压：FF V</li>
-                    <li class="list-group-item">直流电流：FF A</li>
+                    <li class="list-group-item">直流功率：<%=newes.getX_Coutpout_Voltage() %> KW</li>
+                    <li class="list-group-item">直流电压：<%=newes.getX_Coutpout_Current() %> V</li>
+                    <li class="list-group-item">直流电流：<%=newes.getX_Coutpout_Power() %> A</li>
                     <li class="list-group-item">无</li>
                   </ul>
                 </div>
@@ -96,10 +96,10 @@
                 <div class="widget-content u3" style="background: #f1f1f1">
                   <h4><strong>输出参数</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">功率：<%=outData.getTotalPower() %> KW</li>
-                    <li class="list-group-item">电压：<%=outData.getTotalVoltage() %> V</li>
-                    <li class="list-group-item">电流：<%=outData.getTotalCurrent() %> A</li>
-                    <li class="list-group-item">频率：FF Hz</li>
+                    <li class="list-group-item">功率：<%=newes.getExchangeOutPower() %> KW</li>
+                    <li class="list-group-item">电压：<%=newes.getOutputVoltage() %> V</li>
+                    <li class="list-group-item">电流：<%=newes.getOutputCurrent()%> A</li>
+                    <li class="list-group-item">频率：<%=newes.getX_AC_Frequency() %> Hz</li>
                   </ul>
                 </div>
               </div>

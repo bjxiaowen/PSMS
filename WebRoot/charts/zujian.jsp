@@ -1,11 +1,12 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ page import="com.PSMS.pojo.PowerStationBase" %>
 <%@ page import="com.PSMS.Hibernate.Inverter_parameter" %>
+<%@ page import="com.PSMS.pojo.BIPSBaseData" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 	Inverter_parameter parameter=(Inverter_parameter)request.getAttribute("parameter");
-	PowerStationBase outData=(PowerStationBase)request.getAttribute("outData");
+	BIPSBaseData newes=(BIPSBaseData)request.getAttribute("newes");
 %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -31,6 +32,7 @@
     <script type="text/javascript" src="charts/js/zujian-03.js"></script>
     <script>
     	var current = _.map(data_json["hourlyData"],"current");
+    	console.log(current);
     	var vv = _.map(data_json["hourlyData"],"voltage");
     	var power = _.map(data_json["hourlyData"],"power");
     </script>
@@ -73,9 +75,9 @@
                 <div class="widget-content u2" style="background: #f1f1f1">
                   <h4><strong>输出</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">组件功率：<%=outData.getTotalPower() %> KW</li>
-                    <li class="list-group-item">组件电压：：<%=outData.getTotalVoltage() %> V</li>
-                    <li class="list-group-item">组件电流：<%=outData.getTotalCurrent() %> A</li>
+                    <li class="list-group-item">组件功率：<%=newes.getX_TPV_Power() %> KW</li>
+                    <li class="list-group-item">组件电压：：<%=newes.getX_TPV_Voltage() %> V</li>
+                    <li class="list-group-item">组件电流：<%=newes.getX_TPV_Current() %> A</li>
                   </ul>
                 </div>
               </div>
@@ -100,7 +102,7 @@
                     </i>
                     组件电压(
                     <span class="blue">
-                      <%=outData.getTotalVoltage() %>V
+                     <%=newes.getX_TPV_Voltage() %>V
                     </span>
                     )
                   </h4>
@@ -129,7 +131,7 @@
                     </i>
                     组件电流(
                     <span class="blue">
-                      <%=outData.getTotalCurrent() %>A
+                     <%=newes.getX_TPV_Current() %>A
                     </span>
                     )
                   </h4>

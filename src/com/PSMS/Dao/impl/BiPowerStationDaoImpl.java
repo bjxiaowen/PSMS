@@ -11,6 +11,7 @@ import org.hibernate.Session;
 import com.PSMS.Dao.IBiPowerStationDao;
 import com.PSMS.Hibernate.HibernateSessionFactory;
 import com.PSMS.Hibernate.Inverter_parameter;
+import com.PSMS.pojo.BIPSBaseData;
 import com.PSMS.pojo.InParameter;
 import com.PSMS.pojo.PSTotal;
 import com.PSMS.pojo.PowerStationBase;
@@ -459,7 +460,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
 		buffer.append(" where CONVERT(varchar(100),tod.OperateDate, 23)= ? and inp.PS_id=?");
-		buffer.append(" and inp.type=?");
+//		buffer.append(" and inp.type=?");
 		buffer.append(" order by tod.OperateDate desc ");
 		Query query = session.createSQLQuery(buffer.toString());
 		query.setString(0, dateTime);
@@ -538,23 +539,29 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 	}
 
 	@Override
-	public List<PowerStationBase> getPSHourlyData(String dateTime, int psId, String type) throws Exception {
+	public List<PowerStationBase> getPSHourlyData(String dateTime, int psId) throws Exception {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
 		buffer.append(" select ");
-		buffer.append(" sum(tod.MpptOutVoltage * tod.MpptOutCurrent) as power, ");//功率
-		buffer.append(" sum(tod.MpptOutVoltage)  voltage ,");//电压
-		buffer.append(" sum(tod.MpptOutCurrent)  curr , ");//电流
-		buffer.append(" DateName(hour,GetDate()) as groupHour ");
-		buffer.append(" from  Inverter_parameter inp   inner join bd_to_data tod on inp.name=tod.InverterID ");
-		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
-		buffer.append(" where CONVERT(varchar(100),OperateDate, 23)=? and inp.PS_id=? ");
-		buffer.append(" and inp.type=? ");//组件
-		buffer.append(" group by DateName(hour,tod.OperateDate) ");
+		buffer.append(" b.ExchangeOutPower as power, ");
+		buffer.append(" b.X_TPV_Voltage as voltage, ");
+		buffer.append(" b.X_TPV_Current as curr, ");
+		buffer.append(" DateName(hour,b.operatedate) as groupHour  ");
+		buffer.append(" from bd_to_data b right join  ");
+		buffer.append(" (SELECT ");
+		buffer.append(" max(tod.operateDate) as operatedate ");
+		buffer.append(" FROM ");
+		buffer.append(" Inverter_parameter inp ");
+		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID ");
+		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id  ");
+		buffer.append(" WHERE ");
+		buffer.append(" convert(varchar(30),tod.operateDate,23) = ? ");
+		buffer.append(" and inp.PS_id=? ");
+		buffer.append(" GROUP BY ");
+		buffer.append(" DATEPART(hh,tod.operateDate)) c on b.OperateDate = c.operatedate ");
 		Query query = session.createSQLQuery(buffer.toString());
 		query.setString(0, dateTime);
 		query.setInteger(1, psId);
-		query.setString(2, type);
 		@SuppressWarnings("rawtypes")
 		List list = query.list();
 		HibernateSessionFactory.closeHibernateSession();
@@ -575,35 +582,69 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 	}
 
 	@Override
-	public PowerStationBase getNewesData(String dateTime, int psId, String type) throws Exception {
+	public BIPSBaseData getNewesData(String dateTime, int psId) throws Exception {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
 		buffer.append(" select ");
 		buffer.append(" top 1 ");
-		buffer.append(" tod.MpptOutVoltage * tod.MpptOutCurrent as power, ");//功率
-		buffer.append(" tod.MpptOutVoltage  voltage ,");//电压
-		buffer.append(" tod.MpptOutCurrent curr  ");//电流
+		buffer.append(" tod.X_TPV_Voltage,");	
+		buffer.append(" tod.X_TPV_Current,  ");
+		buffer.append(" tod.BatteryVoltage, ");
+		buffer.append(" tod.X_Battery_Current ,");
+		buffer.append(" tod.ExchangeOutPower ,");
+		buffer.append(" tod.OutputVoltage,  ");
+		buffer.append(" tod.OutputCurrent,  ");
+		buffer.append(" tod.X_AC_Frequency, ");
+		buffer.append(" tod.X_TPV_Power,    ");
+		buffer.append(" tod.X_Battery_Current*tod.BatteryVoltage as  BatteryPower,");
+		buffer.append(" tod.MpptTemp,       ");
+		buffer.append(" tod.X_Run_Status ,  ");
+		buffer.append(" tod.ChargeDischarge ,");
+		buffer.append(" tod.X_Battery_tem, ");
+		buffer.append(" tod.X_Failcode_1, ");
+		buffer.append(" tod.X_Battery_Capacity, ");
+		buffer.append(" tod.X_Coutpout_Voltage, ");
+		buffer.append(" tod.X_Coutpout_Current,  ");
+		buffer.append(" tod.X_Coutpout_Power, ");
+		buffer.append(" tod.X_Inerin_tem, ");
+		buffer.append(" tod.MachineState ");
 		buffer.append(" from  Inverter_parameter inp   inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
 		buffer.append(" where CONVERT(varchar(100),OperateDate, 23)=? and inp.PS_id=? ");
-		buffer.append(" and inp.type=? ");//设备
 		buffer.append(" order by tod.OperateDate desc ");
 		Query query = session.createSQLQuery(buffer.toString());
 		query.setString(0, dateTime);
 		query.setInteger(1, psId);
-		query.setString(2, type);
 		@SuppressWarnings("rawtypes")
 		List list = query.list();
 		HibernateSessionFactory.closeHibernateSession();
-		PowerStationBase power = new PowerStationBase();
+		BIPSBaseData power = new BIPSBaseData();
 		if (list == null || list.size() == 0) {
 			return power;
 		}
 		for (int i = 0; i < list.size(); i++) {
 			Object[] obj = (Object[]) list.get(i);
-			power.setPower(DataUtils.getDecimal(obj[0]));
-			power.setVoltage(DataUtils.getDecimal(obj[1]));
-			power.setCurrent(DataUtils.getDecimal(obj[2]));
+			power.setX_TPV_Voltage(DataUtils.getDecimal(obj[0]));
+			power.setX_TPV_Current(DataUtils.getDecimal(obj[1]));
+			power.setBatteryVoltage(DataUtils.getDecimal(obj[2]));
+			power.setX_Battery_Current(DataUtils.getDecimal(obj[3]));
+			power.setExchangeOutPower(DataUtils.getDecimal(obj[4]));
+			power.setOutputVoltage(DataUtils.getDecimal(obj[5]));
+			power.setOutputCurrent(DataUtils.getDecimal(obj[6]));
+			power.setX_AC_Frequency(DataUtils.getDecimal(obj[7]));
+			power.setX_TPV_Power(DataUtils.getDecimal(obj[8]));
+			power.setBatteryPower(DataUtils.getDecimal(obj[9]));
+			power.setMpptTemp(DataUtils.getDecimal(obj[10]));
+			power.setX_Run_Status(DataUtils.getDecimal(obj[11]));
+			power.setChargeDischarge(DataUtils.getDecimal(obj[12]));
+			power.setX_Battery_tem(DataUtils.getDecimal(obj[13]));
+			power.setX_Failcode_1(DataUtils.getDecimal(obj[14]));
+			power.setX_Battery_Capacity(DataUtils.getDecimal(obj[15]));
+			power.setX_Coutpout_Voltage(DataUtils.getDecimal(obj[16]));
+			power.setX_Coutpout_Current(DataUtils.getDecimal(obj[17]));
+			power.setX_Coutpout_Power(DataUtils.getDecimal(obj[18]));
+			power.setX_Inerin_tem(DataUtils.getDecimal(obj[19]));
+			power.setMachineState(DataUtils.getDecimal(obj[20]));
 		}
 		return power;
 	}
@@ -668,6 +709,50 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 			power.setCurrPower(DataUtils.getDecimal(obj[2]));
 		}
 		return power;
+	}
+
+	@Override
+	public List<PowerStationBase> getPSHourlyData(String dateTime, int psId, String type) throws Exception {
+		Session session = HibernateSessionFactory.getHibernateSession();
+		StringBuffer buffer=new StringBuffer();
+		buffer.append(" select ");
+		buffer.append(" b.X_Coutpout_Power as power, ");
+		buffer.append(" b.X_TPV_Voltage as voltage, ");
+		buffer.append(" b.X_TPV_Current as curr, ");
+		buffer.append(" DateName(hour,b.operatedate) as groupHour  ");
+		buffer.append(" from bd_to_data b right join  ");
+		buffer.append(" (SELECT ");
+		buffer.append(" max(tod.operateDate) as operatedate ");
+		buffer.append(" FROM ");
+		buffer.append(" Inverter_parameter inp ");
+		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID ");
+		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id  ");
+		buffer.append(" WHERE ");
+		buffer.append(" convert(varchar(30),tod.operateDate,23) = ? ");
+		buffer.append(" and inp.PS_id=? ");
+		buffer.append(" GROUP BY ");
+		buffer.append(" DATEPART(hh,tod.operateDate)) c on b.OperateDate = c.operatedate ");
+		Query query = session.createSQLQuery(buffer.toString());
+		query.setString(0, dateTime);
+		query.setInteger(1, psId);
+		@SuppressWarnings("rawtypes")
+		List list = query.list();
+		HibernateSessionFactory.closeHibernateSession();
+		List<PowerStationBase> reList = new ArrayList<PowerStationBase>();
+		if (list == null || list.size() == 0) {
+			return reList;
+		}
+		for (int i = 0; i < list.size(); i++) {
+			Object[] obj = (Object[]) list.get(i);
+			PowerStationBase power = new PowerStationBase();
+			power.setPower(DataUtils.getDecimal(obj[0]));
+			power.setVoltage(DataUtils.getDecimal(obj[1]));
+			power.setCurrent(DataUtils.getDecimal(obj[2]));
+			power.setGroupHour(DataUtils.getInteger(obj[3]));
+			reList.add(power);
+		}
+		return reList;
+	
 	}
 
 }

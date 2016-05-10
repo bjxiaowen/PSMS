@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ page import="com.PSMS.pojo.PowerStationBase" %>
+<%@ page import="com.PSMS.pojo.BIPSBaseData" %>
 <%@ page import="com.PSMS.pojo.InParameter" %>
 <%@ page import="com.PSMS.Hibernate.Inverter_parameter" %>
 <%@ page import="java.util.*" %>
@@ -11,7 +12,7 @@
 	PowerStationBase outData=(PowerStationBase)request.getAttribute("outData");
 	
 	InParameter inParameter=(InParameter)request.getAttribute("inParameter");
-
+	BIPSBaseData newes=(BIPSBaseData)request.getAttribute("newes");
 %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -54,7 +55,7 @@
         <div class="container">
           <div class="crumbs">
             <div class="current-time" style="    padding: 10px 15px;font-size: 14px;font-weight: bold;
-    float: left;">采集时刻：
+    float: left;">系统时刻：
             </div>
           </div>
           <div class="page-header">
@@ -78,10 +79,10 @@
                 <div class="widget-content u2" style="background: #f1f1f1">
                   <h4><strong>输入参数</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">组件电压：<%=inParameter.getModelInVoltage() %> V</li>
-                    <li class="list-group-item">组件电流：<%=inParameter.getModelInCurrent() %> A</li>
-                    <li class="list-group-item">蓄电池电压：<%=inParameter.getBatteryInVoltage() %> V</li>
-                    <li class="list-group-item">蓄电池电流：FF A</li>
+                    <li class="list-group-item">组件电压：<%=newes.getX_TPV_Voltage() %> V</li>
+                    <li class="list-group-item">组件电流：<%=newes.getX_TPV_Current() %> A</li>
+                    <li class="list-group-item">蓄电池电压：<%=newes.getBatteryVoltage() %> V</li>
+                    <li class="list-group-item">蓄电池电流：<%=newes.getX_Battery_Current() %> A</li>
                   </ul>
                 </div>
               </div>
@@ -91,10 +92,10 @@
                 <div class="widget-content u3" style="background: #f1f1f1">
                   <h4><strong>输出参数</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">功率：<%=outData.getTotalPower() %> KW</li>
-                    <li class="list-group-item">电压：<%=outData.getTotalVoltage() %> V</li>
-                    <li class="list-group-item">电流：<%=outData.getTotalCurrent() %> A</li>
-                    <li class="list-group-item">频率：FF Hz</li>
+                    <li class="list-group-item">功率：<%=newes.getExchangeOutPower() %> KW</li>
+                    <li class="list-group-item">电压：<%=newes.getOutputVoltage() %> V</li>
+                    <li class="list-group-item">电流：<%=newes.getOutputCurrent() %> A</li>
+                    <li class="list-group-item">频率：<%=newes.getX_AC_Frequency() %> Hz</li>
                   </ul>
                 </div>
               </div>

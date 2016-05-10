@@ -10,6 +10,7 @@ public class SqlServer2008Dialect extends SQLServerDialect{
         registerHibernateType(Types.CHAR, Hibernate.STRING.getName());   
         registerHibernateType(Types.NVARCHAR, Hibernate.STRING.getName());   
         registerHibernateType(Types.LONGNVARCHAR, Hibernate.STRING.getName());   
-        registerHibernateType(Types.DECIMAL, Hibernate.DOUBLE.getName());   
+        registerHibernateType(Types.DECIMAL, Hibernate.DOUBLE.getName()); 
+        registerHibernateType(Types.NCHAR, Hibernate.DOUBLE.getName());   
     }   
 }

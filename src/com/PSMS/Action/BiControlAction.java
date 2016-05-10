@@ -9,6 +9,7 @@ import com.PSMS.Service.IBiModuleService;
 import com.PSMS.Service.IBiPowerStationService;
 import com.PSMS.Service.impl.BiModuleServiceImpl;
 import com.PSMS.Service.impl.BiPowerStationServiceImpl;
+import com.PSMS.pojo.BIPSBaseData;
 import com.PSMS.pojo.InParameter;
 import com.PSMS.pojo.PowerStationBase;
 import com.PSMS.util.GetTime;
@@ -27,6 +28,7 @@ public class BiControlAction {
 
 	public String toBiControl(){
 		try {
+			
 			HttpServletRequest request =ServletActionContext.getRequest();
 			request.setCharacterEncoding("utf-8");
 			biModuleService = new BiModuleServiceImpl();
@@ -36,50 +38,25 @@ public class BiControlAction {
 			psId = java.net.URLDecoder.decode(psId, "UTF-8");
 			int pId=Integer.parseInt(psId);
 			JSONObject object = JSONObject.fromObject("{}");
-			PowerStationBase outData=biPSService.getPSOutOneData(dateTime, pId,"控制器");
-			object.put("outData", outData);//输出
-			List<PowerStationBase> hourlyData=biPSService.getPSHourlyData(dateTime, pId,"控制器");
-			object.put("hourlyData", hourlyData);//实时数据
+			
+			List<PowerStationBase> hourlyData=biPSService.getPSHourlyData("2016-03-01", pId,"");//dateTime
+			object.put("hourlyData", hourlyData);//曲线数据
+			
+			
 			List<Inverter_parameter> parameters=biPSService.getParameter(pId, "控制器");
 			object.put("parameters", parameters);//设备基本参数
-			
-			//组件
-			PowerStationBase modelData=biPSService.getPSOutOneData(dateTime, pId,"组件");
-			object.put("modelData", modelData);
-			
-			PowerStationBase modelStatus=biPSService.getNewestStatus(dateTime, pId,"组件");
-			object.put("modelStatus", modelStatus);
-			
-			//蓄电池
-			PowerStationBase batteryData=biPSService.getPSOutOneData(dateTime, pId,"蓄电池");
-			object.put("batteryData", batteryData);
-			
-			//逆变器
-			PowerStationBase InverterData=biPSService.getPSOutOneData(dateTime, pId,"控制器");
-			object.put("InverterData", InverterData);
-			
-			InParameter inParameter=biPSService.getInParameter(dateTime, pId);//输入参数
-			
-			PowerStationBase newesModelData=biPSService.getNewesData(dateTime, pId,"组件");
-			object.put("newesModelData", newesModelData);
-			
-			PowerStationBase newesBatteryData=biPSService.getNewesData(dateTime, pId,"蓄电池");
-			object.put("newesBatteryData", newesBatteryData);
-			
-			PowerStationBase newesControlData=biPSService.getNewesData(dateTime, pId,"控制器");
-			object.put("newesControlData", newesControlData);
-			
-			PowerStationBase controlStatus=biPSService.getNewestStatus(dateTime, pId,"控制器");
-			object.put("controlStatus", controlStatus);
 			
 			
 			object.put("psId", pId);
 			object.put("pageName", "kongzhiqi");
 			
+			BIPSBaseData newes=biPSService.getNewesData("2016-03-01", pId);
+			object.put("newes", newes);
+			request.setAttribute("newes", newes);
+			
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
-			request.setAttribute("inParameter", inParameter);
-			request.setAttribute("outData", outData);
+			
 			if(parameters!=null&&parameters.size()>0){
 				request.setAttribute("parameter", parameters.get(0));//设备基本参数
 			}

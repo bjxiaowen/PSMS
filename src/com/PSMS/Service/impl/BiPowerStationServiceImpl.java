@@ -5,6 +5,7 @@ import com.PSMS.Dao.IBiPowerStationDao;
 import com.PSMS.Factory.DAOFactory;
 import com.PSMS.Hibernate.Inverter_parameter;
 import com.PSMS.Service.IBiPowerStationService;
+import com.PSMS.pojo.BIPSBaseData;
 import com.PSMS.pojo.InParameter;
 import com.PSMS.pojo.PSTotal;
 import com.PSMS.pojo.PowerStationBase;
@@ -103,14 +104,14 @@ public class BiPowerStationServiceImpl implements IBiPowerStationService {
 	}
 
 	@Override
-	public List<PowerStationBase> getPSHourlyData(String dateTime, int psId, String type) throws Exception {
-		List<PowerStationBase> list=biDao.getPSHourlyData(dateTime, psId,type);
+	public List<PowerStationBase> getPSHourlyData(String dateTime, int psId) throws Exception {
+		List<PowerStationBase> list=biDao.getPSHourlyData(dateTime, psId);
 		return  BiPowerStationTools.getListSize24(list);
 	}
 
 	@Override
-	public PowerStationBase getNewesData(String dateTime, int psId, String type) throws Exception {
-		return biDao.getNewesData(dateTime, psId, type);
+	public BIPSBaseData getNewesData(String dateTime, int psId) throws Exception {
+		return biDao.getNewesData(dateTime, psId);
 	}
 
 	@Override
@@ -121,6 +122,12 @@ public class BiPowerStationServiceImpl implements IBiPowerStationService {
 	@Override
 	public InParameter getInParameter(String dateTime, int psId) throws Exception {
 		return biDao.getInParameter(dateTime, psId);
+	}
+
+	@Override
+	public List<PowerStationBase> getPSHourlyData(String dateTime, int psId, String type) throws Exception {
+		List<PowerStationBase> list=biDao.getPSHourlyData(dateTime, psId,type);
+		return BiPowerStationTools.getListSize24(list);
 	}
 
 	

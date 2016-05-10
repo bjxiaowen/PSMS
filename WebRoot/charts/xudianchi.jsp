@@ -2,17 +2,22 @@
 <%@ page import="com.PSMS.pojo.PowerStationBase" %>
 <%@ page import="com.PSMS.Hibernate.Inverter_parameter" %>
 <%@ page import="java.math.BigDecimal" %>
+<%@ page import="com.PSMS.pojo.BIPSBaseData" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 	Inverter_parameter parameter=(Inverter_parameter)request.getAttribute("parameter");
-	
-	PowerStationBase outData=(PowerStationBase)request.getAttribute("outData");
-	
-	PowerStationBase newestStatus=(PowerStationBase)request.getAttribute("newestStatus");
-	
-	String cd=newestStatus.getChargeDischarge()==0?"充电":"放电";
-	String mState=newestStatus.getMachineState()==0?"正常":"机器失效";//1：机器失效，0：正常
+	BIPSBaseData newes=(BIPSBaseData)request.getAttribute("newes");
+	String failcode=newes.getX_Failcode_1()+"";
+	String fail="正常";
+	 if(!failcode.equals("0.00")){
+		 fail="欠压";
+	} 
+	String state=newes.getChargeDischarge()+"";
+	 String mState="充电";//0：电池充电,1：电池放电
+	if(!state.equals("0.00")){
+		mState="放电";
+	} 
 %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -39,8 +44,10 @@
       $(document).ready(function() {
         App.init();
       });
-      var vv = data_json["newesData"]["voltage"];
-      var c = data_json["newesData"]["current"]; 
+      var vv = data_json["newes"]["batteryVoltage"];
+      var c = data_json["newes"]["x_Battery_Current"]; 
+      console.log(vv);
+      console.log(c);
     </script>
     
     <!--电池电量,温度计必要样式-->
@@ -77,7 +84,7 @@
         <div class="container">
           <div class="crumbs">
              <div class="current-time" style="    padding: 10px 15px;font-size: 14px;font-weight: bold;
-    float: left;">采集时刻：
+    float: left;">系统时间：
             </div>
           </div>
           <div class="page-header">
@@ -104,9 +111,9 @@
                 <div class="widget-content u2" style="background: #f1f1f1">
                   <h4><strong>输出参数</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">功率：<%=outData.getTotalPower() %> KW</li>
-                    <li class="list-group-item">电压：<%=outData.getTotalVoltage() %> V</li>
-                    <li class="list-group-item">电流 :<%=outData.getTotalCurrent() %>A</li>
+                    <li class="list-group-item">功率：<%=newes.getBatteryPower() %> KW</li>
+                    <li class="list-group-item">电压：<%=newes.getBatteryVoltage() %> V</li>
+                    <li class="list-group-item">电流 :<%=newes.getX_Battery_Current() %>A</li>
                   </ul>
                 </div>
               </div>
@@ -116,10 +123,10 @@
                 <div class="widget-content u3" style="background: #f1f1f1">
                   <h4><strong>状态值</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">蓄电池温度：<%=newestStatus.getMpptTemp() %> °C</li>
+                    <li class="list-group-item">蓄电池温度：<%=newes.getX_Battery_tem() %> °C</li>
                     <li class="list-group-item">蓄电池状态：<span class="label label-info"><%=mState %></span></li>
                     <li class="list-group-item">
-                      充放电状态：<%=cd %>
+                     		<%=fail %>
                       </li>
                   </ul>
                 </div>
@@ -181,7 +188,7 @@
     position: absolute;
     height: 1em;
     width: 2em;
-    margin: .4em .4em .4em .8em;"><%=cd %></div>
+    margin: .4em .4em .4em .8em;"><%=newes.getX_Battery_Capacity() %></div>
                             </div>
                           </div>
                         </div>
@@ -196,7 +203,7 @@
                 <div class="widget-content">
                   <ul class="stats" style="text-align: center;">
                     <li><strong>
-                      状态：</strong> <span class="label label-info"><%=cd %></span>
+                      状态：</strong> <span class="label label-info"><%=fail %></span>
                     </li>
                   </ul>
                 </div>
@@ -208,7 +215,7 @@
                   <!--<img src="./assets/img/demo/wenduji.png" alt="" style="height: 200px;">-->
                   <div class="bg_wenduji" style="height: 200px;">
                     <div class="progress vertical">
-                      <div class="progress-bar " role="progressbar" aria-valuenow="60" aria-valuemin="-20" aria-valuemax="100" style="width: <%=newestStatus.getMpptTemp() %>%;">
+                      <div class="progress-bar " role="progressbar" aria-valuenow="60" aria-valuemin="-20" aria-valuemax="100" style="width: <%=newes.getX_Battery_tem() %>%;">
                         <span class="sr-only">60% Complete</span>
                       </div>
                     </div>
@@ -220,7 +227,7 @@
                   <ul class="stats" style="text-align: center;">
                     <li>
                       <strong>
-                        蓄电池温度：<%=newestStatus.getMpptTemp() %>°C
+                        蓄电池温度：<%=newes.getX_Battery_tem() %>°C
                       </strong>
                     </li>
                   </ul>

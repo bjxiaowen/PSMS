@@ -9,6 +9,7 @@ import com.PSMS.Service.IBiModuleService;
 import com.PSMS.Service.IBiPowerStationService;
 import com.PSMS.Service.impl.BiModuleServiceImpl;
 import com.PSMS.Service.impl.BiPowerStationServiceImpl;
+import com.PSMS.pojo.BIPSBaseData;
 import com.PSMS.pojo.PowerStationBase;
 import com.PSMS.util.GetTime;
 import net.sf.json.JSONObject;
@@ -35,9 +36,9 @@ public class BiModuleAction {
 			psId = java.net.URLDecoder.decode(psId, "UTF-8");
 			int pId=Integer.parseInt(psId);
 			JSONObject object = JSONObject.fromObject("{}");
-			PowerStationBase outData=biPSService.getPSOutOneData(dateTime, pId,"组件");
-			object.put("outData", outData);//输出
-			List<PowerStationBase> hourlyData=biModuleService.getPowerStationHourByDate(dateTime, pId);
+			/*List<PowerStationBase> hourlyData=biModuleService.getPowerStationHourByDate("2016-03-01", pId);
+			object.put("hourlyData", hourlyData);//实时数据
+*/			List<PowerStationBase> hourlyData=biPSService.getPSHourlyData("2016-03-01", pId);
 			object.put("hourlyData", hourlyData);//实时数据
 			List<Inverter_parameter> parameters=biPSService.getParameter(pId, "组件");
 			object.put("parameters", parameters);//设备基本参数
@@ -49,7 +50,9 @@ public class BiModuleAction {
 			if(parameters!=null&&parameters.size()>0){
 				request.setAttribute("parameter", parameters.get(0));//设备基本参数
 			}
-			request.setAttribute("outData", outData);//输出
+			BIPSBaseData newes=biPSService.getNewesData("2016-03-01", pId);
+			object.put("newes", newes);
+			request.setAttribute("newes", newes);
 			request.setAttribute("list", object.toString());
 			System.out.println(object.toString());
 		}catch(IOException e){
