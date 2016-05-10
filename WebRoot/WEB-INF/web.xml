@@ -30,7 +30,7 @@
   	<filter-class>com.PSMS.Action.RemindServlet</filter-class>
   	<init-param>
         <param-name>allow</param-name>
-        <param-value>2018-03-21</param-value>
+        <param-value>2016-05-21</param-value>
     </init-param>
   </filter>
   <filter-mapping>
