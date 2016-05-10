@@ -35,11 +35,11 @@ public class BiInverterAction {
 			JSONObject object = JSONObject.fromObject("{}");
 			
 			
-			BIPSBaseData newes=biPSService.getNewesData("2016-03-01", pId);
+			BIPSBaseData newes=biPSService.getNewesData(dateTime, pId);
 			object.put("newes", newes);
 			request.setAttribute("newes", newes);
 			
-			List<PowerStationBase> hourlyData=biPSService.getPSHourlyData("2016-03-01", pId,"");//dateTime
+			List<PowerStationBase> hourlyData=biPSService.getPSHourlyData(dateTime, pId,"");//dateTime
 			object.put("hourlyData", hourlyData);//曲线数据
 			request.setAttribute("hourlyData", hourlyData);
 			

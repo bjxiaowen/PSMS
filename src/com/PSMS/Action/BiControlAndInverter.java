@@ -38,7 +38,7 @@ public class BiControlAndInverter {
 			int pId=Integer.parseInt(psId);
 			JSONObject object = JSONObject.fromObject("{}");
 			
-			List<PowerStationBase> hourlyData=biPSService.getPSHourlyData("2016-03-01", pId);
+			List<PowerStationBase> hourlyData=biPSService.getPSHourlyData(dateTime, pId);
 			object.put("hourlyData", hourlyData);//实时数据
 			
 			List<Inverter_parameter> parameters=biPSService.getParameter(pId, "控逆一体机");
@@ -47,7 +47,7 @@ public class BiControlAndInverter {
 			object.put("psId", pId);
 			object.put("pageName", "yitiji");
 			
-			BIPSBaseData newes=biPSService.getNewesData("2016-03-01", pId);
+			BIPSBaseData newes=biPSService.getNewesData(dateTime, pId);
 			object.put("newes", newes);
 			request.setAttribute("newes", newes);
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");

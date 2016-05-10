@@ -38,7 +38,7 @@ public class BiModuleAction {
 			JSONObject object = JSONObject.fromObject("{}");
 			/*List<PowerStationBase> hourlyData=biModuleService.getPowerStationHourByDate("2016-03-01", pId);
 			object.put("hourlyData", hourlyData);//实时数据
-*/			List<PowerStationBase> hourlyData=biPSService.getPSHourlyData("2016-03-01", pId);
+*/			List<PowerStationBase> hourlyData=biPSService.getPSHourlyData(dateTime, pId);
 			object.put("hourlyData", hourlyData);//实时数据
 			List<Inverter_parameter> parameters=biPSService.getParameter(pId, "组件");
 			object.put("parameters", parameters);//设备基本参数
@@ -50,7 +50,7 @@ public class BiModuleAction {
 			if(parameters!=null&&parameters.size()>0){
 				request.setAttribute("parameter", parameters.get(0));//设备基本参数
 			}
-			BIPSBaseData newes=biPSService.getNewesData("2016-03-01", pId);
+			BIPSBaseData newes=biPSService.getNewesData(dateTime, pId);
 			object.put("newes", newes);
 			request.setAttribute("newes", newes);
 			request.setAttribute("list", object.toString());

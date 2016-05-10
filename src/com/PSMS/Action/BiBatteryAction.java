@@ -51,10 +51,10 @@ public class BiBatteryAction {
 			if(parameters!=null&&parameters.size()>0){
 				request.setAttribute("parameter", parameters.get(0));//设备基本参数
 			}
-			List<PowerStationBase> hourlyData=biPSService.getPSHourlyData("2016-03-01", pId);
+			List<PowerStationBase> hourlyData=biPSService.getPSHourlyData(dateTime, pId);
 			object.put("hourlyData", hourlyData);//实时数据
 			request.setAttribute("hourlyData", hourlyData);
-			BIPSBaseData newes=biPSService.getNewesData("2016-03-01", pId);
+			BIPSBaseData newes=biPSService.getNewesData(dateTime, pId);
 			object.put("newes", newes);
 			request.setAttribute("newes", newes);
 			request.setAttribute("list", object.toString());
