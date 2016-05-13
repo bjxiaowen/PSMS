@@ -45,8 +45,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div class="span9">   
       <ul id="social-icons">
         <li class="facebook"><a href="accountSetting.jsp" data-toggle="tooltip" title="个人信息修改"></a></li>
-        <li class="flickr"><a href="allStationMonitor.jsp" data-toggle="tooltip" title="监测系统平台"></a></li>
-        <li class="pinterest"><a href="psData.jsp" data-toggle="tooltip" title="历史数据"></a></li>                
+        <li class="flickr"><a href="operationMaintenance.jsp" data-toggle="tooltip" title="运维管理"></a></li>
+        <li class="chart"><a target="_blank" href="toPSMap.action" data-toggle="tooltip" title="实时监控"></a></li>
+        <li class="pinterest"><a href="psData.jsp" data-toggle="tooltip" title="历史数据"></a></li>
       </ul>
     </div>
   </div>  

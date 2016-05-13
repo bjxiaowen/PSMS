@@ -35,8 +35,11 @@ public class BiIndexAction {
 			String dateTime=GetTime.getCurrentTime3();
 			String psId = request.getParameter("psId");
 			psId = java.net.URLDecoder.decode(psId, "UTF-8");
-			String psName=request.getParameter("psName");
-			psName = java.net.URLDecoder.decode(psName, "UTF-8");
+			String psName=null;
+			if(session.getAttribute("psName")==null){
+				psName=request.getParameter("psName");
+				psName = java.net.URLDecoder.decode(psName, "UTF-8");
+			}
 			
 			int pId=Integer.parseInt(psId);
 			JSONObject object = JSONObject.fromObject("{}");
@@ -83,7 +86,9 @@ public class BiIndexAction {
 			request.setAttribute("currDayCountQ", currDayCountQ);
 			request.setAttribute("currYearCountQ", currYearCountQ);
 			request.setAttribute("currMonthCountQ",currMonthCountQ);
-			session.setAttribute("psName", psName);
+			if(session.getAttribute("psName")==null){
+				session.setAttribute("psName", psName);
+			}
 			session.setAttribute("equipments", equipments);
 			System.out.println(object.toString());
 		}catch(IOException e){

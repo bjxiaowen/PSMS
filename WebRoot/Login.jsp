@@ -62,9 +62,9 @@
 					} else if (result == "Role2") {
 						location.href = 'superResearchDesk.jsp';
 					} else if (result == "Role3") {
-						location.href = 'psResearchDesk.jsp';
+						location.href = 'superResearchDesk.jsp';
 					} else if (result == "Role4") {
-						location.href = 'engineer.jsp';
+						location.href = 'superResearchDesk.jsp';
 					} else if (result == "Role5") {
 						location.href = 'engineer.jsp';
 					}else {

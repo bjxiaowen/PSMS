@@ -136,11 +136,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                   	<div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px; ">
 	                   		<a href="javascript:void(0)"  onclick="opeanHtml(this)" name="toPsHistoryData" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">电站数据</a>
 	                   	</div>
-	                   	<!-- <div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
-	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toFailureHistoryPage" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">设备故障数据</a>
-	                   	</div>	 -->                   	
 	                </div>
-	                <div title="发电量数据" data-options="selected:true" >
+	              <!--   <div title="发电量数据" data-options="selected:true" >
 	                   	<div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px; ">
 	                   		<a href="javascript:void(0)"  onclick="opeanHtml(this)" name="toYearPowerHistory" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">年发电量数据</a>
 	                   	</div>
@@ -150,57 +147,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                   	<div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px;">
 	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toDayPowerHistory" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">日发电量数据</a>
 	                   	</div>	                   	
-	                </div>
-	                <!-- <div title="数据对比"  >
-	                    <div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px;">
-	                   		<a href="javascript:void(0)" onclick="opeanHtml(this)" name="toCompPowerAndIrradPage" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:  '宋体','微软雅黑';">发电量-辐射量对比</a>
-	                   	</div>
-	                   		<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
-	                   		<a href="javascript:void(0)" onclick="opeanHtml(this)" name="toCompHistoryDayPage" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;">辐射量发电量天数对比</a>
-	                   	</div>
-	                    <div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px;">
-	                   		<a href="javascript:void(0)" onclick="opeanHtml(this)" name="toCompTheoreticalAndActualPage" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:  '宋体','微软雅黑';">理论电量-实际发电量对比</a>
-	                   	</div>	                   	
-	                </div>	
-	                <div title="站内对比"  >
-	                    <div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px;">
-	                   		<a href="javascript:void(0)" onclick="opeanHtml(this)" name="toComOfInverter" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:  '宋体','微软雅黑';">站内逆变器对比</a>
-	                   	</div>
-	                   		<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
-	                   		<a href="javascript:void(0)" onclick="opeanHtml(this)" name="toCompOfWeatherStaion" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;">站内气象站对比</a>
-	                   	</div>
-	                                       	
-	                </div>	 -->
-	                <div title="人员管控">
-	                   	<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
-	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toRegionList" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">区域列表</a>
-	                   	</div>
-	                   	<!--  
-	                   	<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
-	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toEngineerArea" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">区域人员关联表</a>
-	                   	</div>
-	                   	-->
-	                   	<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
-	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toReEngAreaPS" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">工程师区域电站关联表</a>
-	                   	</div>	                   		                   	
-	                </div>  
-	                <div title="故障管理">
-	                	<div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px; ">
-	                   		<a href="javascript:void(0)"  onclick="opeanHtml(this)" name="toInspectionManager" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">巡检管理</a>
-	                   	</div>
-	                   	<div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px; ">
-	                   		<a href="javascript:void(0)"  onclick="opeanHtml(this)" name="toInspection" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">巡检记录</a>
-	                   	</div>
-	                   	<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
-	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toInspectionOverdue" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">逾期运维</a>
-	                   	</div>	
-	                   	<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
-	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toFaultMessage" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">故障列表</a>
-	                   	</div>	 
-	                   	<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
-	                   		<a href="toModule.action" name="toModule" psId="92" target="_blank" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">组件图表</a>
-	                   	</div>                  	
-	                </div>                
+	                </div>  -->
             </div>
         </div>
         <div id="content" data-options="region:'center'">
