@@ -7,6 +7,7 @@ import com.PSMS.Hibernate.Inverter_parameter;
 import com.PSMS.Service.IBiPowerStationService;
 import com.PSMS.pojo.BIPSBaseData;
 import com.PSMS.pojo.InParameter;
+import com.PSMS.pojo.PSEquipment;
 import com.PSMS.pojo.PSTotal;
 import com.PSMS.pojo.PowerStationBase;
 import com.PSMS.util.BiPowerStationTools;
@@ -128,6 +129,11 @@ public class BiPowerStationServiceImpl implements IBiPowerStationService {
 	public List<PowerStationBase> getPSHourlyData(String dateTime, int psId, String type) throws Exception {
 		List<PowerStationBase> list=biDao.getPSHourlyData(dateTime, psId,type);
 		return BiPowerStationTools.getListSize24(list);
+	}
+
+	@Override
+	public List<PSEquipment> getPSEquipment(int psId) throws Exception {
+		return biDao.getPSEquipment(psId);
 	}
 
 	

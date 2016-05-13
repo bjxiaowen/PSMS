@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ page import="com.PSMS.pojo.PowerStationBase" %>
 <%@ page import="java.math.BigDecimal" %>
-<%@ page import="com.PSMS.pojo.JointInspection" %>
+<%@ page import="com.PSMS.pojo.PSEquipment" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -10,7 +10,7 @@
 	PowerStationBase currMonthCountQ=(PowerStationBase)request.getAttribute("currMonthCountQ");
 	PowerStationBase history=(PowerStationBase)request.getAttribute("history");
 	String psName=(String)session.getAttribute("psName");
-	ArrayList<JointInspection> pslist=(ArrayList<JointInspection>)session.getAttribute("psList");
+	ArrayList<PSEquipment> pslist=(ArrayList<PSEquipment>)session.getAttribute("equipments");
 %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -76,7 +76,7 @@
         <div class="container">
           <div class="crumbs">
             <div class="current-time" style="    padding: 10px 15px;font-size: 14px;font-weight: bold;
-    float: left;">系统时间：
+    float: left;">采集时刻：
             </div>
             <!-- <ul id="breadcrumbs" class="breadcrumb">
               <li>
@@ -99,9 +99,10 @@
               </h3>
               <table>
 				<%
-					for(JointInspection join:pslist){%>
+					for(PSEquipment join:pslist){%>
 						 <tr> 
 				          <td id="title" colspan="2">标题：<%=join.getPsName() %></td> 
+				          <td>设备：<%=join.getType() %></td>
 				        </tr> 
 					<% }
 				%>

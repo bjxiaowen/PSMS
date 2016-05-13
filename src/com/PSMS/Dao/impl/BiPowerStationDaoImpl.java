@@ -13,6 +13,7 @@ import com.PSMS.Hibernate.HibernateSessionFactory;
 import com.PSMS.Hibernate.Inverter_parameter;
 import com.PSMS.pojo.BIPSBaseData;
 import com.PSMS.pojo.InParameter;
+import com.PSMS.pojo.PSEquipment;
 import com.PSMS.pojo.PSTotal;
 import com.PSMS.pojo.PowerStationBase;
 import com.PSMS.util.DataUtils;
@@ -607,7 +608,8 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		buffer.append(" tod.X_Coutpout_Current,  ");
 		buffer.append(" tod.X_Coutpout_Power, ");
 		buffer.append(" tod.X_Inerin_tem, ");
-		buffer.append(" tod.MachineState ");
+		buffer.append(" tod.MachineState, ");
+		buffer.append(" tod.OperateDate ");
 		buffer.append(" from  Inverter_parameter inp   inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
 		buffer.append(" where CONVERT(varchar(100),OperateDate, 23)=? and inp.PS_id=? ");
@@ -645,6 +647,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 			power.setX_Coutpout_Power(DataUtils.getDecimal(obj[18]));
 			power.setX_Inerin_tem(DataUtils.getDecimal(obj[19]));
 			power.setMachineState(DataUtils.getDecimal(obj[20]));
+			power.setOperateDate(DataUtils.getString(obj[21]));
 		}
 		return power;
 	}
@@ -753,6 +756,38 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		}
 		return reList;
 	
+	}
+
+	@Override
+	public List<PSEquipment> getPSEquipment(int psId) throws Exception {
+		Session session = HibernateSessionFactory.getHibernateSession();
+		StringBuffer buffer=new StringBuffer();
+		buffer.append("  select ");
+		buffer.append("  psi.id,psi.name,inp.type  ");
+		buffer.append("  from  Inverter_parameter inp    ");
+		buffer.append("  inner join bd_to_data tod on inp.name=tod.InverterID  ");
+		buffer.append("  inner join PS_information psi on inp.PS_id=psi.id ");
+		buffer.append("  where  inp.PS_id=?   ");
+		buffer.append("  group by inp.type,psi.id,psi.name ");
+		Query query = session.createSQLQuery(buffer.toString());
+		query.setInteger(0, psId);
+		@SuppressWarnings("rawtypes")
+		List list = query.list();
+		HibernateSessionFactory.closeHibernateSession();
+		List<PSEquipment> reList = new ArrayList<PSEquipment>();
+		if (list == null || list.size() == 0) {
+			return reList;
+		}
+	
+		for (int i = 0; i < list.size(); i++) {
+			Object[] obj = (Object[]) list.get(i);
+			PSEquipment power = new PSEquipment();
+			power.setPsId(DataUtils.getInteger(obj[0]));
+			power.setPsName(DataUtils.getString(obj[1]));
+			power.setType(DataUtils.getString(obj[2]));
+			reList.add(power);
+		}
+		return reList;
 	}
 
 }

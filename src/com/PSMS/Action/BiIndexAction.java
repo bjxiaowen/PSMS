@@ -7,10 +7,13 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 import com.PSMS.Service.IBiIndexService;
+import com.PSMS.Service.IBiPowerStationService;
 import com.PSMS.Service.IInspectionManagerService;
 import com.PSMS.Service.impl.BiIndexServiceImpl;
+import com.PSMS.Service.impl.BiPowerStationServiceImpl;
 import com.PSMS.Service.impl.InspectionManagerServiceImpl;
 import com.PSMS.pojo.JointInspection;
+import com.PSMS.pojo.PSEquipment;
 import com.PSMS.pojo.PowerStationBase;
 import com.PSMS.util.GetTime;
 
@@ -20,8 +23,7 @@ public class BiIndexAction {
 	
 	private IBiIndexService biIndeService;
 	
-	private IInspectionManagerService inspectionManagerService;
-	
+	private IBiPowerStationService biPSService;
 	
 	public String toBiIndex(){
 		try {
@@ -29,34 +31,46 @@ public class BiIndexAction {
 			HttpSession session = request.getSession();
 			request.setCharacterEncoding("utf-8");
 			biIndeService = new BiIndexServiceImpl();
+			
 			String dateTime=GetTime.getCurrentTime3();
 			String psId = request.getParameter("psId");
 			psId = java.net.URLDecoder.decode(psId, "UTF-8");
 			String psName=request.getParameter("psName");
 			psName = java.net.URLDecoder.decode(psName, "UTF-8");
+			
 			int pId=Integer.parseInt(psId);
 			JSONObject object = JSONObject.fromObject("{}");
 			List<PowerStationBase> currDayQ=biIndeService.getCurrDayQ(dateTime, pId);//当天日发电量
 			object.put("currDayQ", currDayQ);
+			
 			PowerStationBase currDayCountQ=biIndeService.getCurrDayCountQ(dateTime, pId);//当天累计发电量
 			object.put("currDayCountQ", currDayCountQ);
 			String currMonth=GetTime.getCurrentMonth();
+			
 			List<PowerStationBase> currMonthQ=biIndeService.getCurrMonthQ(currMonth, pId);//当月发电量
 			object.put("currMonthQ", currMonthQ);
+			
 			PowerStationBase currMonthCountQ=biIndeService.getCurrMonthCountQ(currMonth, pId);//当月累计发电量
 			object.put("currMonthCountQ", currMonthCountQ);
 			String currYear=GetTime.getCurrentYear();
+			
 			List<PowerStationBase> currYearQ=biIndeService.getCurrYearQ(currYear, pId);//当年每月发电量
 			object.put("currYearQ", currYearQ);
+			
 			PowerStationBase currYearCountQ=biIndeService.getCurrYearCountQ(currYear, pId);//当年总发电量
 			object.put("currYearCountQ", currYearCountQ);
+			
 			PowerStationBase dashboard=biIndeService.getCurrDashboard(pId);//查询电站仪表盘实时数据（最新数据）
 			object.put("dashboard", dashboard);
+			
 			PowerStationBase history=biIndeService.getHistoryQAndObligate(pId);//历史发电量  减排二氧化碳
 			object.put("history", history);
 			
-			inspectionManagerService = new InspectionManagerServiceImpl();
-			List<JointInspection> psList = inspectionManagerService.getPsId(pId);
+			biPSService=new BiPowerStationServiceImpl();
+			List<PSEquipment> equipments=biPSService.getPSEquipment(pId);
+			object.put("equipments", equipments);
+			request.setAttribute("equipments", equipments);
+			
 			object.put("psId", pId);
 			object.put("pageName", "total");
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
@@ -69,9 +83,8 @@ public class BiIndexAction {
 			request.setAttribute("currDayCountQ", currDayCountQ);
 			request.setAttribute("currYearCountQ", currYearCountQ);
 			request.setAttribute("currMonthCountQ",currMonthCountQ);
-//			request.setAttribute("psName", psName);
 			session.setAttribute("psName", psName);
-			session.setAttribute("psList", psList);
+			session.setAttribute("equipments", equipments);
 			System.out.println(object.toString());
 		}catch(IOException e){
 			e.printStackTrace();

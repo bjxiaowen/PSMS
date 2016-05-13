@@ -17,9 +17,9 @@ public class BIPSBaseData {
 	private BigDecimal    BatteryPower;       							//蓄电池功率  
 	private BigDecimal    MpptTemp;                                     //mppt温度    
 	private BigDecimal    X_Run_Status ;                                //运行状态    
-	private BigDecimal   ChargeDischarge;                              //充放电      
+	private BigDecimal    ChargeDischarge;                              //充放电      
 	private BigDecimal 	  X_Battery_tem;								//温度
-	private BigDecimal 		  X_Failcode_1;									//故障代码第9位，1则显示蓄电池欠压，0则正常
+	private BigDecimal 	  X_Failcode_1;									//故障代码第9位，1则显示蓄电池欠压，0则正常
 	private BigDecimal    X_Battery_Capacity;							//剩余容量
 	
 	private BigDecimal X_Coutpout_Voltage;//直流电压
@@ -27,6 +27,7 @@ public class BIPSBaseData {
 	private BigDecimal X_Coutpout_Power;//直流功率
 	private BigDecimal X_Inerin_tem;//逆变器内部温度
 	private BigDecimal MachineState;//1：机器失效，0：正常
+	private String 		OperateDate;//最新操作时间
 	
 	
 	
@@ -156,4 +157,11 @@ public class BIPSBaseData {
 	public void setMachineState(BigDecimal machineState) {
 		MachineState = machineState;
 	}
+	public String getOperateDate() {
+		return OperateDate;
+	}
+	public void setOperateDate(String operateDate) {
+		OperateDate = operateDate;
+	}
+	
 }

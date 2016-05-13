@@ -76,7 +76,6 @@ public class toEquipmentManageAction {
 		}
 		equipmentService = new EquipmentServiceImpl();
 		List<Equipment> list_all_equipment = equipmentService.getAllEquipment();// 得到所有设备信息
-		ArrayList list = new ArrayList();
 		JSONObject object = JSONObject.fromObject("{}");
 		object.put("total", list_all_equipment.size());
 		object.put("rows", list_all_equipment);

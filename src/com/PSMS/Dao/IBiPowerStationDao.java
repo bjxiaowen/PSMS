@@ -5,6 +5,7 @@ import java.util.List;
 import com.PSMS.Hibernate.Inverter_parameter;
 import com.PSMS.pojo.BIPSBaseData;
 import com.PSMS.pojo.InParameter;
+import com.PSMS.pojo.PSEquipment;
 import com.PSMS.pojo.PSTotal;
 import com.PSMS.pojo.PowerStationBase;
 
@@ -183,4 +184,11 @@ public interface IBiPowerStationDao {
 	 */
 	public InParameter getInParameter(String dateTime,int psId)throws Exception;
 	
+	/**
+	 * 
+	 * @param psId
+	 * @return
+	 * @throws Exception
+	 */
+	public List<PSEquipment> getPSEquipment(int psId)throws Exception;
 }

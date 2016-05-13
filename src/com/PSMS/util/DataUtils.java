@@ -33,4 +33,8 @@ public class DataUtils {
 		return obj==null?new Date():new Date(obj + "");
 	}
 	
+	public static String getString(Object obj){
+		return obj==null?null:obj.toString();
+	}
+	
 }
