@@ -8,6 +8,7 @@
 	PowerStationBase currYearCountQ=(PowerStationBase)request.getAttribute("currYearCountQ");
 	PowerStationBase currMonthCountQ=(PowerStationBase)request.getAttribute("currMonthCountQ");
 	PowerStationBase history=(PowerStationBase)request.getAttribute("history");
+	String psName=(String)request.getAttribute("psName");
 %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -65,6 +66,7 @@
     <jsp:include page="sysHead.jsp"/>
     </header>
     <div id="container">
+    
     <jsp:include page="sysSidebar.jsp" />
        <div id="content">
         <div class="container">

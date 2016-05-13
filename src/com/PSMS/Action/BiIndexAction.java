@@ -24,6 +24,8 @@ public class BiIndexAction {
 			String dateTime=GetTime.getCurrentTime3();
 			String psId = request.getParameter("psId");
 			psId = java.net.URLDecoder.decode(psId, "UTF-8");
+			String psName=request.getParameter("psName");
+			psName = java.net.URLDecoder.decode(psName, "UTF-8");
 			int pId=Integer.parseInt(psId);
 			JSONObject object = JSONObject.fromObject("{}");
 			List<PowerStationBase> currDayQ=biIndeService.getCurrDayQ(dateTime, pId);//当天日发电量
@@ -49,12 +51,15 @@ public class BiIndexAction {
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 //			ServletActionContext.getResponse().getWriter().write(object.toString());
+			object.put("psName", psName);
 			request.setAttribute("list", object.toString());
 			request.setAttribute("dashboard", dashboard);
 			request.setAttribute("history", history);//currDayCountQ
 			request.setAttribute("currDayCountQ", currDayCountQ);
 			request.setAttribute("currYearCountQ", currYearCountQ);
 			request.setAttribute("currMonthCountQ",currMonthCountQ);
+			request.setAttribute("psName", psName);
+			
 			System.out.println(object.toString());
 		}catch(IOException e){
 			e.printStackTrace();

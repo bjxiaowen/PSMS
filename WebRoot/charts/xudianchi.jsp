@@ -187,7 +187,7 @@
     font-size: 28px;
     position: absolute;
     height: 1em;
-    width: 4em;
+    width: 5em;
     margin: .4em .4em .4em .8em;"><%=newes.getX_Battery_Capacity() %> %</div>
                             </div>
                           </div>

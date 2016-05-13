@@ -8,8 +8,8 @@
 	<a class="navbar-brand" href="index.html"> <img
 		src="charts/assets/img/logo.png" alt="logo" height="30" width="30" /> <strong>
 			中兴能源 PSMS</strong>
-	</a> <a href="#" class="toggle-sidebar bs-tooltip" data-placement="bottom"
+	<!-- </a> <a href="#" class="toggle-sidebar bs-tooltip" data-placement="bottom"
 		data-original-title="Toggle navigation"> <i class="icon-reorder">
-	</i>
+	</i> -->
 	</a>
 </div>

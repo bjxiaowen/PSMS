@@ -19,9 +19,9 @@ option1 = {
             type:'gauge',radius : '100%',
             z: 3,
             min:0,
-            max:100, center : ['50%', '60%'],
-            startAngle:135,
-            endAngle:45,
+            max:500, center : ['50%', '60%'],
+            startAngle:180,
+            endAngle:0,
             splitNumber:4,
             axisLine: {            // 坐标轴线
                 lineStyle: {       // 属性lineStyle控制线条样式
