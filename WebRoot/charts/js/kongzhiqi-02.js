@@ -58,10 +58,11 @@ $(function(){
     
     
     // 连线二
-    if(data_json["newes"]["ChargeDischarge "]){
+    console.log(data_json["newes"]["chargeDischarge"]);
+    if(data_json["newes"]["chargeDischarge"]){
     	var l2 = new JTopo.AnimateNode('./charts/assets/img/demo/gifgif.png', 1, 5, 1000, 0);
     	l2.setSize(120, 12);
-    	l2.setLocation(200, 290);                                
+    	l2.setLocation(180, 290);                                
     	l2.repeatPlay = true;            
     	l2.play();
         scene.add(l2); 
@@ -123,7 +124,7 @@ $(function(){
     
     var nodeB2 = nodeBlock(330,10,3);
     nodeB2.textNode0.text = '内部温度：'+ data_json["newes"]["mpptTemp"]+" °C";
-    nodeB2.textNode1.text = data_json["newes"]["chargeDischarge "]?"放电":"充电";
+    nodeB2.textNode1.text = data_json["newes"]["chargeDischarge"]?"放电":"充电";
     nodeB2.textNode2.text = data_json["newes"]["x_Run_Status"]==1?"开机":"关机";
     
     var nodeB3 = nodeBlock(620,10,3);

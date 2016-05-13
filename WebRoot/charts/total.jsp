@@ -9,7 +9,7 @@
 	PowerStationBase currYearCountQ=(PowerStationBase)request.getAttribute("currYearCountQ");
 	PowerStationBase currMonthCountQ=(PowerStationBase)request.getAttribute("currMonthCountQ");
 	PowerStationBase history=(PowerStationBase)request.getAttribute("history");
-	String psName=(String)session.getAttribute("psName");
+
 	PowerStationBase dashboard=(PowerStationBase)request.getAttribute("dashboard");
 	ArrayList<PSEquipment> pslist=(ArrayList<PSEquipment>)session.getAttribute("equipments");
 %>
@@ -52,9 +52,7 @@
   </head>
   <body>
   	<header class="header navbar navbar-fixed-top" role="banner">
-    <jsp:include page="sysHead.jsp">
-    	<jsp:param value="<%=psName %>" name="psName"/>
-    </jsp:include>
+    	<jsp:include page="sysHead.jsp"/>
     </header>
     <div id="container">
     <jsp:include page="sysSidebar.jsp">

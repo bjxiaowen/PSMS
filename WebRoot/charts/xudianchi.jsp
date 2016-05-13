@@ -8,17 +8,16 @@
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 	Inverter_parameter parameter=(Inverter_parameter)request.getAttribute("parameter");
 	BIPSBaseData newes=(BIPSBaseData)request.getAttribute("newes");
-	String failcode=newes.getX_Failcode_1()+"";
-	String fail="正常";
+	String failcode=newes.getX_Failcode_1()==0?"正常":"欠压";
+	/* String fail="正常";
 	 if(!failcode.equals("0")){
 		 fail="欠压";
-	} 
-	String state=newes.getChargeDischarge()+"";
-	 String mState="充电";//0：电池充电,1：电池放电
+	}  */
+	String state=newes.getChargeDischarge()==0?"充电":"放电";
+/* 	 String mState="充电";//0：电池充电,1：电池放电
 	if(!state.equals("0")){
 		mState="放电";
-	} 
-	String psName=(String)session.getAttribute("psName");
+	}  */
 %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -70,9 +69,7 @@
   
   <body>
     <header class="header navbar navbar-fixed-top" role="banner">
-      <jsp:include page="sysHead.jsp">
-    		<jsp:param value="<%=psName %>" name="psName"/>
-    	</jsp:include>
+      <jsp:include page="sysHead.jsp"/>
     </header>
     <div id="container">
       <jsp:include page="sysSidebar.jsp" />
@@ -120,9 +117,9 @@
                   <h4><strong>状态值</strong></h4>
                   <ul class="list-group ">
                     <li class="list-group-item">蓄电池温度：<%=newes.getX_Battery_tem() %> °C</li>
-                    <li class="list-group-item">蓄电池状态：<span class="label label-info"><%=mState %></span></li>
+                    <li class="list-group-item">蓄电池状态：<span class="label label-info"><%=state %></span></li>
                     <li class="list-group-item">
-                     		<%=fail %>
+                     		<%=failcode %>
                       </li>
                   </ul>
                 </div>
@@ -218,7 +215,7 @@
                       剩余：</strong> <span class="label label-info"><%=newes.getX_Battery_Capacity() %> %</span>
                     </li>
                     <li><strong>
-                      状态：</strong> <span class="label label-info"><%=fail %></span>
+                      状态：</strong> <span class="label label-info"><%=failcode %></span>
                     </li>
                   </ul>
                 </div>

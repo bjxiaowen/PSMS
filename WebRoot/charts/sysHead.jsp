@@ -2,8 +2,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ page import="java.net.*" %>
 <%
-	String psName=request.getParameter("psName");
+	String psName=(String)session.getAttribute("psName");
+	psName =URLDecoder.decode(psName, "UTF-8");
 %>
+<%@ taglib uri="/struts-tags" prefix="s"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <div class="container">
 	<ul class="nav navbar-nav">
 		<li class="nav-toggle"><a href="javascript:void(0);" title="">
@@ -20,5 +25,5 @@
 	<input type="hidden" id="psName" value="<%=psName %>">
 </div>
 <script>
-var psName = $("#psName").val();
+	var psName = $("#psName").val();
 </script>

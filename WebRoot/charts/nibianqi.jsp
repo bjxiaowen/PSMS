@@ -8,7 +8,6 @@
 	Inverter_parameter parameter=(Inverter_parameter)request.getAttribute("parameter");
 	
 	BIPSBaseData newes=(BIPSBaseData)request.getAttribute("newes");
-	String psName=(String)session.getAttribute("psName");
 %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -34,9 +33,7 @@
   
   <body>
     <header class="header navbar navbar-fixed-top" role="banner">
-    <jsp:include page="sysHead.jsp">
-    	<jsp:param value="<%=psName %>" name="psName"/>
-    </jsp:include>
+    	<jsp:include page="sysHead.jsp"/>
     </header>
     <div id="container">
       <div id="sidebar" class="sidebar-fixed">
