@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ page import="com.PSMS.pojo.PowerStationBase" %>
 <%@ page import="java.math.BigDecimal" %>
+<%@ page import="com.PSMS.pojo.JointInspection" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -8,7 +9,8 @@
 	PowerStationBase currYearCountQ=(PowerStationBase)request.getAttribute("currYearCountQ");
 	PowerStationBase currMonthCountQ=(PowerStationBase)request.getAttribute("currMonthCountQ");
 	PowerStationBase history=(PowerStationBase)request.getAttribute("history");
-	String psName=(String)request.getAttribute("psName");
+	String psName=(String)session.getAttribute("psName");
+	ArrayList<JointInspection> pslist=(ArrayList<JointInspection>)session.getAttribute("psList");
 %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -62,12 +64,14 @@
   </head>
   <body>
   	<header class="header navbar navbar-fixed-top" role="banner">
-    
-    <jsp:include page="sysHead.jsp"/>
+    <jsp:include page="sysHead.jsp">
+    	<jsp:param value="<%=psName %>" name="psName"/>
+    </jsp:include>
     </header>
     <div id="container">
-    
-    <jsp:include page="sysSidebar.jsp" />
+    <jsp:include page="sysSidebar.jsp">
+    	<jsp:param value="<%=pslist %>" name="pslist"/>
+    </jsp:include>
        <div id="content">
         <div class="container">
           <div class="crumbs">
@@ -93,6 +97,15 @@
             <div class="page-title" style="padding: 8px 0 0px 0px;">
               <h3 style="margin-bottom: 0px;">
               </h3>
+              <table>
+				<%
+					for(JointInspection join:pslist){%>
+						 <tr> 
+				          <td id="title" colspan="2">标题：<%=join.getPsName() %></td> 
+				        </tr> 
+					<% }
+				%>
+			</table>
             </div>
           </div>
           <div class="row">

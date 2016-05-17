@@ -72,7 +72,6 @@ public class toEquipmentManageAction {
 		try {
 			request.setCharacterEncoding("utf-8");
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		equipmentService = new EquipmentServiceImpl();

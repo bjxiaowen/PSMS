@@ -3,9 +3,14 @@ package com.PSMS.Action;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.struts2.ServletActionContext;
 import com.PSMS.Service.IBiIndexService;
+import com.PSMS.Service.IInspectionManagerService;
 import com.PSMS.Service.impl.BiIndexServiceImpl;
+import com.PSMS.Service.impl.InspectionManagerServiceImpl;
+import com.PSMS.pojo.JointInspection;
 import com.PSMS.pojo.PowerStationBase;
 import com.PSMS.util.GetTime;
 
@@ -15,10 +20,13 @@ public class BiIndexAction {
 	
 	private IBiIndexService biIndeService;
 	
+	private IInspectionManagerService inspectionManagerService;
+	
 	
 	public String toBiIndex(){
 		try {
 			HttpServletRequest request =ServletActionContext.getRequest();
+			HttpSession session = request.getSession();
 			request.setCharacterEncoding("utf-8");
 			biIndeService = new BiIndexServiceImpl();
 			String dateTime=GetTime.getCurrentTime3();
@@ -46,6 +54,9 @@ public class BiIndexAction {
 			object.put("dashboard", dashboard);
 			PowerStationBase history=biIndeService.getHistoryQAndObligate(pId);//历史发电量  减排二氧化碳
 			object.put("history", history);
+			
+			inspectionManagerService = new InspectionManagerServiceImpl();
+			List<JointInspection> psList = inspectionManagerService.getPsId(pId);
 			object.put("psId", pId);
 			object.put("pageName", "total");
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
@@ -58,10 +69,13 @@ public class BiIndexAction {
 			request.setAttribute("currDayCountQ", currDayCountQ);
 			request.setAttribute("currYearCountQ", currYearCountQ);
 			request.setAttribute("currMonthCountQ",currMonthCountQ);
-			request.setAttribute("psName", psName);
-			
+//			request.setAttribute("psName", psName);
+			session.setAttribute("psName", psName);
+			session.setAttribute("psList", psList);
 			System.out.println(object.toString());
 		}catch(IOException e){
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "success";

@@ -10,6 +10,7 @@
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 	Inverter_parameter parameter=(Inverter_parameter)request.getAttribute("parameter");
 	BIPSBaseData newes=(BIPSBaseData)request.getAttribute("newes");
+	String psName=(String)session.getAttribute("psName");
 %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -21,7 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
     <title>控制器</title>
-  <%@ include file="sysJs.jsp"%>
+  	<%@ include file="sysJs.jsp"%>
   <!-- 公共文件引入 -->
     <script type="text/javascript">
     	//后台取出数据
@@ -48,7 +49,9 @@
   
   <body>
     <header class="header navbar navbar-fixed-top" role="banner">
-      <jsp:include page="sysHead.jsp"/>
+    <jsp:include page="sysHead.jsp">
+    	<jsp:param value="<%=psName %>" name="psName"/>
+    </jsp:include>
     </header>
     <div id="container">
       <jsp:include page="sysSidebar.jsp" />

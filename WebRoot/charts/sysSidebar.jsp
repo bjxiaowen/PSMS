@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <script>
      /*  var pageName = data_json["pageName"]; */
+     
     </script>
 <div id="sidebar" class="sidebar-fixed">
         <div id="sidebar-content">
