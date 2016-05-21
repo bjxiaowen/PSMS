@@ -9,6 +9,7 @@ var v,data_json,psId;
 data_json = $.parseJSON(v);
 psId = data_json["psId"];
 var pageName = data_json["pageName"];
+//
 //var sideBarUrlArr = ['toBiIndex','toBiModule','toBattery','toBiControl','toBiInverter','toControlAndInverter'];
 var sideBarUrlArr = [{
 	name:"控逆一体机",
@@ -41,7 +42,7 @@ function sideBarUrl(){
 		{
 			if($(this).data("cur") == sideBarUrlArr[ii].name){
 				console.log(sideBarUrlArr[ii].name);
-				$(this).find("a").attr('href',sideBarUrlArr[ii].url+'.action?psId='+psId); 
+				$(this).find("a").attr('href',sideBarUrlArr[ii].url+'.action?psId='+psId+"&psName="+psName); 
 				$(this).find("i").addClass(sideBarUrlArr[ii].icon);
 			}
 		}

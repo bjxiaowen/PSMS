@@ -26,21 +26,7 @@
     	//后台取出数据
     	v = '${list}';
     </script>
-    <script type="text/javascript" src="charts/js/chart-pub.js"></script>
-    <!-- ECharts单文件引入 -->
-    <script type="text/javascript" src="charts/plugins/echart/echarts2.js"></script>
-    <script type="text/javascript" src="charts/js/jtopo-0.4.8-min.js"></script>
-    <script type="text/javascript" src="charts/js/nibianqi-01.js"></script>
-    <script type="text/javascript" src="charts/js/nibianqi-02.js"></script>
-    <script>
-      $(document).ready(function() {
-        App.init();
-        // Plugins.init();
-        // FormComponents.init()
-      });
-      var hourlyData = data_json["hourlyData"];
-      var kw = _.map(hourlyData,"power");
-    </script>
+    
     <style>
 
     </style>
@@ -130,5 +116,19 @@
     </div>
 
   </body>
-
+<script type="text/javascript" src="charts/js/chart-pub.js"></script>
+    <!-- ECharts单文件引入 -->
+    <script type="text/javascript" src="charts/plugins/echart/echarts2.js"></script>
+    <script type="text/javascript" src="charts/js/jtopo-0.4.8-min.js"></script>
+    <script type="text/javascript" src="charts/js/nibianqi-01.js"></script>
+    <script type="text/javascript" src="charts/js/nibianqi-02.js"></script>
+    <script>
+      $(document).ready(function() {
+        App.init();
+        // Plugins.init();
+        // FormComponents.init()
+      });
+      var hourlyData = data_json["hourlyData"];
+      var kw = _.map(hourlyData,"power");
+    </script>
 </html>

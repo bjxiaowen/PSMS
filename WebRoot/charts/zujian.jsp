@@ -25,18 +25,7 @@
     	//后台取出数据
     	v = '${list}';
     </script>
-    <script type="text/javascript" src="charts/js/chart-pub.js"></script>
-    <!-- ECharts单文件引入 -->
-    <script type="text/javascript" src="charts/plugins/echart/echarts2.js"></script>
-    <script type="text/javascript" src="charts/js/zujian-01.js"></script>
-    <script type="text/javascript" src="charts/js/zujian-02.js"></script>
-    <script type="text/javascript" src="charts/js/zujian-03.js"></script>
-    <script>
-    	var current = _.map(data_json["hourlyData"],"current");
-    	console.log(current);
-    	var vv = _.map(data_json["hourlyData"],"voltage");
-    	var power = _.map(data_json["hourlyData"],"power");
-    </script>
+    
   </head>
   
   <body>
@@ -156,5 +145,16 @@
     </div>
 
   </body>
-
+<script type="text/javascript" src="charts/js/chart-pub.js"></script>
+    <!-- ECharts单文件引入 -->
+    <script type="text/javascript" src="charts/plugins/echart/echarts2.js"></script>
+    <script type="text/javascript" src="charts/js/zujian-01.js"></script>
+    <script type="text/javascript" src="charts/js/zujian-02.js"></script>
+    <script type="text/javascript" src="charts/js/zujian-03.js"></script>
+    <script>
+    	var current = _.map(data_json["hourlyData"],"current");
+    	console.log(current);
+    	var vv = _.map(data_json["hourlyData"],"voltage");
+    	var power = _.map(data_json["hourlyData"],"power");
+    </script>
 </html>

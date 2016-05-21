@@ -221,6 +221,22 @@ $(function(){
             myChart.on(ecConfig.EVENT.CLICK,linkToUrl);
             
 	    	myChart.setOption(option);
+	    	
+	    	var au = $(".au"); 
+	        au.each(function(){
+	            var audio_btn = $(this).find(".audio_btn");
+	            var m = $(this).find(".music");
+	            audio_btn.on("click",function(){
+	                 if(m[0].paused){
+	                    m[0].play();
+	                    $(this).find(".music_btn").attr("src","charts/assets/img/icons/play.gif");
+	                 }else{
+	                    m[0].pause();
+	                    $(this).find(".music_btn").attr("src","charts/assets/img/icons/pause.png");
+	                 }
+	            })
+	        })
+
 	    }		 
     )
 })

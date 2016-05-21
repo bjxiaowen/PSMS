@@ -29,20 +29,7 @@
 		  //后台取出数据
 		  v = '${list}';
   	</script>
-    <script type="text/javascript" src="charts/js/chart-pub.js"></script>
-    <script type="text/javascript" src="charts/plugins/echart/echarts2.js"></script>
-    <script type="text/javascript" src="charts/js/total-01.js"></script>
-    <script type="text/javascript" src="charts/js/total-02.js"></script>
-    <script type="text/javascript" src="charts/js/total-03.js"></script>
-    <script type="text/javascript" src="charts/js/total-04.js"></script>
-    <script type="text/javascript">
-    	var currDayQ = data_json["currDayQ"];
-    	var currMonthQ = data_json["currMonthQ"];
-    	var currYearQ = data_json["currYearQ"];
-    	var currV = data_json["dashboard"]["voltage"];
-    	var currC = data_json["dashboard"]["current"];
-    	var currKw = data_json["dashboard"]["power"];
-    </script>
+   
     <style>
       .navbar{
         background: #2677af;
@@ -205,5 +192,18 @@
     </div>
 
   </body>
-
+ <script type="text/javascript" src="charts/js/chart-pub.js"></script>
+    <script type="text/javascript" src="charts/plugins/echart/echarts2.js"></script>
+    <script type="text/javascript" src="charts/js/total-01.js"></script>
+    <script type="text/javascript" src="charts/js/total-02.js"></script>
+    <script type="text/javascript" src="charts/js/total-03.js"></script>
+    <script type="text/javascript" src="charts/js/total-04.js"></script>
+    <script type="text/javascript">
+    	var currDayQ = data_json["currDayQ"];
+    	var currMonthQ = data_json["currMonthQ"];
+    	var currYearQ = data_json["currYearQ"];
+    	var currV = data_json["dashboard"]["voltage"];
+    	var currC = data_json["dashboard"]["current"];
+    	var currKw = data_json["dashboard"]["power"];
+    </script>
 </html>

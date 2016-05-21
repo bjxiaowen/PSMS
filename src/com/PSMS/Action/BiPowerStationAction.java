@@ -53,7 +53,7 @@ public class BiPowerStationAction {
 			String dateTime=GetTime.getCurrentTime3();
 			for(PS_information psInfo:ps_list){//通过电站查询电站状态
 				int pId=psInfo.getId();
-				PowerStationBase power=biPowerStationService.getPowerStationStatus(dateTime, pId);
+				PowerStationBase power=biPowerStationService.getPowerStationStatus(null, pId);
 				psInfo.setMachineState(power.getMachineState());
 			}
 			PSTotal psTotal=biPowerStationService.getPSTotalData();

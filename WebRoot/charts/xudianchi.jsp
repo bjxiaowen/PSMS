@@ -36,20 +36,7 @@
     	//后台取出数据
     	v = '${list}';
     </script>
-    <script type="text/javascript" src="charts/js/chart-pub.js"></script>
-    <!-- ECharts单文件引入 -->
-    <script type="text/javascript" src="charts/plugins/echart/echarts2.js"></script>
-     <script type="text/javascript" src="charts/js/xudianchi-01.js"></script>
-     <script type="text/javascript" src="charts/js/xudianchi-02.js"></script>
-    <script>
-      $(document).ready(function() {
-        App.init();
-      });
-      var vv = data_json["newes"]["batteryVoltage"];
-      var c = data_json["newes"]["x_Battery_Current"]; 
-      console.log(vv);
-      console.log(c);
-    </script>
+    
     
     <!--电池电量,温度计必要样式-->
     <link rel="stylesheet" type="text/css" href="charts/assets/css/component.css" />
@@ -291,5 +278,16 @@
     </div>
 
   </body>
-
+<script type="text/javascript" src="charts/js/chart-pub.js"></script>
+    <!-- ECharts单文件引入 -->
+    <script type="text/javascript" src="charts/plugins/echart/echarts2.js"></script>
+     <script type="text/javascript" src="charts/js/xudianchi-01.js"></script>
+     <script type="text/javascript" src="charts/js/xudianchi-02.js"></script>
+    <script>
+      $(document).ready(function() {
+        App.init();
+      });
+      var vv = data_json["newes"]["batteryVoltage"];
+      var c = data_json["newes"]["x_Battery_Current"]; 
+    </script>
 </html>

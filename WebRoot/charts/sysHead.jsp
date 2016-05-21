@@ -13,7 +13,11 @@
 		src="charts/assets/img/logo.png" alt="logo" height="30" width="30" /> <strong>
 			中兴能源 PSMS</strong>
 	</a> 
-	<div class="navbar navbar-brand" style="border:0;">
+	<div class="navbar navbar-brand asdf" style="border:0;">
 		 <%=psName %>
 	</div>
+	<input type="hidden" id="psName" value="<%=psName %>">
 </div>
+<script>
+var psName = $("#psName").val();
+</script>

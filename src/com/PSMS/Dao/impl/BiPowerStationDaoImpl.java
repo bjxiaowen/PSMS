@@ -32,12 +32,13 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		buffer.append(" from bd_to_data tod   ");
 		buffer.append(" left join Inverter_parameter inp  on inp.name=tod.InverterID ");
 		buffer.append(" left join PS_information psi on inp.PS_id=psi.id ");
-		buffer.append("  where CONVERT(varchar(100),tod.OperateDate, 23)=? ");
-		buffer.append(" and inp.PS_id=? ");
+//		buffer.append("  where CONVERT(varchar(100),tod.OperateDate, 23)=? ");
+		buffer.append("  where  ");
+		buffer.append("  inp.PS_id=? ");
 		buffer.append(" order by tod.OperateDate desc ");
 		Query query = session.createSQLQuery(buffer.toString());
-		query.setString(0, dateTime);
-		query.setInteger(1, psId);
+//		query.setString(0, dateTime);
+		query.setInteger(0, psId);
 		@SuppressWarnings("rawtypes")
 		List list = query.list();
 		HibernateSessionFactory.closeHibernateSession();
