@@ -41,7 +41,6 @@ function sideBarUrl(){
 		for (var ii=0;ii<6;ii++)
 		{
 			if($(this).data("cur") == sideBarUrlArr[ii].name){
-				console.log(sideBarUrlArr[ii].name);
 				$(this).find("a").attr('href',sideBarUrlArr[ii].url+'.action?psId='+psId+"&psName="+psName); 
 				$(this).find("i").addClass(sideBarUrlArr[ii].icon);
 			}

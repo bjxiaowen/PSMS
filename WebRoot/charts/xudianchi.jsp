@@ -165,7 +165,23 @@
                 <div class="widget-content" style="text-align: center;">
 
 
-                  <article class="flexy-grid" style="height:200px;">
+
+				<div class="progress-dianchi" style="height: 200px; position: relative;   width: 80%;padding-top: 50px;
+				    margin: 0 auto;">
+	                <div style="position: relative;z-index: 99;margin:0 auto;">
+	                	<div class="progress" style="margin-bottom: 0px; height: 130px;background: none;width:90%;">
+						   <div class="progress-bar" role="progressbar" aria-valuenow="60" 
+						      aria-valuemin="0" aria-valuemax="100" style="width: <%=newes.getX_Battery_Capacity() %>%;background: #61cc74;">
+						      <i style="font-size:22px;"><%=newes.getX_Battery_Capacity() %>%</i>
+						   </div>
+						</div>
+					</div>
+                	 <img src="charts/assets/img/demo/dianchi.png" alt="" style="position: absolute;z-index: 90;top: 0;left: 0; padding-top: 50px;" id="progress-bg-img">
+                </div>
+
+
+
+                 <%--  <article class="flexy-grid" style="height:200px;">
                     <h3>电池状态</h3>
                     <div class="flexy-column">
                       <div class="progress-factor flexy-item">
@@ -190,7 +206,7 @@
                         </div>
                       </div>
                     </div>
-                  </article>
+                  </article> --%>
 
 
                 </div>
@@ -286,8 +302,16 @@
     <script>
       $(document).ready(function() {
         App.init();
+        $(window).resize();
+      });
+
+      $(window).resize(function(){
+    	  $(".progress-dianchi .progress").css("height",$("#progress-bg-img").height()-1);
+    	  $(".progress-dianchi .progress i").css("line-height",($("#progress-bg-img").height()-1)+"px");
       });
       var vv = data_json["newes"]["batteryVoltage"];
       var c = data_json["newes"]["x_Battery_Current"]; 
+      /* $(".progress").height = $("#progress-bg-img").height(); */
+     
     </script>
 </html>
