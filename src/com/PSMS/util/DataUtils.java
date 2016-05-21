@@ -22,15 +22,15 @@ public class DataUtils {
 	}
 	
 	public static BigDecimal getDecimal(Object obj ){
-		return obj==null?new BigDecimal(0):new BigDecimal(obj + "").setScale(2, BigDecimal.ROUND_HALF_UP);
+		return obj==null?new BigDecimal(0):new BigDecimal(obj + "").setScale(2, BigDecimal.ROUND_HALF_UP);//.intValue()
 	}
 	
-	public static Integer getInteger(Object obj){
-		return obj==null?Integer.parseInt("0"):Integer.parseInt(obj+"");
+	public static int getInteger(Object obj){
+		return obj==null?Integer.parseInt("0"):new BigDecimal(obj.toString()).intValue();
 	}
 	
 	public static Date getDate(Object obj){
-		return obj==null?new Date():new Date(obj + "");
+		return obj==null?new Date():new Date(obj.toString());
 	}
 	
 	public static String getString(Object obj){

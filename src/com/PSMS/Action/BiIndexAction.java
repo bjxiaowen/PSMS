@@ -75,7 +75,7 @@ public class BiIndexAction {
 			request.setAttribute("equipments", equipments);
 			
 			object.put("psId", pId);
-			object.put("pageName", "total");
+			object.put("pageName", "首页");
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
 			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
 //			ServletActionContext.getResponse().getWriter().write(object.toString());
@@ -91,6 +91,7 @@ public class BiIndexAction {
 			}
 			session.setAttribute("equipments", equipments);
 			System.out.println(object.toString());
+			System.out.println(dashboard.toString());
 		}catch(IOException e){
 			e.printStackTrace();
 		} catch (Exception e) {

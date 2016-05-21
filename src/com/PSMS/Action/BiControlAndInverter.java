@@ -45,7 +45,7 @@ public class BiControlAndInverter {
 			object.put("parameters", parameters);//设备基本参数
 			
 			object.put("psId", pId);
-			object.put("pageName", "yitiji");
+			object.put("pageName", "控逆一体机");
 			
 			BIPSBaseData newes=biPSService.getNewesData(dateTime, pId);
 			object.put("newes", newes);

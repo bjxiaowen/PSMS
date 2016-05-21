@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <tr> 
                 <th field="id"             align="center"width="20" hidden="true">电站id</th>        
                 <th field="name"           align="left"  width="25" sortable="true">电站名称</th>
-                <th field="capacity"       align="center"width="20" sortable="true">电站容量(MW)</th>
+                <th field="capacity"       align="center"width="20" sortable="true">电站容量(KW)</th>
                 <th field="area"           align="center"width="20" sortable="true">占地面积(公顷)</th>
                 <th field="part_num"       align="center"width="15" sortable="true">光伏板组件数量</th>
                 <th field="owner"          align="left"  width="20" sortable="true">业主</th>
@@ -112,13 +112,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <input id="ps_ex_name" name="ex_name" type="hidden" ></input>  
             </div>
             <div class="fitem">
-                <label style="width:30%">电站容量(MW)</label>
+                <label style="width:30%">电站容量(KW)</label>
 				<input id="ps_capacity" name="capacity"   class="easyui-textbox">(必填)</input>
                 <input id="ex_ps_capacity" name="ex_ps_capacity" type="hidden" ></input>    
             </div>
             
            <div class="fitem" id="first_capacity_fitem">
-                <label style="width:30%">首期容量(MW)</label>
+                <label style="width:30%">首期容量(KW)</label>
 				<input id="ps_first_capacity" name="first_capacity"   class="easyui-textbox">(必填)</input>   
             </div>
             

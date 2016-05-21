@@ -16,11 +16,11 @@ public class BIPSBaseData {
 	private BigDecimal    X_TPV_Power;                                  //光伏阵列功率
 	private BigDecimal    BatteryPower;       							//蓄电池功率  
 	private BigDecimal    MpptTemp;                                     //mppt温度    
-	private BigDecimal    X_Run_Status ;                                //运行状态    
-	private BigDecimal    ChargeDischarge;                              //充放电      
+	private int    X_Run_Status ;                                //运行状态    
+	private int    ChargeDischarge;                              //充放电      
 	private BigDecimal 	  X_Battery_tem;								//温度
-	private BigDecimal 	  X_Failcode_1;									//故障代码第9位，1则显示蓄电池欠压，0则正常
-	private BigDecimal    X_Battery_Capacity;							//剩余容量
+	private int 	  X_Failcode_1;									//故障代码第9位，1则显示蓄电池欠压，0则正常
+	private int    X_Battery_Capacity;							//剩余容量
 	
 	private BigDecimal X_Coutpout_Voltage;//直流电压
 	private BigDecimal X_Coutpout_Current;//直流电流
@@ -97,22 +97,22 @@ public class BIPSBaseData {
 	public void setMpptTemp(BigDecimal mpptTemp) {
 		MpptTemp = mpptTemp;
 	}
-	public BigDecimal getX_Run_Status() {
+	public int getX_Run_Status() {
 		return X_Run_Status;
 	}
-	public void setX_Run_Status(BigDecimal x_Run_Status) {
+	public void setX_Run_Status(int x_Run_Status) {
 		X_Run_Status = x_Run_Status;
 	}
-	public BigDecimal getX_Battery_Capacity() {
+	public int getX_Battery_Capacity() {
 		return X_Battery_Capacity;
 	}
-	public void setX_Battery_Capacity(BigDecimal x_Battery_Capacity) {
+	public void setX_Battery_Capacity(int x_Battery_Capacity) {
 		X_Battery_Capacity = x_Battery_Capacity;
 	}
-	public BigDecimal getChargeDischarge() {
+	public int getChargeDischarge() {
 		return ChargeDischarge;
 	}
-	public void setChargeDischarge(BigDecimal chargeDischarge) {
+	public void setChargeDischarge(int chargeDischarge) {
 		ChargeDischarge = chargeDischarge;
 	}
 	public BigDecimal getX_Battery_tem() {
@@ -121,10 +121,10 @@ public class BIPSBaseData {
 	public void setX_Battery_tem(BigDecimal x_Battery_tem) {
 		X_Battery_tem = x_Battery_tem;
 	}
-	public BigDecimal getX_Failcode_1() {
+	public int getX_Failcode_1() {
 		return X_Failcode_1;
 	}
-	public void setX_Failcode_1(BigDecimal x_Failcode_1) {
+	public void setX_Failcode_1(int x_Failcode_1) {
 		X_Failcode_1 = x_Failcode_1;
 	}
 	public BigDecimal getX_Coutpout_Voltage() {

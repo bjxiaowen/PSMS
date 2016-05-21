@@ -87,7 +87,7 @@ $(function(){
          return obj;
          
     }   
-   
+    
     var nodeB1 = nodeBlock(40,10,3);
     nodeB1.textNode0.text = '电流：'+ data_json["newes"]["x_Coutpout_Voltage"]+" V";
     nodeB1.textNode1.text = '电压：'+ data_json["newes"]["x_Coutpout_Current"]+" A";
@@ -95,7 +95,8 @@ $(function(){
     
     var nodeB2 = nodeBlock(330,10,2);
     nodeB2.textNode0.text = '内部温度：'+ data_json["newes"]["x_Inerin_tem"]+" °C";
-    nodeB2.textNode1.text = data_json["newes"]["machineState "]?"放电":"充电";
+//    nodeB2.textNode1.text = data_json["newes"]["machineState "]?"放电":"充电";
+    nodeB2.textNode1.text = data_json["newes"]["machineState "]?"异常":"正常";
     
     var nodeB3 = nodeBlock(620,10,3);
     nodeB3.textNode0.text = '电流：'+ data_json["newes"]["outputVoltage"]+" V";

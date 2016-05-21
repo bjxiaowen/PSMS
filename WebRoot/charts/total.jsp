@@ -10,6 +10,7 @@
 	PowerStationBase currMonthCountQ=(PowerStationBase)request.getAttribute("currMonthCountQ");
 	PowerStationBase history=(PowerStationBase)request.getAttribute("history");
 	String psName=(String)session.getAttribute("psName");
+	PowerStationBase dashboard=(PowerStationBase)request.getAttribute("dashboard");
 	ArrayList<PSEquipment> pslist=(ArrayList<PSEquipment>)session.getAttribute("equipments");
 %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
@@ -76,7 +77,7 @@
         <div class="container">
           <div class="crumbs">
             <div class="current-time" style="    padding: 10px 15px;font-size: 14px;font-weight: bold;
-    float: left;">采集时刻：
+    float: left;">采集时刻：<%=dashboard.getOperateDate() %>
             </div>
             <!-- <ul id="breadcrumbs" class="breadcrumb">
               <li>
@@ -97,16 +98,6 @@
             <div class="page-title" style="padding: 8px 0 0px 0px;">
               <h3 style="margin-bottom: 0px;">
               </h3>
-              <table>
-				<%
-					for(PSEquipment join:pslist){%>
-						 <tr> 
-				          <td id="title" colspan="2">标题：<%=join.getPsName() %></td> 
-				          <td>设备：<%=join.getType() %></td>
-				        </tr> 
-					<% }
-				%>
-			</table>
             </div>
           </div>
           <div class="row">

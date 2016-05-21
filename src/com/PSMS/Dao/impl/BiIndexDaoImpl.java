@@ -205,7 +205,8 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 		StringBuffer buffer=new StringBuffer();
 		buffer.append(" select ");
 		buffer.append(" top 1 tod.OutputVoltage voltage,tod.OutputCurrent curr, ");
-		buffer.append(" (tod.OutputVoltage* tod.OutputCurrent)/1000 as power ");
+		buffer.append(" (tod.OutputVoltage* tod.OutputCurrent)/1000 as power, ");
+		buffer.append(" CONVERT(varchar(100), tod.OperateDate, 20) OperateDate "); // CONVERT(varchar(100), GETDATE(), 20)
 		buffer.append(" from bd_to_data tod   ");
 		buffer.append(" inner join Inverter_parameter inp  on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
@@ -225,6 +226,7 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 			power.setVoltage(DataUtils.getDecimal(obj[0]));
 			power.setCurrent(DataUtils.getDecimal(obj[1]));
 			power.setPower(DataUtils.getDecimal(obj[2]));
+			power.setOperateDate(DataUtils.getString(obj[3]));
 		}
 		return power;
 	}

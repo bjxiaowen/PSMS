@@ -72,6 +72,8 @@ public class PowerStationBase {
 	
 	private int dayCount;//运行天数
 	
+	private String OperateDate;//操作时间
+	
 	
 	public BigDecimal getTotalCapacity() {
 		return totalCapacity;
@@ -325,7 +327,26 @@ public class PowerStationBase {
 		this.dayCount = dayCount;
 	}
 
-	
-	
-	
+	public String getOperateDate() {
+		return OperateDate;
+	}
+
+	public void setOperateDate(String operateDate) {
+		OperateDate = operateDate;
+	}
+
+	@Override
+	public String toString() {
+		return "PowerStationBase [totalCapacity=" + totalCapacity + ", totalPower=" + totalPower + ", totalVoltage="
+				+ totalVoltage + ", totalCurrent=" + totalCurrent + ", currHour=" + currHour + ", groupHour="
+				+ groupHour + ", groupMonth=" + groupMonth + ", groupDay=" + groupDay + ", mpptTemp=" + mpptTemp
+				+ ", chargeDischarge=" + chargeDischarge + ", voltage=" + voltage + ", current=" + current + ", power="
+				+ power + ", outputState=" + outputState + ", date=" + date + ", psId=" + psId + ", psName=" + psName
+				+ ", partNum=" + partNum + ", area=" + area + ", machineState=" + machineState + ", undervoltage="
+				+ undervoltage + ", currDayQ=" + currDayQ + ", currDayCountQ=" + currDayCountQ + ", currMonthQ="
+				+ currMonthQ + ", currMonthCountQ=" + currMonthCountQ + ", currYearQ=" + currYearQ + ", currYearCountQ="
+				+ currYearCountQ + ", historyCountQ=" + historyCountQ + ", countCarbon=" + countCarbon
+				+ ", batteryCapacity=" + batteryCapacity + ", dayCount=" + dayCount + ", OperateDate=" + OperateDate
+				+ "]";
+	}
 }

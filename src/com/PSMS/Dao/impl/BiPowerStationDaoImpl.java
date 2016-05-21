@@ -609,7 +609,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		buffer.append(" tod.X_Coutpout_Power, ");
 		buffer.append(" tod.X_Inerin_tem, ");
 		buffer.append(" tod.MachineState, ");
-		buffer.append(" tod.OperateDate ");
+		buffer.append("  CONVERT(varchar(100), tod.OperateDate, 20) OperateDate ");
 		buffer.append(" from  Inverter_parameter inp   inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
 		buffer.append(" where CONVERT(varchar(100),OperateDate, 23)=? and inp.PS_id=? ");
@@ -637,11 +637,11 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 			power.setX_TPV_Power(DataUtils.getDecimal(obj[8]));
 			power.setBatteryPower(DataUtils.getDecimal(obj[9]));
 			power.setMpptTemp(DataUtils.getDecimal(obj[10]));
-			power.setX_Run_Status(DataUtils.getDecimal(obj[11]));
-			power.setChargeDischarge(DataUtils.getDecimal(obj[12]));
+			power.setX_Run_Status(DataUtils.getInteger(obj[11]));
+			power.setChargeDischarge(DataUtils.getInteger(obj[12]));
 			power.setX_Battery_tem(DataUtils.getDecimal(obj[13]));
-			power.setX_Failcode_1(DataUtils.getDecimal(obj[14]));
-			power.setX_Battery_Capacity(DataUtils.getDecimal(obj[15]));
+			power.setX_Failcode_1(DataUtils.getInteger(obj[14]));
+			power.setX_Battery_Capacity(DataUtils.getInteger(obj[15]));
 			power.setX_Coutpout_Voltage(DataUtils.getDecimal(obj[16]));
 			power.setX_Coutpout_Current(DataUtils.getDecimal(obj[17]));
 			power.setX_Coutpout_Power(DataUtils.getDecimal(obj[18]));

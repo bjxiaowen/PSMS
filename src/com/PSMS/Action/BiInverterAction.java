@@ -48,7 +48,7 @@ public class BiInverterAction {
 			
 			
 			object.put("psId", pId);
-			object.put("pageName", "nibianqi");
+			object.put("pageName", "逆变器");
 			InParameter inParameter=biPSService.getInParameter(dateTime, pId);//输入参数
 			
 			if(parameters!=null&&parameters.size()>0){

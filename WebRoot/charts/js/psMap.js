@@ -71,7 +71,7 @@ $(function(){
                     backgroundColor: '#044062',
                     color: ['gold','aqua','lime'],
                     title : {
-                    text: '光伏电站分布图\r\n总电站数：'+$("#psNum").val()+'\r\n总装机容量：'+$("#Capacity").val()+' mwh\r\n历史发电总量：'+$("#HistoryQ").val()+' mwh',
+                    text: '光伏电站分布图\r\n总电站数：'+$("#psNum").val()+'\r\n总装机容量：'+$("#Capacity").val()+' KW\r\n历史发电总量：'+$("#HistoryQ").val()+' mwh',
                         subtext:'',
                         x:'left',
                         textStyle : {
@@ -158,11 +158,23 @@ $(function(){
             },
             itemStyle:{
                 normal:{
-                	label:{show:true,textStyle:{color:'rgba(229,229,229,1)'}},
+                	label:{show:true,textStyle:{color:'rgba(229,229,229,1)',fontSize:14}},
                     borderColor:'rgba(16,142,192,1)',
                     borderWidth:0.5,
                     areaStyle:{
                         color: '#004882'
+                    }
+                }, 
+                emphasis: {                 // 也是选中样式
+                    borderWidth:2,
+                    borderColor:'#fff',
+                    color: '#000000',
+                    label: {
+                          show: true,
+                          textStyle: {
+                        	  color:'rgba(229,229,229,1)',
+                        	  fontSize:14
+                          }
                     }
                 }
             },

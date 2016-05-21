@@ -47,7 +47,7 @@ public class BiBatteryAction {
 			object.put("parameters", parameters);//设备基本参数
 			
 			object.put("psId", pId);
-			object.put("pageName", "xudianchi");
+			object.put("pageName", "蓄电池");
 			if(parameters!=null&&parameters.size()>0){
 				request.setAttribute("parameter", parameters.get(0));//设备基本参数
 			}

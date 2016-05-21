@@ -10,12 +10,12 @@
 	BIPSBaseData newes=(BIPSBaseData)request.getAttribute("newes");
 	String failcode=newes.getX_Failcode_1()+"";
 	String fail="正常";
-	 if(!failcode.equals("0.00")){
+	 if(!failcode.equals("0")){
 		 fail="欠压";
 	} 
 	String state=newes.getChargeDischarge()+"";
 	 String mState="充电";//0：电池充电,1：电池放电
-	if(!state.equals("0.00")){
+	if(!state.equals("0")){
 		mState="放电";
 	} 
 	String psName=(String)session.getAttribute("psName");
@@ -61,7 +61,10 @@
     height: 8px;
     margin-left: -39px;
     transform: rotate(-90deg);
-      }
+    -o-transform: rotate(-90deg); 
+-webkit-transform: rotate(-90deg); 
+-moz-transform: rotate(-90deg);
+}
       
        .progress {
          -webkit-border-radius: 0;
@@ -71,6 +74,9 @@
        .progress .progress-bar {
     background-image: none;
     background-color: #89231f;
+}
+@media screen and (min-width: 960px) and (max-width: 1366px) {
+	.progress-factor{font-size: 3.5em;}
 }
     </style>
   </head>
@@ -87,7 +93,7 @@
         <div class="container">
           <div class="crumbs">
              <div class="current-time" style="    padding: 10px 15px;font-size: 14px;font-weight: bold;
-    float: left;">>采集时刻：
+    float: left;">采集时刻：<%=newes.getOperateDate() %>
             </div>
           </div>
           <div class="page-header">
@@ -177,7 +183,7 @@
                     <div class="flexy-column">
                       <div class="progress-factor flexy-item">
                         <div class="progress-bar">
-                          <div class="bar has-rotation has-colors red heat-gradient move " role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
+                          <div class="bar has-rotation has-colors red heat-gradient move " role="progressbar" aria-valuenow="<%=newes.getX_Battery_Capacity() %>" aria-valuemin="0" aria-valuemax="100">
 
                             <div class="bar-face face-position roof percentage"></div>
                             <div class="bar-face face-position back percentage"></div>
@@ -191,7 +197,7 @@
     position: absolute;
     height: 1em;
     width: 5em;
-    margin: .4em .4em .4em .8em;"><%=newes.getX_Battery_Capacity() %> %</div>
+    margin: .4em .4em .4em .8em;"><%=newes.getX_Battery_Capacity() %>%</div>
                             </div>
                           </div>
                         </div>
@@ -206,7 +212,7 @@
                 <div class="widget-content">
                   <ul class="stats" style="text-align: center;">
                   <li><strong>
-                      剩余容量：</strong> <span class="label label-info"><%=newes.getX_Battery_Capacity() %> %</span>
+                      剩余：</strong> <span class="label label-info"><%=newes.getX_Battery_Capacity() %> %</span>
                     </li>
                     <li><strong>
                       状态：</strong> <span class="label label-info"><%=fail %></span>

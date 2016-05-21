@@ -25,7 +25,7 @@ $(function(){
     xudianchi.showSelected = false; // 不显示选中矩形
     scene.add(xudianchi); 
     // 控制器
-    var dcac = new JTopo.Node("DC/AC");
+    var dcac = new JTopo.Node("DC/DC");
     dcac.alpha = 1;
     dcac.setImage('./charts/assets/img/demo/kongzhiqi02.jpg');
     dcac.setBound(310, 170, 200, 150);
@@ -48,6 +48,7 @@ $(function(){
     scene.add(ac); 
     
     // 连线一
+    if(data_json["newes"]["x_Run_Status"]==1){
     var l1 = new JTopo.AnimateNode('./charts/assets/img/demo/gifgif.png', 1, 5, 1000, 0);
     l1.setSize(120, 12);
     l1.setLocation(180, 200);                                
@@ -82,7 +83,7 @@ $(function(){
     l3.play();
     scene.add(l3); 
 
-    
+    }
     
 
     
@@ -120,9 +121,10 @@ $(function(){
     nodeB1.textNode1.text = '电压：'+ data_json["newes"]["x_TPV_Voltage"]+" V";
     nodeB1.textNode2.text = '功率：'+ data_json["newes"]["x_TPV_Power"]+" KW";
     
-    var nodeB2 = nodeBlock(330,10,2);
+    var nodeB2 = nodeBlock(330,10,3);
     nodeB2.textNode0.text = '内部温度：'+ data_json["newes"]["mpptTemp"]+" °C";
     nodeB2.textNode1.text = data_json["newes"]["chargeDischarge "]?"放电":"充电";
+    nodeB2.textNode2.text = data_json["newes"]["x_Run_Status"]==1?"开机":"关机";
     
     var nodeB3 = nodeBlock(620,10,3);
     nodeB3.textNode0.text = '电流：'+ data_json["newes"]["x_Coutpout_Current"]+" A";

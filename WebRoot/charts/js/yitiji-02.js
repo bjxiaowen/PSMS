@@ -46,7 +46,7 @@ $(function(){
     ac.textOffsetY = 8;
     ac.showSelected = false; // 不显示选中矩形
     scene.add(ac); 
-    
+    if(data_json["newes"]["x_Run_Status"]==1){
     // 连线一
     var l1 = new JTopo.AnimateNode('./charts/assets/img/demo/gifgif.png', 1, 5, 1000, 0);
     l1.setSize(120, 12);
@@ -72,7 +72,7 @@ $(function(){
     	l2.play();
         scene.add(l2); 
     }
-    
+   
     
     // 连线三
     var l3 = new JTopo.AnimateNode('./charts/assets/img/demo/gifgif.png', 1, 5, 1000, 0);
@@ -82,7 +82,7 @@ $(function(){
     l3.play();
     scene.add(l3); 
 
-    
+    }
     
 
     
@@ -120,20 +120,24 @@ $(function(){
     nodeB1.textNode1.text = '电压：'+ data_json["newes"]["x_TPV_Current"]+" V";
     nodeB1.textNode2.text = '功率：'+ data_json["newes"]["x_TPV_Power"]+" KW";
     
-    var nodeB2 = nodeBlock(330,10,2);
+    var nodeB2 = nodeBlock(330,10,3);
     nodeB2.textNode0.text = 'MPPT模块温度：'+ data_json["newes"]["mpptTemp"]+" °C";
     nodeB2.textNode1.text = data_json["newes"]["chargeDischarge "]?"放电":"充电";
+    nodeB2.textNode2.text = data_json["newes"]["x_Run_Status"]==1?"开机":"关机";
     
     var nodeB3 = nodeBlock(620,10,3);
-    nodeB3.textNode0.text = '电流：'+ data_json["newes"]["x_Battery_Current"]+" A";
-    nodeB3.textNode1.text = '电压：'+ data_json["newes"]["batteryVoltage"]+" V";
-    nodeB3.textNode2.text = '功率：'+ data_json["newes"]["batteryPower"]+" KW";
+    nodeB3.textNode0.text = '电流：'+ data_json["newes"]["outputVoltage"]+" A";
+    nodeB3.textNode1.text = '电压：'+ data_json["newes"]["outputCurrent"]+" V";
+    nodeB3.textNode2.text = '功率：'+ data_json["newes"]["exchangeOutPower"]+" KW";
+
     nodeB3.node.setSize(150,80);
 
     var nodeB4 = nodeBlock(40,440,3);
-    nodeB4.textNode0.text = '电流：'+ data_json["newes"]["outputVoltage"]+" A";
-    nodeB4.textNode1.text = '电压：'+ data_json["newes"]["outputCurrent"]+" V";
-    nodeB4.textNode2.text = '功率：'+ data_json["newes"]["exchangeOutPower"]+" KW";
+    
+    nodeB4.textNode0.text = '电流：'+ data_json["newes"]["x_Battery_Current"]+" A";
+    nodeB4.textNode1.text = '电压：'+ data_json["newes"]["batteryVoltage"]+" V";
+    nodeB4.textNode2.text = '功率：'+ data_json["newes"]["batteryPower"]+" KW";
+   
     
 
 })

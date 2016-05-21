@@ -9,11 +9,11 @@
 				<i class="icon-reorder"> </i>
 		</a></li>
 	</ul>
-	<a class="navbar-brand" href="index.html"> <img
+	<a class="navbar-brand" href="#"> <img
 		src="charts/assets/img/logo.png" alt="logo" height="30" width="30" /> <strong>
 			中兴能源 PSMS</strong>
 	</a> 
-	<span href="#" class="toggle-sidebar bs-tooltip" data-placement="bottom" data-original-title="Toggle navigation" style="margin-left:100px;">
+	<div class="navbar navbar-brand" style="border:0;">
 		 <%=psName %>
-	</span>
+	</div>
 </div>

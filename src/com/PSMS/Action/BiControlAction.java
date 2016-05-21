@@ -48,7 +48,7 @@ public class BiControlAction {
 			
 			
 			object.put("psId", pId);
-			object.put("pageName", "kongzhiqi");
+			object.put("pageName", "控制器");
 			
 			BIPSBaseData newes=biPSService.getNewesData(dateTime, pId);
 			object.put("newes", newes);

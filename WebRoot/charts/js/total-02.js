@@ -2,7 +2,6 @@
 		 var myChart = echarts.init(document.getElementById('chart_002')); 
 		        // data = [11, 11, 15, 13, 12, 13, 10,8,2,6,15,20,4,7,14,10,11,12,0,2,6,15,20,14];
 		        // data1 = [13, 10,18,12,6,15,20,14,17,14,20,21,12,10,12,16,15,20,14,12,16,15,20,14];
-		
 		option = {
 		    tooltip : {
 		        formatter: "{a} <br/>{c} {b}"

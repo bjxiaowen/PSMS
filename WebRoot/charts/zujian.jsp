@@ -101,8 +101,6 @@
               <div class="widget box widget-closed">
                 <div class="widget-header">
                   <h4>
-                    <i class="icon-reorder">
-                    </i>
                     组件电压(
                     <span class="blue">
                      <%=newes.getX_TPV_Voltage() %>V
@@ -130,8 +128,6 @@
               <div class="widget box widget-closed">
                 <div class="widget-header">
                   <h4>
-                    <i class="icon-reorder">
-                    </i>
                     组件电流(
                     <span class="blue">
                      <%=newes.getX_TPV_Current() %>A
