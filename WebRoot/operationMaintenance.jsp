@@ -151,8 +151,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toInspectionOverdue" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">逾期运维</a>
 	                   	</div>	
 	                   	<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
-	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toFaultMessage" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">故障列表</a>
-	                   	</div>	 
+	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toFaultMessage" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">故障处理</a>
+	                   	</div>
+	                   	<div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px;">
+	                   		<a href="javascript:void(0)" onclick="opeanHtml(this)" name="toFailureAlarmManage" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;">故障查看</a>
+	                   	</div> 
 	                </div>                
             </div>
         </div>

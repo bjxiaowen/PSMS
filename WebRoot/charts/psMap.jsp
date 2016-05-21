@@ -108,7 +108,7 @@ ul.stats li strong {
                             {{each list as value i}}
                                 <tr>
                                   <td>
-                                    <div style="height: 30px; line-height: 30px;"><a target="_blank" href="toFailureAlarmManage.action">{{value.name}}</a></div>
+                                    <div style="height: 30px; line-height: 30px;"><a target="_blank" href="toFaultMessage.action">{{value.name}}</a></div>
                                   </td>
                                   <td>
                                     <div class="au">

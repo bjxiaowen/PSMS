@@ -1,7 +1,8 @@
 <%@ page contentType="text/html; charset=utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page import="java.net.*" %>
 <%
 	String psName=request.getParameter("psName");
-	
 %>
 <div class="container">
 	<ul class="nav navbar-nav">

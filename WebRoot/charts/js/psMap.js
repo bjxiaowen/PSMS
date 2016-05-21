@@ -214,7 +214,7 @@ $(function(){
 	    	function linkToUrl(param){
 	    		if(param.data.id != undefined){
 	    			console.log("param:"+param.data.name);
-		    		window.open("toBiIndex.action?psId="+param.data.id+"&psName="+param.data.name); 
+		    		window.open("toBiIndex.action?psId="+param.data.id+"&psName="+encodeURI(param.data.name));
 	    		}
 	    	}
             var ecConfig = require('echarts/config')

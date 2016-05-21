@@ -169,11 +169,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                   		<a href="javascript:void(0)" onclick="opeanHtml(this)" name="toPMManage" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;">电表</a>
 	                   	</div> -->
 	                </div>
-	                <div title="故障管理" >
+	                <!-- <div title="故障管理" >
 	                    <div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px;">
 	                   		<a href="javascript:void(0)" onclick="opeanHtml(this)" name="toFailureAlarmManage" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;">故障管理</a>
 	                   	</div>
-	                </div>  
+	                </div>  --> 
             </div>
         </div>
         <div id="content" data-options="region:'center'">
