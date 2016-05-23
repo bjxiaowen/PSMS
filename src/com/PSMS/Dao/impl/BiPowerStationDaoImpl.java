@@ -313,10 +313,10 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		buffer.append(" DateName(hour,GetDate()) as currHour  ");
 		buffer.append(" from  Inverter_parameter inp   inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id  ");
-		buffer.append(" where CONVERT(varchar(100),OperateDate, 23)= ? and inp.PS_id= ?  ");
+		buffer.append(" where  inp.PS_id= ?  ");//CONVERT(varchar(100),OperateDate, 23)= ? and
 		Query query = session.createSQLQuery(buffer.toString());
-		query.setString(0, dateTime);
-		query.setInteger(1, psId);
+//		query.setString(0, dateTime);
+		query.setInteger(0, psId);
 		@SuppressWarnings("rawtypes")
 		List list = query.list();
 		HibernateSessionFactory.closeHibernateSession();
@@ -347,11 +347,11 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		buffer.append(" from  Inverter_parameter inp ");
 		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
-		buffer.append(" where CONVERT(varchar(100),tod.OperateDate, 23)=? and inp.PS_id=?");
+		buffer.append(" where  inp.PS_id=?");//CONVERT(varchar(100),tod.OperateDate, 23)=? and
 		buffer.append(" group by DateName(hour,tod.OperateDate) ");
 		Query query = session.createSQLQuery(buffer.toString());
-		query.setString(0, dateTime);
-		query.setInteger(1, psId);
+//		query.setString(0, dateTime);
+		query.setInteger(0, psId);
 		@SuppressWarnings("rawtypes")
 		List list = query.list();
 		HibernateSessionFactory.closeHibernateSession();
@@ -420,12 +420,12 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		buffer.append(" from  Inverter_parameter inp ");
 		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
-		buffer.append(" where CONVERT(varchar(100),tod.OperateDate, 23)= ? ");
-		buffer.append(" and  inp.PS_id=? ");
+		buffer.append(" where  ");//CONVERT(varchar(100),tod.OperateDate, 23)= ? and
+		buffer.append("   inp.PS_id=? ");
 		buffer.append(" order by tod.OperateDate desc ");
 		Query query = session.createSQLQuery(buffer.toString());
-		query.setString(0, dateTime);
-		query.setInteger(1, psId);
+//		query.setString(0, dateTime);
+		query.setInteger(0, psId);
 		@SuppressWarnings("rawtypes")
 		List list = query.list();
 		HibernateSessionFactory.closeHibernateSession();
@@ -461,13 +461,13 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		buffer.append(" from Inverter_parameter inp  ");
 		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
-		buffer.append(" where CONVERT(varchar(100),tod.OperateDate, 23)= ? and inp.PS_id=?");
-//		buffer.append(" and inp.type=?");
+		buffer.append(" where  inp.PS_id=?");//CONVERT(varchar(100),tod.OperateDate, 23)= ? and
+		buffer.append(" and inp.type=?");
 		buffer.append(" order by tod.OperateDate desc ");
 		Query query = session.createSQLQuery(buffer.toString());
-		query.setString(0, dateTime);
-		query.setInteger(1, psId);
-		query.setString(2, type);
+//		query.setString(0, dateTime);
+		query.setInteger(0, psId);
+		query.setString(1, type);
 		@SuppressWarnings("rawtypes")
 		List list = query.list();
 		HibernateSessionFactory.closeHibernateSession();
@@ -503,12 +503,12 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		buffer.append(" DateName(hour,GetDate()) as currHour ");
 		buffer.append(" from  Inverter_parameter inp   inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
-		buffer.append(" where CONVERT(varchar(100),OperateDate, 23)=? and inp.PS_id=? ");
+		buffer.append(" where inp.PS_id=? ");//CONVERT(varchar(100),OperateDate, 23)=? and 
 		buffer.append(" and inp.type=? ");
 		Query query = session.createSQLQuery(buffer.toString());
-		query.setString(0, dateTime);
-		query.setInteger(1, psId);
-		query.setString(2, type);
+//		query.setString(0, dateTime);
+		query.setInteger(0, psId);
+		query.setString(1, type);
 		@SuppressWarnings("rawtypes")
 		List list = query.list();
 		HibernateSessionFactory.closeHibernateSession();
@@ -557,13 +557,13 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id  ");
 		buffer.append(" WHERE ");
-		buffer.append(" convert(varchar(30),tod.operateDate,23) = ? ");
-		buffer.append(" and inp.PS_id=? ");
+//		buffer.append(" convert(varchar(30),tod.operateDate,23) = ? and ");
+		buffer.append("  inp.PS_id=? ");
 		buffer.append(" GROUP BY ");
 		buffer.append(" DATEPART(hh,tod.operateDate)) c on b.OperateDate = c.operatedate ");
 		Query query = session.createSQLQuery(buffer.toString());
-		query.setString(0, dateTime);
-		query.setInteger(1, psId);
+//		query.setString(0, dateTime);
+		query.setInteger(0, psId);
 		@SuppressWarnings("rawtypes")
 		List list = query.list();
 		HibernateSessionFactory.closeHibernateSession();
@@ -613,11 +613,13 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		buffer.append("  CONVERT(varchar(100), tod.OperateDate, 20) OperateDate ");
 		buffer.append(" from  Inverter_parameter inp   inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
-		buffer.append(" where CONVERT(varchar(100),OperateDate, 23)=? and inp.PS_id=? ");
+		buffer.append(" where ");
+//		buffer.append(" CONVERT(varchar(100),OperateDate, 23)=? and ");
+		buffer.append("  inp.PS_id=? ");
 		buffer.append(" order by tod.OperateDate desc ");
 		Query query = session.createSQLQuery(buffer.toString());
-		query.setString(0, dateTime);
-		query.setInteger(1, psId);
+//		query.setString(0, dateTime);
+		query.setInteger(0, psId);
 		@SuppressWarnings("rawtypes")
 		List list = query.list();
 		HibernateSessionFactory.closeHibernateSession();
@@ -694,10 +696,12 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		buffer.append(" DateName(hour,GetDate()) as currHour  ");
 		buffer.append(" from  Inverter_parameter inp   inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id  ");
-		buffer.append(" where CONVERT(varchar(100),OperateDate, 23)= ? and inp.PS_id= ?  ");
+		buffer.append(" where ");
+//		buffer.append(" CONVERT(varchar(100),OperateDate, 23)= ? and inp.PS_id= ?   ");
+		buffer.append(" inp.PS_id= ? ");
 		Query query = session.createSQLQuery(buffer.toString());
-		query.setString(0, dateTime);
-		query.setInteger(1, psId);
+//		query.setString(0, dateTime);
+		query.setInteger(0, psId);
 		@SuppressWarnings("rawtypes")
 		List list = query.list();
 		HibernateSessionFactory.closeHibernateSession();
@@ -732,13 +736,13 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id  ");
 		buffer.append(" WHERE ");
-		buffer.append(" convert(varchar(30),tod.operateDate,23) = ? ");
-		buffer.append(" and inp.PS_id=? ");
+//		buffer.append(" convert(varchar(30),tod.operateDate,23) = ?  and");
+		buffer.append("  inp.PS_id=? ");
 		buffer.append(" GROUP BY ");
 		buffer.append(" DATEPART(hh,tod.operateDate)) c on b.OperateDate = c.operatedate ");
 		Query query = session.createSQLQuery(buffer.toString());
-		query.setString(0, dateTime);
-		query.setInteger(1, psId);
+//		query.setString(0, dateTime);
+		query.setInteger(0, psId);
 		@SuppressWarnings("rawtypes")
 		List list = query.list();
 		HibernateSessionFactory.closeHibernateSession();

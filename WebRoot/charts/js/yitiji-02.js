@@ -116,8 +116,8 @@ $(function(){
     }   
    
     var nodeB1 = nodeBlock(40,10,3);
-    nodeB1.textNode0.text = '电流：'+ data_json["newes"]["x_TPV_Voltage"]+" A";
-    nodeB1.textNode1.text = '电压：'+ data_json["newes"]["x_TPV_Current"]+" V";
+    nodeB1.textNode0.text = '电流：'+ data_json["newes"]["x_TPV_Current"]+" A";
+    nodeB1.textNode1.text = '电压：'+ data_json["newes"]["x_TPV_Voltage"]+" V";
     nodeB1.textNode2.text = '功率：'+ data_json["newes"]["x_TPV_Power"]+" KW";
     
     var nodeB2 = nodeBlock(330,10,3);
