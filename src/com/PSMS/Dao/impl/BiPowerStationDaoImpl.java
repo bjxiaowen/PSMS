@@ -267,7 +267,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
 		buffer.append("  select ");
-		buffer.append(" sum(tod.OutputVoltage*tod.OutputCurrent)power, ");
+		buffer.append(" sum(tod.OutputVoltage*tod.OutputCurrent)/1000   power, ");
 		buffer.append(" max(tod.OutputVoltage) voltage, ");
 		buffer.append(" max(tod.OutputCurrent)  curr , ");
 		buffer.append(" DateName(hour,GetDate()) as currHour, ");
@@ -307,7 +307,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
 		buffer.append("  select ");
-		buffer.append(" sum(tod.MpptOutVoltage * tod.MpptOutCurrent*DateName(hour,GetDate())) as totalPower,  ");
+		buffer.append(" sum(tod.MpptOutVoltage * tod.MpptOutCurrent*DateName(hour,GetDate()))/1000 as totalPower,  ");
 		buffer.append(" max(tod.MpptOutVoltage) totalVoltage,  ");
 		buffer.append(" max(tod.MpptOutCurrent) totalCurrent,  ");
 		buffer.append(" DateName(hour,GetDate()) as currHour  ");
@@ -339,7 +339,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 	public List<PowerStationBase> getControlInShowHourByDate(String dateTime,int psId) throws Exception {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
-		buffer.append("  select sum(tod.MpptOutVoltage * tod.MpptOutCurrent) as power,  ");
+		buffer.append("  select sum(tod.MpptOutVoltage * tod.MpptOutCurrent)/1000 as power,  ");
 		buffer.append("  sum(tod.MpptOutVoltage) voltage,  ");
 		buffer.append("  sum(tod.MpptOutCurrent) curr,  ");
 		buffer.append("  DateName(hour,GetDate()) as currHour,  ");
@@ -377,7 +377,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 	public List<PowerStationBase> getElectricEveryDayByDate(int psId) throws Exception {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
-		buffer.append("   select sum(tod.MpptOutVoltage*tod.MpptOutCurrent*24)power,  ");
+		buffer.append("   select sum(tod.MpptOutVoltage*tod.MpptOutCurrent*24)/1000 power,  ");
 		buffer.append("   sum(tod.MpptOutVoltage) voltage,   ");
 		buffer.append("   sum(tod.MpptOutCurrent)  curr ,   ");
 		buffer.append("   CONVERT(varchar(100), OperateDate, 23) date  ");
@@ -451,7 +451,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		buffer.append(" select top 1 ");
 		buffer.append(" tod.MpptOutVoltage Voltage, ");//电压
 		buffer.append(" tod.MpptOutCurrent curr, ");//电流
-		buffer.append(" (tod.MpptOutVoltage * tod.MpptOutCurrent) power, ");//功率
+		buffer.append(" (tod.MpptOutVoltage * tod.MpptOutCurrent)/1000 power, ");//功率
 		buffer.append(" tod.Undervoltage , ");//欠压
 		buffer.append(" tod.ChargeDischarge  chargeDischarge,");//0：电池充电,1：电池放电
 		buffer.append(" tod.MpptTemp mpptTemp,  ");//MpptTemp 温度
@@ -497,7 +497,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		StringBuffer buffer=new StringBuffer();
 		buffer.append(" select ");
 		buffer.append(" sum(distinct psi.capacity) totalCapacity, ");//容量
-		buffer.append(" sum(tod.MpptOutVoltage * tod.MpptOutCurrent) as totalPower, ");//输出功率
+		buffer.append(" sum(tod.MpptOutVoltage * tod.MpptOutCurrent)/1000 as totalPower, ");//输出功率
 		buffer.append(" sum(tod.MpptOutVoltage)  totalVoltage ,");//电压
 		buffer.append(" sum(tod.MpptOutCurrent)  totalCurrent , ");//电流
 		buffer.append(" DateName(hour,GetDate()) as currHour ");
@@ -598,7 +598,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		buffer.append(" tod.OutputCurrent,  ");
 		buffer.append(" tod.X_AC_Frequency, ");
 		buffer.append(" tod.X_TPV_Power,    ");
-		buffer.append(" tod.X_Battery_Current*tod.BatteryVoltage as  BatteryPower,");
+		buffer.append(" (tod.X_Battery_Current*tod.BatteryVoltage)/1000 as  BatteryPower,");
 		buffer.append(" tod.MpptTemp,       ");
 		buffer.append(" tod.X_Run_Status ,  ");
 		buffer.append(" tod.ChargeDischarge ,");
