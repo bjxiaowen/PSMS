@@ -145,7 +145,7 @@
                 text-align: center;
                 color: white;
                 line-height: 200px;
-                text-shadow:3px 3px 3px black;">23.21<span style="font-size: 62px;">MWh</span></h2>
+                text-shadow:3px 3px 3px black;"><%=history.getHistoryCountQ() %><span style="font-size: 62px;">MWh</span></h2>
                 </div>
               </div>
             </div>
