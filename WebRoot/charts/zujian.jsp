@@ -152,6 +152,6 @@
     	var current = _.map(data_json["hourlyData"],"current");
     	console.log(current);
     	var vv = _.map(data_json["hourlyData"],"voltage");
-    	var power = _.map(data_json["hourlyData"],"power");
+    	var power = _.map(data_json["hourlyData"],"x_TPV_Power");
     </script>
 </html>

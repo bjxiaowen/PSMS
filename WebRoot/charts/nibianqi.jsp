@@ -82,7 +82,7 @@
                 <div class="widget-content u3" style="background: #f1f1f1">
                   <h4><strong>输出参数</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">功率：<%=newes.getExchangeOutPower() %> KW</li>
+                   <li class="list-group-item">功率：<%=newes.getOutputPower() %> KW</li> 
                     <li class="list-group-item">电压：<%=newes.getOutputVoltage() %> V</li>
                     <li class="list-group-item">电流：<%=newes.getOutputCurrent()%> A</li>
                     <li class="list-group-item">频率：<%=newes.getX_AC_Frequency() %> Hz</li>
@@ -126,6 +126,6 @@
         // FormComponents.init()
       });
       var hourlyData = data_json["hourlyData"];
-      var kw = _.map(hourlyData,"power");
+      var kw = _.map(hourlyData,"outputPower");
     </script>
 </html>

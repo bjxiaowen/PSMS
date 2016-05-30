@@ -28,6 +28,7 @@ public class BIPSBaseData {
 	private BigDecimal X_Inerin_tem;//逆变器内部温度
 	private BigDecimal MachineState;//1：机器失效，0：正常
 	private String 		OperateDate;//最新操作时间
+	private BigDecimal OutputPower;//输出功率
 	
 	
 	
@@ -163,5 +164,13 @@ public class BIPSBaseData {
 	public void setOperateDate(String operateDate) {
 		OperateDate = operateDate;
 	}
+	public BigDecimal getOutputPower() {
+		return OutputPower;
+	}
+	public void setOutputPower(BigDecimal outputPower) {
+		OutputPower = outputPower;
+	}
+	
+	
 	
 }

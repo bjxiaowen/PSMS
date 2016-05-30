@@ -36,6 +36,10 @@ public class PowerStationBase {
 	
 	private BigDecimal power;//功率
 	
+	private BigDecimal X_TPV_Power;//组件功率
+	
+	private BigDecimal X_Coutpout_Power;//控制器功率
+	
 	private int outputState;//输出状态  1：输出过载，0：输出正常
 	
 	private Date date;//日期
@@ -73,6 +77,11 @@ public class PowerStationBase {
 	private int dayCount;//运行天数
 	
 	private String OperateDate;//操作时间
+	
+	//逆变器
+	private BigDecimal OutputVoltage; 
+	private BigDecimal  OutputCurrent; 
+	private BigDecimal OutputPower;
 	
 	
 	public BigDecimal getTotalCapacity() {
@@ -334,6 +343,48 @@ public class PowerStationBase {
 	public void setOperateDate(String operateDate) {
 		OperateDate = operateDate;
 	}
+	
+	
+
+	public BigDecimal getX_TPV_Power() {
+		return X_TPV_Power;
+	}
+
+	public void setX_TPV_Power(BigDecimal x_TPV_Power) {
+		X_TPV_Power = x_TPV_Power;
+	}
+
+	public BigDecimal getX_Coutpout_Power() {
+		return X_Coutpout_Power;
+	}
+
+	public void setX_Coutpout_Power(BigDecimal x_Coutpout_Power) {
+		X_Coutpout_Power = x_Coutpout_Power;
+	}
+
+	public BigDecimal getOutputVoltage() {
+		return OutputVoltage;
+	}
+
+	public void setOutputVoltage(BigDecimal outputVoltage) {
+		OutputVoltage = outputVoltage;
+	}
+
+	public BigDecimal getOutputCurrent() {
+		return OutputCurrent;
+	}
+
+	public void setOutputCurrent(BigDecimal outputCurrent) {
+		OutputCurrent = outputCurrent;
+	}
+
+	public BigDecimal getOutputPower() {
+		return OutputPower;
+	}
+
+	public void setOutputPower(BigDecimal outputPower) {
+		OutputPower = outputPower;
+	}
 
 	@Override
 	public String toString() {
@@ -341,12 +392,17 @@ public class PowerStationBase {
 				+ totalVoltage + ", totalCurrent=" + totalCurrent + ", currHour=" + currHour + ", groupHour="
 				+ groupHour + ", groupMonth=" + groupMonth + ", groupDay=" + groupDay + ", mpptTemp=" + mpptTemp
 				+ ", chargeDischarge=" + chargeDischarge + ", voltage=" + voltage + ", current=" + current + ", power="
-				+ power + ", outputState=" + outputState + ", date=" + date + ", psId=" + psId + ", psName=" + psName
-				+ ", partNum=" + partNum + ", area=" + area + ", machineState=" + machineState + ", undervoltage="
-				+ undervoltage + ", currDayQ=" + currDayQ + ", currDayCountQ=" + currDayCountQ + ", currMonthQ="
-				+ currMonthQ + ", currMonthCountQ=" + currMonthCountQ + ", currYearQ=" + currYearQ + ", currYearCountQ="
-				+ currYearCountQ + ", historyCountQ=" + historyCountQ + ", countCarbon=" + countCarbon
-				+ ", batteryCapacity=" + batteryCapacity + ", dayCount=" + dayCount + ", OperateDate=" + OperateDate
-				+ "]";
+				+ power + ", X_TPV_Power=" + X_TPV_Power + ", X_Coutpout_Power=" + X_Coutpout_Power + ", outputState="
+				+ outputState + ", date=" + date + ", psId=" + psId + ", psName=" + psName + ", partNum=" + partNum
+				+ ", area=" + area + ", machineState=" + machineState + ", undervoltage=" + undervoltage + ", currDayQ="
+				+ currDayQ + ", currDayCountQ=" + currDayCountQ + ", currMonthQ=" + currMonthQ + ", currMonthCountQ="
+				+ currMonthCountQ + ", currYearQ=" + currYearQ + ", currYearCountQ=" + currYearCountQ
+				+ ", historyCountQ=" + historyCountQ + ", countCarbon=" + countCarbon + ", batteryCapacity="
+				+ batteryCapacity + ", dayCount=" + dayCount + ", OperateDate=" + OperateDate + ", OutputVoltage="
+				+ OutputVoltage + ", OutputCurrent=" + OutputCurrent + ", OutputPower=" + OutputPower + "]";
 	}
+
+	
+	
+	
 }

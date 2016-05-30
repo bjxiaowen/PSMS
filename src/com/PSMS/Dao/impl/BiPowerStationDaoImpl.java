@@ -564,11 +564,11 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		buffer.append(" GROUP BY ");
 		buffer.append(" DATEPART(hh,tod.operateDate)) c on b.OperateDate = c.operatedate ");*/
 		
-		buffer.append(" select atmp.power,atmp.voltage,atmp.curr,DateName(hour,atmp.operatedate) as groupHour ");
+		buffer.append(" select atmp.power,atmp.voltage,atmp.curr,DateName(hour,atmp.operatedate) as groupHour,atmp.X_TPV_Power ");
 		buffer.append(" from ( ");
 		buffer.append(" select distinct ");
 		buffer.append(" b.ExchangeOutPower as power,  b.X_TPV_Voltage as voltage,  b.X_TPV_Current as curr,  ");
-		buffer.append(" b.operatedate ,inp.PS_id  ");
+		buffer.append(" b.operatedate ,inp.PS_id,b.X_TPV_Power  ");
 		buffer.append(" from bd_to_data b ");
 		buffer.append(" inner join Inverter_parameter inp on inp.name=b.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
@@ -608,6 +608,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 			power.setVoltage(DataUtils.getDecimal(obj[1]));
 			power.setCurrent(DataUtils.getDecimal(obj[2]));
 			power.setGroupHour(DataUtils.getInteger(obj[3]));
+			power.setX_TPV_Power(DataUtils.getDecimal(obj[4]));
 			reList.add(power);
 		}
 		return reList;
@@ -640,7 +641,8 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		buffer.append(" tod.X_Coutpout_Power, ");
 		buffer.append(" tod.X_Inerin_tem, ");
 		buffer.append(" tod.MachineState, ");
-		buffer.append("  CONVERT(varchar(100), tod.OperateDate, 20) OperateDate ");
+		buffer.append("  CONVERT(varchar(100), tod.OperateDate, 20) OperateDate, ");
+		buffer.append(" (( tod.OutputVoltage * tod.OutputCurrent)/1000) as OutputPower ");
 		buffer.append(" from  Inverter_parameter inp   inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
 		buffer.append(" where ");
@@ -681,6 +683,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 			power.setX_Inerin_tem(DataUtils.getDecimal(obj[19]));
 			power.setMachineState(DataUtils.getDecimal(obj[20]));
 			power.setOperateDate(DataUtils.getString(obj[21]));
+			power.setOutputPower(DataUtils.getDecimal(obj[22]));
 		}
 		return power;
 	}
@@ -771,11 +774,14 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		buffer.append(" GROUP BY ");
 		buffer.append(" DATEPART(hh,tod.operateDate)) c on b.OperateDate = c.operatedate ");*/
 		
-		buffer.append(" select atmp.power,atmp.voltage,atmp.curr,DateName(hour,atmp.operatedate) as groupHour ");
+		buffer.append(" select atmp.power,atmp.voltage,atmp.curr,DateName(hour,atmp.operatedate) as groupHour, ");
+		buffer.append(" atmp.OutputVoltage, atmp.OutputCurrent,atmp.OutputPower");
 		buffer.append(" from ( ");
 		buffer.append(" select distinct ");
-		buffer.append(" b.X_Coutpout_Power as power,  b.X_TPV_Voltage as voltage,  b.X_TPV_Current as curr,  ");
-		buffer.append(" b.operatedate ,inp.PS_id  ");
+		buffer.append(" b.X_Coutpout_Power as power,  b.X_Coutpout_Voltage as voltage,  b.X_Coutpout_Current as curr,  ");
+		buffer.append(" b.operatedate ,inp.PS_id , ");
+		buffer.append("  b.OutputVoltage,  b.OutputCurrent,");
+		buffer.append(" (( b.OutputVoltage * b.OutputCurrent)/1000) as OutputPower ");
 		buffer.append(" from bd_to_data b ");
 		buffer.append(" inner join Inverter_parameter inp on inp.name=b.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
@@ -814,6 +820,10 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 			power.setVoltage(DataUtils.getDecimal(obj[1]));
 			power.setCurrent(DataUtils.getDecimal(obj[2]));
 			power.setGroupHour(DataUtils.getInteger(obj[3]));
+//			buffer.append(" atmp.OutputVoltage, atmp.OutputCurrent,atmp.OutputPower");
+			power.setOutputVoltage(DataUtils.getDecimal(obj[4]));
+			power.setOutputCurrent(DataUtils.getDecimal(obj[5]));
+			power.setOutputPower(DataUtils.getDecimal(obj[6]));
 			reList.add(power);
 		}
 		return reList;
