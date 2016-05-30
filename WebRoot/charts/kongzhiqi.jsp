@@ -79,9 +79,9 @@
                 <div class="widget-content u3" style="background: #f1f1f1">
                   <h4><strong>输出参数</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">功率：<%=newes.getX_Coutpout_Voltage()%> KW</li>
-                    <li class="list-group-item">电压：<%=newes.getX_Coutpout_Current() %> V</li>
-                    <li class="list-group-item">电流：<%=newes.getX_Coutpout_Power() %> A</li>
+                    <li class="list-group-item">功率：<%=newes.getX_Coutpout_Power() %> KW</li>
+                    <li class="list-group-item">电压：<%=newes.getX_Coutpout_Voltage()%> V</li>
+                    <li class="list-group-item">电流：<%=newes.getX_Coutpout_Current() %> A</li>
                   </ul>
                 </div>
             </div>

@@ -35,7 +35,7 @@ public class RemindServlet extends HttpServlet implements Filter  {
         HttpServletResponse resp = (HttpServletResponse) response;
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
-        String allowDate=getAllow();//到期时间
+        String allowDate="2016-06-05";//到期时间
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date allTime = null;
 		try {

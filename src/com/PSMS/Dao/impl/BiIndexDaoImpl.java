@@ -20,19 +20,36 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 	public List<PowerStationBase> getCurrDayQ(String currTime, int psId) {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
-		buffer.append(" select ");
+/*		buffer.append(" select ");
 		buffer.append(" DateName(hour,tod.OperateDate) as groupHour, ");
-		buffer.append(" sum(tod.CurrDayQ) CurrDayQ ");
+		buffer.append(" (tod.LoadDayQ) CurrDayQ ");
 		buffer.append(" from Inverter_parameter inp  ");
 		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
 		buffer.append("  where  ");
 		buffer.append("  tod.OperateDate=(select max(td.OperateDate) from bd_to_data td) ");
 		buffer.append("  and inp.PS_id=? ");
-		buffer.append(" group by DateName(hour,tod.OperateDate) ");
+		buffer.append(" group by DateName(hour,tod.OperateDate) ");*/
+		
+		buffer.append(" select  DATEPART(hh,tod.operateDate) as groupHour,max(tod.LoadDayQ) ");
+		buffer.append(" LoadDayQ ");
+		buffer.append(" from Inverter_parameter inp ");
+		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID ");
+		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
+		buffer.append(" where ");
+		buffer.append(" CONVERT(varchar(100), tod.OperateDate, 23)=( ");
+		buffer.append(" select max(CONVERT(varchar(100), tod.OperateDate, 23))  ");
+		buffer.append(" from Inverter_parameter inp ");
+		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID  inner join ");
+		buffer.append(" PS_information psi on inp.PS_id=psi.id  ");
+		buffer.append(" where  inp.PS_id=? )  ");
+		buffer.append(" and inp.PS_id=? ");
+		buffer.append(" group by DATEPART(hh,tod.operateDate) ");
+		
 		Query query = session.createSQLQuery(buffer.toString());
 //		query.setString(0, currTime);
 		query.setInteger(0, psId);
+		query.setInteger(1, psId);
 		List list = query.list();
 		HibernateSessionFactory.closeHibernateSession();
 		List<PowerStationBase> reList = new ArrayList<PowerStationBase>();
@@ -54,17 +71,32 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 	public PowerStationBase getCurrDayCountQ(String currTime, int psId) {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
-		buffer.append(" select ");
-		buffer.append(" sum(tod.CurrDayQ) currDayCountQ ");
+		/*buffer.append(" select ");
+		buffer.append(" tod.LoadDayQ currDayCountQ ");
 		buffer.append(" from Inverter_parameter inp  ");
 		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
 		buffer.append("  where  ");
 		buffer.append(" tod.OperateDate=(select max(td.OperateDate) from bd_to_data td) ");
-		buffer.append("  and inp.PS_id=? ");
+		buffer.append("  and inp.PS_id=? ");*/
+		
+		buffer.append(" select  max(tod.LoadDayQ) LoadDayQ ");
+		buffer.append(" from Inverter_parameter inp   ");
+		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID ");
+		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id  ");
+		buffer.append(" where ");
+		buffer.append(" CONVERT(varchar(100), tod.OperateDate, 23)=( ");
+		buffer.append(" select max(CONVERT(varchar(100), tod.OperateDate, 23)) ");
+		buffer.append(" from Inverter_parameter inp  ");
+		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID  inner join ");
+		buffer.append(" PS_information psi on inp.PS_id=psi.id ");
+		buffer.append(" where  inp.PS_id=?  ) ");
+		buffer.append(" and inp.PS_id=?  ");
+		
 		Query query = session.createSQLQuery(buffer.toString());
 //		query.setString(0, currTime);
 		query.setInteger(0, psId);
+		query.setInteger(1, psId);
 		List list = query.list();
 		HibernateSessionFactory.closeHibernateSession();
 		PowerStationBase power = new PowerStationBase();
@@ -85,18 +117,30 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 	public List<PowerStationBase> getCurrMonthQ(String currMonth, int psId) {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
-		buffer.append(" select ");
+		/*buffer.append(" select ");
 		buffer.append(" DateName(day,tod.OperateDate) as groupDay, ");
-		buffer.append(" sum(tod.CurrDayQ) currMonthQ ");
+		buffer.append(" sum(tod.LoadDayQ) currMonthQ ");
 		buffer.append(" from Inverter_parameter inp  ");
 		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
-		buffer.append("  where CONVERT(varchar(7),tod.OperateDate, 20)=? ");
-		buffer.append(" and inp.PS_id=? ");
-		buffer.append(" group by DateName(day,tod.OperateDate) ");
+		buffer.append(" where  ");
+		buffer.append("  inp.PS_id=? ");
+		buffer.append(" and tod.tod.OperateDate =");
+		buffer.append(" ( select ");
+		buffer.append(" max(tod.OperateDate) ");
+		buffer.append(" from bd_to_data tod ");
+		buffer.append(" where CONVERT(varchar(7),tod.OperateDate, 20)=? ");
+		buffer.append(" group by DATEPART(dd,tod.operateDate) ) ");
+		buffer.append(" group by DateName(day,tod.OperateDate) ");*/
+		
+		buffer.append(" select  DateName(day,max(tod.OperateDate)) as groupDay,max(tod.LoadDayQ) LoadDayQ  from Inverter_parameter inp  ");
+		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID  ");
+		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id  ");
+		buffer.append(" where inp.PS_id=?  and CONVERT(varchar(7),tod.OperateDate, 20)=? ");
+		buffer.append(" group by DATEPART(dd,tod.operateDate)  ");
 		Query query = session.createSQLQuery(buffer.toString());
-		query.setString(0, currMonth);
-		query.setInteger(1, psId);
+		query.setInteger(0, psId);
+		query.setString(1, currMonth);
 		List list = query.list();
 		HibernateSessionFactory.closeHibernateSession();
 		List<PowerStationBase> reList = new ArrayList<PowerStationBase>();
@@ -117,16 +161,30 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 	public PowerStationBase getCurrMonthCountQ(String currMonth, int psId) {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
-		buffer.append(" select ");
-		buffer.append(" sum(tod.CurrDayQ) currMonthCountQ ");
+		/*buffer.append(" select ");
+		buffer.append(" sum(tod.LoadDayQ) currMonthCountQ ");
 		buffer.append(" from Inverter_parameter inp  ");
 		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
-		buffer.append("  where CONVERT(varchar(7),tod.OperateDate, 20)=? ");
-		buffer.append(" and inp.PS_id=? ");
+		buffer.append(" where  ");
+		buffer.append("  inp.PS_id=? ");
+		buffer.append(" and tod.tod.OperateDate =");
+		buffer.append(" ( select ");
+		buffer.append(" max(tod.OperateDate) ");
+		buffer.append(" from bd_to_data tod ");
+		buffer.append(" where CONVERT(varchar(7),tod.OperateDate, 20)=? ");
+		buffer.append(" group by DATEPART(dd,tod.operateDate) ) ");*/
+		
+		buffer.append(" select 	sum(LoadDayQ) LoadDayQ from ( ");
+		buffer.append(" select  max(tod.LoadDayQ) LoadDayQ  from Inverter_parameter inp  ");
+		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID ");
+		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
+		buffer.append(" where inp.PS_id=?  and CONVERT(varchar(7),tod.OperateDate, 20)=?  ");
+		buffer.append(" group by DATEPART(dd,tod.operateDate) )as tab ");
+		
 		Query query = session.createSQLQuery(buffer.toString());
-		query.setString(0, currMonth);
-		query.setInteger(1, psId);
+		query.setInteger(0, psId);
+		query.setString(1, currMonth);
 		List list = query.list();
 		HibernateSessionFactory.closeHibernateSession();
 		PowerStationBase power = new PowerStationBase();
@@ -147,16 +205,17 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 		StringBuffer buffer=new StringBuffer();
 		buffer.append(" select ");
 		buffer.append(" DateName(month,tod.OperateDate) as groupMonth, ");
-		buffer.append(" sum(tod.CurrDayQ) currYearQ ");
+		buffer.append(" max(tod.LoadMonthQ) currYearQ ");
 		buffer.append(" from Inverter_parameter inp  ");
 		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
-		buffer.append("  where CONVERT(varchar(4),tod.OperateDate, 20)=? ");
-		buffer.append(" and inp.PS_id=? ");
+		buffer.append(" where ");
+		buffer.append(" inp.PS_id=? ");
+		buffer.append(" and CONVERT(varchar(4),tod.OperateDate, 20)=?  ");
 		buffer.append(" group by DateName(month,tod.OperateDate) ");
 		Query query = session.createSQLQuery(buffer.toString());
-		query.setString(0, currYear);
-		query.setInteger(1, psId);
+		query.setInteger(0, psId);
+		query.setString(1, currYear);
 		List list = query.list();
 		HibernateSessionFactory.closeHibernateSession();
 		List<PowerStationBase> reList = new ArrayList<PowerStationBase>();
@@ -178,16 +237,23 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 	public PowerStationBase getCurrYearCountQ(String currYear, int psId) {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
+		buffer.append(" select sum (currYearQ)from ( ");
 		buffer.append(" select ");
-		buffer.append(" sum(tod.CurrDayQ) currYearCountQ ");
+		buffer.append(" DateName(month,tod.OperateDate) as groupMonth, ");
+		buffer.append(" max(tod.LoadMonthQ) currYearQ ");
 		buffer.append(" from Inverter_parameter inp  ");
 		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID ");
 		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
-		buffer.append("  where CONVERT(varchar(4),tod.OperateDate, 20)=? ");
-		buffer.append(" and inp.PS_id=? ");
+		buffer.append(" where ");
+		buffer.append(" inp.PS_id=? ");
+		buffer.append(" and CONVERT(varchar(4),tod.OperateDate, 20)=?  ");
+		buffer.append(" group by DateName(month,tod.OperateDate) ");
+		buffer.append(" ) tab ");
+		
 		Query query = session.createSQLQuery(buffer.toString());
-		query.setString(0, currYear);
-		query.setInteger(1, psId);
+		
+		query.setInteger(0, psId);
+		query.setString(1, currYear);
 		List list = query.list();
 		HibernateSessionFactory.closeHibernateSession();
 		PowerStationBase power = new PowerStationBase();
@@ -238,7 +304,7 @@ public class BiIndexDaoImpl implements IBiIndexDao{
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
 		buffer.append(" select ");
-		buffer.append(" sum(tod.CurrHistoryQ) CurrHistoryQ,sum(tod.Carbon) Carbon, ");
+		buffer.append(" max(tod.CurrHistoryQ) CurrHistoryQ,max(tod.Carbon) Carbon, ");
 		buffer.append(" sum(DISTINCT (DATEDIFF (day , psi.Build_time , convert(varchar(10),getdate(),120) ))) dayCount ");
 		buffer.append(" from bd_to_data tod   ");
 		buffer.append(" inner join Inverter_parameter inp  on inp.name=tod.InverterID ");

@@ -40,6 +40,7 @@ public class BiIndexAction {
 			
 			int pId=Integer.parseInt(psId);
 			JSONObject object = JSONObject.fromObject("{}");
+			
 			List<PowerStationBase> currDayQ=biIndeService.getCurrDayQ(dateTime, pId);//当天日发电量
 			object.put("currDayQ", currDayQ);
 			

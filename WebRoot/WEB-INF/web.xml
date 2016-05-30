@@ -28,10 +28,6 @@
   <filter>
   	<filter-name>remind</filter-name>
   	<filter-class>com.PSMS.Action.RemindServlet</filter-class>
-  	<init-param>
-        <param-name>allow</param-name>
-        <param-value>2016-06-01</param-value>
-    </init-param>
   </filter>
   <filter-mapping>
     <filter-name>remind</filter-name>

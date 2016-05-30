@@ -2,7 +2,7 @@ $(document).ready(
 		function() {
 			var myChart = echarts.init(document.getElementById('chart_003'));
 //			data3 = [ 11, 11, 15, 13, 12, 13, 10, 8, 2, 6 ];
-			data3 = _.map(currMonthQ,"totalVoltage");
+			data3 = _.map(currMonthQ,"currMonthQ");
 			// data1 = [13,
 			// 10,18,12,6,15,20,14,17,14,20,21,12,10,12,16,15,20,14,12,16,15,20,14];
 
@@ -55,7 +55,7 @@ $(document).ready(
 				} ],
 				series : [ {
 					name : month+'月日发电量',
-					type : 'bar',
+					type : 'line',
 					data : data3,
 					markPoint : {
 						data : [ {

@@ -141,7 +141,7 @@
                 </div>
                 <div class="widget-content" style="height: 270px;background: #2b5797;">
                 <h2 style="
-                font-size: 120px;
+                font-size: 80px;
                 text-align: center;
                 color: white;
                 line-height: 200px;
@@ -176,7 +176,7 @@
                 </div>
                 <div class="widget-content" style="height: 270px;background: #00a300;">
                 <h2 style="
-                font-size: 120px;
+                font-size: 80px;
                 text-align: center;
                 color: white;
                 line-height: 200px;
