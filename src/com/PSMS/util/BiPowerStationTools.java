@@ -14,7 +14,7 @@ public class BiPowerStationTools {
 	 */
 	public static  List<PowerStationBase> getListSize24(List<PowerStationBase> list){
 		List<PowerStationBase> reList=new ArrayList<PowerStationBase>();
-		for(int i=0;i<24;i++){
+		for(int i=0;i<23;i++){
 			boolean flag=true;
 			for(PowerStationBase power: list){
 				int hour=power.getGroupHour();
