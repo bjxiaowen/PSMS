@@ -5,6 +5,16 @@ $(document).ready(
 			data3 = _.map(currMonthQ,"currMonthQ");
 			// data1 = [13,
 			// 10,18,12,6,15,20,14,17,14,20,21,12,10,12,16,15,20,14,12,16,15,20,14];
+			
+			var d = new Date();
+		    var curMonthDays = new Date(d.getFullYear(), (d.getMonth()+1), 0).getDate();
+		    var mycars = new Array(curMonthDays);
+		    for(var i=0;i<curMonthDays;i++){
+		        var index=(i+1);
+		        mycars[i]=index;
+		    }
+		    
+		    console.log(mycars);
 
 			option3 = {
 				title : {
@@ -41,11 +51,12 @@ $(document).ready(
 				calculable : true,
 				xAxis : [ {
 					type : 'category',
-					// boundaryGap : false,
+				/*	// boundaryGap : false,
 					data : [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
 							'11', '12', '13', '14', '15', '16', '17', '18',
 							'19', '20', '21', '22', '23', '25', '26', '27',
-							'28', '29', '30' ]
+							'28', '29', '30','31' ]*/
+					data :mycars
 				} ],
 				yAxis : [ {
 					type : 'value',
@@ -55,7 +66,7 @@ $(document).ready(
 				} ],
 				series : [ {
 					name : month+'月日发电量',
-					type : 'line',
+					type : 'bar',
 					data : data3,
 					markPoint : {
 						data : [ {
@@ -65,13 +76,13 @@ $(document).ready(
 							type : 'min',
 							name : '最小值'
 						} ]
-					},
+					}/*,
 					markLine : {
 						data : [ {
 							type : 'average',
 							name : '平均值'
 						} ]
-					}
+					}*/
 				} ]
 			};
 

@@ -54,7 +54,7 @@
                   <h4><strong  style="">设备基本参数</strong></h4>
                   <ul class="list-group ">
                     <li class="list-group-item">额定功率：：<%=parameter.getRate_power() %>  KW</li>
-                    <li class="list-group-item">额定直流电压：<%=parameter.getRated_voltage() %></li>
+                    <li class="list-group-item">额定直流电压：<%=parameter.getRated_voltage() %> V</li>
                     <li class="list-group-item">充电电流：FF A</li>
                     <li class="list-group-item">无</li>
                   </ul>

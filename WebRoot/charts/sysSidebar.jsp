@@ -10,7 +10,7 @@
 	PowerStationBase currYearCountQ=(PowerStationBase)request.getAttribute("currYearCountQ");
 	PowerStationBase currMonthCountQ=(PowerStationBase)request.getAttribute("currMonthCountQ");
 	PowerStationBase history=(PowerStationBase)request.getAttribute("history");
-	String psName=(String)session.getAttribute("psName");
+	//String psName=(String)session.getAttribute("psName");
 	ArrayList<PSEquipment> pslist=(ArrayList<PSEquipment>)session.getAttribute("equipments");
 %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
@@ -30,6 +30,7 @@
 	              </a>
             	</li>
             	<%
+            	if(pslist!=null&&pslist.size()>0){
 					for(PSEquipment join:pslist){%>
 						 <li data-cur="<%=join.getType() %>">
 						 	<a href="#">
@@ -38,6 +39,7 @@
 						 	</a>	
 						 </li> 
 					<% }
+            	}
 				%>
             <!-- <li data-cur="zujian">
               <a href="zujian.html">

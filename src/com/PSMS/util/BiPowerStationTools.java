@@ -14,7 +14,10 @@ public class BiPowerStationTools {
 	 */
 	public static  List<PowerStationBase> getListSize24(List<PowerStationBase> list){
 		List<PowerStationBase> reList=new ArrayList<PowerStationBase>();
-		for(int i=0;i<23;i++){
+		if(list==null||list.size()==0)return null;
+		PowerStationBase base=list.get(list.size()-1);
+		int ghour=base.getGroupHour();
+		for(int i=0;i<24;i++){
 			boolean flag=true;
 			for(PowerStationBase power: list){
 				int hour=power.getGroupHour();
@@ -28,7 +31,20 @@ public class BiPowerStationTools {
 				power.setGroupHour(i);
 				reList.add(power);
 			}
+			if(ghour==i)
+				break;
 		}
+		
+		/*List<PowerStationBase> list24=new ArrayList<PowerStationBase>();
+		for(PowerStationBase base:reList){
+			BigDecimal a=base.getPower();
+			BigDecimal b=BigDecimal.valueOf(0);
+			if(a==null||!(a.compareTo(b)>0)){
+				list24.add(null);
+			}else{
+				list24.add(base);
+			}
+		}*/
 		return reList;
 	}
 	
@@ -49,11 +65,13 @@ public class BiPowerStationTools {
 					flag=false;
 				}
 			}
+			
 			if(flag){//没有相等的时候
 				PowerStationBase power=new PowerStationBase();
 				power.setGroupDay(i);
 				reList.add(power);
 			}
+			
 		}
 		return reList;
 	}
@@ -67,6 +85,7 @@ public class BiPowerStationTools {
 		List<PowerStationBase> reList=new ArrayList<PowerStationBase>();
 		for(int i=1;i<=12;i++){
 			boolean flag=true;
+			
 			for(PowerStationBase power: list){
 				int month=power.getGroupMonth();
 				if(i==month){

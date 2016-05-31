@@ -89,8 +89,8 @@ $(function(){
     }   
     
     var nodeB1 = nodeBlock(40,10,3);
-    nodeB1.textNode0.text = '电流：'+ data_json["newes"]["x_Coutpout_Voltage"]+" V";
-    nodeB1.textNode1.text = '电压：'+ data_json["newes"]["x_Coutpout_Current"]+" A";
+    nodeB1.textNode0.text = '电流：'+ data_json["newes"]["x_Coutpout_Current"]+" A";
+    nodeB1.textNode1.text = '电压：'+ data_json["newes"]["x_Coutpout_Voltage"]+" V";
     nodeB1.textNode2.text = '功率：'+ data_json["newes"]["x_Coutpout_Power"]+" KW";
     
     var nodeB2 = nodeBlock(330,10,2);
@@ -99,8 +99,8 @@ $(function(){
     nodeB2.textNode1.text = data_json["newes"]["machineState "]?"异常":"正常";
     
     var nodeB3 = nodeBlock(620,10,3);
-    nodeB3.textNode0.text = '电流：'+ data_json["newes"]["outputCurrent"]+" V";
-    nodeB3.textNode1.text = '电压：'+ data_json["newes"]["outputVoltage"]+" A";
+    nodeB3.textNode0.text = '电流：'+ data_json["newes"]["outputCurrent"]+" A";
+    nodeB3.textNode1.text = '电压：'+ data_json["newes"]["outputVoltage"]+" V";
     nodeB3.textNode2.text = '功率：'+ data_json["newes"]["exchangeOutPower"]+" KW";
     nodeB3.node.setSize(150,80);
     

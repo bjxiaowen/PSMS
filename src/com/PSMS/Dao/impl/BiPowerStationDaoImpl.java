@@ -544,7 +544,9 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 	public List<PowerStationBase> getPSHourlyData(String dateTime, int psId) throws Exception {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
-		buffer.append(" select ");
+		
+		/**20160531由于要查询最新数据所以sql比较复杂只考虑实现没有考虑性能**/
+		/*buffer.append(" select ");
 		buffer.append(" b.ExchangeOutPower as power, ");
 		buffer.append(" b.X_TPV_Voltage as voltage, ");
 		buffer.append(" b.X_TPV_Current as curr, ");
@@ -560,10 +562,38 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 //		buffer.append(" convert(varchar(30),tod.operateDate,23) = ? and ");
 		buffer.append("  inp.PS_id=? ");
 		buffer.append(" GROUP BY ");
-		buffer.append(" DATEPART(hh,tod.operateDate)) c on b.OperateDate = c.operatedate ");
+		buffer.append(" DATEPART(hh,tod.operateDate)) c on b.OperateDate = c.operatedate ");*/
+		
+		buffer.append(" select atmp.power,atmp.voltage,atmp.curr,DateName(hour,atmp.operatedate) as groupHour ");
+		buffer.append(" from ( ");
+		buffer.append(" select distinct ");
+		buffer.append(" b.ExchangeOutPower as power,  b.X_TPV_Voltage as voltage,  b.X_TPV_Current as curr,  ");
+		buffer.append(" b.operatedate ,inp.PS_id  ");
+		buffer.append(" from bd_to_data b ");
+		buffer.append(" inner join Inverter_parameter inp on inp.name=b.InverterID ");
+		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
+		buffer.append(" WHERE   inp.PS_id=?  ");
+		buffer.append(" ) atmp inner join ( ");
+		buffer.append(" select max(b.OperateDate)  as odate,max(inp.PS_id) psId ");
+		buffer.append(" from bd_to_data b ");
+		buffer.append(" inner join Inverter_parameter inp on inp.name=b.InverterID ");
+		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id   ");
+		buffer.append(" WHERE   inp.PS_id=?  ");
+		buffer.append(" and CONVERT(varchar(100),b.operateDate, 23)=( ");
+		buffer.append(" SELECT  CONVERT(varchar(100),max(tod.operateDate), 23) as operatedate ");
+		buffer.append(" FROM  Inverter_parameter inp ");
+		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID  ");
+		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id  ");
+		buffer.append(" WHERE   inp.PS_id=? ");
+		buffer.append(" ) ");
+		buffer.append(" GROUP BY  DATEPART(hh,b.operateDate) ");
+		buffer.append(" ) btmp on btmp.odate=atmp.operatedate and btmp.psId=atmp.PS_id ");
+		
 		Query query = session.createSQLQuery(buffer.toString());
 //		query.setString(0, dateTime);
 		query.setInteger(0, psId);
+		query.setInteger(1, psId);
+		query.setInteger(2, psId);
 		@SuppressWarnings("rawtypes")
 		List list = query.list();
 		HibernateSessionFactory.closeHibernateSession();
@@ -723,7 +753,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 	public List<PowerStationBase> getPSHourlyData(String dateTime, int psId, String type) throws Exception {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
-		buffer.append(" select ");
+		/*buffer.append(" select ");
 		buffer.append(" b.X_Coutpout_Power as power, ");
 		buffer.append(" b.X_TPV_Voltage as voltage, ");
 		buffer.append(" b.X_TPV_Current as curr, ");
@@ -739,10 +769,37 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 //		buffer.append(" convert(varchar(30),tod.operateDate,23) = ?  and");
 		buffer.append("  inp.PS_id=? ");
 		buffer.append(" GROUP BY ");
-		buffer.append(" DATEPART(hh,tod.operateDate)) c on b.OperateDate = c.operatedate ");
+		buffer.append(" DATEPART(hh,tod.operateDate)) c on b.OperateDate = c.operatedate ");*/
+		
+		buffer.append(" select atmp.power,atmp.voltage,atmp.curr,DateName(hour,atmp.operatedate) as groupHour ");
+		buffer.append(" from ( ");
+		buffer.append(" select distinct ");
+		buffer.append(" b.X_Coutpout_Power as power,  b.X_TPV_Voltage as voltage,  b.X_TPV_Current as curr,  ");
+		buffer.append(" b.operatedate ,inp.PS_id  ");
+		buffer.append(" from bd_to_data b ");
+		buffer.append(" inner join Inverter_parameter inp on inp.name=b.InverterID ");
+		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id ");
+		buffer.append(" WHERE   inp.PS_id=?  ");
+		buffer.append(" ) atmp inner join ( ");
+		buffer.append(" select max(b.OperateDate)  as odate,max(inp.PS_id) psId ");
+		buffer.append(" from bd_to_data b ");
+		buffer.append(" inner join Inverter_parameter inp on inp.name=b.InverterID ");
+		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id   ");
+		buffer.append(" WHERE   inp.PS_id=?  ");
+		buffer.append(" and CONVERT(varchar(100),b.operateDate, 23)=( ");
+		buffer.append(" SELECT  CONVERT(varchar(100),max(tod.operateDate), 23) as operatedate ");
+		buffer.append(" FROM  Inverter_parameter inp ");
+		buffer.append(" inner join bd_to_data tod on inp.name=tod.InverterID  ");
+		buffer.append(" inner join PS_information psi on inp.PS_id=psi.id  ");
+		buffer.append(" WHERE   inp.PS_id=? ");
+		buffer.append(" ) ");
+		buffer.append(" GROUP BY  DATEPART(hh,b.operateDate) ");
+		buffer.append(" ) btmp on btmp.odate=atmp.operatedate and btmp.psId=atmp.PS_id ");
 		Query query = session.createSQLQuery(buffer.toString());
 //		query.setString(0, dateTime);
 		query.setInteger(0, psId);
+		query.setInteger(1, psId);
+		query.setInteger(2, psId);
 		@SuppressWarnings("rawtypes")
 		List list = query.list();
 		HibernateSessionFactory.closeHibernateSession();

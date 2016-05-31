@@ -3,7 +3,12 @@
 <%@ page import="java.net.*" %>
 <%
 	String psName=(String)session.getAttribute("psName");
-	psName =URLDecoder.decode(psName, "UTF-8");
+	if(psName!=null){
+		psName =URLDecoder.decode(psName, "UTF-8");
+	}else{
+		psName="";
+	}
+	
 %>
 <%@ taglib uri="/struts-tags" prefix="s"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>

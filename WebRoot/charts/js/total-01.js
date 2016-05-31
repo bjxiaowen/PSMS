@@ -6,6 +6,8 @@
  var myChart = echarts.init(document.getElementById('chart_001')),
 
         data = _.map(currDayQ,"currDayQ");
+ 		//data1=_.map(currDayQ,"groupHour");
+ 		//console.log(data1);
         // data1 = [13, 10,18,12,6,15,20,14,17,14,20,21,12,10,12,16,15,20,14,12,16,15,20,14];
  		
 option = {
@@ -33,7 +35,7 @@ option = {
         {
             type : 'category',
             // boundaryGap : false,
-            data : ['01:00','02:00','03:00','04:00','05:00','06:00','07:00','08:00','09:00','10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00','19:00','20:00','21:00','22:00','23:00','24:00']
+            data : xdata
         }
     ],
     yAxis : [
@@ -54,12 +56,12 @@ option = {
                     {type : 'max', name: '最大值'},
                     {type : 'min', name: '最小值'}
                 ]
-            },
+            }/*,
             markLine : {
                 data : [
                     {type : 'average', name: '平均值'}
                 ]
-            }
+            }*/
         }
     ]
 };

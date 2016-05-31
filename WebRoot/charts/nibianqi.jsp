@@ -69,9 +69,9 @@
                 <div class="widget-content u2" style="background: #f1f1f1">
                   <h4><strong>输入参数</strong></h4>
                   <ul class="list-group ">
-                    <li class="list-group-item">直流功率：<%=newes.getX_Coutpout_Voltage() %> KW</li>
-                    <li class="list-group-item">直流电压：<%=newes.getX_Coutpout_Current() %> V</li>
-                    <li class="list-group-item">直流电流：<%=newes.getX_Coutpout_Power() %> A</li>
+                    <li class="list-group-item">直流功率：<%=newes.getX_Coutpout_Power() %> KW</li>
+                    <li class="list-group-item">直流电压：<%=newes.getX_Coutpout_Voltage() %> V</li>
+                    <li class="list-group-item">直流电流：<%=newes.getX_Coutpout_Current() %> A</li>
                     <li class="list-group-item">无</li>
                   </ul>
                 </div>
