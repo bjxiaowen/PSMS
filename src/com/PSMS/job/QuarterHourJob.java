@@ -27,9 +27,9 @@ import com.PSMS.util.MailUtils;
  * 定时任务每15分钟执行一次
  * @author Andy
  */
-//@Component
+@Component
 public class QuarterHourJob {
-	//@Scheduled(cron = "0 0/15 0 * * ?")
+	@Scheduled(cron = "0 0/15 0 * * ?")
 	public void transformData(){
 		//查询出目标数据中最大值去查来源数据
 		IToDataDao todao=DAOFactory.getToDataDaoInstance();//目的数据
