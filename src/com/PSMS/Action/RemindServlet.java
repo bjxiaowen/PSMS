@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.PSMS.util.GetTime;
+import com.PSMS.util.TimeHelper;
 
 public class RemindServlet extends HttpServlet implements Filter  {
 
@@ -35,20 +36,8 @@ public class RemindServlet extends HttpServlet implements Filter  {
         HttpServletResponse resp = (HttpServletResponse) response;
         req.setCharacterEncoding("UTF-8");
         resp.setCharacterEncoding("UTF-8");
-        String allowDate="2016-06-05";//到期时间
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Date allTime = null;
-		try {
-			allTime = dateFormat.parse(allowDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-        Date currtTime = new Date();
-        int i = allTime.compareTo(currtTime); 
-        if(i<0){
+        if(TimeHelper.getAllow()){
         	resp.sendRedirect(((HttpServletRequest) request).getContextPath() + "/remind.action"); 
-        	//request.getRequestDispatcher("/remind.action");
-        	//request.getServletContext().getRequestDispatcher ("/remind.jsp"); 
         	return;
         }else{
         	 chain.doFilter(request, response);
@@ -57,6 +46,7 @@ public class RemindServlet extends HttpServlet implements Filter  {
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
+		filterConfig.getServletContext().setInitParameter("allow", TimeHelper.getAllow()+"");
 		setAllow(filterConfig.getInitParameter("allow"));
 	}
 
