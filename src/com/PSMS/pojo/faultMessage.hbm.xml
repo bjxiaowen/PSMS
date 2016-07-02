@@ -83,5 +83,13 @@
 		<property name="failureType" type="java.lang.String">
 			<column name="failure_type"></column>
 		</property>
+		
+		<property name="initialDate" type="java.lang.String">
+			<column name="initialDate"></column>
+		</property>
+		
+		<property name="handleDate" type="java.lang.String">
+			<column name="handleDate"></column>
+		</property>
 	</class>
 </hibernate-mapping>

@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </style>
 </head>
 <body>
-   <p style="font-weight:bold;color:#0E2D5F;font: bold 16px '宋体','微软雅黑';font-size:12px">人员管控->故障信息列表</p>
+   <p style="font-weight:bold;color:#0E2D5F;font: bold 16px '宋体','微软雅黑';font-size:12px">故障管理->故障信息列表</p>
     <table id="dg" title="故障信息" class="easyui-datagrid" style="width:100%;height:95%;text-align:center" 
             url="getAllFaultMessage.action"        
             toolbar="#toolbar" pagination="true" pageSize=20 pageList="[ 20, 30, 40 ]" //读取分页条数，即向后台读取数据时传过去的值
@@ -61,20 +61,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <th field="psId" hidden="hidden" width="20">电站id</th>
                 <th field="userId" hidden="hidden" width="20">人员id</th>
                 <th field="predictTime" hidden="hidden" width="20">预计完成日期</th>
+                <th field="initialDate" width="20">初步诊断日期</th>
+                <th field="handleDate" hidden="hidden" width="20">处理日期</th>
                 <th field="alertCause" hidden="hidden" width="20">故障原因</th>
                 <th field="handleCondition" hidden="hidden" width="20">处理状况</th>
                 <th field="maintainDate" hidden="hidden" width="20">维护日期</th>
                 <th field="checkDate" hidden="hidden" width="20">检验日期</th>
                 <th field="checkPerson" hidden="hidden" width="20">检验人</th>
                 <th field="checkText" hidden="hidden" width="20">检查批语</th>
-                <th field="psName" width="20" align="center" sortable="true">电站名称</th>
-                <th field="areaName" width="20" align="center" sortable="true">区域名称</th>
+                <th field="psName" width="30" align="center" sortable="true">电站名称</th>
+                <th field="areaName" width="15" align="center" sortable="true">区域名称</th>
                 <th field="equipmentId" width="20" align="center" hidden="hidden" data-options="formatter:eIdChangeToString" sortable="true">设备ID</th>
-                <th field="equipmentStatus" formatter="managerstr" width="20" align="center" sortable="true">设备状态</th>
+                <th field="equipmentStatus" formatter="managerstr" width="10" align="center" sortable="true">设备状态</th>
+                <th field=failureMeaning formatter="managerstr" width="10" align="center" sortable="true">故障信息</th>
                 <th field="alertTime" width="20" align="center" sortable="true">报警时间</th>
                 <th field="userName" width="20" align="center" sortable="true">维护工程师</th>
-                <th field="status" width="20" align="center" data-options="formatter:statusChange" sortable="true">状态</th>
-                <th data-options="field:'aa',width:20,formatter:go,align:'center'">操作</th>
+                <th field="status" width="15" align="center" data-options="formatter:statusChange" sortable="true">状态</th>
+                <th width="15" data-options="field:'aa',width:10,formatter:go,align:'center'">操作</th>
             </tr>
         </thead>
     </table>
@@ -109,10 +112,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <input id="predictTime" name="predictTime" class="easyui-textbox" readonly/>
                 </span>
             </div>
+           <hr style="height:1px;border:none;border-top:1px dashed #0066CC;overflow:hidden;margin-top:15px;" />
             <div class="fitem">
             <label style="width:120px;margin:10px 10px 10px 0px;">初步诊断报告(必填)</label>
                 <textarea cols="30" rows="5" name="initialDiagnose" id="initialDiagnose" onpropertychange="if(this.value.length>100){this.value=this.value.substr(0,100)}" class="easyui-validatebox" style="width: 99%; height: 50px;"></textarea>
+            
             </div>
+            <div class="fitem alertCauseContent">
+            	<label style="width:60px;">诊断日期</label>
+                <input id="initialDate" name="initialDate"  class="easyui-datebox" readonly/>
+            </div>
+            <hr style="height:1px;border:none;border-top:1px dashed #0066CC;overflow:hidden;margin-top:15px;" />
             <div class="fitem alertCauseContent">
             <label style="width:120px;margin:10px 10px 10px 0px;">故障原因(必填)</label>
                 <textarea cols="30" rows="5" name="alertCause" id="alertCause" onpropertychange="if(this.value.length>100){this.value=this.value.substr(0,100)}" class="easyui-validatebox" style="width: 99%; height: 50px;"></textarea>
@@ -122,14 +132,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             	<textarea id="handleCondition" name="handleCondition" style="width:100%;height:200px;visibility:hidden;">KindEditor</textarea>
             </div>
             <div class="fitem checkTextContent">
+            <label style="width:60px;">处理日期</label>
+                <input id="handleDate" name="handleDate"  class="easyui-datebox" readonly/>
+            </div>
+            <hr style="height:1px;border:none;border-top:1px dashed #0066CC;overflow:hidden;margin-top:15px;" />
+            <div class="fitem checkTextContent">
             <label style="width:120px;margin:10px 10px 10px 0px;">检验评语(必填)</label>
                 <textarea cols="30" rows="5" name="checkText" id="checkText" onpropertychange="if(this.value.length>100){this.value=this.value.substr(0,100)}" class="easyui-validatebox" style="width: 99%; height: 50px;"></textarea>
             </div>
+            
             <div class="fitem nameContent" >
             	<label style="width:60px;">维修人</label>
                 <input id="userName" name="userName" class="easyui-textbox" readonly/> &nbsp; &nbsp; &nbsp; &nbsp;
                 <label style="width:60px;">检验人</label>
                 <input id="checkPerson" name="checkPerson" class="easyui-textbox" readonly/>
+            </div>
+            <div class="fitem checkTextContent">
+            <label style="width:60px;">检验日期</label>
+                <input id="checkDate" name="checkDate"  class="easyui-datebox" readonly/>
             </div>
         </form>
     </div>
@@ -343,6 +363,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             $('#dg').datagrid({loadFilter:pagerFilter}).datagrid('loadData', getData());
         });
         
+       /*  function test(){
+        	var aaaa = row.initialDate;
+        } */
 
         function saveLink(){          
         	var row = $('#dg').datagrid('getSelected');
@@ -357,13 +380,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	         var psId = row.psId;
 	         var equipmentId = row.equipmentId;
 	         var equipmentStatus = row.equipmentStatus;
+	         var initialDate = row.initialDate;
+	         var handleDate = row.handleDate;
 	         var userId = row.userId;
 	         var alertTime = row.alertTime;
 	         var status = Number(row.status)+1;
 	         var maintainDate = row.maintainDate;
 	         var checkPerson = row.checkPerson;
-	         var checkDate = myformatter(d1);
-	         var url = 'updateFaultMessage.action?faultMessageId='+encodeURI(encodeURI(faultMessageId))+'&areaId='+encodeURI(encodeURI(areaId))+'&psId='+encodeURI(encodeURI(psId))+'&equipmentId='+encodeURI(encodeURI(equipmentId))+'&equipmentStatus='+encodeURI(encodeURI(equipmentStatus))+'&userId='+encodeURI(encodeURI(userId))+'&alertTime='+encodeURI(encodeURI(alertTime))+'&status='+encodeURI(encodeURI(status))+'&initialDiagnose='+encodeURI(encodeURI(initialDiagnose))+'&predictTime='+encodeURI(encodeURI(predictTime))+'&alertCause='+encodeURI(encodeURI(alertCause))+'&handleCondition='+encodeURI(encodeURI(handleCondition))+'&maintainDate='+encodeURI(encodeURI(maintainDate))+'&checkPerson='+encodeURI(encodeURI(checkPerson))+'&checkDate='+encodeURI(encodeURI(checkDate))+'&checkText='+encodeURI(encodeURI(checkText));
+
+	         var initialDate = row.initialDate==""?(row.status==0?myformatter(d1):""):row.initialDate;
+	         var handleDate = row.handleDate==""?(row.status==1?myformatter(d1):""):row.handleDate;
+	         var checkDate = row.checkDate==""?(row.status==2?myformatter(d1):""):row.checkDate;
+	         
+	         
+	         
+	         debugger;
+	         var url = 'updateFaultMessage.action?faultMessageId='+encodeURI(encodeURI(faultMessageId))+'&areaId='+encodeURI(encodeURI(areaId))+'&psId='+encodeURI(encodeURI(psId))+'&equipmentId='+encodeURI(encodeURI(equipmentId))+'&equipmentStatus='+encodeURI(encodeURI(equipmentStatus))+'&userId='+encodeURI(encodeURI(userId))+'&alertTime='+encodeURI(encodeURI(alertTime))+'&status='+encodeURI(encodeURI(status))+'&initialDiagnose='+encodeURI(encodeURI(initialDiagnose))+'&predictTime='+encodeURI(encodeURI(predictTime))+'&alertCause='+encodeURI(encodeURI(alertCause))+'&handleCondition='+encodeURI(encodeURI(handleCondition))+'&maintainDate='+encodeURI(encodeURI(maintainDate))+'&checkPerson='+encodeURI(encodeURI(checkPerson))+'&initialDate='+encodeURI(encodeURI(initialDate))+'&handleDate='+encodeURI(encodeURI(handleDate))+'&checkDate='+encodeURI(encodeURI(checkDate))+'&checkText='+encodeURI(encodeURI(checkText));
 		    	
 	   	 if(row.status=="0"||row.status==""){//flag为0表示添加初步诊断报告
 			    if(!checkLinkInformation(initialDiagnose)){return false; }//校验信息

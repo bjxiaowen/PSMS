@@ -29,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </style>
 </head>
 <body>
-   <p style="font-weight:bold;color:#0E2D5F;font: bold 16px '宋体','微软雅黑';font-size:12px">人员管控->巡检列表</p>
+   <p style="font-weight:bold;color:#0E2D5F;font: bold 16px '宋体','微软雅黑';font-size:12px">故障管理->巡检列表</p>
     <table id="dg" title="定期巡检" class="easyui-datagrid" style="width:100%;height:95%;text-align:center" 
             url="getInspectionAll.action"        
             toolbar="#toolbar" pagination="true" pageSize=20 pageList="[ 20, 30, 40 ]" //读取分页条数，即向后台读取数据时传过去的值

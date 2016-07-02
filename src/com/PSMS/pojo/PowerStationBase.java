@@ -18,6 +18,8 @@ public class PowerStationBase {
 	
 	private BigDecimal  totalCurrent;//总电流
 	
+	private BigDecimal capacity;//历史发电量
+	
 	private int currHour;//统计时间
 	
 	private int groupHour;//按小时分组时间
@@ -124,6 +126,14 @@ public class PowerStationBase {
 		this.mpptTemp = mpptTemp;
 	}
 
+	
+	public BigDecimal getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(BigDecimal capacity) {
+		this.capacity = capacity;
+	}
 
 	public int getChargeDischarge() {
 		return chargeDischarge;

@@ -86,7 +86,7 @@ $(function(){
                       //  transitionDuration:0.4,//动画变换时长，单位s，如果你希望tooltip的跟随实时响应，showDelay设置为0是关键，同时transitionDuration设0也会有交互体验上的差别。
                         formatter: function(params, ticket, callback){
                         	if(params[5].build_time != undefined ){
-                        		return "<div style='color:#33CCCC'> 电站名称："+params[5].name+"<br/>装机容量："+params[5].capacity +" kw/h"+"<br/>建站时间："+params[5].build_time+"</div>"
+                        		return "<div style='color:#33CCCC'> 电站名称："+params[5].name+"<br/>装机容量："+params[5].capacity +" KW"+"<br/>建站时间："+params[5].build_time+"</div>"
                            }else{
                         		return params[5].name;
                         	}

@@ -231,7 +231,7 @@ public class FaultMessageDaoImpl implements IFaultMessageDao {
 		sql.append("select fau.faultMessageId,fau.psId,ps.name,fau.areaId,ar.areaName,");
 		sql.append(" fau.userId,mu.User_name,fau.alertTime ,fau.initialDiagnose,fau.predictTime,fau.alertCause,fau.handleCondition, ");
 		sql.append(" fau.maintainDate,fau.checkPerson,fau.checkDate,fau.status,fau.flagSend,fau.sendDate, ");
-		sql.append(" fau.failureMeaning,fau.failureType,mu.email,mu.telephone,fau.checkText ");
+		sql.append(" fau.failureMeaning,fau.failureType,mu.email,mu.telephone,fau.checkText ,fau.initialDate,fau.handleDate");
 		sql.append(" from FaultMessage as fau, Area as ar,M_user as mu,PS_information as ps ");
 		sql.append(" where fau.areaId=ar.areaId and fau.userId=mu.id and fau.psId=ps.id  ");
 		
@@ -311,6 +311,13 @@ public class FaultMessageDaoImpl implements IFaultMessageDao {
 			
 			if(obj[22]!=null){
 				faultMessage.setCheckText(obj[22]+"");
+			}
+			if(obj[23]!=null){
+				faultMessage.setInitialDate(obj[23]+"");
+			}
+			
+			if(obj[24]!=null){
+				faultMessage.setHandleDate(obj[24]+"");
 			}
 			reList.add(faultMessage);
 		}
@@ -528,7 +535,7 @@ public class FaultMessageDaoImpl implements IFaultMessageDao {
 		sql.append("select fau.faultMessageId,fau.psId,ps.name,fau.areaId,ar.areaName,");
 		sql.append(" fau.userId,mu.User_name,fau.alertTime ,fau.initialDiagnose,fau.predictTime,fau.alertCause,fau.handleCondition, ");
 		sql.append(" fau.maintainDate,fau.checkPerson,fau.checkDate,fau.status,fau.flagSend,fau.sendDate, ");
-		sql.append(" fau.failureMeaning,fau.failureType,mu.email,mu.telephone,fau.checkText ");
+		sql.append(" fau.failureMeaning,fau.failureType,mu.email,mu.telephone,fau.checkText,fau.initialDate,fau.handleDate ");
 		sql.append(" from FaultMessage as fau, Area as ar,M_user as mu,PS_information as ps ");
 		sql.append(" where fau.areaId=ar.areaId and fau.userId=mu.id and fau.psId=ps.id and ");
 		sql.append(" mu.id=? ");
@@ -608,6 +615,14 @@ public class FaultMessageDaoImpl implements IFaultMessageDao {
 			
 			if(obj[22]!=null){
 				faultMessage.setCheckText(obj[22]+"");
+			}
+			
+			if(obj[23]!=null){
+				faultMessage.setInitialDate(obj[23]+"");
+			}
+			
+			if(obj[24]!=null){
+				faultMessage.setHandleDate(obj[24]+"");
 			}
 			
 			reList.add(faultMessage);

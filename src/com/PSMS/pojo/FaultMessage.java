@@ -102,6 +102,28 @@ public class FaultMessage implements Serializable {
 	private String failureMeaning;// 错误信息
 
 	private String failureType;// 错误类型
+	
+	private String initialDate;//初步诊断日期
+	
+	private String handleDate;//处理日期
+
+	
+	
+	public String getInitialDate() {
+		return initialDate;
+	}
+
+	public void setInitialDate(String initialDate) {
+		this.initialDate = initialDate;
+	}
+
+	public String getHandleDate() {
+		return handleDate;
+	}
+
+	public void setHandleDate(String handleDate) {
+		this.handleDate = handleDate;
+	}
 
 	public String getFlagSend() {
 		return flagSend;

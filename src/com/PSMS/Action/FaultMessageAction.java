@@ -87,7 +87,14 @@ public class FaultMessageAction {
 		try {
 			HttpServletResponse response = ServletActionContext.getResponse();
 			faultMessageService=new FaultMessageServiceImpl();
-			faultMessageService.updateFaultMessage(getFaultMessageVO());
+			HttpServletRequest req=(HttpServletRequest) ServletActionContext.getRequest();
+			FaultMessage mssge=getFaultMessageVO();
+			HttpSession session = req.getSession();
+			M_user user=(M_user) session.getAttribute("user");
+			if(user!=null){
+				mssge.setCheckPerson(user.getName());
+			}
+			faultMessageService.updateFaultMessage(mssge);
 			List<String> list = new ArrayList<String>();
 			String result = "修改成功！";// 用result存放提示信息，并将其传回前台
 			list.add(result);// 通过json将校验结果传回到前台显示
@@ -324,6 +331,24 @@ public class FaultMessageAction {
 		if(null!=checkDate&&!checkDate.equals("")){
 			checkDate = java.net.URLDecoder.decode(checkDate, "UTF-8");
 			fau.setCheckDate(checkDate);
+		}
+		
+		/**
+		 * initialDate;//初步诊断日期
+		 */
+		String initialDate = request.getParameter("initialDate");
+		if(null!=initialDate&&!initialDate.equals("")){
+			initialDate = java.net.URLDecoder.decode(initialDate, "UTF-8");
+			fau.setInitialDate(initialDate);
+		}
+		
+		/**
+		 * handleDate;//处理日期
+		 */
+		String handleDate = request.getParameter("handleDate");
+		if(null!=handleDate&&!handleDate.equals("")){
+			handleDate = java.net.URLDecoder.decode(handleDate, "UTF-8");
+			fau.setHandleDate(handleDate);
 		}
 		
 		String checkText = request.getParameter("checkText");

@@ -14,7 +14,7 @@ public class TimeHelper {
 	}
 
 	public static boolean getAllow() {
-		String allowDate = "2016-06-08";// 到期时间
+		String allowDate = "2016-08-14";// 到期时间
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date allTime;
 		try {

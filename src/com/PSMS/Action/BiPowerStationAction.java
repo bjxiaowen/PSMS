@@ -51,12 +51,18 @@ public class BiPowerStationAction {
 			biPowerStationService=new BiPowerStationServiceImpl();
 			List<PS_information> ps_list=ps_informationService.getAllStation();//查询电站信息
 			String dateTime=GetTime.getCurrentTime3();
+			BigDecimal sumCapacity=new BigDecimal("0");
 			for(PS_information psInfo:ps_list){//通过电站查询电站状态
 				int pId=psInfo.getId();
 				PowerStationBase power=biPowerStationService.getPowerStationStatus(null, pId);
+				if(power.getCapacity()!=null){
+					sumCapacity=sumCapacity.add(power.getCapacity());
+				}
+				
 				psInfo.setMachineState(power.getMachineState());
 			}
 			PSTotal psTotal=biPowerStationService.getPSTotalData();
+			psTotal.setTotalHistoryQ(sumCapacity);
 			JSONObject object = JSONObject.fromObject("{}");
 			object.put("list", ps_list);
 			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");

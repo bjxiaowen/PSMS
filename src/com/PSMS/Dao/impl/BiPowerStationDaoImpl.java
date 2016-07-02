@@ -28,7 +28,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
 		buffer.append(" select ");
-		buffer.append(" top 1 tod.MachineState,tod.OperateDate ");
+		buffer.append(" top 1 tod.MachineState,tod.OperateDate,tod.CurrDayQ ");
 		buffer.append(" from bd_to_data tod   ");
 		buffer.append(" left join Inverter_parameter inp  on inp.name=tod.InverterID ");
 		buffer.append(" left join PS_information psi on inp.PS_id=psi.id ");
@@ -61,6 +61,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 				}  
 				
 			}
+			power.setCapacity(DataUtils.getDecimal(obj[2]));
 		}
 		return power;
 	}
@@ -694,11 +695,11 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		StringBuffer buffer=new StringBuffer();
 		buffer.append(" select ");
 		buffer.append(" count(distinct psi.id) totalPS, ");
-		buffer.append(" sum(psi.capacity) totalCapacity, ");
-		buffer.append(" sum(tod.LoadHistoryQ) totalHistoryQ  ");
+		buffer.append(" sum(psi.capacity) totalCapacity ");
+//		buffer.append(" ,sum(tod.LoadHistoryQ) totalHistoryQ  ");
 		buffer.append(" from  PS_information psi ");
-		buffer.append(" left join Inverter_parameter inp on inp.PS_id=psi.id ");
-		buffer.append(" left join bd_to_data tod   on inp.name=tod.InverterID ");
+//		buffer.append(" right join Inverter_parameter inp on inp.PS_id=psi.id ");
+//		buffer.append(" right join bd_to_data tod   on inp.name=tod.InverterID ");
 		
 		Query query = session.createSQLQuery(buffer.toString());
 		@SuppressWarnings("rawtypes")
@@ -712,7 +713,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 			Object[] obj = (Object[]) list.get(i);
 			total.setTotalPS(DataUtils.getInteger(obj[0]));
 			total.setTotalCapacity(DataUtils.getDecimal(obj[1]));
-			total.setTotalHistoryQ(DataUtils.getDecimal(obj[2]));
+//			total.setTotalHistoryQ(DataUtils.getDecimal(obj[2]));
 		}
 		return total;
 	}

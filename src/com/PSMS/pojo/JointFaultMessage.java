@@ -121,6 +121,10 @@ public class JointFaultMessage implements Serializable {
 	
 	private String failureType;//错误类型
 	
+	private String initialDate;//初步诊断日期
+	
+	private String handleDate;//处理日期
+	
 	
 
 	public String getFaultMessageId() {
@@ -339,6 +343,24 @@ public class JointFaultMessage implements Serializable {
 
 	public void setFailureType(String failureType) {
 		this.failureType = failureType;
+	}
+	
+	
+
+	public String getInitialDate() {
+		return initialDate;
+	}
+
+	public void setInitialDate(String initialDate) {
+		this.initialDate = initialDate;
+	}
+
+	public String getHandleDate() {
+		return handleDate;
+	}
+
+	public void setHandleDate(String handleDate) {
+		this.handleDate = handleDate;
 	}
 
 	@Override

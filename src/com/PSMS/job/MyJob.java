@@ -13,7 +13,7 @@ import com.PSMS.Hibernate.HibernateSessionFactory;
 public class MyJob{
 	
 	
-	@Scheduled(cron = "0 0/1 * * * ?")
+	@Scheduled(cron = "0 0 22 * * ?")
 	public void sendMessage(){
 		if(getAuthorization()){
 			HibernateSessionFactory.begainHibernateTransaction();
@@ -25,7 +25,7 @@ public class MyJob{
 	}
 	
 	public  boolean getAuthorization() {
-		String allowDate = "2016-06-08";// 到期时间
+		String allowDate = "2016-08-14";// 到期时间
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date allTime;
 		try {

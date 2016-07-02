@@ -131,7 +131,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				</div>	  
         </div>       
         <div data-options="region:'west',split:true,align:'center'" title="电站数据" style="width:17%;text-align:left;">
-        	<div class="easyui-accordion" data-options="fit:true,border:false,align:'center'">
+        	<div class="easyui-accordion" data-options="fit:true,border:false,align:'center',selected:1">
 	                <div title="人员管控">
 	                   	<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
 	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toRegionList" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">区域列表</a>
@@ -153,14 +153,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                   	<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
 	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toFaultMessage" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">故障处理</a>
 	                   	</div>
-	                   	<div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px;">
+	                   	<!-- <div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px;">
 	                   		<a href="javascript:void(0)" onclick="opeanHtml(this)" name="toFailureAlarmManage" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;">故障查看</a>
-	                   	</div> 
+	                   	</div>  -->
 	                </div>                
             </div>
         </div>
         <div id="content" data-options="region:'center'">
-           <iframe id="display" style="width:100%;height:99%;border:0px;" src="pshistorydata.jsp"></iframe>
+           <!-- <iframe id="display" style="width:100%;height:99%;border:0px;" src="Failure_alarm.jsp"></iframe> -->
+           <iframe id="display" style="width:100%;height:99%;border:0px;" src="faultMessage.jsp"></iframe>
         </div>
          <div data-options="region:'south',split:true" style="height:5%;text-align:center;padding:3px;font-size:12px;color:#999999;">中兴能源ZTE &copy; 2015</div>
     </div>
