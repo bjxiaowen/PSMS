@@ -2,6 +2,7 @@ package com.PSMS.Action;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -185,7 +186,7 @@ public class FaultMessageAction {
 			}else{
 				list=new ArrayList<JointFaultMessage>();
 			}
-			
+			Collections.sort(list);
 			JSONObject object = JSONObject.fromObject("{}");
 			object.put("total", list.size());
 			object.put("rows", list);

@@ -10,6 +10,7 @@
 */
 package com.PSMS.Dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -17,6 +18,8 @@ import org.hibernate.Session;
 
 import com.PSMS.Hibernate.HibernateSessionFactory;
 import com.PSMS.Hibernate.Inverter_parameter;
+import com.PSMS.pojo.HistoryData;
+import com.PSMS.util.DataUtils;
 
 /**
  * 逆变器信息管理需要的操作函数*
@@ -246,6 +249,140 @@ public class Inverter_parameterDAOImpl implements Inverter_parameterDAO {
 		HibernateSessionFactory.commitHibernateTransaction();
 		HibernateSessionFactory.closeHibernateSession();
 		return parame;
+	}
+	
+	@Override
+	public List<HistoryData> getHistoryData(){
+		Session session = HibernateSessionFactory.getHibernateSession();
+		StringBuffer buffer=new StringBuffer();
+		buffer.append("  select ");
+		buffer.append("  psi.id,psi.name,  ");
+		buffer.append("  td.X_Coutpout_Current,   ");
+		buffer.append("  td.X_Coutpout_Voltage,  ");
+		buffer.append("  td.X_Coutpout_Power, ");
+		buffer.append("  td.OutputCurrent,  ");
+		buffer.append("  td.OutputVoltage, ");
+		buffer.append("  td.ExchangeOutPower,  ");
+		buffer.append("  td.LineFrequency,  ");
+		buffer.append("  td.X_Inerin_tem,  ");
+		buffer.append("  td.MachineState,  ");
+		buffer.append("  td.OperateDate  ");
+		buffer.append("  from bd_to_data  td  ");
+		buffer.append("  inner join Inverter_parameter inp  on inp.name=td.InverterID  ");
+		buffer.append("  inner join PS_information psi on inp.PS_id=psi.id  ");
+		buffer.append("  where psi.id is not null  ");
+		Query query = session.createSQLQuery(buffer.toString());
+		@SuppressWarnings("rawtypes")
+		List list = query.list();
+		HibernateSessionFactory.closeHibernateSession();
+		List<HistoryData> reList = new ArrayList<HistoryData>();
+		if (list == null || list.size() == 0) {
+			return reList;
+		}
+	
+		for (int i = 0; i < list.size(); i++) {
+			Object[] obj = (Object[]) list.get(i);
+			HistoryData power = new HistoryData();
+			power.setId(DataUtils.getInteger(obj[0]));
+			power.setName(DataUtils.getString(obj[1]));
+			power.setX_Coutpout_Current(DataUtils.getDecimal(obj[2]));
+			power.setX_Coutpout_Voltage(DataUtils.getDecimal(obj[3]));
+			power.setX_Coutpout_Power(DataUtils.getDecimal(obj[4]));
+			power.setOutputCurrent(DataUtils.getDecimal(obj[5]));
+			power.setOutputVoltage(DataUtils.getDecimal(obj[6]));
+			power.setExchangeOutPower(DataUtils.getDecimal(obj[7]));
+			power.setLineFrequency(DataUtils.getDecimal(obj[8]));
+			power.setX_Inerin_tem(DataUtils.getDecimal(obj[9]));
+			power.setMachineState(DataUtils.getDecimal(obj[10]));
+			power.setOperateDate(DataUtils.getString(obj[11]));
+			reList.add(power);
+		}
+		return reList;
+	}
+	
+	@Override
+	public List<HistoryData> getByPsId(Integer psId,String startTime,String endTime){
+		Session session = HibernateSessionFactory.getHibernateSession();
+		StringBuffer buffer=new StringBuffer();
+		buffer.append("  select ");
+		buffer.append("  psi.id,psi.name,  ");
+		buffer.append("  td.X_Coutpout_Current,   ");
+		buffer.append("  td.X_Coutpout_Voltage,  ");
+		buffer.append("  td.X_Coutpout_Power, ");
+		buffer.append("  td.OutputCurrent,  ");
+		buffer.append("  td.OutputVoltage, ");
+		buffer.append("  td.ExchangeOutPower,  ");
+		buffer.append("  td.LineFrequency,  ");
+		buffer.append("  td.X_Inerin_tem,  ");
+		buffer.append("  td.MachineState,  ");
+		buffer.append("  td.OperateDate  ");
+		buffer.append("  from bd_to_data  td  ");
+		buffer.append("  inner join Inverter_parameter inp  on inp.name=td.InverterID  ");
+		buffer.append("  inner join PS_information psi on inp.PS_id=psi.id  ");
+		buffer.append("  where psi.id is not null  ");
+		buffer.append("  and psi.id =?  ");
+		buffer.append( " and CONVERT(varchar(100), td.OperateDate, 23)<? and CONVERT(varchar(100), td.OperateDate, 23)>? ");
+		Query query = session.createSQLQuery(buffer.toString());
+		query.setInteger(0,psId);
+		query.setString(1, endTime);
+		query.setString(2,startTime);
+		@SuppressWarnings("rawtypes")
+		List list = query.list();
+		HibernateSessionFactory.closeHibernateSession();
+		List<HistoryData> reList = new ArrayList<HistoryData>();
+		if (list == null || list.size() == 0) {
+			return reList;
+		}
+	
+		for (int i = 0; i < list.size(); i++) {
+			Object[] obj = (Object[]) list.get(i);
+			HistoryData power = new HistoryData();
+			power.setId(DataUtils.getInteger(obj[0]));
+			power.setName(DataUtils.getString(obj[1]));
+			power.setX_Coutpout_Current(DataUtils.getDecimal(obj[2]));
+			power.setX_Coutpout_Voltage(DataUtils.getDecimal(obj[3]));
+			power.setX_Coutpout_Power(DataUtils.getDecimal(obj[4]));
+			power.setOutputCurrent(DataUtils.getDecimal(obj[5]));
+			power.setOutputVoltage(DataUtils.getDecimal(obj[6]));
+			power.setExchangeOutPower(DataUtils.getDecimal(obj[7]));
+			power.setLineFrequency(DataUtils.getDecimal(obj[8]));
+			power.setX_Inerin_tem(DataUtils.getDecimal(obj[9]));
+			power.setMachineState(DataUtils.getDecimal(obj[10]));
+			power.setOperateDate(DataUtils.getString(obj[11]));
+			reList.add(power);
+		}
+		return reList;
+	}
+
+	@Override
+	public List<HistoryData> getPSData() {
+		Session session = HibernateSessionFactory.getHibernateSession();
+		StringBuffer buffer=new StringBuffer();
+		buffer.append("  select ");
+		buffer.append("  psi.id,psi.name   ");
+		buffer.append("  from bd_to_data  td  ");
+		buffer.append("  inner join Inverter_parameter inp  on inp.name=td.InverterID  ");
+		buffer.append("  inner join PS_information psi on inp.PS_id=psi.id  ");
+		buffer.append("  where psi.id is not null  ");
+		buffer.append(" group by   psi.id,psi.name ");
+		Query query = session.createSQLQuery(buffer.toString());
+		
+		@SuppressWarnings("rawtypes")
+		List list = query.list();
+		HibernateSessionFactory.closeHibernateSession();
+		List<HistoryData> reList = new ArrayList<HistoryData>();
+		if (list == null || list.size() == 0) {
+			return reList;
+		}
+	
+		for (int i = 0; i < list.size(); i++) {
+			Object[] obj = (Object[]) list.get(i);
+			HistoryData power = new HistoryData();
+			power.setId(DataUtils.getInteger(obj[0]));
+			power.setName(DataUtils.getString(obj[1]));
+			reList.add(power);
+		}
+		return reList;
 	}
 
 }

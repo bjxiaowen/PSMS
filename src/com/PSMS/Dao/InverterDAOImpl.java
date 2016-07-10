@@ -3,6 +3,7 @@ package com.PSMS.Dao;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +17,9 @@ import com.PSMS.Hibernate.Inverter;
 import com.PSMS.Hibernate.Inverter_parameter;
 import com.PSMS.Hibernate.M_user;
 import com.PSMS.Hibernate.PowerMeter;
+import com.PSMS.pojo.HistoryData;
+import com.PSMS.pojo.PSEquipment;
+import com.PSMS.util.DataUtils;
 
 public class InverterDAOImpl implements InverterDAO{
 
@@ -41,6 +45,41 @@ public class InverterDAOImpl implements InverterDAO{
 		
 		
 	}
+	
+	
+
+	
+	public List<HistoryData> getPSData(){
+		Session session = HibernateSessionFactory.getHibernateSession();
+		StringBuffer buffer=new StringBuffer();
+		buffer.append("  select ");
+		buffer.append("  psi.id,psi.name ");
+		buffer.append("  from bd_to_data  td  ");
+		buffer.append("  left join Inverter_parameter inp  on inp.name=td.InverterID  ");
+		buffer.append("  left join PS_information psi on inp.PS_id=psi.id  ");
+		buffer.append("  where psi.id is not null  ");
+		buffer.append("  group by  psi.id,psi.name  ");
+		Query query = session.createSQLQuery(buffer.toString());
+		@SuppressWarnings("rawtypes")
+		List list = query.list();
+		HibernateSessionFactory.closeHibernateSession();
+		List<HistoryData> reList = new ArrayList<HistoryData>();
+		if (list == null || list.size() == 0) {
+			return reList;
+		}
+	
+		for (int i = 0; i < list.size(); i++) {
+			Object[] obj = (Object[]) list.get(i);
+			HistoryData power = new HistoryData();
+			power.setId(DataUtils.getInteger(obj[0]));
+			power.setName(DataUtils.getString(obj[1]));
+			reList.add(power);
+		}
+		return reList;
+	}
+	
+	
+	
 
 	@Override
 	public String searchTopPowerByParameter_id(int parameter_id) {//---------------------------lm

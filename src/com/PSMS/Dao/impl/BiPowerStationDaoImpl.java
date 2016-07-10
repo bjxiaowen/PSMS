@@ -28,7 +28,7 @@ public class BiPowerStationDaoImpl implements IBiPowerStationDao {
 		Session session = HibernateSessionFactory.getHibernateSession();
 		StringBuffer buffer=new StringBuffer();
 		buffer.append(" select ");
-		buffer.append(" top 1 tod.MachineState,tod.OperateDate,tod.CurrDayQ ");
+		buffer.append(" top 1 tod.MachineState,tod.OperateDate,tod.CurrHistoryQ");
 		buffer.append(" from bd_to_data tod   ");
 		buffer.append(" left join Inverter_parameter inp  on inp.name=tod.InverterID ");
 		buffer.append(" left join PS_information psi on inp.PS_id=psi.id ");

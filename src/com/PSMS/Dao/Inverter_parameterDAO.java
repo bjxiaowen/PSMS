@@ -14,6 +14,7 @@ import java.util.List;
 
 import com.PSMS.Adapter.inverter_parameter;
 import com.PSMS.Hibernate.Inverter_parameter;
+import com.PSMS.pojo.HistoryData;
 
 /**
  * 逆变器信息管理需要的操作函数*
@@ -54,4 +55,10 @@ public interface Inverter_parameterDAO {
 	Integer getParameterIdByPsId(int ps_id, int period_num, String inverter_name);// 根据电站和逆变器名称查询对应的parameterid
 
 	public List<Inverter_parameter> getParameter(int ps_id,String type);//通过电站和类型查询设备信息
+	
+	public List<HistoryData> getHistoryData();
+	
+	public List<HistoryData> getPSData();
+	
+	public List<HistoryData> getByPsId(Integer psId,String startTime,String endTime);
 }

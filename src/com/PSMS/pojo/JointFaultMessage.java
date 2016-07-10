@@ -3,7 +3,7 @@ package com.PSMS.pojo;
 import java.io.Serializable;
 import java.util.Date;
 
-public class JointFaultMessage implements Serializable {
+public class JointFaultMessage implements Serializable , Comparable<JointFaultMessage>{
 
 	/**
 	 * 
@@ -68,7 +68,7 @@ public class JointFaultMessage implements Serializable {
 	/**
 	 * 处理状态
 	 */
-	private int status;
+	private Integer status;
 
 	/**
 	 * 初步诊断
@@ -183,11 +183,11 @@ public class JointFaultMessage implements Serializable {
 		this.alertTime = alertTime;
 	}
 
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
@@ -374,5 +374,10 @@ public class JointFaultMessage implements Serializable {
 				+ ", checkText=" + checkText + ", checkStatus=" + checkStatus + ", tel=" + tel + ", email=" + email
 				+ ", flagSend=" + flagSend + ", sendDate=" + sendDate + ", failureMeaning=" + failureMeaning
 				+ ", failureType=" + failureType + "]";
+	}
+
+	@Override
+	public int compareTo(JointFaultMessage message) {
+		return this.getStatus().compareTo(message.getStatus());
 	}
 }

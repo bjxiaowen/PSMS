@@ -137,21 +137,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                   		<a href="javascript:void(0)"  onclick="opeanHtml(this)" name="toPsHistoryData" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">电站数据</a>
 	                   	</div>
 	                </div>
-	              <!--   <div title="发电量数据" data-options="selected:true" >
-	                   	<div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px; ">
-	                   		<a href="javascript:void(0)"  onclick="opeanHtml(this)" name="toYearPowerHistory" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">年发电量数据</a>
-	                   	</div>
-	                   	<div style="width:100%;border:0px;height:30px;background:#E0ECFF;text-align:left;line-height:30px;">
-	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toMonthPowerHistory" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">月发电量数据</a>
-	                   	</div>
-	                   	<div style="width:100%;border:0px;height:30px;background:#f0f0f0;text-align:left;line-height:30px;">
-	                   		<a href="javascript:void(0)"onclick="opeanHtml(this)" name="toDayPowerHistory" style="text-decoration:none;padding:0px 30px 0px 30px;color:#000000;font:'宋体','微软雅黑';">日发电量数据</a>
-	                   	</div>	                   	
-	                </div>  -->
             </div>
         </div>
         <div id="content" data-options="region:'center'">
-           <iframe id="display" style="width:100%;height:99%;border:0px;" src="pshistorydata.jsp"></iframe>
+           <iframe id="display" style="width:100%;height:99%;border:0px;" src="toPsHistoryData.action"></iframe>
         </div>
          <div data-options="region:'south',split:true" style="height:5%;text-align:center;padding:3px;font-size:12px;color:#999999;">中兴能源ZTE &copy; 2015</div>
     </div>

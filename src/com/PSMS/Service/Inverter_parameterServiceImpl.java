@@ -5,6 +5,7 @@ import java.util.List;
 import com.PSMS.Dao.Inverter_parameterDAO;
 import com.PSMS.Factory.DAOFactory;
 import com.PSMS.Hibernate.Inverter_parameter;
+import com.PSMS.pojo.HistoryData;
 
 /**
  * 设备信息管理需要的操作函数*
@@ -165,5 +166,20 @@ public class Inverter_parameterServiceImpl implements Inverter_parameterService 
 	@Override
 	public List<Inverter_parameter> getParameter(int ps_id, String type) {
 		return dao.getParameter(ps_id, type);
+	}
+
+	@Override
+	public List<HistoryData> getHistoryData() {
+		return dao.getHistoryData();
+	}
+
+	@Override
+	public List<HistoryData> getPSData() {
+		return dao.getPSData();
+	}
+
+	@Override
+	public List<HistoryData> getByPsId(Integer psId,String startTime,String endTime) {
+		return dao.getByPsId(psId,startTime,endTime);
 	}
 }

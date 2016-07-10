@@ -234,6 +234,7 @@ public class FaultMessageDaoImpl implements IFaultMessageDao {
 		sql.append(" fau.failureMeaning,fau.failureType,mu.email,mu.telephone,fau.checkText ,fau.initialDate,fau.handleDate");
 		sql.append(" from FaultMessage as fau, Area as ar,M_user as mu,PS_information as ps ");
 		sql.append(" where fau.areaId=ar.areaId and fau.userId=mu.id and fau.psId=ps.id  ");
+//		sql.append(" order by fau.status asc  ");
 		
 		Query query = session.createQuery(sql.toString());
 		@SuppressWarnings("rawtypes")
@@ -539,6 +540,8 @@ public class FaultMessageDaoImpl implements IFaultMessageDao {
 		sql.append(" from FaultMessage as fau, Area as ar,M_user as mu,PS_information as ps ");
 		sql.append(" where fau.areaId=ar.areaId and fau.userId=mu.id and fau.psId=ps.id and ");
 		sql.append(" mu.id=? ");
+//		sql.append(" order by fau.status asc ");
+		
 		Query query = session.createQuery(sql.toString());
 		query.setInteger(0, userId);
 		List list=query.list();

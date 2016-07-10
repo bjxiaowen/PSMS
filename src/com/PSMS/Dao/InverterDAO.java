@@ -5,6 +5,7 @@ import java.util.List;
 import com.PSMS.Adapter.inverter_parameter;
 import com.PSMS.Hibernate.Inverter;
 import com.PSMS.Hibernate.Inverter_parameter;
+import com.PSMS.pojo.HistoryData;
 
 
 public interface InverterDAO {
@@ -19,7 +20,12 @@ public interface InverterDAO {
 	List<Inverter> getTopRealTimeData(Integer parameter_id);
 
 	Double getZhengDianPowerByParaIdAndHour(Integer parameter_id, int h);
-
 	
+	/*public List<HistoryData> getHistoryData();
+	
+	public List<HistoryData> getPSData();
+	
+	public List<HistoryData> getByPsId(Integer psId);
+	*/
 
 }

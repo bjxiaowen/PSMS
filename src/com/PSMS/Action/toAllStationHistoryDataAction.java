@@ -56,6 +56,9 @@ import com.PSMS.Service.WS_parameterService;
 import com.PSMS.Service.WS_parameterServiceImpl;
 import com.PSMS.Service.WeatherStationService;
 import com.PSMS.Service.WeatherStationServiceImpl;
+import com.PSMS.Service.impl.BiPowerStationServiceImpl;
+import com.PSMS.pojo.HistoryData;
+import com.PSMS.pojo.PowerStationBase;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -94,26 +97,25 @@ public class toAllStationHistoryDataAction {
 	private JunctionBoxService junctionboxService;
 	private JB_parameterService jb_parameterService;
 	
+	/** 
+	* 获取所有电站名称列表*
+	* @author min.li
+	* @date 2014-1-2 
+	* @param list_station_name 
+	* @param ps_list 
+	*/
 	public String toAllStationHistoryData(){
-		/** 
-		* 获取所有电站名称列表*
-		* @author min.li
-		* @date 2014-1-2 
-		* @param list_station_name 
-		* @param ps_list 
-		*/
+		
 		HttpServletRequest request =ServletActionContext.getRequest();	
 		try {
 			request.setCharacterEncoding("utf-8");
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		String username = request.getParameter("username") ;		
 		try {
 			username = java.net.URLDecoder.decode(username, "UTF-8");//以上为获取前台数据，转码
 			} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 			
@@ -145,28 +147,28 @@ public class toAllStationHistoryDataAction {
 			ServletActionContext.getResponse().getWriter().write(object.toString());
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
 	}
 	
+	/** 
+	* 获取某电站的逆变器历史数据*
+	* @author min.li
+	* @date 2014-1-2 
+	* @param fromRangeDate 
+	* @param toRangeDate 
+	* @param ps_name
+	* @param ps_id
+	* @param list_parameter_id
+	* @param l_inverter_history
+	* @param num
+	* @param inverter_name
+	* @param list_inverter_history
+	* @param ih
+	*/
 	public String getInverterHistoryData(){
-		/** 
-		* 获取某电站的逆变器历史数据*
-		* @author min.li
-		* @date 2014-1-2 
-		* @param fromRangeDate 
-		* @param toRangeDate 
-		* @param ps_name
-		* @param ps_id
-		* @param list_parameter_id
-		* @param l_inverter_history
-		* @param num
-		* @param inverter_name
-		* @param list_inverter_history
-		* @param ih
-		*/
+		
 		HttpServletRequest request =ServletActionContext.getRequest();	
 		try {
 			request.setCharacterEncoding("utf-8");
@@ -440,20 +442,98 @@ public class toAllStationHistoryDataAction {
 		return null;
 	}
 	
+	/** 
+	* 历史数据界面跳转*
+	* @author min.li
+	* @date 2014-10-25 
+	*/	
 	public String toPsHistoryData(){
-		/** 
-		* 历史数据界面跳转*
-		* @author min.li
-		* @date 2014-10-25 
-		*/		
+		try {
+			HttpServletRequest request = ServletActionContext.getRequest();
+			inverter_parameterService = new Inverter_parameterServiceImpl();
+			List<HistoryData> psDate=inverter_parameterService.getPSData();
+			List<HistoryData> histDate=inverter_parameterService.getHistoryData();
+			request.setAttribute("psDate", psDate);// 查询工程师列表
+			request.setAttribute("histDate", histDate);// 查询工程师列表
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "success";
+	}
+	
+	public String getAllHistoryData(){
+		try {
+			HttpServletRequest request = ServletActionContext.getRequest();
+			JSONObject object=JSONObject.fromObject("{}");	
+			inverter_parameterService = new Inverter_parameterServiceImpl();
+			List<HistoryData> histDate=inverter_parameterService.getHistoryData();
+			request.setAttribute("histDate", histDate);// 查询工程师列表
+			object.put("histDate", histDate);
+			object.put("total", histDate.size());
+			object.put("rows", histDate);	
+			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
+			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
+			ServletActionContext.getResponse().getWriter().write(object.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/** 
+	* 历史数据界面跳转*
+	* @author min.li
+	* @date 2014-10-25 
+	*/	
+	public String getPsHistoryData(){
+		try {
+			HttpServletRequest request =ServletActionContext.getRequest();
+			request.setCharacterEncoding("utf-8");
+//			JSONObject object=JSONObject.fromObject("{}");	
+			inverter_parameterService = new Inverter_parameterServiceImpl();
+			List<HistoryData> psDate=inverter_parameterService.getPSData();
+			List<HistoryData> histDate=inverter_parameterService.getHistoryData();
+//			object.put("psDate", psDate);
+//			object.put("histDate", histDate);
+			request.setAttribute("psDate", psDate);// 查询工程师列表
+			request.setAttribute("histDate", histDate);// 查询工程师列表
+//			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
+//			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
+//			ServletActionContext.getResponse().getWriter().write(object.toString());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * 通过电站查询
+	 * @return
+	 */
+	public String getByPsId(){
 		HttpServletRequest request =ServletActionContext.getRequest();
 		try {
 			request.setCharacterEncoding("utf-8");
-		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
+			inverter_parameterService = new Inverter_parameterServiceImpl();
+			String psId = request.getParameter("psId");
+			String startTime= request.getParameter("startTime");
+			String endTime=request.getParameter("endTime");
+			psId = java.net.URLDecoder.decode(psId, "UTF-8");
+			startTime = java.net.URLDecoder.decode(startTime, "UTF-8");
+			endTime = java.net.URLDecoder.decode(endTime, "UTF-8");
+			int pId=Integer.parseInt(psId);
+			List<HistoryData> histDate=inverter_parameterService.getByPsId(pId,startTime,endTime);
+			JSONObject object = JSONObject.fromObject("{}");
+			object.put("histDate", histDate);
+			object.put("total", histDate.size());
+			object.put("rows", histDate);	
+			ServletActionContext.getResponse().setContentType("application/json;charset=UTF-8");
+			ServletActionContext.getResponse().setCharacterEncoding("UTF-8");
+			ServletActionContext.getResponse().getWriter().write(object.toString());
+		} catch (Exception e) {
 			e.printStackTrace();
-		}		
-		return "success";
+		}	
+		return null;
 	}
 	
 	

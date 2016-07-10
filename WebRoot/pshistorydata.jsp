@@ -17,6 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" type="text/css" href="easyui/demo/demo.css"> 
     <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
     <script type="text/javascript" src="easyui/jquery.easyui.min.js"></script>    
+    <script type="text/javascript" src="easyui/datagrid-detailview.js"></script>
     <script type="text/javascript" src="easyui/locale/easyui-lang-zh_CN.js"></script> 
     <script type="text/javascript"></script>
     <style>
@@ -27,88 +28,67 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-	<P style="font-weight:bold;color:#0E2D5F;font: bold 16px '宋体','微软雅黑';font-size:12px">历史数据 -> 电站数据</P>
-	
+	<P style="font-weight:bold;color:#0E2D5F;font: bold 16px '宋体','微软雅黑';font-size:12px">历史数据 -> 电站数据223</P>
+	 <table id="dg" title="巡检管理列表" class="easyui-datagrid" style="width:100%;height:95%;text-align:center" 
+            url="getAllHistoryData.action"        
+            toolbar="#toolbar" pagination="true" pageSize=20 pageList="[ 20, 30, 40 ]" 
+            autoRowHeight="true" striped="true" rownumbers="true" fitColumns="true"
+             singleSelect="true"  remoteSort="flase">
+        <thead>
+            <tr> 
+                <th field="x_Coutpout_Current"  width="20">直流电流(A)</th> 
+                <th field="x_Coutpout_Voltage"  width="20">直流电压(V)</th> 
+                <th field="x_Coutpout_Power"  width="20">直流功率(W)</th> 
+                <th field="outputCurrent"  width="20">交流电流(A)</th> 
+                <th field="outputVoltage"  width="20">交流电压(V)</th> 
+                <th field="exchangeOutPower"  width="20">交流功率(W)</th> 
+                 <th field="lineFrequency"  width="20">频率(Hz)</th> 
+                <th field="x_Inerin_tem"  width="20">温度(°C)</th> 
+                <th field="machineState"  width="20">机器状态</th> 
+                <th field="operateDate"  width="20">时间</th> 
+                <th field="id"   hidden="hidden">编号</th> 
+                <th field="name"    hidden="hidden">编号</th> 
+            </tr>
+        </thead>
+    </table>
     <div id="toolbar"  >
-		<lable style="margin-left:10px">设置   起始时间:</lable>
+    	<lable style="margin-left:10px">开始时间:</lable>
   		<input id="dateFrom" name="dateFrom" class="easyui-datebox" style="width:160px;"></input>
   		<label>结束时间:</label>
   		<input id="dateTo" name="dateTo" class="easyui-datebox" style="width:160px;"></input>
   		<label>电站名称:</label>				
-		<select  id="ps_name" name="ps_name"  class="easyui-combobox" style="width:160px;" data-options=" panelHeight:'auto'">       	
+        <select class="easyui-combobox" name="search-station" style="width:160px;" data-options=" panelHeight:'auto'" >
+        	<c:forEach items="${psDate}" var="ps">		
+				<option value="${ps.id}">${ps.name}</option>
+			</c:forEach>
         </select>
-   		 <label>设备类型:</label>				
-		<select  id="device_type" name="device_type"  class="easyui-combobox" style="width:80px;" data-options=" panelHeight:'auto'">       
-        	<option value="逆变器">逆变器</option>												
-			<option value="汇流箱">汇流箱</option>
-			<option value="电表">电表</option>
-			<option value="气象站">气象站</option>	
-        </select>
+        
         <a id= "abc" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" onclick="searchData()">查 询</a>
-         
-         <a id= "exportExcel" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-save" onclick="exportData()">导出报表</a> 
- 
-        <P id="table_title" name="table_title" style="font-weight:bold;color:#0E2D5F;font: bold 16px '宋体','微软雅黑';font-size:12px"></P>
-	 	
-    </div>
-    <div style="width:100%;height:92%">
-    <table id="dg"  class="easyui-datagrid" style="width:100%;height:95%;text-align:center"
-            pagination="true"
-             pageSize=20 pageList="[ 20,30, 50]" 
-             autoRowHeight="true"  fitcolumns="false" striped="true" 
-             rownumbers="true" >
-          <thead > </thead>
-    </table>
     </div>
  	
      <script>
-       var username = "<%=session.getAttribute("User_name")%>"; 
-     $(document).ready(function() { 
-     		    
-			var myDate = new Date();
+     	 $(document).ready(function() { 
+     		var myDate = new Date();
 			var year = myDate.getFullYear();//获取当前年份   		
 			var month = myDate.getMonth() + 1;//获取当前月份
 			var date = myDate.getDate();//获取当前日期
 			var from_month;
 			var from_year;
 			if(month==1)
-				{from_month = 12;from_year = year-1;}
+				{from_month = 11;from_year = year-1;}
 			else if(month==2)
-				{from_month = 1;from_year  = year;}
-			else {from_month = month - 1;from_year = year;}			
+				{from_month = 12;from_year  = year -1;}
+			else {from_month = month - 2;from_year = year;}			
 			var fromdate ="" + from_year +"-"+ from_month +"-" + date ;
 			var todate = "" + year+ "-" + month +"-" + date ;
 			$('#dateFrom').datebox('setValue', fromdate);
 			$('#dateTo').datebox('setValue', todate);
-			//----------------------赋值
-			$.ajax({
-				url : 'toAllStationHistoryData.action?username='+encodeURI(encodeURI(username)),
-				type : 'GET',
-				dataType : 'json',
-				async : false,
-				success : function(obj) {
-					 $('#ps_name').combobox({
-       					data:obj.aaData,
-    					valueField:'ps_name',
-    					textField:'ps_name'
-     				});
-     				$('#ps_name').combobox('setValue',obj.first_ps); 			
-				}
-			});	
-			getInverterHistory();
 	});
      
   	function searchData(){
-  		var device_type = document.getElementsByName("device_type")[0].value;
-  		
-  		if (device_type == "逆变器")	
-			getInverterHistory();			
-		else if (device_type == "电表")
-			PowerMeterHistory();			
-		else if (device_type == "汇流箱")  		
-			JunctionBoxHistory();
-		else
-			WeatherStationHistory();	 
+  		var psId = document.getElementsByName("search-station")[0].value;
+  		console.log(psId);
+		weatherStationHistory(psId);	 
   	}
   	
   	function exportData(){
@@ -169,7 +149,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		+ fromRangeDate + "&toRangeDate=" + toRangeDate
     		+ "&ps_name="+ encodeURI(encodeURI(ps_name)),
             columns: [[            
-            { field: 'inverter_name',title:'逆变器名称', width: '8%',align:'center' },  
+            { field: 'inverter_name',title:'逆变器名称111', width: '8%',align:'center' },  
             { field: 'dc_current', title:'直流电流(A)', width: '8%',align:'center'},
             { field: 'dc_voltage', title:'直流电压(V)', width: '8%',align:'center' },
             { field: 'dc_power', title:'直流功率(W)', width: '8%',align:'center'},
@@ -374,38 +354,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             ]]  
         }); 
 	 }
-	  function WeatherStationHistory() {
-		var tempStr = $("#dateFrom").datebox("getValue");  
-		 var dateFrom  = new Date(tempStr);
-		 var year1=dateFrom.getFullYear();
-		 var month1=dateFrom.getMonth()+1;
-		 var day1=dateFrom.getDate();
-		 var tempStr2 = $("#dateTo").datebox("getValue");  
-		 var dateTo  = new Date(tempStr2);
-		 var year2=dateTo.getFullYear();
-		var month2=dateTo.getMonth()+1;
-		var day2=dateTo.getDate();
-        var fromRangeDate = "" + month1 + "/" + day1 + "/" + year1;
-        var toRangeDate = "" + month2 + "/" + day2 + "/" + year2;
-
-		var ps_name = document.getElementsByName("ps_name")[0].value;
-		var table_title=ps_name+ "气象站历史数据";
-		$('#table_title').text(table_title);
-        $("#dg").datagrid({  
-             url:"getWeatherStationHistoryData.action?fromRangeDate="
-    		+ fromRangeDate + "&toRangeDate=" + toRangeDate
-    		+ "&ps_name="+ encodeURI(encodeURI(ps_name)),
-            columns: [[            
-            { field: 'weatherstation_name',title:'气象站名称', width: '12%',align:'center' },  
-            { field: 'pv_temperature', title:'电池板温度(℃)', width: '11%',align:'center' },
-            { field: 'wind_direction', title:'风向', width: '11%',align:'center' },
-            { field: 'wind_speed', title:'风速(m/s)', width: '11%',align:'center' },
-            { field: 'temperature', title:'温度(℃)', width: '11%',align:'center' },    
-            { field: 'irraditation_value', title:'辐射值(W/m²)', width: '11%',align:'center' },
-            { field: 'humidity', title:'湿度', width: '11%',align:'center' },   
-            { field: 'time', title:'时间', width: '22%',align:'center' }          
-            ]]  
-        }); 
+	  function weatherStationHistory(psId) {
+		  	var startTime = $("#dateFrom").datebox("getValue");  
+			var endTime = $("#dateTo").datebox("getValue"); 
+			/*debugger*/
+		  if(startTime==""||endTime==""){
+			  alert("开始时间或结束时间不能为空");
+		  }else{
+		        $("#dg").datagrid({  
+		             url:"getHistoryDataByPsId.action?psId="+psId+"&startTime="+startTime+"&endTime="+endTime,
+		            columns: [[     
+		            { field: 'x_Coutpout_Current',title:'直流电流(A)', width: '12%',align:'center' },
+		            { field: 'x_Coutpout_Voltage',title:'直流电压(V)', width: '12%',align:'center' },  
+		            { field: 'x_Coutpout_Power', title:'直流功率(W)', width: '11%',align:'center' },
+		            { field: 'outputCurrent', title:'交流电流(A)', width: '11%',align:'center' },
+		            { field: 'outputVoltage', title:'交流电压(V)', width: '11%',align:'center' },
+		            { field: 'exchangeOutPower', title:'交流功率(W)', width: '11%',align:'center' },    
+		            { field: 'lineFrequency', title:'频率(Hz)', width: '11%',align:'center' },
+		            { field: 'x_Inerin_tem', title:'温度(°C)', width: '11%',align:'center' },   
+		            { field: 'machineState', title:'机器状态', width: '22%',align:'center' } ,
+		            { field: 'operateDate', title:'时间', width: '22%',align:'center' } 
+		            ]]  
+		        }); 
+		  }
 	 }
 	 
 	  

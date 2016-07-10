@@ -559,10 +559,24 @@
 			class="com.PSMS.Action.toAllStationHistoryDataAction">
 			<result name="success">pshistorydata.jsp</result>
 		</action>
+		
+		<action name="getHistoryDataByPsId" method="getByPsId" class="com.PSMS.Action.toAllStationHistoryDataAction">
+		</action>
+		
+		
+		<action name="getAllHistoryData" method="getAllHistoryData" class="com.PSMS.Action.toAllStationHistoryDataAction">
+		</action>
+		
+		<action name="getPsHistoryData" method="getPsHistoryData" class="com.PSMS.Action.toAllStationHistoryDataAction">
+		</action>
+		
+		
 		<action name="toYearPowerHistory" method="toYearPowerHistory"
 			class="com.PSMS.Action.toPowerHistoryDataAction">
 			<result name="success">YearPowerHistory.jsp</result>
 		</action>
+		
+		
 		<action name="toMonthPowerHistory" method="toMonthPowerHistory"
 			class="com.PSMS.Action.toPowerHistoryDataAction">
 			<result name="success">MonthPowerHistory.jsp</result>
@@ -779,8 +793,7 @@
 			class="com.PSMS.Action.InspectionAction" />
 
 		<!-- 异常信息处理 -->
-		<action name="toFaultMessage" method="toFaultMessage"
-			class="com.PSMS.Action.FaultMessageAction">
+		<action name="toFaultMessage" method="toFaultMessage" class="com.PSMS.Action.FaultMessageAction">
 			<result name="success">faultMessage.jsp</result>
 		</action>
 		<action name="addFaultMessage" method="addFaultMessage"

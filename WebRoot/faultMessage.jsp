@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             url="getAllFaultMessage.action"        
             toolbar="#toolbar" pagination="true" pageSize=20 pageList="[ 20, 30, 40 ]" //读取分页条数，即向后台读取数据时传过去的值
             autoRowHeight="true" striped="true" rownumbers="true" fitColumns="true"
-             singleSelect="true" sortName="psId" sortOrder="asc" remoteSort="false">
+             singleSelect="true" sortName="status" sortOrder="asc" remoteSort="false">
         <thead>
             <tr> 
                 <th field="faultMessageId" hidden="hidden" width="20">主键id</th> 
